@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="primary">#6040FF</color>
+    <color name="primaryDark">#300090</color>
+    <color name="accent">#9090FF</color>
+    <color name="white">#FAFAFF</color>
+    <color name="grey">#9090A9</color>
+    <color name="black">#000040</color>
+    <!--Gradient colours for goal achievement-->
+    <!--http://www.perbang.dk/rgbgradient/-->
+    <color name="gradient1">#A90000</color>
+    <color name="gradient2">#AC4600</color>
+    <color name="gradient3">#AF8F00</color>
+    <color name="gradient4">#89B100</color>
+    <color name="gradient5">#42B400</color>
+    <color name="gradient6">#01B708</color>
+    <!--Graph view colours-->
+    <color name="graphStepSeries">@color/primaryDark</color>
+    <color name="graphPercentSeries">@color/gradient1</color>
+</resources>

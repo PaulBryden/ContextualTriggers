@@ -1,0 +1,173 @@
+<resources>
+    <string name="app_name">KeepFit</string>
+    <string name="title_home">Home</string>
+    <string name="title_history">History</string>
+    <string name="title_goals">Goals</string>
+    <string name="zero_percent">0%</string>
+    <string name="steps_label_text">Steps today:</string>
+    <string name="edit_step_count_button_description">Edit step count</string>
+    <string name="save_button_text">Save</string>
+    <string name="cancel_button_text">Cancel</string>
+    <string name="yes_button_text">Yes</string>
+    <string name="no_button_text">No</string>
+    <string name="selected_goal_label">Goal:</string>
+    <string name="add_step_count_description">Add steps to current total</string>
+    <string name="clear_step_count_description">Clear current step count</string>
+    <string name="title_about">About KeepFit</string>
+    <string name="title_settings">Settings</string>
+
+    <string-array name="list_default_goal_names">
+        <item>Easy</item>
+        <item>Medium</item>
+        <item>Hard</item>
+    </string-array>
+
+    <string-array name="list_default_goal_targets">
+        <item>8000</item>
+        <item>10000</item>
+        <item>15000</item>
+    </string-array>
+
+    <string name="goal_alert_name_instruction">Choose a name for your goal:</string>
+    <string name="goal_alert_target_instruction">Enter a target step count for your goal:</string>
+    <string name="input_hint_goal_name">Goal name</string>
+    <string name="input_hint_goal_target">Target step count</string>
+    <string name="add_goal_dialog_title">Add new goal</string>
+    <string name="edit_goal_dialog_title">Edit goal</string>
+    <string name="validation_error_missing_goal_name">Enter a goal name</string>
+    <string name="validation_error_zero_step_count">Step count must be greater than 0</string>
+    <string name="validation_error_goal_name_taken">Goal name already taken</string>
+    <string name="validation_error_missing_step_count">Enter a step count</string>
+    <string name="confirm_delete_message">Are you sure you want to delete the \"%1$s\" goal?</string>
+    <string name="confirm_delete_title">Delete goal</string>
+    <string name="add_button_text">Add</string>
+    <string name="add_step_count_title">Add steps</string>
+    <string name="add_step_count_message">Enter how many steps to add to the current step count.</string>
+    <string name="default_goal_name">Medium</string>
+    <string name="title_statistics">Statistics</string>
+    <string name="data_label">Date:</string>
+    <string name="percent_completed_label">Completed:</string>
+    <string name="target_step_count_label">Target:</string>
+    <string name="step_count_label">Step count:</string>
+    <string name="no_entry_label">-</string>
+    <string name="clear_step_count_message">Are you sure you want to clear your current step count?</string>
+    <string name="clear_step_count_title">Clear step count</string>
+    <string name="today_string">Today</string>
+    <string name="edit_goal_dialog_message">Enter a name and target step count for your goal.</string>
+    <string name="average_step_count_label">Average step count:</string>
+    <string name="total_step_count_label">Total step count:</string>
+    <string name="longest_streak_label">Longest streak:</string>
+    <string name="current_streak_label">Current streak:</string>
+    <string name="most_active_day_label">Most active day:</string>
+    <string name="goal_completion_label">Goal completion rate:</string>
+    <string name="records_start_label">Records start:</string>
+    <string name="active_goal_label">%1$s (active)</string>
+    <string name="title_activity_settings">Settings</string>
+
+    <!-- Strings related to Settings -->
+
+    <!-- Example General settings -->
+    <string name="pref_header_general">General</string>
+
+    <string name="pref_title_social_recommendations">Enable social recommendations</string>
+    <string name="pref_description_social_recommendations">Recommendations for people to contact
+        based on your message history
+    </string>
+
+    <string name="pref_title_display_name">Display name</string>
+    <string name="pref_default_display_name">John Smith</string>
+
+    <string name="pref_title_add_friends_to_messages">Add friends to messages</string>
+    <string-array name="pref_example_list_titles">
+        <item>Always</item>
+        <item>When possible</item>
+        <item>Never</item>
+    </string-array>
+    <string-array name="pref_example_list_values">
+        <item>1</item>
+        <item>0</item>
+        <item>-1</item>
+    </string-array>
+
+    <!-- Example settings for Data & Sync -->
+    <string name="pref_header_data_sync">Data &amp; sync</string>
+
+
+    <string-array name="list_preference_entries">
+        <item>Entry 1</item>
+        <item>Entry 2</item>
+        <item>Entry 3</item>
+    </string-array>
+
+    <string-array name="list_preference_entry_values">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+    </string-array>
+
+    <string-array name="multi_select_list_preference_default_value" />
+
+    <string name="pref_title_system_sync_settings">System sync settings</string>
+
+    <!-- Example settings for Notifications -->
+    <string name="pref_header_notifications">Notifications</string>
+
+    <string name="pref_title_new_message_notifications">New message notifications</string>
+
+    <string name="pref_title_ringtone">Ringtone</string>
+    <string name="pref_ringtone_silent">Silent</string>
+
+    <string name="pref_title_vibrate">Vibrate</string>
+    <string name="no_step_counter_warning">No step count sensor available</string>
+    <string name="pref_description_enable_step_counter">Enable using hardware step counter for automated activity recording (not supported on all devices)</string>
+    <string name="pref_title_enable_step_counter">Enable step counter</string>
+    <string name="pref_key_step_counter_enabled">step_counter_enabled</string>
+    <string name="pref_key_goal_editing_enabled">goal_editing_enabled</string>
+    <string name="pref_key_notifications_enabled">notifications_enabled</string>
+    <string name="pref_title_enable_goal_editing">Enable goal editing</string>
+    <string name="pref_title_enable_notifications">Enable notifications</string>
+    <string name="pref_description_enable_notifications">Enable motivational notifications based on your performance</string>
+    <string name="pref_description_enable_goal_editing">Allow editing of existing goal names and targets</string>
+    <string name="pref_title_history_length">History duration</string>
+    <string name="pref_key_history_length">history_length</string>
+    <string name="pref_title_clear_history">Clear history</string>
+    <string name="pref_key_clear_history">clear_history</string>
+    <string name="delete_history_confirmation">Deleting history</string>
+    <string name="delete_history_message">Are you sure you wish permanently delete your activity history?</string>
+    <string name="pref_title_delete_history">Clear history</string>
+    <string name="pref_description_delete_history">Permanently delete all historical activity records</string>
+    <string name="pref_description_history_length">Choose how long to store historical activity</string>
+    <string name="reduce_history_warning_message">Reducing the history duration will permanently delete any historical records outside of the new range. Do you wish to continue?</string>
+    <string name="reduce_history_warning_title">Reduce history duration</string>
+    <string name="add_historic_activity_description">Add activity for this date</string>
+    <string name="input_hint_step_count">Step count</string>
+    <string name="add_historic_step_count_title">Add historical activity</string>
+    <string name="add_historic_step_count_message">Enter a number of steps to add to the activity for %1$s.</string>
+    <string name="add_historic_step_count_and_goal_message">Choose a goal and enter a step count for %1$s.</string>
+    <string name="notification_title_halfway">Halfway there</string>
+    <string name="notification_content_halfway">You\'re halfway towards today\'s goal - good work!</string>
+    <string name="keepfit_version_details">KeepFit version 0.1</string>
+    <string name="keepfit_author_info">Created by R. David Dunphy</string>
+    <string name="keepfit_email_info">raymond.dunphy.2014@uni.strath.ac.uk</string>
+
+    <string-array name="pref_history_length_titles">
+        <item>No record</item>
+        <item>1 week</item>
+        <item>2 weeks</item>
+        <item>1 month</item>
+        <item>3 months</item>
+        <item>6 months</item>
+        <item>1 year</item>
+        <item>Record all</item>
+    </string-array>
+    <string-array name="pref_history_length_values">
+        <item>0</item>
+        <item>7</item>
+        <item>14</item>
+        <item>30</item>
+        <item>90</item>
+        <item>180</item>
+        <item>365</item>
+        <item>-1</item>
+    </string-array>
+</resources>

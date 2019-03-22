@@ -1,0 +1,40 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <SwitchPreference
+        android:defaultValue="true"
+        android:key="@string/pref_key_step_counter_enabled"
+        android:summary="@string/pref_description_enable_step_counter"
+        android:title="@string/pref_title_enable_step_counter" />
+
+    <SwitchPreference
+        android:defaultValue="true"
+        android:key="@string/pref_key_goal_editing_enabled"
+        android:summary="@string/pref_description_enable_goal_editing"
+        android:title="@string/pref_title_enable_goal_editing" />
+
+    <SwitchPreference
+        android:defaultValue="true"
+        android:key="@string/pref_key_notifications_enabled"
+        android:summary="@string/pref_description_enable_notifications"
+        android:title="@string/pref_title_enable_notifications" />
+
+    <uk.co.daviddunphy.keepfit.view.ConfirmListPreference
+        android:defaultValue="365"
+        android:entries="@array/pref_history_length_titles"
+        android:entryValues="@array/pref_history_length_values"
+        android:key="@string/pref_key_history_length"
+        android:negativeButtonText="@null"
+        android:positiveButtonText="@null"
+        android:title="@string/pref_title_history_length"
+        android:summary="@string/pref_description_history_length"/>
+
+    <uk.co.daviddunphy.keepfit.view.ConfirmDialogPreference
+        android:key="@string/pref_key_clear_history"
+        android:dialogIcon="@drawable/ic_warning_blue_24dp"
+        android:title="@string/pref_title_delete_history"
+        android:summary="@string/pref_description_delete_history"
+        android:dialogMessage="@string/delete_history_message"
+        android:positiveButtonText="@string/yes_button_text"
+        android:negativeButtonText="@string/no_button_text"/>
+
+</PreferenceScreen>
