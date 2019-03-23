@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Contextual Triggers</string>
+    <string name="channel_name">contextualtriggers</string>
+    <string name="channel_description">contextualtriggers channel</string>
 </resources>
