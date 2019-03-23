@@ -31,11 +31,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-import uk.co.daviddunphy.keepfit.model.Goal;
-import uk.co.daviddunphy.keepfit.model.HistoryEntry;
-import uk.co.daviddunphy.keepfit.model.NotificationService;
-import uk.co.daviddunphy.keepfit.R;
-import uk.co.daviddunphy.keepfit.model.SharedPreferencesManager;
+import uk.ac.strath.keepfit.model.Goal;
+import uk.ac.strath.keepfit.model.HistoryEntry;
+import uk.ac.strath.keepfit.model.NotificationService;
+import uk.ac.strath.keepfit.R;
+import uk.ac.strath.keepfit.model.SharedPreferencesManager;
 
 
 /**

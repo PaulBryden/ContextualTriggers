@@ -6,7 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
 
-import uk.co.daviddunphy.keepfit.R;
+import uk.ac.strath.keepfit.R;
 
 public class AboutActivity extends AppCompatActivity {
 

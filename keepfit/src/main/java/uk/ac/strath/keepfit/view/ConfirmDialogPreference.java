@@ -4,8 +4,8 @@ import android.content.Context;
 import android.preference.DialogPreference;
 import android.util.AttributeSet;
 
-import uk.co.daviddunphy.keepfit.R;
-import uk.co.daviddunphy.keepfit.view.Toaster;
+import uk.ac.strath.keepfit.R;
+import uk.ac.strath.keepfit.view.Toaster;
 
 public class ConfirmDialogPreference extends DialogPreference {
 

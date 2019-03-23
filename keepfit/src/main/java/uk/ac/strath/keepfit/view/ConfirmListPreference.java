@@ -8,7 +8,7 @@ import android.os.Build;
 import android.preference.ListPreference;
 import android.util.AttributeSet;
 
-import uk.co.daviddunphy.keepfit.R;
+import uk.ac.strath.keepfit.R;
 
 public class ConfirmListPreference extends ListPreference {
 

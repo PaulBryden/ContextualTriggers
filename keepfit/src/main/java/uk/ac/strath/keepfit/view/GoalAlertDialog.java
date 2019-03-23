@@ -15,9 +15,9 @@ import android.widget.EditText;
 import java.util.List;
 import java.util.Locale;
 
-import uk.co.daviddunphy.keepfit.model.Goal;
-import uk.co.daviddunphy.keepfit.R;
-import uk.co.daviddunphy.keepfit.view.DialogValidationOnClickListener;
+import uk.ac.strath.keepfit.model.Goal;
+import uk.ac.strath.keepfit.R;
+import uk.ac.strath.keepfit.view.DialogValidationOnClickListener;
 
 
 public class GoalAlertDialog extends AlertDialog {

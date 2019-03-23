@@ -14,7 +14,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import uk.co.daviddunphy.keepfit.R;
+import uk.ac.strath.keepfit.R;
 
 public class SharedPreferencesManager {
 

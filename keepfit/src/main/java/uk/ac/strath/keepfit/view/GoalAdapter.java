@@ -14,8 +14,8 @@ import android.widget.TextView;
 import java.util.List;
 import java.util.Locale;
 
-import uk.co.daviddunphy.keepfit.model.Goal;
-import uk.co.daviddunphy.keepfit.R;
+import uk.ac.strath.keepfit.model.Goal;
+import uk.ac.strath.keepfit.R;
 
 class GoalAdapter extends RecyclerView.Adapter<GoalAdapter.GoalViewHolder> {
 
