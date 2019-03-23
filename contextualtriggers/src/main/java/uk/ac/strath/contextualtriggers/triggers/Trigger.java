@@ -1,12 +1,14 @@
-package uk.ac.strath.contextualtriggers;
+package uk.ac.strath.contextualtriggers.triggers;
 
+import uk.ac.strath.contextualtriggers.Action;
+import uk.ac.strath.contextualtriggers.Condition;
 import uk.ac.strath.contextualtriggers.conditions.AbstractCondition;
 
 /**
  * Triggers basically just link conditions to actions. If data relevant to the condition changes,
  * the Trigger checks if the condition is satisfied, and if so executes the action.
  */
-public class Trigger {
+public class Trigger implements ITrigger {
 
     private Condition condition;
     private Action action;

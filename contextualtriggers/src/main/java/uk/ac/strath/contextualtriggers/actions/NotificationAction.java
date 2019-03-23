@@ -1,17 +1,20 @@
 package uk.ac.strath.contextualtriggers.actions;
 
 import uk.ac.strath.contextualtriggers.Action;
+import uk.ac.strath.contextualtriggers.Logger;
 
 public class NotificationAction implements Action {
 
     private String message;
-
-    public NotificationAction(String message) {
+    private Logger logger;
+    public NotificationAction(String message)
+    {
         this.message = message;
+        logger=Logger.getInstance();
     }
 
     @Override
     public void execute() {
-        System.out.println("*** SENDING NOTIFICATION ***\n\"" + message + "\"");
+        logger.log("*** SENDING NOTIFICATION ***\n\"" + message + "\"");
     }
 }

@@ -2,6 +2,9 @@ package uk.ac.strath.contextualtriggers;
 
 import android.widget.TextView;
 
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
+
 public class Logger
 {
     public static Logger logger = null;
@@ -12,7 +15,7 @@ public class Logger
         logger=this;
 
     }
-    public void log(String message)
+    public synchronized void log(String message)
     {
         loggerText.append(message);
     }

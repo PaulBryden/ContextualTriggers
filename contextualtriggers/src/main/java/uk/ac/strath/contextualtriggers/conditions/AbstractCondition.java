@@ -1,20 +1,21 @@
 package uk.ac.strath.contextualtriggers.conditions;
 
 import uk.ac.strath.contextualtriggers.Condition;
-import uk.ac.strath.contextualtriggers.Trigger;
+import uk.ac.strath.contextualtriggers.triggers.ITrigger;
+import uk.ac.strath.contextualtriggers.triggers.Trigger;
 
 /**
  * Base class for Condition implementations.
  */
 public abstract class AbstractCondition implements Condition {
 
-    private Trigger trigger;
+    private ITrigger trigger;
 
-    public void attachTrigger(Trigger trigger) {
+    public void attachTrigger(ITrigger trigger) {
         this.trigger = trigger;
     }
 
-    Trigger getTrigger() {
+    ITrigger getTrigger() {
         return trigger;
     }
 }

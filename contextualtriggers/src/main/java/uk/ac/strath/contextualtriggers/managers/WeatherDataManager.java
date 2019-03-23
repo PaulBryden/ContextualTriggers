@@ -23,12 +23,24 @@ public class WeatherDataManager implements IDataManager<WeatherData>, IDataManag
     Logger logger;
     boolean isRunning=false;
     private DataManager<WeatherData> dataManager;
+    private static WeatherDataManager singletonWeatherDataManager= null; ;
 
     public WeatherDataManager()
     {
         dataManager= new DataManager<WeatherData>();
         logger = Logger.getInstance();
+        singletonWeatherDataManager=this;
     }
+
+    public static WeatherDataManager getInstance()
+    {
+        if (singletonWeatherDataManager == null)
+            singletonWeatherDataManager = new WeatherDataManager();
+
+        return singletonWeatherDataManager;
+    }
+
+
     public void register(DataCondition<WeatherData> dataCondition)
     {
         dataManager.register(dataCondition);
@@ -104,9 +116,12 @@ public class WeatherDataManager implements IDataManager<WeatherData>, IDataManag
     @Override
     public void start()
     {
-        Thread aThread = new Thread(this);
-        isRunning=true;
-        aThread.start();
+        if(!isRunning)
+        {
+            Thread aThread = new Thread(this);
+            isRunning = true;
+            aThread.start();
+        }
     }
 
 }

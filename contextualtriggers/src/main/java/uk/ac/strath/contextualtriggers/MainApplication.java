@@ -9,6 +9,7 @@ import android.widget.TextView;
 import com.google.android.gms.awareness.Awareness;
 import com.google.android.gms.common.api.GoogleApiClient;
 import uk.ac.strath.contextualtriggers.managers.WeatherDataManager;
+import uk.ac.strath.contextualtriggers.triggers.ButItsSunnyOutsideTrigger;
 
 public class MainApplication extends AppCompatActivity
 {
@@ -17,7 +18,7 @@ public class MainApplication extends AppCompatActivity
     private static Context context;
     WeatherDataManager weatherData;
     Logger logger;
-
+    ButItsSunnyOutsideTrigger sunnyOotsideTrigger;
     public static Context getAppContext() {
         return MainApplication.context;
     }
@@ -48,8 +49,7 @@ public class MainApplication extends AppCompatActivity
                 .build();
         mGoogleApiClient.connect();
         mAppActivity=this;
-        weatherData = new WeatherDataManager();
-        weatherData.start();
+        sunnyOotsideTrigger = new ButItsSunnyOutsideTrigger();
 
     }
 

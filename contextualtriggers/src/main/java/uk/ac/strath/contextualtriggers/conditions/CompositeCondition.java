@@ -1,7 +1,8 @@
 package uk.ac.strath.contextualtriggers.conditions;
 
 import uk.ac.strath.contextualtriggers.Condition;
-import uk.ac.strath.contextualtriggers.Trigger;
+import uk.ac.strath.contextualtriggers.triggers.ITrigger;
+import uk.ac.strath.contextualtriggers.triggers.Trigger;
 
 import java.util.List;
 
@@ -14,7 +15,7 @@ public abstract class CompositeCondition extends AbstractCondition {
     List<Condition> components;
 
     @Override
-    public void attachTrigger(Trigger trigger) {
+    public void attachTrigger(ITrigger trigger) {
         super.attachTrigger(trigger);
         for (Condition condition : components) {
             ((AbstractCondition) condition).attachTrigger(trigger);
