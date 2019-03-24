@@ -10,6 +10,7 @@ import uk.ac.strath.contextualtriggers.Action;
 import uk.ac.strath.contextualtriggers.Logger;
 import uk.ac.strath.contextualtriggers.MainApplication;
 import uk.ac.strath.contextualtriggers.R;
+import uk.ac.strath.contextualtriggers.exceptions.LogSinkNotDefinedException;
 
 import static android.support.v4.content.ContextCompat.getSystemService;
 
@@ -24,7 +25,7 @@ public class NotificationAction implements Action {
         logger=Logger.getInstance();
         createNotificationChannel();
     }
-    
+
     @Override
     public void execute()
     {

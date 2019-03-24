@@ -41,7 +41,8 @@ public class MainApplication extends AppCompatActivity
         setContentView(R.layout.scrollable_textview);
         TextView textView = (TextView) findViewById(R.id.text_view);
         textView.setMovementMethod(new ScrollingMovementMethod());
-        logger = new Logger(textView);
+        logger = Logger.getInstance();
+        logger.setLogger(textView);
 
         //noinspection MissingPermission
         mGoogleApiClient = new GoogleApiClient.Builder(this)

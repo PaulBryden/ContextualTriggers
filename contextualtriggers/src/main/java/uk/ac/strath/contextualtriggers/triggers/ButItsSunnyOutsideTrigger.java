@@ -5,8 +5,6 @@ import java.util.ArrayList;
 import uk.ac.strath.contextualtriggers.Condition;
 import uk.ac.strath.contextualtriggers.actions.NotificationAction;
 import uk.ac.strath.contextualtriggers.conditions.AndCondition;
-import uk.ac.strath.contextualtriggers.conditions.CompositeCondition;
-import uk.ac.strath.contextualtriggers.conditions.DataCondition;
 import uk.ac.strath.contextualtriggers.conditions.NotificationHistoryCondition;
 import uk.ac.strath.contextualtriggers.conditions.StepCountCondition;
 import uk.ac.strath.contextualtriggers.conditions.WeatherSunnyCondition;
