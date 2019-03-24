@@ -22,7 +22,7 @@ public class StepDataManager implements IDataManager<StepData>, IDataManagerSour
         return singletonStepDataManager;
     }
 
-    public StepDataManager()
+    private StepDataManager()
     {
         stepData = new StepData();
         dataManager= new DataManager<StepData>();
