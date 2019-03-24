@@ -31,7 +31,9 @@ public class Logger
             Log.i("CTLogger", "LOGGER SINK NOT DEFINED - " + message);
 
         }
+    else {
         loggerText.append(message);
+    }
     }
 
     public static Logger getInstance()
