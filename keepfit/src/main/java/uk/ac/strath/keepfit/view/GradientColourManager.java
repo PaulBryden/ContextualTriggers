@@ -4,7 +4,7 @@ package uk.ac.strath.keepfit.view;
 import java.util.HashMap;
 import java.util.Map;
 
-import uk.co.daviddunphy.keepfit.R;
+import uk.ac.strath.keepfit.R;
 
 public class GradientColourManager {
 

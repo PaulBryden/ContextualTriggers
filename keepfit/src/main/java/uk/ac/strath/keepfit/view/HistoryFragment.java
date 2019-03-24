@@ -38,11 +38,11 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
-import uk.co.daviddunphy.keepfit.model.Goal;
-import uk.co.daviddunphy.keepfit.model.HistoryEntry;
-import uk.co.daviddunphy.keepfit.model.HistoryEntryObserver;
-import uk.co.daviddunphy.keepfit.R;
-import uk.co.daviddunphy.keepfit.model.SharedPreferencesManager;
+import uk.ac.strath.keepfit.model.Goal;
+import uk.ac.strath.keepfit.model.HistoryEntry;
+import uk.ac.strath.keepfit.model.HistoryEntryObserver;
+import uk.ac.strath.keepfit.R;
+import uk.ac.strath.keepfit.model.SharedPreferencesManager;
 
 
 /**

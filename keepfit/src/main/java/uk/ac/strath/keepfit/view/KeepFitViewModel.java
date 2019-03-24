@@ -10,9 +10,9 @@ import com.prolificinteractive.materialcalendarview.CalendarDay;
 import java.util.Date;
 import java.util.List;
 
-import uk.co.daviddunphy.keepfit.model.HistoryEntry;
-import uk.co.daviddunphy.keepfit.model.KeepFitRepository;
-import uk.co.daviddunphy.keepfit.model.SharedPreferencesManager;
+import uk.ac.strath.keepfit.model.HistoryEntry;
+import uk.ac.strath.keepfit.model.KeepFitRepository;
+import uk.ac.strath.keepfit.model.SharedPreferencesManager;
 
 public class KeepFitViewModel extends AndroidViewModel {
 

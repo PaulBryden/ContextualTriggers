@@ -6,7 +6,7 @@ import android.content.Context;
 import java.util.ArrayList;
 import java.util.List;
 
-import uk.co.daviddunphy.keepfit.R;
+import uk.ac.strath.keepfit.R;
 
 public class Goal implements Comparable<Goal> {
 

@@ -12,8 +12,8 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.NotificationManagerCompat;
 
-import uk.co.daviddunphy.keepfit.R;
-import uk.co.daviddunphy.keepfit.view.MainActivity;
+import uk.ac.strath.keepfit.R;
+import uk.ac.strath.keepfit.view.MainActivity;
 
 public class NotificationService extends Service {
 

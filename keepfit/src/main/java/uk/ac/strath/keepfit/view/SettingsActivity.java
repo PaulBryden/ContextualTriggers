@@ -8,9 +8,9 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 
-import uk.co.daviddunphy.keepfit.R;
-import uk.co.daviddunphy.keepfit.model.SharedPreferencesManager;
-import uk.co.daviddunphy.keepfit.view.KeepFitViewModel;
+import uk.ac.strath.keepfit.R;
+import uk.ac.strath.keepfit.model.SharedPreferencesManager;
+import uk.ac.strath.keepfit.view.KeepFitViewModel;
 
 public class SettingsActivity extends AppCompatActivity {
 

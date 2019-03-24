@@ -20,10 +20,10 @@ import android.widget.Toast;
 
 import com.prolificinteractive.materialcalendarview.CalendarDay;
 
-import uk.co.daviddunphy.keepfit.model.Goal;
-import uk.co.daviddunphy.keepfit.model.HistoryEntry;
-import uk.co.daviddunphy.keepfit.R;
-import uk.co.daviddunphy.keepfit.model.SharedPreferencesManager;
+import uk.ac.strath.keepfit.model.Goal;
+import uk.ac.strath.keepfit.model.HistoryEntry;
+import uk.ac.strath.keepfit.R;
+import uk.ac.strath.keepfit.model.SharedPreferencesManager;
 
 
 public class MainActivity extends AppCompatActivity implements SensorEventListener, GoalsFragment.OnFragmentInteractionListener, StatisticsFragment.OnFragmentInteractionListener, HistoryFragment.OnFragmentInteractionListener, HomeFragment.OnFragmentInteractionListener {

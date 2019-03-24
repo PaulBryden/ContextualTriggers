@@ -12,8 +12,8 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
-import uk.co.daviddunphy.keepfit.view.KeepFitViewModel;
-import uk.co.daviddunphy.keepfit.view.StatisticsFragment;
+import uk.ac.strath.keepfit.view.KeepFitViewModel;
+import uk.ac.strath.keepfit.view.StatisticsFragment;
 
 public class StatisticsCalculator {
 
