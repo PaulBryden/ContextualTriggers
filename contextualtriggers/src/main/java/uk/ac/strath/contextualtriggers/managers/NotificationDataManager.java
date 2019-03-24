@@ -4,7 +4,7 @@ import uk.ac.strath.contextualtriggers.conditions.DataCondition;
 import uk.ac.strath.contextualtriggers.data.NotificationData;
 import uk.ac.strath.contextualtriggers.data.WeatherData;
 
-public class NotificationDataManager implements IDataManager<NotificationData>, IDataManagerSource
+public class NotificationDataManager implements IDataManager<NotificationData>
 {
     private DataManager<NotificationData> dataManager;
 
@@ -23,9 +23,4 @@ public class NotificationDataManager implements IDataManager<NotificationData>, 
         dataManager.sendUpdate(data);
     }
 
-    @Override
-    public void start()
-    {
-
-    }
 }

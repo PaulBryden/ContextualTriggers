@@ -1,5 +1,6 @@
 package uk.ac.strath.contextualtriggers;
 
+import android.util.Log;
 import android.widget.TextView;
 
 import java.util.concurrent.locks.Lock;
@@ -27,7 +28,8 @@ public class Logger
     {
         if(loggerText==null)
         {
-            System.out.println("NOTE:: LOGGER SINK NOT DEFINED\n"+message);
+            Log.i("CTLogger", "LOGGER SINK NOT DEFINED - " + message);
+
         }
         loggerText.append(message);
     }
