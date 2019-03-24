@@ -29,7 +29,9 @@ public class Logger
         {
             System.out.println("NOTE:: LOGGER SINK NOT DEFINED\n"+message);
         }
+    else {
         loggerText.append(message);
+    }
     }
 
     public static Logger getInstance()
