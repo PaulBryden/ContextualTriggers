@@ -13,7 +13,7 @@ public class Trigger implements ITrigger {
     private Condition condition;
     private Action action;
 
-    public Trigger(Condition condition, Action action) {
+    Trigger(Condition condition, Action action) {
         this.condition = condition;
         this.action = action;
         ((AbstractCondition) this.condition).attachTrigger(this);
@@ -27,6 +27,27 @@ public class Trigger implements ITrigger {
         if (condition.isSatisfied()) {
             action.execute();
         }
+    }
+
+    public static class Builder {
+
+        private Condition condition;
+        private Action action;
+
+        public Builder setCondition(Condition condition) {
+            this.condition = condition;
+            return this;
+        }
+
+        public Builder setAction(Action action) {
+            this.action = action;
+            return this;
+        }
+
+        public Trigger build() {
+            return new Trigger(condition, action);
+        }
+
     }
 
 }
