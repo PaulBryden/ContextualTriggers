@@ -1,12 +1,18 @@
 package uk.ac.strath.contextualtriggers.managers;
 
+import android.app.Service;
+import android.content.Context;
+import android.content.Intent;
+import android.os.IBinder;
+import android.support.annotation.Nullable;
 import android.support.annotation.RequiresPermission;
 
 import uk.ac.strath.contextualtriggers.Logger;
+import uk.ac.strath.contextualtriggers.MainApplication;
 import uk.ac.strath.contextualtriggers.conditions.DataCondition;
 import uk.ac.strath.contextualtriggers.data.StepData;
 
-public class StepDataManager implements IDataManager<StepData>, IDataManagerSource, Runnable
+public class StepDataManager implements IDataManager<StepData>, IDataManagerSource
 {
     Logger logger;
     boolean isRunning=false;
@@ -40,33 +46,34 @@ public class StepDataManager implements IDataManager<StepData>, IDataManagerSour
         dataManager.sendUpdate(data);
     }
 
-    public void run()
-    {
-        while(isRunning)
-        {
+    @Override
+    public void start() {
+        //Currently starts but could bind service
+        Intent service = new Intent(MainApplication.getAppContext(), StepDataManagerService.class);
+        MainApplication.getAppContext().startService(service);
+    }
+
+    public class StepDataManagerService extends Service{
+
+        @Override
+        public int onStartCommand(Intent intent, int flags, int startId) {
+
             stepData.steps += 100;
             logger.log("Steps: " + stepData.steps + "\n");
             sendUpdate(stepData);
-
             try
             {
                 Thread.sleep(10000);
             } catch (Exception e)
             {
-
             }
+            return START_STICKY;
+        }
+
+        @Nullable
+        @Override
+        public IBinder onBind(Intent intent) {
+            return null;
         }
     }
-
-    @Override
-    public void start()
-    {
-        if(!isRunning)
-        {
-            Thread aThread = new Thread(this);
-            isRunning = true;
-            aThread.start();
-        }
-    }
-
 }

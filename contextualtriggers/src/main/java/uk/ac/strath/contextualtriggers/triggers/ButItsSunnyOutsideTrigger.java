@@ -1,5 +1,11 @@
 package uk.ac.strath.contextualtriggers.triggers;
 
+import android.app.Service;
+import android.content.Intent;
+import android.content.ServiceConnection;
+import android.os.IBinder;
+import android.support.annotation.Nullable;
+
 import java.util.ArrayList;
 
 import uk.ac.strath.contextualtriggers.Condition;
