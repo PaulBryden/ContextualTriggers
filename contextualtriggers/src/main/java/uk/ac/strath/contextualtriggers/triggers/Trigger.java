@@ -45,9 +45,7 @@ public class Trigger implements ITrigger {
         }
 
         public Trigger build() {
-            Trigger trigger = new Trigger(condition, action);
-            ((AbstractCondition) condition).attachTrigger(trigger);
-            return trigger;
+            return new Trigger(condition, action);
         }
 
     }

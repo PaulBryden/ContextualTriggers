@@ -81,7 +81,6 @@ public class MainApplication extends AppCompatActivity {
         NotificationAction action = new NotificationAction("Go for a walk ya lazy. It's even sunny ootside!");
         action.attachCondition(notifyCondition);
         Trigger trigger = new Trigger.Builder().setCondition(condition).setAction(action).build();
-        condition.attachTrigger(trigger);
         stepDataManager.start();
         weatherDataManager.start();
         return trigger;
