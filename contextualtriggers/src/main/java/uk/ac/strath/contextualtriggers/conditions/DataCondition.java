@@ -1,11 +1,14 @@
 package uk.ac.strath.contextualtriggers.conditions;
 
+import uk.ac.strath.contextualtriggers.managers.IDataManager;
+
 public abstract class DataCondition<T> extends AbstractCondition {
 
     private T data;
 
-    DataCondition() {
+    DataCondition(IDataManager<T> dataManager) {
         data = null;
+        dataManager.register(this);
     }
 
     DataCondition(T initialData) {

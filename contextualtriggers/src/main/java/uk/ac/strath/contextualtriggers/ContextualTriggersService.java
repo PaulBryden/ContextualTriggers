@@ -10,14 +10,16 @@ import com.google.android.gms.common.api.GoogleApiClient;
 
 import java.util.List;
 
-import uk.ac.strath.contextualtriggers.triggers.ButItsSunnyOutsideTrigger;
+import uk.ac.strath.contextualtriggers.managers.StepDataManager;
+//import uk.ac.strath.contextualtriggers.triggers.ButItsSunnyOutsideTrigger;
+import uk.ac.strath.contextualtriggers.triggers.DefaultTriggers;
 import uk.ac.strath.contextualtriggers.triggers.ITrigger;
 
 public class ContextualTriggersService extends Service {
     private static GoogleApiClient mGoogleApiClient;
 
     private static List<ITrigger> triggerList;
-    ButItsSunnyOutsideTrigger sunnyOotsideTrigger;
+//    ButItsSunnyOutsideTrigger sunnyOotsideTrigger;
     public static GoogleApiClient getGoogleAPIClient()
     {
         return mGoogleApiClient;
@@ -41,6 +43,12 @@ public class ContextualTriggersService extends Service {
    public static void removeTrigger(ITrigger t){
        triggerList.remove(t);
    }
+
+
+    private void createTriggers(){
+       //Pointless Trigger creation
+       triggerList.add(DefaultTriggers.createStepMonitorTrigger(onBind(new Intent(this, StepDataManager.class))));
+    }
 
     @Nullable
     @Override
