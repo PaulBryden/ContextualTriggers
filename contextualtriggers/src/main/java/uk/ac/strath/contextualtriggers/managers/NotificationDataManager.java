@@ -10,7 +10,7 @@ public class NotificationDataManager implements IDataManager<NotificationData>
 
     public NotificationDataManager()
     {
-        dataManager= new DataManager<NotificationData>();
+        //dataManager= new DataManager<NotificationData>();
     }
 
     public void register(DataCondition<NotificationData> dataCondition)

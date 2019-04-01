@@ -26,7 +26,7 @@
             android:name=".ContextualTriggersService">
         </service>
         <service
-            android:name=".managers.StepDataManager$StepDataManagerService">
+            android:name=".managers.StepDataManager">
         </service>
         </application>
 

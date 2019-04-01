@@ -33,7 +33,7 @@ public class WeatherDataManager implements IDataManager<WeatherData>, IDataManag
     ;
 
     private WeatherDataManager() {
-        dataManager = new DataManager<WeatherData>();
+        //dataManager = new DataManager<WeatherData>();
         logger = Logger.getInstance();
         singletonWeatherDataManager = this;
     }

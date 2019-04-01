@@ -11,6 +11,11 @@ public abstract class DataCondition<T> extends AbstractCondition {
         dataManager.register(this);
     }
 
+    @Deprecated
+    DataCondition() {
+        // placeholder - change conditions to use data managers
+    }
+
     DataCondition(T initialData) {
         data = initialData;
     }
