@@ -30,7 +30,6 @@ public class ContextualTriggersService extends Service {
                 .addApi(Awareness.API)
                 .build();
         mGoogleApiClient.connect();
-
         return START_STICKY;
     }
 
