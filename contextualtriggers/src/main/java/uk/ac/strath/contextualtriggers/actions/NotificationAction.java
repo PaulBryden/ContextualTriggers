@@ -2,8 +2,12 @@ package uk.ac.strath.contextualtriggers.actions;
 
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
+import android.app.Service;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Build;
+import android.os.IBinder;
+import android.support.annotation.Nullable;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.NotificationManagerCompat;
 
@@ -28,6 +32,8 @@ public class NotificationAction implements Action {
         createNotificationChannel();
     }
 
+
+
     @Override
     public void execute() {
         if (notifyCondition != null) {
@@ -35,7 +41,7 @@ public class NotificationAction implements Action {
         }
         logger.log("*** SENDING NOTIFICATION ***\n\"" + message + "\"");
         NotificationCompat.Builder builder = new NotificationCompat.Builder(MainApplication.getAppContext(), CHANNEL_ID)
-                .setSmallIcon(R.drawable.ic_launcher_foreground)
+                .setSmallIcon(R.drawable.powered_by_google_dark)
                 .setContentTitle("Notification")
                 .setContentText(message)
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT);

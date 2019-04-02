@@ -15,7 +15,6 @@ public class StepDataManager extends DataManager<StepData> implements IDataManag
     StepData stepData;
     private final IBinder binder = new LocalBinder();
 
-
     public class LocalBinder extends Binder {
         public IDataManager getInstance() {
             return StepDataManager.this;
@@ -44,11 +43,6 @@ public class StepDataManager extends DataManager<StepData> implements IDataManag
         logger.log("Steps: " + stepData.steps + "\n");
         Log.d("StepDataManager", "Starting");
         sendUpdate(stepData);
-        try {
-            Thread.sleep(10000);
-        } catch (Exception e) {
-            Log.e("StepDataManager", "Trouble sleeping", e);
-        }
         return START_STICKY;
     }
 }

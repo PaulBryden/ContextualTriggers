@@ -4,12 +4,14 @@ import android.Manifest;
 import android.app.Service;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.os.Binder;
 import android.os.IBinder;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresPermission;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.util.Log;
 
 import com.google.android.gms.awareness.Awareness;
 import com.google.android.gms.awareness.snapshot.WeatherResult;
@@ -20,70 +22,46 @@ import uk.ac.strath.contextualtriggers.ContextualTriggersService;
 import uk.ac.strath.contextualtriggers.Logger;
 import uk.ac.strath.contextualtriggers.MainApplication;
 import uk.ac.strath.contextualtriggers.conditions.DataCondition;
+import uk.ac.strath.contextualtriggers.data.StepData;
 import uk.ac.strath.contextualtriggers.data.WeatherData;
 
 import static android.Manifest.permission.ACCESS_FINE_LOCATION;
 
-public class WeatherDataManager implements IDataManager<WeatherData>, IDataManagerSource {
+public class WeatherDataManager extends DataManager<WeatherData> implements IDataManager<WeatherData> {
     int MY_PERMISSIONS_REQUEST_READ_CONTACTS;
     Logger logger;
-    boolean isRunning = false;
-    private DataManager<WeatherData> dataManager;
-    private static WeatherDataManager singletonWeatherDataManager = null;
-    ;
+    WeatherData weatherData;
 
-    private WeatherDataManager() {
-        //dataManager = new DataManager<WeatherData>();
-        logger = Logger.getInstance();
-        singletonWeatherDataManager = this;
-    }
-
-    public static WeatherDataManager getInstance() {
-        if (singletonWeatherDataManager == null)
-            singletonWeatherDataManager = new WeatherDataManager();
-
-        return singletonWeatherDataManager;
-    }
+    private final IBinder binder = new WeatherDataManager.LocalBinder();
 
 
-    public void register(DataCondition<WeatherData> dataCondition) {
-        dataManager.register(dataCondition);
-    }
-
-    private void sendUpdate(WeatherData data) {
-        dataManager.sendUpdate(data);
-    }
-
-
+    @Nullable
     @Override
-    public void start() {
-
-        Intent service = new Intent(MainApplication.getAppContext(), WeatherDataManager.WeatherDataManagerService.class);
-        MainApplication.getAppContext().startService(service);
+    public IBinder onBind(Intent intent) {
+        setup();
+        return binder;
     }
 
-    public class WeatherDataManagerService extends Service {
+    public class LocalBinder extends Binder {
+        public IDataManager getInstance() {
+            return WeatherDataManager.this;
+        }
+    }
 
+
+    private void setup() {
+        weatherData = new WeatherData();
+        logger = Logger.getInstance();
+    }
         @Override
         public int onStartCommand(Intent intent, int flags, int startId) {
             monitor();
-            try {
-                Thread.sleep(10000);
-            } catch (Exception e) {
-
-            }
-
             return START_STICKY;
         }
 
-        @Nullable
-        @Override
-        public IBinder onBind(Intent intent) {
-            return null;
-        }
 
         private void monitor() {
-            if (ContextCompat.checkSelfPermission(MainApplication.getAppContext(),
+            if (ContextCompat.checkSelfPermission(this,
                     ACCESS_FINE_LOCATION)
                     != PackageManager.PERMISSION_GRANTED) {
 
@@ -108,7 +86,7 @@ public class WeatherDataManager implements IDataManager<WeatherData>, IDataManag
                             @Override
                             public void onResult(@NonNull WeatherResult weatherResult) {
                                 if (!weatherResult.getStatus().isSuccess()) {
-                                    System.out.println("ERROR");
+                                    Log.e("WeatherDataManager", "ERROR");
                                     return;
                                 }
 
@@ -126,4 +104,4 @@ public class WeatherDataManager implements IDataManager<WeatherData>, IDataManag
             }
         }
     }
-}
+

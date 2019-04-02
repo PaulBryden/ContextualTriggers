@@ -3,6 +3,7 @@ package uk.ac.strath.contextualtriggers;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.text.method.ScrollingMovementMethod;
 import android.widget.TextView;
@@ -23,15 +24,21 @@ public class MainApplication extends AppCompatActivity {
     }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        MainApplication.context = getApplicationContext();
+    protected void onPostCreate(@Nullable Bundle savedInstanceState)
+    {
+        super.onPostCreate(savedInstanceState);
         mAppActivity=this;
         if(serviceMode){
             emptyActivity();
         } else {
             logActivity();
         }
+    }
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        MainApplication.context = getApplicationContext();
+
     }
 
     @Override

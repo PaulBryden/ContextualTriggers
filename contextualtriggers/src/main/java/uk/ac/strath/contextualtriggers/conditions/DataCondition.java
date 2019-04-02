@@ -1,5 +1,7 @@
 package uk.ac.strath.contextualtriggers.conditions;
 
+import android.util.Log;
+
 import uk.ac.strath.contextualtriggers.managers.IDataManager;
 
 public abstract class DataCondition<T> extends AbstractCondition {
@@ -16,7 +18,8 @@ public abstract class DataCondition<T> extends AbstractCondition {
         // placeholder - change conditions to use data managers
     }
 
-    DataCondition(T initialData) {
+    DataCondition(T initialData, IDataManager<T> dataManager) {
+        this(dataManager);
         data = initialData;
     }
 
@@ -26,7 +29,15 @@ public abstract class DataCondition<T> extends AbstractCondition {
 
     public void notifyUpdate(T data) {
         this.data = data;
-        getTrigger().notifyChange();
+        try
+        {
+            getTrigger().notifyChange();
+        }
+        catch(NullPointerException e)
+        {
+            Log.d("DataCondition", "Trigger Not Attached");
+
+        }
     }
 
 }

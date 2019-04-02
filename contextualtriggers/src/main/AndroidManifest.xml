@@ -28,6 +28,9 @@
         <service
             android:name=".managers.StepDataManager">
         </service>
+        <service
+            android:name=".managers.WeatherDataManager">
+        </service>
         </application>
 
 </manifest>

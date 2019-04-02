@@ -1,29 +1,35 @@
 package uk.ac.strath.contextualtriggers.managers;
+
 import android.app.Service;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import uk.ac.strath.contextualtriggers.conditions.*;
-public abstract class DataManager<T> extends Service implements IDataManager<T>
-{
+
+public abstract class DataManager<T> extends Service implements IDataManager<T> {
     private List<DataCondition<T>> observers;
+    private T cachedData;
 
-    public DataManager()
-    {
-        observers=new ArrayList<DataCondition<T>>();
+    public DataManager() {
+        observers = new ArrayList<DataCondition<T>>();
+        cachedData = null;
     }
 
-    public void register(DataCondition<T> dataCondition)
-    {
+    public void register(DataCondition<T> dataCondition) {
         observers.add(dataCondition);
+        if(cachedData!=null)
+        {
+            Log.d("DataManager", "Registering condition, cachedData = " + cachedData.toString());
+            dataCondition.notifyUpdate(cachedData);
+        }
     }
 
-    protected void sendUpdate(T data)
-    {
-         for(DataCondition<T> i : observers)
-         {
-             i.notifyUpdate(data);
-         }
+    protected void sendUpdate(T data) {
+        cachedData = data;
+        for (DataCondition<T> i : observers) {
+            i.notifyUpdate(data);
+        }
     }
 }
