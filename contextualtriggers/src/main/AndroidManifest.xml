@@ -22,6 +22,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <service
+            android:name=".ContextualTriggersService">
+        </service>
+        <service
+            android:name=".managers.StepDataManager">
+        </service>
         </application>
 
 </manifest>

@@ -10,7 +10,7 @@ import uk.ac.strath.contextualtriggers.Action;
 import uk.ac.strath.contextualtriggers.Logger;
 import uk.ac.strath.contextualtriggers.MainApplication;
 import uk.ac.strath.contextualtriggers.R;
-import uk.ac.strath.contextualtriggers.exceptions.LogSinkNotDefinedException;
+import uk.ac.strath.contextualtriggers.conditions.NotificationHistoryCondition;
 
 import static android.support.v4.content.ContextCompat.getSystemService;
 
@@ -19,16 +19,19 @@ public class NotificationAction implements Action {
     private static final String CHANNEL_ID = "contextualtriggers";
     private String message;
     private Logger logger;
-    public NotificationAction(String message)
-    {
+    private NotificationHistoryCondition notifyCondition;
+
+    public NotificationAction(String message) {
         this.message = message;
-        logger=Logger.getInstance();
+        logger = Logger.getInstance();
         createNotificationChannel();
     }
 
     @Override
-    public void execute()
-    {
+    public void execute() {
+        if (notifyCondition != null) {
+            notifyCondition.notifyUpdate(null);
+        }
         logger.log("*** SENDING NOTIFICATION ***\n\"" + message + "\"");
         NotificationCompat.Builder builder = new NotificationCompat.Builder(MainApplication.getAppContext(), CHANNEL_ID)
                 .setSmallIcon(R.drawable.ic_launcher_foreground)
@@ -40,8 +43,7 @@ public class NotificationAction implements Action {
         notificationManager.notify(0, builder.build());
     }
 
-    private void createNotificationChannel()
-    {
+    private void createNotificationChannel() {
         // Create the NotificationChannel, but only on API 26+ because
         // the NotificationChannel class is new and not in the support library
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -52,8 +54,13 @@ public class NotificationAction implements Action {
             channel.setDescription(description);
             // Register the channel with the system; you can't change the importance
             // or other notification behaviors after this
-            NotificationManager notificationManager = (NotificationManager) getSystemService(MainApplication.getAppContext(),NotificationManager.class);
+            NotificationManager notificationManager = (NotificationManager) getSystemService(MainApplication.getAppContext(), NotificationManager.class);
             notificationManager.createNotificationChannel(channel);
         }
     }
+
+    public void attachCondition(NotificationHistoryCondition notifyCondition) {
+        this.notifyCondition = notifyCondition;
+    }
+
 }
