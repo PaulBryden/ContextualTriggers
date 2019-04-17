@@ -20,13 +20,16 @@ public class StepDataManager extends DataManager<StepData> implements IDataManag
             return StepDataManager.this;
         }
     }
+    StepDataManager()
+    {
+        setup();
+    }
 
     @Nullable
     @Override
     public IBinder onBind(Intent intent) {
         //Not sure if this is required
         //Needed if onStartCommand not called automatically
-        setup();
         Log.d("StepDataManager", "Binding");
         return binder;
     }
@@ -38,7 +41,7 @@ public class StepDataManager extends DataManager<StepData> implements IDataManag
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        setup();
+        super.onStart(intent, startId);
         stepData.steps += 100;
         logger.log("Steps: " + stepData.steps + "\n");
         Log.d("StepDataManager", "Starting");

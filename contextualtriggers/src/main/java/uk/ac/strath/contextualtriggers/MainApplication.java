@@ -9,7 +9,7 @@ import android.text.method.ScrollingMovementMethod;
 import android.widget.TextView;
 
 public class MainApplication extends AppCompatActivity {
-    private final Boolean serviceMode = false;
+    private final Boolean serviceMode = true;
     private static AppCompatActivity mAppActivity;
     private static Context context;
     Logger logger;
@@ -51,7 +51,8 @@ public class MainApplication extends AppCompatActivity {
         this.setTheme(R.style.Theme_Transparent);
         Intent i = new Intent(this, ContextualTriggersService.class);
         startService(i);
-        this.finish();
+        //this.finish(); This causes destructor to be called on the instance of the contextualtriggersservice class
+        this.
     }
 
     private void logActivity(){

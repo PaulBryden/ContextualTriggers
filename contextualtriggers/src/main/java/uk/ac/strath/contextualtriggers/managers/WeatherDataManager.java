@@ -47,7 +47,10 @@ public class WeatherDataManager extends DataManager<WeatherData> implements IDat
             return WeatherDataManager.this;
         }
     }
-
+    WeatherDataManager()
+    {
+        setup();
+    }
 
     private void setup() {
         weatherData = new WeatherData();
@@ -55,6 +58,7 @@ public class WeatherDataManager extends DataManager<WeatherData> implements IDat
     }
         @Override
         public int onStartCommand(Intent intent, int flags, int startId) {
+            super.onStart(intent, startId);
             monitor();
             return START_STICKY;
         }

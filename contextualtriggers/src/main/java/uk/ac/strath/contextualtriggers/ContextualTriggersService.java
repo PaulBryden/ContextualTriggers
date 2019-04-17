@@ -1,5 +1,7 @@
 package uk.ac.strath.contextualtriggers;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.app.Service;
 import android.content.ComponentName;
 import android.content.Context;
@@ -7,6 +9,7 @@ import android.content.Intent;
 import android.content.ServiceConnection;
 import android.os.Bundle;
 import android.os.IBinder;
+import android.os.SystemClock;
 import android.support.annotation.Nullable;
 import android.util.Log;
 
@@ -28,12 +31,12 @@ import uk.ac.strath.contextualtriggers.triggers.ITrigger;
 public class ContextualTriggersService extends Service {
 
     private static GoogleApiClient mGoogleApiClient;
-
     private static List<ITrigger> triggerList = new ArrayList<>();
     private static List<IBinder> serviceList = new ArrayList<>();
 
     private AbstractServiceConnection stepServiceConnection;
     private AbstractServiceConnection weatherServiceConnection;
+    private AlarmManager alarmMgr;
 
     public static GoogleApiClient getGoogleAPIClient() {
         return mGoogleApiClient;
@@ -76,15 +79,26 @@ public class ContextualTriggersService extends Service {
         weatherServiceConnection = new AbstractServiceConnection(this);
         stepServiceConnection = new AbstractServiceConnection(this);
         Intent is = new Intent(this, StepDataManager.class);
+        startService(is);
         boolean b = bindService(is, stepServiceConnection, Context.BIND_AUTO_CREATE);
         Log.d("BindingStepService", Boolean.toString(b));
-        startService(is);
-
         Log.d("TriggerManager", "Creating default triggers");
         Intent iw = new Intent(this, WeatherDataManager.class);
+        startService(iw);
         b = bindService(iw, weatherServiceConnection, Context.BIND_AUTO_CREATE);
         Log.d("BindingWeatherService", Boolean.toString(b));
-        startService(iw);
+        PendingIntent alarmIntent;
+        PendingIntent alarmIntent2;
+        alarmMgr = (AlarmManager)this.getSystemService(Context.ALARM_SERVICE);
+        alarmIntent = PendingIntent.getService(this, 0, is, 0);
+        alarmMgr.setRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP,
+                SystemClock.elapsedRealtime() + 10000,
+                10000, alarmIntent);
+        alarmIntent2 = PendingIntent.getService(this, 0, iw, 0);
+        alarmMgr.setInexactRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP,
+                SystemClock.elapsedRealtime() + 10000,
+                10000, alarmIntent2);
+
     }
 
     private void addService(IBinder b){

@@ -22,13 +22,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <service
+        <service android:enabled="true"
             android:name=".ContextualTriggersService">
         </service>
-        <service
+        <service android:enabled="true"
             android:name=".managers.StepDataManager">
         </service>
-        <service
+        <service android:enabled="true"
             android:name=".managers.WeatherDataManager">
         </service>
         </application>
