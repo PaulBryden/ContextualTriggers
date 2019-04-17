@@ -12,6 +12,7 @@ public class MainApplication extends AppCompatActivity {
     private final Boolean serviceMode = true;
     private static AppCompatActivity mAppActivity;
     private static Context context;
+    private Intent i;
     Logger logger;
 
    // Trigger sunnyOotsideTrigger;
@@ -49,10 +50,10 @@ public class MainApplication extends AppCompatActivity {
 
     private void emptyActivity(){
         this.setTheme(R.style.Theme_Transparent);
-        Intent i = new Intent(this, ContextualTriggersService.class);
+        i = new Intent(this, ContextualTriggersService.class);
         startService(i);
-        //this.finish(); This causes destructor to be called on the instance of the contextualtriggersservice class
-        this.
+        this.finish();
+
     }
 
     private void logActivity(){
@@ -62,6 +63,5 @@ public class MainApplication extends AppCompatActivity {
         logger = Logger.getInstance();
         logger.setLogger(textView);
         Intent i = new Intent(this, ContextualTriggersService.class);
-        startService(i);
     }
 }

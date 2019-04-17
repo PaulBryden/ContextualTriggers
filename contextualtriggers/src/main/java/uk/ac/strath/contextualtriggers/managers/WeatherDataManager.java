@@ -58,6 +58,7 @@ public class WeatherDataManager extends DataManager<WeatherData> implements IDat
     }
         @Override
         public int onStartCommand(Intent intent, int flags, int startId) {
+            weatherData = new WeatherData();
             super.onStart(intent, startId);
             monitor();
             return START_STICKY;
@@ -90,7 +91,7 @@ public class WeatherDataManager extends DataManager<WeatherData> implements IDat
                             @Override
                             public void onResult(@NonNull WeatherResult weatherResult) {
                                 if (!weatherResult.getStatus().isSuccess()) {
-                                    Log.e("WeatherDataManager", "ERROR");
+                                    Log.e("WeatherDataManager", weatherResult.getStatus().getStatusMessage()+" ");
                                     return;
                                 }
 
