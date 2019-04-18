@@ -15,11 +15,14 @@ public class StepDataManager extends DataManager<StepData> implements IDataManag
     StepData stepData;
     private final IBinder binder = new LocalBinder();
 
-
     public class LocalBinder extends Binder {
         public IDataManager getInstance() {
             return StepDataManager.this;
         }
+    }
+    StepDataManager()
+    {
+        setup();
     }
 
     @Nullable
@@ -27,7 +30,6 @@ public class StepDataManager extends DataManager<StepData> implements IDataManag
     public IBinder onBind(Intent intent) {
         //Not sure if this is required
         //Needed if onStartCommand not called automatically
-        setup();
         Log.d("StepDataManager", "Binding");
         return binder;
     }
@@ -39,16 +41,11 @@ public class StepDataManager extends DataManager<StepData> implements IDataManag
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        setup();
+        super.onStart(intent, startId);
         stepData.steps += 100;
         logger.log("Steps: " + stepData.steps + "\n");
         Log.d("StepDataManager", "Starting");
         sendUpdate(stepData);
-        try {
-            Thread.sleep(10000);
-        } catch (Exception e) {
-            Log.e("StepDataManager", "Trouble sleeping", e);
-        }
         return START_STICKY;
     }
 }

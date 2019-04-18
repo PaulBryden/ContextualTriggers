@@ -3,14 +3,16 @@ package uk.ac.strath.contextualtriggers;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.text.method.ScrollingMovementMethod;
 import android.widget.TextView;
 
 public class MainApplication extends AppCompatActivity {
-    private final Boolean serviceMode = false;
+    private final Boolean serviceMode = true;
     private static AppCompatActivity mAppActivity;
     private static Context context;
+    private Intent i;
     Logger logger;
 
    // Trigger sunnyOotsideTrigger;
@@ -23,15 +25,21 @@ public class MainApplication extends AppCompatActivity {
     }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        MainApplication.context = getApplicationContext();
+    protected void onPostCreate(@Nullable Bundle savedInstanceState)
+    {
+        super.onPostCreate(savedInstanceState);
         mAppActivity=this;
         if(serviceMode){
             emptyActivity();
         } else {
             logActivity();
         }
+    }
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        MainApplication.context = getApplicationContext();
+
     }
 
     @Override
@@ -42,9 +50,10 @@ public class MainApplication extends AppCompatActivity {
 
     private void emptyActivity(){
         this.setTheme(R.style.Theme_Transparent);
-        Intent i = new Intent(this, ContextualTriggersService.class);
+        i = new Intent(this, ContextualTriggersService.class);
         startService(i);
         this.finish();
+
     }
 
     private void logActivity(){
@@ -54,6 +63,5 @@ public class MainApplication extends AppCompatActivity {
         logger = Logger.getInstance();
         logger.setLogger(textView);
         Intent i = new Intent(this, ContextualTriggersService.class);
-        startService(i);
     }
 }

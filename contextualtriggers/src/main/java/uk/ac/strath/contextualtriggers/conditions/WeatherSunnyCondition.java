@@ -1,6 +1,7 @@
 package uk.ac.strath.contextualtriggers.conditions;
 
 import uk.ac.strath.contextualtriggers.data.WeatherData;
+import uk.ac.strath.contextualtriggers.managers.IDataManager;
 
 /**
  * Condition satisfied if current weather matches a target value. Use constants defined in
@@ -10,8 +11,8 @@ public class WeatherSunnyCondition extends DataCondition<WeatherData> {
 
     private WeatherData targetWeather;
 
-    public WeatherSunnyCondition(WeatherData targetWeather) {
-        super(targetWeather);
+    public WeatherSunnyCondition(WeatherData targetWeather, IDataManager<WeatherData> dataManager) {
+        super(targetWeather, dataManager);
         this.targetWeather = targetWeather;
     }
 

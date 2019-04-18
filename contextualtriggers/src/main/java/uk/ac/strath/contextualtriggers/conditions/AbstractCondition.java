@@ -16,6 +16,12 @@ public abstract class AbstractCondition implements Condition {
     }
 
     ITrigger getTrigger() {
-        return trigger;
+        if (trigger!=null)
+        {
+            return trigger;
+        }else
+        {
+            throw new NullPointerException();
+        }
     }
 }

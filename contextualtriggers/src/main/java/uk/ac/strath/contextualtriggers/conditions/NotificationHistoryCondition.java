@@ -1,5 +1,7 @@
 package uk.ac.strath.contextualtriggers.conditions;
 
+import uk.ac.strath.contextualtriggers.managers.IDataManager;
+
 /**
  * Basic condition that checks if a notification has been sent recently.
  * Condition is satisfied if time elapsed since last condition is more than
@@ -11,9 +13,9 @@ public class NotificationHistoryCondition extends DataCondition<Void>
     private long lastNotificationSent;
     private int minimumTimeElapsed; // in seconds
 
-    public NotificationHistoryCondition(int minimumTimeElapsed)
+    public NotificationHistoryCondition(int minimumTimeElapsed, IDataManager dataManager)
     {
-        super();
+        super(dataManager);
         this.minimumTimeElapsed = minimumTimeElapsed; /*seconds*/
         lastNotificationSent = -1;
     }
