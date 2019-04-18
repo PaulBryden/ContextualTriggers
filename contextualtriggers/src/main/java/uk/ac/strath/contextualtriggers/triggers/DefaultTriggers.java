@@ -16,7 +16,7 @@ import uk.ac.strath.contextualtriggers.conditions.WeatherSunnyCondition;
 import uk.ac.strath.contextualtriggers.data.StepData;
 import uk.ac.strath.contextualtriggers.data.WeatherData;
 import uk.ac.strath.contextualtriggers.managers.IDataManager;
-import uk.ac.strath.contextualtriggers.managers.StepDataManager;
+import uk.ac.strath.contextualtriggers.managers.SimulatedStepDataManager;
 import uk.ac.strath.contextualtriggers.managers.WeatherDataManager;
 
 public class DefaultTriggers {
@@ -26,7 +26,7 @@ public class DefaultTriggers {
     @SuppressWarnings("unchecked")
     public static ITrigger createStepMonitorTrigger(IBinder binder) throws ClassCastException{
         IDataManager<StepData> dataManager;
-            dataManager = ((StepDataManager.LocalBinder) binder).getInstance();
+            dataManager = ((SimulatedStepDataManager.LocalBinder) binder).getInstance();
             Trigger.Builder builder = new Trigger.Builder();
             Condition c = new StepCountCondition(StepCountCondition.LESS_THAN, 10000, dataManager);
             Action a = new NotificationAction("Go for a walk ya lazy. It's even sunny ootside!");
@@ -42,7 +42,7 @@ public class DefaultTriggers {
         IDataManager<WeatherData> weatherDataManager;
         WeatherData targetWeather = new WeatherData();
         targetWeather.TemperatureCelsius=1;
-        stepDataManager = ((StepDataManager.LocalBinder) stepBinder).getInstance();
+        stepDataManager = ((SimulatedStepDataManager.LocalBinder) stepBinder).getInstance();
         weatherDataManager = ((WeatherDataManager.LocalBinder) weatherBinder).getInstance();
         Trigger.Builder builder = new Trigger.Builder();
         Condition c = new StepCountCondition(StepCountCondition.LESS_THAN, 10000, stepDataManager);
@@ -63,7 +63,7 @@ public class DefaultTriggers {
         IDataManager<StepData> stepDataManager;
         Log.d("Create Weather Trigger", stepBinder.toString());
 
-        stepDataManager = ((StepDataManager.LocalBinder) stepBinder).getInstance();
+        stepDataManager = ((SimulatedStepDataManager.LocalBinder) stepBinder).getInstance();
         Trigger.Builder builder = new Trigger.Builder();
         Condition c = new StepCountCondition(StepCountCondition.LESS_THAN, 5000, stepDataManager);
         Action a = new NotificationAction("Go for a walk ya lazy. Not sure if its sunny outside?! Go Anyway! You're less than half your goal!");

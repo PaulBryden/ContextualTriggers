@@ -15,7 +15,7 @@
 //import uk.ac.strath.contextualtriggers.conditions.StepCountCondition;
 //import uk.ac.strath.contextualtriggers.conditions.WeatherSunnyCondition;
 //import uk.ac.strath.contextualtriggers.data.WeatherData;
-//import uk.ac.strath.contextualtriggers.managers.StepDataManager;
+//import uk.ac.strath.contextualtriggers.managers.SimulatedStepDataManager;
 //import uk.ac.strath.contextualtriggers.managers.WeatherDataManager;
 //
 //public class ButItsSunnyOutsideTrigger implements ITrigger
@@ -32,7 +32,7 @@
 //        WeatherSunnyCondition sunnyCondition = new WeatherSunnyCondition(targetWeather);
 //        notifyCondition = new NotificationHistoryCondition(30);
 //        /*Link Conditions to Data Manager*/
-//        StepDataManager stepDataManager = StepDataManager.getInstance();
+//        SimulatedStepDataManager stepDataManager = SimulatedStepDataManager.getInstance();
 //        WeatherDataManager weatherDataManager = WeatherDataManager.getInstance();
 //        stepDataManager.register(stepCondition);
 //        weatherDataManager.register(sunnyCondition);

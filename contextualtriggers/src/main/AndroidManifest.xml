@@ -2,6 +2,10 @@
     package="uk.ac.strath.contextualtriggers">
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
+    <uses-permission android:name="com.google.android.gms.permission.ACTIVITY_RECOGNITION" />
+    <uses-permission
+        android:name="com.google.android.providers.gsf.permission.READ_GSERVICES"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
         android:allowBackup="true"
@@ -13,6 +17,9 @@
         <meta-data
             android:name="com.google.android.awareness.API_KEY"
             android:value="AIzaSyAas2dlnnxWlZMfX5-rAHVz1fLGwiyD-Cw"/>
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyAas2dlnnxWlZMfX5-rAHVz1fLGwiyD-Cw" />
         <activity
             android:name=".MainApplication"
             android:launchMode="singleTop"
@@ -27,7 +34,13 @@
             android:name=".ContextualTriggersService">
         </service>
         <service android:enabled="true"
-            android:name=".managers.StepDataManager">
+            android:name=".managers.SimulatedStepDataManager">
+        </service>
+        <service android:enabled="true"
+            android:name=".managers.ActivityDataManager">
+        </service>
+        <service android:enabled="true"
+            android:name=".managers.PlacesDataManager">
         </service>
         <service android:enabled="true"
             android:name=".managers.WeatherDataManager">
