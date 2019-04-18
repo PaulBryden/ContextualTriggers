@@ -1,5 +1,7 @@
 package uk.ac.strath.contextualtriggers.managers;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -7,6 +9,7 @@ import android.content.IntentFilter;
 import android.os.Binder;
 import android.os.Bundle;
 import android.os.IBinder;
+import android.os.SystemClock;
 import android.support.annotation.Nullable;
 import android.util.Log;
 
@@ -37,7 +40,7 @@ public class ActualStepDataManager extends DataManager<StepData> implements IDat
     public IBinder onBind(Intent intent) {
         //Not sure if this is required
         //Needed if onStartCommand not called automatically
-        Log.d("SimulatedStepDataManager", "Binding");
+        Log.d("SimulatedStepDataManage", "Binding");
         return binder;
     }
 
@@ -48,7 +51,14 @@ public class ActualStepDataManager extends DataManager<StepData> implements IDat
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        super.onStart(intent, startId);
+        super.onStartCommand(intent, flags, startId);
+        monitor(intent);
+        alarm();
+        stopSelf();
+        return START_STICKY;
+    }
+
+    private void monitor(Intent intent){
         try
         {
             stepData.steps = intent.getIntExtra("steps", 0);
@@ -59,6 +69,13 @@ public class ActualStepDataManager extends DataManager<StepData> implements IDat
         logger.log("Steps: " + stepData.steps + "\n");
         Log.d("ActualStepDataManager", "Starting");
         sendUpdate(stepData);
-        return START_STICKY;
+    }
+
+    private void alarm(){
+        AlarmManager alarmMgr = (AlarmManager)this.getSystemService(Context.ALARM_SERVICE);
+        Intent asd = new Intent(this, ActualStepDataManager.class);
+        PendingIntent alarmIntent = PendingIntent.getService(this, 0, asd, PendingIntent.FLAG_UPDATE_CURRENT);
+        alarmMgr.set(AlarmManager.ELAPSED_REALTIME_WAKEUP,
+                SystemClock.elapsedRealtime() + 5000, alarmIntent);
     }
 }

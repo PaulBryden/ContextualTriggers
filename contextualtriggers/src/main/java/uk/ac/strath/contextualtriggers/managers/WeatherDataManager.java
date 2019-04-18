@@ -99,6 +99,7 @@ public class WeatherDataManager extends DataManager<WeatherData> implements IDat
                             @Override
                             public void onResult(@NonNull WeatherResult weatherResult) {
                                 if (!weatherResult.getStatus().isSuccess()) {
+                                    Log.d("WeatherDM", weatherResult.getStatus().toString());
                                     Log.e("WeatherDataManager", weatherResult.getStatus().getStatusMessage()+" ");
                                     return;
                                 }
@@ -109,6 +110,7 @@ public class WeatherDataManager extends DataManager<WeatherData> implements IDat
                                 data.TemperatureCelsius = weather.getTemperature(Weather.CELSIUS);
                                 data.Humidity = weather.getHumidity();
                                 data.Conditions = weather.getConditions();
+                                Log.d("WeatherDM", data.toString());
                                 data.printData();
                                 logger.log(data.toString());
                                 sendUpdate(data);
