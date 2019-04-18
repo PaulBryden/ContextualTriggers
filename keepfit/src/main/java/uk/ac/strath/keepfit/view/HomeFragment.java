@@ -141,6 +141,17 @@ public class HomeFragment extends Fragment {
             Intent intent = new Intent(getContext(), NotificationService.class);
             getContext().startService(intent);
         }
+
+        Intent intent = new Intent();
+        intent.setAction("uk.ac.strath.contextualtriggers.step");
+        intent.addFlags(Intent.FLAG_INCLUDE_STOPPED_PACKAGES);
+        intent.putExtra("steps",stepCount);
+        this.getContext().sendBroadcast(intent);
+        Intent intent2 = new Intent();
+        intent.setAction("uk.ac.strath.contextualtriggers.goal");
+        intent2.addFlags(Intent.FLAG_INCLUDE_STOPPED_PACKAGES);
+        intent2.putExtra("goal",mCurrentGoal.getTarget());
+        this.getContext().sendBroadcast(intent2);
     }
 
     @Override

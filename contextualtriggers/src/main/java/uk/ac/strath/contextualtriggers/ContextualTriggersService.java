@@ -18,6 +18,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import uk.ac.strath.contextualtriggers.managers.ActivityDataManager;
+import uk.ac.strath.contextualtriggers.managers.ActualGoalDataManager;
+import uk.ac.strath.contextualtriggers.managers.ActualStepDataManager;
 import uk.ac.strath.contextualtriggers.managers.PlacesDataManager;
 import uk.ac.strath.contextualtriggers.managers.SimulatedStepDataManager;
 import uk.ac.strath.contextualtriggers.managers.WeatherDataManager;
@@ -35,6 +37,7 @@ public class ContextualTriggersService extends Service {
     private AbstractServiceConnection weatherServiceConnection;
     private AbstractServiceConnection activityServiceConnection;
     private AbstractServiceConnection placesServiceConnection;
+    private AbstractServiceConnection actualStepsServiceConnection;
     private AlarmManager alarmMgr;
 
     public static GoogleApiClient getGoogleAPIClient() {
@@ -65,7 +68,7 @@ public class ContextualTriggersService extends Service {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        unbindService(weatherServiceConnection);;
+        unbindService(weatherServiceConnection);
         unbindService(stepServiceConnection);
         Log.i("EXIT", "ondestroy!");
         Intent broadcastIntent = new Intent(this, ContextualTriggersService.class);
@@ -81,6 +84,12 @@ public class ContextualTriggersService extends Service {
 
 
     private void startDataManagers() {
+
+        actualStepsServiceConnection = new AbstractServiceConnection(this);
+        Intent ias = new Intent(this, ActualStepDataManager.class);
+        startService(ias);
+        Intent iag = new Intent(this, ActualGoalDataManager.class);
+        startService(iag);
       //  pointlessTrigger();
         alarmMgr = (AlarmManager)this.getSystemService(Context.ALARM_SERVICE);
 
@@ -126,8 +135,6 @@ public class ContextualTriggersService extends Service {
             alarmMgr.setRepeating(AlarmManager.RTC_WAKEUP,
                     SystemClock.elapsedRealtime() + 5000,
                     5000, alarmIntent2);
-
-
     }
 
     @Nullable
