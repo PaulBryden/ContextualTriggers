@@ -9,7 +9,7 @@ import android.util.Log;
 import uk.ac.strath.contextualtriggers.Logger;
 import uk.ac.strath.contextualtriggers.data.StepData;
 
-public class StepDataManager extends DataManager<StepData> implements IDataManager<StepData> {
+public class SimulatedStepDataManager extends DataManager<StepData> implements IDataManager<StepData> {
 
     Logger logger;
     StepData stepData;
@@ -17,10 +17,10 @@ public class StepDataManager extends DataManager<StepData> implements IDataManag
 
     public class LocalBinder extends Binder {
         public IDataManager getInstance() {
-            return StepDataManager.this;
+            return SimulatedStepDataManager.this;
         }
     }
-    StepDataManager()
+    SimulatedStepDataManager()
     {
         setup();
     }
@@ -30,7 +30,7 @@ public class StepDataManager extends DataManager<StepData> implements IDataManag
     public IBinder onBind(Intent intent) {
         //Not sure if this is required
         //Needed if onStartCommand not called automatically
-        Log.d("StepDataManager", "Binding");
+        Log.d("SimulatedStepDataManager", "Binding");
         return binder;
     }
 
@@ -44,7 +44,7 @@ public class StepDataManager extends DataManager<StepData> implements IDataManag
         super.onStart(intent, startId);
         stepData.steps += 100;
         logger.log("Steps: " + stepData.steps + "\n");
-        Log.d("StepDataManager", "Starting");
+        Log.d("SimulatedStepDataManager", "Starting");
         sendUpdate(stepData);
         return START_STICKY;
     }
