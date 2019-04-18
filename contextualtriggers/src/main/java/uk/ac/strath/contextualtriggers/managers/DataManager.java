@@ -1,9 +1,11 @@
 package uk.ac.strath.contextualtriggers.managers;
+import android.app.Service;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import uk.ac.strath.contextualtriggers.conditions.*;
-public class DataManager<T> implements IDataManager<T>
+public abstract class DataManager<T> extends Service implements IDataManager<T>
 {
     private List<DataCondition<T>> observers;
 

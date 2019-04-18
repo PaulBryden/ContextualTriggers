@@ -2,6 +2,7 @@ package uk.ac.strath.contextualtriggers.actions;
 
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
+import android.content.Context;
 import android.os.Build;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.NotificationManagerCompat;
@@ -12,7 +13,7 @@ import uk.ac.strath.contextualtriggers.MainApplication;
 import uk.ac.strath.contextualtriggers.R;
 import uk.ac.strath.contextualtriggers.conditions.NotificationHistoryCondition;
 
-import static android.support.v4.content.ContextCompat.getSystemService;
+//import static android.support.v4.content.ContextCompat.getSystemService;
 
 public class NotificationAction implements Action {
 
@@ -54,7 +55,7 @@ public class NotificationAction implements Action {
             channel.setDescription(description);
             // Register the channel with the system; you can't change the importance
             // or other notification behaviors after this
-            NotificationManager notificationManager = (NotificationManager) getSystemService(MainApplication.getAppContext(), NotificationManager.class);
+            NotificationManager notificationManager = (NotificationManager) MainApplication.getAppContext().getSystemService(Context.NOTIFICATION_SERVICE);
             notificationManager.createNotificationChannel(channel);
         }
     }

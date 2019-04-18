@@ -17,7 +17,7 @@ public class GoalDataManager implements IDataManager<GoalData>, IDataManagerSour
 
     private GoalDataManager()
     {
-        dataManager= new DataManager<GoalData>();
+        //dataManager= new DataManager<GoalData>();
         logger = Logger.getInstance();
         GoalData.steps=10000;
         singletonGoalDataManager=this;

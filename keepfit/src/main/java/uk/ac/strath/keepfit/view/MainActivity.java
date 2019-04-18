@@ -1,13 +1,16 @@
 package uk.ac.strath.keepfit.view;
 
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.ServiceConnection;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.IBinder;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
@@ -83,6 +86,22 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     protected void onCreate(Bundle savedInstanceState) {
         //https://stackoverflow.com/questions/43104485/how-to-change-fragment-with-the-bottom-navigation-activity
         super.onCreate(savedInstanceState);
+
+//        Intent i = new Intent();
+//        i.setAction("ac.uk.strath.contextualtriggers.CONNECT_ACTION");
+//        bindService(i, new ServiceConnection() {
+//            @Override
+//            public void onServiceConnected(ComponentName name, IBinder service) {
+//                service.getInstance();
+//            }
+//
+//            @Override
+//            public void onServiceDisconnected(ComponentName name) {
+//
+//            }
+//        }, 0);
+
+
         spm = new SharedPreferencesManager(this);
         setContentView(R.layout.activity_main);
         BottomNavigationView navigation = findViewById(R.id.navigation);

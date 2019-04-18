@@ -1,6 +1,7 @@
 package uk.ac.strath.contextualtriggers.conditions;
 
 import uk.ac.strath.contextualtriggers.data.StepData;
+import uk.ac.strath.contextualtriggers.managers.IDataManager;
 
 public class StepCountCondition extends DataCondition<StepData> {
 
@@ -10,8 +11,8 @@ public class StepCountCondition extends DataCondition<StepData> {
     public final static int LESS_THAN = 0;
     public final static int GREATER_THAN = 1;
 
-    public StepCountCondition(int mode, int count) {
-        super();
+    public StepCountCondition(int mode, int count, IDataManager<StepData> dataManager) {
+        super(dataManager);
         this.mode = mode;
         this.matchCount = count;
     }
