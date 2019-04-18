@@ -24,6 +24,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import uk.ac.strath.contextualtriggers.managers.ActivityDataManager;
+import uk.ac.strath.contextualtriggers.managers.ActualGoalDataManager;
+import uk.ac.strath.contextualtriggers.managers.ActualStepDataManager;
 import uk.ac.strath.contextualtriggers.managers.PlacesDataManager;
 import uk.ac.strath.contextualtriggers.managers.SimulatedStepDataManager;
 import uk.ac.strath.contextualtriggers.managers.WeatherDataManager;
@@ -41,6 +43,7 @@ public class ContextualTriggersService extends Service {
     private AbstractServiceConnection weatherServiceConnection;
     private AbstractServiceConnection activityServiceConnection;
     private AbstractServiceConnection placesServiceConnection;
+    private AbstractServiceConnection actualStepsServiceConnection;
 
     public static GoogleApiClient getGoogleAPIClient() {
         return mGoogleApiClient;
@@ -91,6 +94,12 @@ public class ContextualTriggersService extends Service {
 
 
     private void startDataManagers() {
+
+        actualStepsServiceConnection = new AbstractServiceConnection(this);
+        Intent ias = new Intent(this, ActualStepDataManager.class);
+        startService(ias);
+        Intent iag = new Intent(this, ActualGoalDataManager.class);
+        startService(iag);
       //  pointlessTrigger();
         placesServiceConnection = new AbstractServiceConnection(this);
         Intent ip = new Intent(this, PlacesDataManager.class);
