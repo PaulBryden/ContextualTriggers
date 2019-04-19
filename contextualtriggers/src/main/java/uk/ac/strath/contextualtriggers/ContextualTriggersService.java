@@ -97,14 +97,14 @@ public class ContextualTriggersService extends Service {
 
 
     private void startDataManagers() {
-        /*calendarServiceConnection = new AbstractServiceConnection(this);
+        calendarServiceConnection = new AbstractServiceConnection(this);
         Intent cs = new Intent(this, CalendarDataManager.class);
         boolean b = bindService(cs, calendarServiceConnection, 0);
         startService(cs);
-*/
+
         actualStepsServiceConnection = new AbstractServiceConnection(this);
         Intent ias = new Intent(this, ActualStepDataManager.class);
-        boolean b = bindService(ias, actualStepsServiceConnection, 0);
+         b = bindService(ias, actualStepsServiceConnection, 0);
         startService(ias);
         actualGoalServiceConnection = new AbstractServiceConnection(this);
         Intent iag = new Intent(this, ActualGoalDataManager.class);
@@ -158,7 +158,7 @@ public class ContextualTriggersService extends Service {
         unbindService(activityServiceConnection);
         unbindService(actualStepsServiceConnection);
         unbindService(actualGoalServiceConnection);
-      //  unbindService(calendarServiceConnection);
+        unbindService(calendarServiceConnection);
     }
 
     private Notification getServiceNotification(){
