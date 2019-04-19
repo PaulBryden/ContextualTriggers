@@ -70,7 +70,7 @@ public class WeatherDataManager extends DataManager<WeatherData> implements IDat
             Intent iw = new Intent(this, WeatherDataManager.class);
             PendingIntent alarmIntent = PendingIntent.getService(this, 0, iw, PendingIntent.FLAG_UPDATE_CURRENT);
             alarmMgr.set(AlarmManager.ELAPSED_REALTIME_WAKEUP,
-                    SystemClock.elapsedRealtime() + 5000, alarmIntent);
+                    SystemClock.elapsedRealtime() + 30000, alarmIntent);
         }
 
         private void monitor() {

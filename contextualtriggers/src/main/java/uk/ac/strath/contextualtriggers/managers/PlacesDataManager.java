@@ -91,7 +91,7 @@ public PlacesDataManager()
         Places.initialize(this,"AIzaSyAas2dlnnxWlZMfX5-rAHVz1fLGwiyD-Cw");
         placesClient = Places.createClient(this);
         // Use fields to define the data types to return.
-        List<Place.Field> placeFields = Arrays.asList(Place.Field.NAME);
+        List<Place.Field> placeFields = Arrays.asList(Place.Field.NAME,Place.Field.TYPES);
 
 // Use the builder to create a FindCurrentPlaceRequest.
         FindCurrentPlaceRequest request =
@@ -108,8 +108,9 @@ public PlacesDataManager()
                     FindCurrentPlaceResponse response = task.getResult();
                     for (PlaceLikelihood placeLikelihood : response.getPlaceLikelihoods())
                     {
-                        Log.i(TAG, String.format("Place '%s' has likelihood: %f",
+                        Log.i(TAG, String.format("Place '%s' has type '%s' has likelihood: %f",
                                 placeLikelihood.getPlace().getName(),
+                                placeLikelihood.getPlace().getTypes(),
                                 placeLikelihood.getLikelihood()));
                     }
                     sendUpdate(response.getPlaceLikelihoods());
