@@ -28,7 +28,8 @@ public class ActualStepDataManager extends DataManager<StepData> implements IDat
             return ActualStepDataManager.this;
         }
     }
-    ActualStepDataManager(){
+
+    public ActualStepDataManager(){
         Log.d("StepIntentReceiver","Starting");
 
         setup();
@@ -54,7 +55,6 @@ public class ActualStepDataManager extends DataManager<StepData> implements IDat
         super.onStartCommand(intent, flags, startId);
         monitor(intent);
         alarm();
-        stopSelf();
         return START_STICKY;
     }
 

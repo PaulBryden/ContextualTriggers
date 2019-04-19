@@ -51,7 +51,8 @@ public class LocalBinder extends Binder
         return PlacesDataManager.this;
     }
 }
-    PlacesDataManager()
+
+public PlacesDataManager()
     {
         setup();
     }
@@ -64,7 +65,6 @@ public class LocalBinder extends Binder
         super.onStartCommand(intent, flags, startId);
         monitor();
         alarm();
-        stopSelf();
         return START_STICKY;
     }
 

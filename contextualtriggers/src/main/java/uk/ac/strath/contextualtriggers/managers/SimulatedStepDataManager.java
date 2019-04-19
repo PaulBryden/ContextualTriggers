@@ -24,7 +24,8 @@ public class SimulatedStepDataManager extends DataManager<StepData> implements I
             return SimulatedStepDataManager.this;
         }
     }
-    SimulatedStepDataManager()
+
+    public SimulatedStepDataManager()
     {
         setup();
     }
@@ -46,12 +47,8 @@ public class SimulatedStepDataManager extends DataManager<StepData> implements I
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         super.onStartCommand(intent, flags, startId);
-        stepData.steps += 100;
-        logger.log("Steps: " + stepData.steps + "\n");
-        Log.d("SimulatedStepDataManage", "Starting");
-        sendUpdate(stepData);
+        monitor();
         alarm();
-        stopSelf();
         return START_STICKY;
     }
 
@@ -61,5 +58,12 @@ public class SimulatedStepDataManager extends DataManager<StepData> implements I
         PendingIntent alarmIntent = PendingIntent.getService(this, 0, isd, PendingIntent.FLAG_UPDATE_CURRENT);
         alarmMgr.set(AlarmManager.ELAPSED_REALTIME_WAKEUP,
                 SystemClock.elapsedRealtime() + 5000, alarmIntent);
+    }
+
+    private void monitor(){
+        stepData.steps += 100;
+        logger.log("Steps: " + stepData.steps + "\n");
+        Log.d("SimulatedStepDataManage", "Starting");
+        sendUpdate(stepData);
     }
 }

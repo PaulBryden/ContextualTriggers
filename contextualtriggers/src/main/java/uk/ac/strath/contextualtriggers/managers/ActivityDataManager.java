@@ -47,7 +47,8 @@ public class ActivityDataManager extends DataManager<DetectedActivity> implement
             return ActivityDataManager.this;
         }
     }
-    ActivityDataManager()
+
+    public ActivityDataManager()
     {
         setup();
     }
@@ -60,7 +61,6 @@ public class ActivityDataManager extends DataManager<DetectedActivity> implement
             super.onStartCommand(intent, flags, startId);
             monitor();
             alarm();
-            stopSelf();
             return START_STICKY;
         }
 

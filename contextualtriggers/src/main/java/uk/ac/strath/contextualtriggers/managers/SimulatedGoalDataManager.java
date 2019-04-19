@@ -24,7 +24,8 @@ public class SimulatedGoalDataManager extends DataManager<Integer> implements ID
             return SimulatedGoalDataManager.this;
         }
     }
-    SimulatedGoalDataManager()
+
+    public SimulatedGoalDataManager()
     {
         setup();
     }
@@ -48,7 +49,6 @@ public class SimulatedGoalDataManager extends DataManager<Integer> implements ID
         super.onStartCommand(intent, flags, startId);
         monitor();
         alarm();
-        stopSelf();
         return START_STICKY;
     }
 

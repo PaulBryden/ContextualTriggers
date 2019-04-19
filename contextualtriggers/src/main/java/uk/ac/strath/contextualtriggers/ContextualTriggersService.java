@@ -26,6 +26,7 @@ import java.util.List;
 import uk.ac.strath.contextualtriggers.managers.ActivityDataManager;
 import uk.ac.strath.contextualtriggers.managers.ActualGoalDataManager;
 import uk.ac.strath.contextualtriggers.managers.ActualStepDataManager;
+import uk.ac.strath.contextualtriggers.managers.CalendarDataManager;
 import uk.ac.strath.contextualtriggers.managers.PlacesDataManager;
 import uk.ac.strath.contextualtriggers.managers.SimulatedStepDataManager;
 import uk.ac.strath.contextualtriggers.managers.WeatherDataManager;
@@ -44,6 +45,8 @@ public class ContextualTriggersService extends Service {
     private AbstractServiceConnection activityServiceConnection;
     private AbstractServiceConnection placesServiceConnection;
     private AbstractServiceConnection actualStepsServiceConnection;
+    private AbstractServiceConnection actualGoalServiceConnection;
+    private AbstractServiceConnection calendarServiceConnection;
 
     public static GoogleApiClient getGoogleAPIClient() {
         return mGoogleApiClient;
@@ -94,16 +97,23 @@ public class ContextualTriggersService extends Service {
 
 
     private void startDataManagers() {
-
+        /*calendarServiceConnection = new AbstractServiceConnection(this);
+        Intent cs = new Intent(this, CalendarDataManager.class);
+        boolean b = bindService(cs, calendarServiceConnection, 0);
+        startService(cs);
+*/
         actualStepsServiceConnection = new AbstractServiceConnection(this);
         Intent ias = new Intent(this, ActualStepDataManager.class);
+        boolean b = bindService(ias, actualStepsServiceConnection, 0);
         startService(ias);
+        actualGoalServiceConnection = new AbstractServiceConnection(this);
         Intent iag = new Intent(this, ActualGoalDataManager.class);
+        b = bindService(iag, actualGoalServiceConnection, 0);
         startService(iag);
       //  pointlessTrigger();
         placesServiceConnection = new AbstractServiceConnection(this);
         Intent ip = new Intent(this, PlacesDataManager.class);
-        boolean b = bindService(ip, placesServiceConnection, 0);
+        b = bindService(ip, placesServiceConnection, 0);
         startService(ip);
         Log.d("BindingActervice", Boolean.toString(b));
         activityServiceConnection = new AbstractServiceConnection(this);
@@ -146,6 +156,9 @@ public class ContextualTriggersService extends Service {
         unbindService(stepServiceConnection);
         unbindService(placesServiceConnection);
         unbindService(activityServiceConnection);
+        unbindService(actualStepsServiceConnection);
+        unbindService(actualGoalServiceConnection);
+      //  unbindService(calendarServiceConnection);
     }
 
     private Notification getServiceNotification(){
