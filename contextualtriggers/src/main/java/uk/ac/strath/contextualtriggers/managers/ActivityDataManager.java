@@ -28,7 +28,7 @@ import uk.ac.strath.contextualtriggers.MainApplication;
 import uk.ac.strath.contextualtriggers.data.WeatherData;
 
 import static android.Manifest.permission.ACCESS_FINE_LOCATION;
-import static com.google.android.gms.internal.zzs.TAG;
+//import static com.google.android.gms.internal.zzs.TAG;
 
 public class ActivityDataManager extends DataManager<DetectedActivity> implements IDataManager<DetectedActivity> {
     Logger logger;
@@ -47,7 +47,8 @@ public class ActivityDataManager extends DataManager<DetectedActivity> implement
             return ActivityDataManager.this;
         }
     }
-    ActivityDataManager()
+
+    public ActivityDataManager()
     {
         setup();
     }
@@ -60,7 +61,6 @@ public class ActivityDataManager extends DataManager<DetectedActivity> implement
             super.onStartCommand(intent, flags, startId);
             monitor();
             alarm();
-            stopSelf();
             return START_STICKY;
         }
 

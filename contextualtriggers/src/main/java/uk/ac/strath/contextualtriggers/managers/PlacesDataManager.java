@@ -59,7 +59,8 @@ public class LocalBinder extends Binder
         return PlacesDataManager.this;
     }
 }
-    PlacesDataManager()
+
+public PlacesDataManager()
     {
         setup();
     }

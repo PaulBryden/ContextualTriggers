@@ -28,7 +28,8 @@ public class ActualGoalDataManager extends DataManager<Integer> implements IData
             return ActualGoalDataManager.this;
         }
     }
-    ActualGoalDataManager(){
+
+    public ActualGoalDataManager(){
         Log.d("GoalIntentReceiver","Starting");
 
         setup();
@@ -51,7 +52,6 @@ public class ActualGoalDataManager extends DataManager<Integer> implements IData
         super.onStartCommand(intent, flags, startId);
         monitor(intent);
         alarm();
-        stopSelf();
         return START_STICKY;
     }
 
