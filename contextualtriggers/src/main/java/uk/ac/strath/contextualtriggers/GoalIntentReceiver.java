@@ -6,7 +6,7 @@ import android.content.Intent;
 import android.util.Log;
 
 import uk.ac.strath.contextualtriggers.managers.ActualGoalDataManager;
-import uk.ac.strath.contextualtriggers.managers.ActualStepDataManager;
+import uk.ac.strath.contextualtriggers.managers.ActualStepAndGoalDataManager;
 
 public class GoalIntentReceiver extends BroadcastReceiver
 {
@@ -22,7 +22,7 @@ public class GoalIntentReceiver extends BroadcastReceiver
         {
             Log.d("goalIntentReceiver", intent.getAction());
             Log.d("goalIntentReceiver", Integer.toString(intent.getIntExtra("goal", 0)));
-            Intent pushIntent = new Intent(context, ActualGoalDataManager.class);
+            Intent pushIntent = new Intent(context, ActualStepAndGoalDataManager.class);
             pushIntent.putExtra("goal", intent.getIntExtra("goal", 0));
             context.startService(pushIntent);
         }

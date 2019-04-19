@@ -1,20 +1,16 @@
 package uk.ac.strath.contextualtriggers;
 
-import android.app.AlarmManager;
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
-import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.IBinder;
-import android.os.SystemClock;
 import android.support.annotation.Nullable;
 import android.support.v4.app.NotificationCompat;
-import android.support.v4.app.NotificationManagerCompat;
 import android.util.Log;
 
 import com.google.android.gms.awareness.Awareness;
@@ -25,8 +21,9 @@ import java.util.List;
 
 import uk.ac.strath.contextualtriggers.managers.ActivityDataManager;
 import uk.ac.strath.contextualtriggers.managers.ActualGoalDataManager;
-import uk.ac.strath.contextualtriggers.managers.ActualStepDataManager;
+import uk.ac.strath.contextualtriggers.managers.ActualStepAndGoalDataManager;
 import uk.ac.strath.contextualtriggers.managers.CalendarDataManager;
+import uk.ac.strath.contextualtriggers.managers.NotificationDataManager;
 import uk.ac.strath.contextualtriggers.managers.PlacesDataManager;
 import uk.ac.strath.contextualtriggers.managers.SimulatedStepDataManager;
 import uk.ac.strath.contextualtriggers.managers.WeatherDataManager;
@@ -45,8 +42,8 @@ public class ContextualTriggersService extends Service {
     private AbstractServiceConnection activityServiceConnection;
     private AbstractServiceConnection placesServiceConnection;
     private AbstractServiceConnection actualStepsServiceConnection;
-    private AbstractServiceConnection actualGoalServiceConnection;
     private AbstractServiceConnection calendarServiceConnection;
+    private AbstractServiceConnection notifyServiceConnection;
 
     public static GoogleApiClient getGoogleAPIClient() {
         return mGoogleApiClient;
@@ -97,19 +94,19 @@ public class ContextualTriggersService extends Service {
 
 
     private void startDataManagers() {
+        notifyServiceConnection = new AbstractServiceConnection(this);
+        Intent cns = new Intent(this, NotificationDataManager.class);
+        boolean b = bindService(cns, notifyServiceConnection, 0);
+        startService(cns);
         calendarServiceConnection = new AbstractServiceConnection(this);
         Intent cs = new Intent(this, CalendarDataManager.class);
-        boolean b = bindService(cs, calendarServiceConnection, 0);
+        b = bindService(cs, calendarServiceConnection, 0);
         startService(cs);
 
         actualStepsServiceConnection = new AbstractServiceConnection(this);
-        Intent ias = new Intent(this, ActualStepDataManager.class);
+        Intent ias = new Intent(this, ActualStepAndGoalDataManager.class);
          b = bindService(ias, actualStepsServiceConnection, 0);
         startService(ias);
-        actualGoalServiceConnection = new AbstractServiceConnection(this);
-        Intent iag = new Intent(this, ActualGoalDataManager.class);
-        b = bindService(iag, actualGoalServiceConnection, 0);
-        startService(iag);
       //  pointlessTrigger();
         placesServiceConnection = new AbstractServiceConnection(this);
         Intent ip = new Intent(this, PlacesDataManager.class);
@@ -140,7 +137,7 @@ public class ContextualTriggersService extends Service {
     }
 
     public void notifyDataManagerOnline() {
-        if (stepServiceConnection.isConnected() && weatherServiceConnection.isConnected()) {
+        if (stepServiceConnection.isConnected() && weatherServiceConnection.isConnected()&& notifyServiceConnection.isConnected()) {
             Log.d("DataManagerOnline", "Data Managers online");
             createTriggers();
         } else {
@@ -150,15 +147,16 @@ public class ContextualTriggersService extends Service {
 
     private void createTriggers() {
         Log.d("Creating Triggers", "created");
-        triggerList.add(DefaultTriggers.createWeatherTrigger(stepServiceConnection.getDataManager(), weatherServiceConnection.getDataManager()));
-        triggerList.add(DefaultTriggers.createWalkIdleTrigger(stepServiceConnection.getDataManager()));
+       // triggerList.add(DefaultTriggers.createWeatherTrigger(stepServiceConnection.getDataManager(), weatherServiceConnection.getDataManager(), this));
+       // triggerList.add(DefaultTriggers.createWalkIdleTrigger(stepServiceConnection.getDataManager(), this));
+        triggerList.add(DefaultTriggers.createWeatherWithNotifyLimitTrigger(stepServiceConnection.getDataManager(), weatherServiceConnection.getDataManager(),notifyServiceConnection.getDataManager(), this));
 
         unbindService(weatherServiceConnection);
         unbindService(stepServiceConnection);
+        unbindService(notifyServiceConnection);
         unbindService(placesServiceConnection);
         unbindService(activityServiceConnection);
         unbindService(actualStepsServiceConnection);
-        unbindService(actualGoalServiceConnection);
         unbindService(calendarServiceConnection);
 
     }

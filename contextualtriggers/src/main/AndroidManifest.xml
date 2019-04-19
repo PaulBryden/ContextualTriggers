@@ -54,7 +54,7 @@
             android:name=".managers.ActualGoalDataManager">
         </service>
         <service android:enabled="true"
-            android:name=".managers.ActualStepDataManager">
+            android:name=".managers.ActualStepAndGoalDataManager">
         </service>
         <service android:enabled="true"
             android:name=".managers.SimulatedStepDataManager">
@@ -70,6 +70,9 @@
         </service>
         <service android:enabled="true"
             android:name=".managers.CalendarDataManager">
+        </service>
+        <service android:enabled="true"
+            android:name=".managers.NotificationDataManager">
         </service>
         </application>
 

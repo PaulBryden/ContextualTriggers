@@ -1,5 +1,6 @@
 package uk.ac.strath.contextualtriggers.actions;
 
+import android.app.Activity;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.Service;
@@ -16,6 +17,9 @@ import uk.ac.strath.contextualtriggers.Logger;
 import uk.ac.strath.contextualtriggers.MainApplication;
 import uk.ac.strath.contextualtriggers.R;
 import uk.ac.strath.contextualtriggers.conditions.NotificationHistoryCondition;
+import uk.ac.strath.contextualtriggers.managers.CalendarDataManager;
+import uk.ac.strath.contextualtriggers.managers.NotificationDataManager;
+import uk.ac.strath.contextualtriggers.services.AbstractServiceConnection;
 
 //import static android.support.v4.content.ContextCompat.getSystemService;
 
@@ -25,8 +29,10 @@ public class NotificationAction implements Action {
     private String message;
     private Logger logger;
     private NotificationHistoryCondition notifyCondition;
+    private Context ct;
 
-    public NotificationAction(String message) {
+    public NotificationAction(String message,Context ct) {
+        this.ct =ct;
         this.message = message;
         logger = Logger.getInstance();
         createNotificationChannel();
@@ -36,6 +42,8 @@ public class NotificationAction implements Action {
 
     @Override
     public void execute() {
+        Intent cs = new Intent(ct, NotificationDataManager.class);
+        ct.startService(cs);
         if (notifyCondition != null) {
             notifyCondition.notifyUpdate(null);
         }
