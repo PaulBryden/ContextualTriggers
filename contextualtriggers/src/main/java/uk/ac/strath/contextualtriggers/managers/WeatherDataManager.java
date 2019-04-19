@@ -35,6 +35,7 @@ public class WeatherDataManager extends DataManager<WeatherData> implements IDat
     private final IBinder binder = new WeatherDataManager.LocalBinder();
 
 
+
     @Nullable
     @Override
     public IBinder onBind(Intent intent) {
@@ -47,7 +48,7 @@ public class WeatherDataManager extends DataManager<WeatherData> implements IDat
             return WeatherDataManager.this;
         }
     }
-    WeatherDataManager()
+    public WeatherDataManager()
     {
         setup();
     }
@@ -60,7 +61,6 @@ public class WeatherDataManager extends DataManager<WeatherData> implements IDat
             super.onStartCommand(intent, flags, startId);
             monitor();
             alarm();
-            stopSelf();
             return START_STICKY;
         }
 
