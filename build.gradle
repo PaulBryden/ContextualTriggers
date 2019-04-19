@@ -4,6 +4,7 @@ buildscript {
     repositories {
         google()
         jcenter()
+        maven { url "https://maven.google.com" }
 
     }
     dependencies {
@@ -24,6 +25,7 @@ allprojects {
     repositories {
         google()
         jcenter()
+        maven { url "https://maven.google.com" }
         maven { url 'https://jitpack.io' }
     }
 }
@@ -38,6 +40,6 @@ ext {
 }
 configurations.all {
     resolutionStrategy {
-        force 'com.android.support:support-v4:27.1.0'
+        force 'com.android.support:support-v4:27.1.1'
     }
 }

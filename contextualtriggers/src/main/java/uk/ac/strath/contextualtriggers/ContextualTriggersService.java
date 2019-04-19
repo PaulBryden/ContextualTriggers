@@ -142,10 +142,6 @@ public class ContextualTriggersService extends Service {
         Log.d("Creating Triggers", "created");
         triggerList.add(DefaultTriggers.createWeatherTrigger(stepServiceConnection.getDataManager(), weatherServiceConnection.getDataManager()));
         triggerList.add(DefaultTriggers.createWalkIdleTrigger(stepServiceConnection.getDataManager()));
-        unbindService(weatherServiceConnection);
-        unbindService(stepServiceConnection);
-        unbindService(placesServiceConnection);
-        unbindService(activityServiceConnection);
     }
 
     private Notification getServiceNotification(){
