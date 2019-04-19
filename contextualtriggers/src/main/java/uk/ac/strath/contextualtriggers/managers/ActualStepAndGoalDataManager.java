@@ -7,17 +7,15 @@ import android.os.IBinder;
 import android.support.annotation.Nullable;
 import android.util.Log;
 
-import uk.ac.strath.contextualtriggers.GoalIntentReceiver;
 import uk.ac.strath.contextualtriggers.Logger;
-import uk.ac.strath.contextualtriggers.StepIntentReceiver;
+import uk.ac.strath.contextualtriggers.StepAndGoalIntentReceiver;
 import uk.ac.strath.contextualtriggers.data.StepAndGoalData;
 
 public class ActualStepAndGoalDataManager extends DataManager<StepAndGoalData> implements IDataManager<StepAndGoalData> {
 
     Logger logger;
     StepAndGoalData stepGoalData;
-    private StepIntentReceiver receiver;
-    private GoalIntentReceiver receiver2;
+    private StepAndGoalIntentReceiver receiver;
     private final IBinder binder = new LocalBinder();
     public class LocalBinder extends Binder {
         public IDataManager getInstance() {
@@ -26,19 +24,15 @@ public class ActualStepAndGoalDataManager extends DataManager<StepAndGoalData> i
     }
 
     public ActualStepAndGoalDataManager(){
-        Log.d("StepIntentReceiver","Starting");
+        Log.d("StepAndGoalIntentReceiver","Starting");
         setup();
     }
 
     private void configureReceiver() {
         IntentFilter filter = new IntentFilter();
         filter.addAction("uk.ac.strath.contextualtriggers.step");
-        receiver = new StepIntentReceiver();
+        receiver = new StepAndGoalIntentReceiver();
         registerReceiver(receiver, filter);
-        IntentFilter filter2 = new IntentFilter();
-        filter2.addAction("uk.ac.strath.contextualtriggers.goal");
-        receiver2 = new GoalIntentReceiver();
-        registerReceiver(receiver2, filter2);
     }
 
     @Nullable

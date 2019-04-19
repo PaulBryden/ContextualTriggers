@@ -55,6 +55,7 @@ public class MainApplication extends AppCompatActivity {
         this.setTheme(R.style.Theme_Transparent);
         i = new Intent(this, ContextualTriggersService.class);
         startForegroundService(i);
+        finish();
 
     }
 

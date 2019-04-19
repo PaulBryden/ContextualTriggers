@@ -2,21 +2,15 @@ package uk.ac.strath.contextualtriggers.managers;
 
 import android.app.AlarmManager;
 import android.app.PendingIntent;
-import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.os.Binder;
-import android.os.Bundle;
 import android.os.IBinder;
 import android.os.SystemClock;
 import android.support.annotation.Nullable;
 import android.util.Log;
 
 import uk.ac.strath.contextualtriggers.Logger;
-import uk.ac.strath.contextualtriggers.MainApplication;
-import uk.ac.strath.contextualtriggers.StepIntentReceiver;
-import uk.ac.strath.contextualtriggers.data.StepData;
 
 public class ActualGoalDataManager extends DataManager<Integer> implements IDataManager<Integer> {
 
