@@ -1,14 +1,20 @@
 package uk.ac.strath.contextualtriggers;
 
 import android.app.AlarmManager;
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.os.SystemClock;
 import android.support.annotation.Nullable;
+import android.support.v4.app.NotificationCompat;
+import android.support.v4.app.NotificationManagerCompat;
 import android.util.Log;
 
 import com.google.android.gms.awareness.Awareness;
@@ -38,7 +44,6 @@ public class ContextualTriggersService extends Service {
     private AbstractServiceConnection activityServiceConnection;
     private AbstractServiceConnection placesServiceConnection;
     private AbstractServiceConnection actualStepsServiceConnection;
-    private AlarmManager alarmMgr;
 
     public static GoogleApiClient getGoogleAPIClient() {
         return mGoogleApiClient;
@@ -46,6 +51,7 @@ public class ContextualTriggersService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
+        startForeground(startId, getServiceNotification());
         //noinspection MissingPermission
         mGoogleApiClient = new GoogleApiClient.Builder(this)
                 .addApi(Awareness.API)
@@ -68,11 +74,15 @@ public class ContextualTriggersService extends Service {
     @Override
     public void onDestroy() {
         super.onDestroy();
+        Log.i("EXIT", "ondestroy!");
+        //Intent broadcastIntent = new Intent(this, ContextualTriggersService.class);
         unbindService(weatherServiceConnection);
         unbindService(stepServiceConnection);
-        Log.i("EXIT", "ondestroy!");
-        Intent broadcastIntent = new Intent(this, ContextualTriggersService.class);
+        unbindService(placesServiceConnection);
+        unbindService(activityServiceConnection);
     }
+
+
     // These probably won't be needed
     public static void addTrigger(ITrigger t) {
         triggerList.add(t);
@@ -91,50 +101,26 @@ public class ContextualTriggersService extends Service {
         Intent iag = new Intent(this, ActualGoalDataManager.class);
         startService(iag);
       //  pointlessTrigger();
-        alarmMgr = (AlarmManager)this.getSystemService(Context.ALARM_SERVICE);
-
         placesServiceConnection = new AbstractServiceConnection(this);
         Intent ip = new Intent(this, PlacesDataManager.class);
+        boolean b = bindService(ip, placesServiceConnection, 0);
         startService(ip);
-        boolean b = bindService(ip, placesServiceConnection, Context.BIND_AUTO_CREATE);
         Log.d("BindingActervice", Boolean.toString(b));
-        PendingIntent alarmIntent4;
-        alarmIntent4 = PendingIntent.getService(this, 0, ip, PendingIntent.FLAG_UPDATE_CURRENT);
-        alarmMgr.setRepeating(AlarmManager.RTC_WAKEUP,
-                SystemClock.elapsedRealtime() + 5000,
-                5000, alarmIntent4);
         activityServiceConnection = new AbstractServiceConnection(this);
         Intent ia = new Intent(this, ActivityDataManager.class);
+        b = bindService(ia, activityServiceConnection, 0);
         startService(ia);
-        b = bindService(ia, activityServiceConnection, Context.BIND_AUTO_CREATE);
         Log.d("BindingActervice", Boolean.toString(b));
-        PendingIntent alarmIntent3;
-        alarmIntent3 = PendingIntent.getService(this, 0, ia, PendingIntent.FLAG_UPDATE_CURRENT);
-        alarmMgr.setRepeating(AlarmManager.RTC_WAKEUP,
-                SystemClock.elapsedRealtime() + 5000,
-                5000, alarmIntent3);
-
         weatherServiceConnection = new AbstractServiceConnection(this);
             Intent iw = new Intent(this, WeatherDataManager.class);
+            b = bindService(iw, weatherServiceConnection, 0);
             startService(iw);
-             b = bindService(iw, weatherServiceConnection, Context.BIND_AUTO_CREATE);
             Log.d("BindingWeatherService", Boolean.toString(b));
-            Log.d("TriggerManager", "Creating default triggers");
-            PendingIntent alarmIntent;
-            alarmIntent = PendingIntent.getService(this, 0, iw, PendingIntent.FLAG_UPDATE_CURRENT);
-            alarmMgr.setRepeating(AlarmManager.RTC_WAKEUP,
-                    SystemClock.elapsedRealtime() + 5000,
-                    5000, alarmIntent);
             stepServiceConnection = new AbstractServiceConnection(this);
             Intent is = new Intent(this, SimulatedStepDataManager.class);
+        b = bindService(is, stepServiceConnection, 0);
         startService(is);
-             b = bindService(is, stepServiceConnection, Context.BIND_AUTO_CREATE);
             Log.d("BindingStepService", Boolean.toString(b));
-            PendingIntent alarmIntent2;
-            alarmIntent2 = PendingIntent.getService(this, 0, is, PendingIntent.FLAG_UPDATE_CURRENT);
-            alarmMgr.setRepeating(AlarmManager.RTC_WAKEUP,
-                    SystemClock.elapsedRealtime() + 5000,
-                    5000, alarmIntent2);
     }
 
     @Nullable
@@ -153,7 +139,36 @@ public class ContextualTriggersService extends Service {
     }
 
     private void createTriggers() {
+        Log.d("Creating Triggers", "created");
         triggerList.add(DefaultTriggers.createWeatherTrigger(stepServiceConnection.getDataManager(), weatherServiceConnection.getDataManager()));
         triggerList.add(DefaultTriggers.createWalkIdleTrigger(stepServiceConnection.getDataManager()));
+        unbindService(weatherServiceConnection);
+        unbindService(stepServiceConnection);
+        unbindService(placesServiceConnection);
+        unbindService(activityServiceConnection);
+    }
+
+    private Notification getServiceNotification(){
+        createNotificationChannel();
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(MainApplication.getAppContext(), "cts")
+                .setSmallIcon(R.drawable.powered_by_google_dark)
+                .setContentTitle("ContextualTriggerService")
+                .setContentText("Context Service Running");
+        return builder.build();
+    }
+
+    private void createNotificationChannel() {
+        // Create the NotificationChannel, but only on API 26+ because
+        // the NotificationChannel class is new and not in the support library
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            CharSequence name = "contextualtriggers";
+            String description = "contextualtriggers channel";
+            NotificationChannel channel = new NotificationChannel("cts", name, NotificationManager.IMPORTANCE_DEFAULT);
+            channel.setDescription(description);
+            // Register the channel with the system; you can't change the importance
+            // or other notification behaviors after this
+            NotificationManager notificationManager = (NotificationManager) MainApplication.getAppContext().getSystemService(Context.NOTIFICATION_SERVICE);
+            notificationManager.createNotificationChannel(channel);
+        }
     }
 }

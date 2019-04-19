@@ -1,11 +1,15 @@
 package uk.ac.strath.contextualtriggers.managers;
 
 import android.Manifest;
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.app.Service;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Binder;
 import android.os.IBinder;
+import android.os.SystemClock;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
@@ -27,7 +31,6 @@ import static android.Manifest.permission.ACCESS_FINE_LOCATION;
 public class WeatherDataManager extends DataManager<WeatherData> implements IDataManager<WeatherData> {
     int MY_PERMISSIONS_REQUEST_READ_CONTACTS;
     Logger logger;
-    WeatherData weatherData;
 
     private final IBinder binder = new WeatherDataManager.LocalBinder();
 
@@ -50,17 +53,25 @@ public class WeatherDataManager extends DataManager<WeatherData> implements IDat
     }
 
     private void setup() {
-        weatherData = new WeatherData();
         logger = Logger.getInstance();
     }
         @Override
         public int onStartCommand(Intent intent, int flags, int startId) {
-            weatherData = new WeatherData();
-            super.onStart(intent, startId);
+            super.onStartCommand(intent, flags, startId);
             monitor();
+            alarm();
+            stopSelf();
             return START_STICKY;
         }
 
+
+        private void alarm() {
+            AlarmManager alarmMgr = (AlarmManager)this.getSystemService(Context.ALARM_SERVICE);
+            Intent iw = new Intent(this, WeatherDataManager.class);
+            PendingIntent alarmIntent = PendingIntent.getService(this, 0, iw, PendingIntent.FLAG_UPDATE_CURRENT);
+            alarmMgr.set(AlarmManager.ELAPSED_REALTIME_WAKEUP,
+                    SystemClock.elapsedRealtime() + 5000, alarmIntent);
+        }
 
         private void monitor() {
             if (ContextCompat.checkSelfPermission(this,
@@ -88,6 +99,7 @@ public class WeatherDataManager extends DataManager<WeatherData> implements IDat
                             @Override
                             public void onResult(@NonNull WeatherResult weatherResult) {
                                 if (!weatherResult.getStatus().isSuccess()) {
+                                    Log.d("WeatherDM", weatherResult.getStatus().toString());
                                     Log.e("WeatherDataManager", weatherResult.getStatus().getStatusMessage()+" ");
                                     return;
                                 }
@@ -98,6 +110,7 @@ public class WeatherDataManager extends DataManager<WeatherData> implements IDat
                                 data.TemperatureCelsius = weather.getTemperature(Weather.CELSIUS);
                                 data.Humidity = weather.getHumidity();
                                 data.Conditions = weather.getConditions();
+                                Log.d("WeatherDM", data.toString());
                                 data.printData();
                                 logger.log(data.toString());
                                 sendUpdate(data);

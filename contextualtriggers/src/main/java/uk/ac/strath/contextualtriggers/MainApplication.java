@@ -1,5 +1,6 @@
 package uk.ac.strath.contextualtriggers;
 
+import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
@@ -51,6 +52,7 @@ public class MainApplication extends AppCompatActivity {
 
     }
 
+    @TargetApi(26)
     private void emptyActivity(){
         this.setTheme(R.style.Theme_Transparent);
         i = new Intent(this, ContextualTriggersService.class);

@@ -1,8 +1,12 @@
 package uk.ac.strath.contextualtriggers.managers;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Binder;
 import android.os.IBinder;
+import android.os.SystemClock;
 import android.support.annotation.Nullable;
 import android.util.Log;
 
@@ -30,7 +34,7 @@ public class SimulatedStepDataManager extends DataManager<StepData> implements I
     public IBinder onBind(Intent intent) {
         //Not sure if this is required
         //Needed if onStartCommand not called automatically
-        Log.d("SimulatedStepDataManager", "Binding");
+        Log.d("SimulatedStepDataManage", "Binding");
         return binder;
     }
 
@@ -41,11 +45,21 @@ public class SimulatedStepDataManager extends DataManager<StepData> implements I
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        super.onStart(intent, startId);
+        super.onStartCommand(intent, flags, startId);
         stepData.steps += 100;
         logger.log("Steps: " + stepData.steps + "\n");
-        Log.d("SimulatedStepDataManager", "Starting");
+        Log.d("SimulatedStepDataManage", "Starting");
         sendUpdate(stepData);
+        alarm();
+        stopSelf();
         return START_STICKY;
+    }
+
+    private void alarm(){
+        AlarmManager alarmMgr = (AlarmManager)this.getSystemService(Context.ALARM_SERVICE);
+        Intent isd = new Intent(this, SimulatedStepDataManager.class);
+        PendingIntent alarmIntent = PendingIntent.getService(this, 0, isd, PendingIntent.FLAG_UPDATE_CURRENT);
+        alarmMgr.set(AlarmManager.ELAPSED_REALTIME_WAKEUP,
+                SystemClock.elapsedRealtime() + 5000, alarmIntent);
     }
 }

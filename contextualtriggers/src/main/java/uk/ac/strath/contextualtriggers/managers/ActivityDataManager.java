@@ -1,9 +1,13 @@
 package uk.ac.strath.contextualtriggers.managers;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Binder;
 import android.os.IBinder;
+import android.os.SystemClock;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
@@ -53,9 +57,21 @@ public class ActivityDataManager extends DataManager<DetectedActivity> implement
     }
         @Override
         public int onStartCommand(Intent intent, int flags, int startId) {
-            super.onStart(intent, startId);
+            super.onStartCommand(intent, flags, startId);
             monitor();
+            alarm();
+            stopSelf();
             return START_STICKY;
+        }
+
+        private void alarm(){
+
+            AlarmManager alarmMgr = (AlarmManager)this.getSystemService(Context.ALARM_SERVICE);
+            Intent ia = new Intent(this, ActivityDataManager.class);
+            PendingIntent alarmIntent = PendingIntent.getService(this, 0, ia, PendingIntent.FLAG_UPDATE_CURRENT);
+            alarmMgr.set(AlarmManager.ELAPSED_REALTIME_WAKEUP,
+                    SystemClock.elapsedRealtime() + 5000,
+                    alarmIntent);
         }
 
 

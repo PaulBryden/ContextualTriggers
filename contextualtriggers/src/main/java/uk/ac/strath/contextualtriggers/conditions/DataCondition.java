@@ -35,7 +35,7 @@ public abstract class DataCondition<T> extends AbstractCondition {
         }
         catch(NullPointerException e)
         {
-            Log.d("DataCondition", "Trigger Not Attached");
+            Log.d("DataCondition", this.toString() + "Trigger Not Attached");
 
         }
     }

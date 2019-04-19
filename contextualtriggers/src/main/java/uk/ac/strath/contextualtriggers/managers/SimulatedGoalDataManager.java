@@ -1,8 +1,12 @@
 package uk.ac.strath.contextualtriggers.managers;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Binder;
 import android.os.IBinder;
+import android.os.SystemClock;
 import android.support.annotation.Nullable;
 import android.util.Log;
 
@@ -30,7 +34,7 @@ public class SimulatedGoalDataManager extends DataManager<Integer> implements ID
     public IBinder onBind(Intent intent) {
         //Not sure if this is required
         //Needed if onStartCommand not called automatically
-        Log.d("SimulatedStepDataManager", "Binding");
+        Log.d("SimulatedStepDataManage", "Binding");
         return binder;
     }
 
@@ -41,8 +45,23 @@ public class SimulatedGoalDataManager extends DataManager<Integer> implements ID
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        super.onStart(intent, startId);
-        sendUpdate(goal);
+        super.onStartCommand(intent, flags, startId);
+        monitor();
+        alarm();
+        stopSelf();
         return START_STICKY;
     }
+
+    private void monitor(){
+        sendUpdate(goal);
+    }
+
+    private void alarm(){
+        AlarmManager alarmMgr = (AlarmManager)this.getSystemService(Context.ALARM_SERVICE);
+        Intent sgd = new Intent(this, SimulatedGoalDataManager.class);
+        PendingIntent alarmIntent = PendingIntent.getService(this, 0, sgd, PendingIntent.FLAG_UPDATE_CURRENT);
+        alarmMgr.set(AlarmManager.ELAPSED_REALTIME_WAKEUP,
+                SystemClock.elapsedRealtime() + 5000, alarmIntent);
+    }
+
 }
