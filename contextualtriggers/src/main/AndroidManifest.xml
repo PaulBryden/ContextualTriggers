@@ -16,6 +16,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <receiver android:name=".intentReceivers.BootCompletedIntentReceiver" >
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" >
+                </action>
+            </intent-filter>
+        </receiver>
         <receiver android:name=".intentReceivers.StepAndGoalIntentReceiver" >
         <intent-filter>
             <action android:name="uk.ac.strath.contextualtriggers.step" >
