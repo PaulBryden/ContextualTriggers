@@ -20,7 +20,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import uk.ac.strath.contextualtriggers.managers.ActivityDataManager;
-import uk.ac.strath.contextualtriggers.managers.ActualGoalDataManager;
 import uk.ac.strath.contextualtriggers.managers.ActualStepAndGoalDataManager;
 import uk.ac.strath.contextualtriggers.managers.AltitudeDataManager;
 import uk.ac.strath.contextualtriggers.managers.BatteryDataManager;
