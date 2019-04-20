@@ -16,12 +16,18 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <receiver android:name=".StepAndGoalIntentReceiver" >
+        <receiver android:name=".intentReceivers.StepAndGoalIntentReceiver" >
         <intent-filter>
             <action android:name="uk.ac.strath.contextualtriggers.step" >
             </action>
         </intent-filter>
     </receiver>
+        <receiver android:name=".intentReceivers.BatteryLevelReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.BATTERY_LOW"/>
+                <action android:name="android.intent.action.BATTERY_OKAY"/>
+            </intent-filter>
+        </receiver>
 
         <meta-data
             android:name="com.google.android.awareness.API_KEY"
@@ -56,6 +62,9 @@
         </service>
         <service android:enabled="true"
             android:name=".managers.ActivityDataManager">
+        </service>
+        <service android:enabled="true"
+            android:name=".managers.BatteryDataManager">
         </service>
         <service android:enabled="true"
             android:name=".managers.PlacesDataManager">

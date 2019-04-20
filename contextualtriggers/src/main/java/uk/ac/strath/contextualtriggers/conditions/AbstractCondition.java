@@ -1,8 +1,6 @@
 package uk.ac.strath.contextualtriggers.conditions;
 
-import uk.ac.strath.contextualtriggers.Condition;
 import uk.ac.strath.contextualtriggers.triggers.ITrigger;
-import uk.ac.strath.contextualtriggers.triggers.Trigger;
 
 /**
  * Base class for Condition implementations.

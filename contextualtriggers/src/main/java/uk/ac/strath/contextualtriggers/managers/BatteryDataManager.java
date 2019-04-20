@@ -8,30 +8,33 @@ import android.support.annotation.Nullable;
 import android.util.Log;
 
 import uk.ac.strath.contextualtriggers.Logger;
-import uk.ac.strath.contextualtriggers.intentReceivers.StepAndGoalIntentReceiver;
+import uk.ac.strath.contextualtriggers.data.BatteryData;
 import uk.ac.strath.contextualtriggers.data.StepAndGoalData;
+import uk.ac.strath.contextualtriggers.intentReceivers.BatteryLevelReceiver;
+import uk.ac.strath.contextualtriggers.intentReceivers.StepAndGoalIntentReceiver;
 
-public class ActualStepAndGoalDataManager extends DataManager<StepAndGoalData> implements IDataManager<StepAndGoalData> {
+public class BatteryDataManager extends DataManager<BatteryData> implements IDataManager<BatteryData> {
 
     Logger logger;
-    StepAndGoalData stepGoalData;
-    private StepAndGoalIntentReceiver receiver;
+    BatteryData batteryData;
+    private BatteryLevelReceiver receiver;
     private final IBinder binder = new LocalBinder();
     public class LocalBinder extends Binder {
         public IDataManager getInstance() {
-            return ActualStepAndGoalDataManager.this;
+            return BatteryDataManager.this;
         }
     }
 
-    public ActualStepAndGoalDataManager(){
+    public BatteryDataManager(){
         Log.d("StepAndGoalIntentReceiver","Starting");
         setup();
     }
 
     private void configureReceiver() {
         IntentFilter filter = new IntentFilter();
-        filter.addAction("uk.ac.strath.contextualtriggers.step");
-        receiver = new StepAndGoalIntentReceiver();
+        filter.addAction("android.intent.action.BATTERY_LOW");
+        filter.addAction("android.intent.action.BATTERY_OKAY");
+        receiver = new BatteryLevelReceiver();
         registerReceiver(receiver, filter);
     }
 
@@ -40,13 +43,13 @@ public class ActualStepAndGoalDataManager extends DataManager<StepAndGoalData> i
     public IBinder onBind(Intent intent) {
         //Not sure if this is required
         //Needed if onStartCommand not called automatically
-        Log.d("SimulatedStepDataManage", "Binding");
+        Log.d("BatteryDataManager", "Binding");
         configureReceiver();
         return binder;
     }
 
     private void setup() {
-        stepGoalData = new StepAndGoalData();
+        batteryData = new BatteryData();
         logger = Logger.getInstance();
     }
 
@@ -59,13 +62,10 @@ public class ActualStepAndGoalDataManager extends DataManager<StepAndGoalData> i
 
     private void monitor(Intent intent){
 
-            stepGoalData.steps.steps = intent.getIntExtra("steps", 0);
-            stepGoalData.goal.steps = intent.getIntExtra("goal", 0);
-
-        logger.log("Actual Steps: " + stepGoalData.steps.steps + "\n");
-        logger.log("Actual Goal: " + stepGoalData.goal.steps + "\n");
-        Log.d("ActualStepAndGoalDataManager", "Starting");
-        sendUpdate(stepGoalData);
+        batteryData.isLow = intent.getBooleanExtra("level", false);
+        logger.log("Battery Low: " + batteryData.isLow);
+        Log.d("BatteryDataManager", "Starting");
+        sendUpdate(batteryData);
     }
 
 }

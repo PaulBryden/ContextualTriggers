@@ -2,8 +2,8 @@ package uk.ac.strath.contextualtriggers.triggers;
 
 import android.util.Log;
 
-import uk.ac.strath.contextualtriggers.Action;
-import uk.ac.strath.contextualtriggers.Condition;
+import uk.ac.strath.contextualtriggers.actions.Action;
+import uk.ac.strath.contextualtriggers.conditions.Condition;
 import uk.ac.strath.contextualtriggers.conditions.AbstractCondition;
 
 /**

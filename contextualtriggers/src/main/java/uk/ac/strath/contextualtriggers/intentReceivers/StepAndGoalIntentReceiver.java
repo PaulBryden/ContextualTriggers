@@ -1,4 +1,4 @@
-package uk.ac.strath.contextualtriggers;
+package uk.ac.strath.contextualtriggers.intentReceivers;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;

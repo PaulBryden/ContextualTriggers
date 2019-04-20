@@ -1,4 +1,4 @@
-package uk.ac.strath.contextualtriggers;
+package uk.ac.strath.contextualtriggers.actions;
 
 import android.app.Service;
 

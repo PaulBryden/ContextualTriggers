@@ -1,29 +1,22 @@
 package uk.ac.strath.contextualtriggers.actions;
 
-import android.app.Activity;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
-import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
-import android.os.IBinder;
-import android.support.annotation.Nullable;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.NotificationManagerCompat;
 
-import uk.ac.strath.contextualtriggers.Action;
 import uk.ac.strath.contextualtriggers.Logger;
 import uk.ac.strath.contextualtriggers.MainApplication;
 import uk.ac.strath.contextualtriggers.R;
 import uk.ac.strath.contextualtriggers.conditions.NotificationHistoryCondition;
-import uk.ac.strath.contextualtriggers.managers.CalendarDataManager;
 import uk.ac.strath.contextualtriggers.managers.NotificationDataManager;
-import uk.ac.strath.contextualtriggers.services.AbstractServiceConnection;
 
 //import static android.support.v4.content.ContextCompat.getSystemService;
 
-public class NotificationAction implements Action {
+public class SimpleNotificationAction implements Action {
 
     private static final String CHANNEL_ID = "contextualtriggers";
     private String message;
@@ -31,8 +24,7 @@ public class NotificationAction implements Action {
     private NotificationHistoryCondition notifyCondition;
     private Context ct;
 
-    public NotificationAction(String message,Context ct) {
-        this.ct =ct;
+    public SimpleNotificationAction(String message) {
         this.message = message;
         logger = Logger.getInstance();
         createNotificationChannel();
@@ -42,8 +34,8 @@ public class NotificationAction implements Action {
 
     @Override
     public void execute() {
-        Intent cs = new Intent(ct, NotificationDataManager.class);
-        ct.startService(cs);
+        Intent cs = new Intent(MainApplication.getAppContext(), NotificationDataManager.class);
+        MainApplication.getAppContext().startService(cs);
         if (notifyCondition != null) {
             notifyCondition.notifyUpdate(null);
         }

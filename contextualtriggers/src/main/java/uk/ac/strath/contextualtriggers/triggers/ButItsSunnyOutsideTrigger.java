@@ -8,8 +8,8 @@
 //
 //import java.util.ArrayList;
 //
-//import uk.ac.strath.contextualtriggers.Condition;
-//import uk.ac.strath.contextualtriggers.actions.NotificationAction;
+//import uk.ac.strath.contextualtriggers.conditions.Condition;
+//import uk.ac.strath.contextualtriggers.actions.SimpleNotificationAction;
 //import uk.ac.strath.contextualtriggers.conditions.AndCondition;
 //import uk.ac.strath.contextualtriggers.conditions.NotificationHistoryCondition;
 //import uk.ac.strath.contextualtriggers.conditions.StepCountCondition;
@@ -53,7 +53,7 @@
 //        if(conditions.isSatisfied())
 //        {
 //            notifyCondition.notifyUpdate(null);
-//            NotificationAction newAction = new NotificationAction("Go for a walk ya lazy. It's even sunny ootside!");
+//            SimpleNotificationAction newAction = new SimpleNotificationAction("Go for a walk ya lazy. It's even sunny ootside!");
 //            newAction.execute();
 //
 //        }
