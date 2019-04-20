@@ -1,6 +1,6 @@
 package uk.ac.strath.contextualtriggers.data;
 
-public class StepAndGoalData
+public class StepAndGoalData extends  AbstractData
 {
     public StepAndGoalData()
     {
