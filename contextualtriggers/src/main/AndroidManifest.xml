@@ -67,6 +67,9 @@
             android:name=".managers.BatteryDataManager">
         </service>
         <service android:enabled="true"
+            android:name=".managers.AltitudeDataManager">
+        </service>
+        <service android:enabled="true"
             android:name=".managers.PlacesDataManager">
         </service>
         <service android:enabled="true"

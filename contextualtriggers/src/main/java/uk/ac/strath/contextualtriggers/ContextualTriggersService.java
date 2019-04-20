@@ -22,6 +22,7 @@ import java.util.List;
 import uk.ac.strath.contextualtriggers.managers.ActivityDataManager;
 import uk.ac.strath.contextualtriggers.managers.ActualGoalDataManager;
 import uk.ac.strath.contextualtriggers.managers.ActualStepAndGoalDataManager;
+import uk.ac.strath.contextualtriggers.managers.AltitudeDataManager;
 import uk.ac.strath.contextualtriggers.managers.BatteryDataManager;
 import uk.ac.strath.contextualtriggers.managers.CalendarDataManager;
 import uk.ac.strath.contextualtriggers.managers.NotificationDataManager;
@@ -46,6 +47,7 @@ public class ContextualTriggersService extends Service {
     private AbstractServiceConnection calendarServiceConnection;
     private AbstractServiceConnection notifyServiceConnection;
     private AbstractServiceConnection batteryServiceConnection;
+    private AbstractServiceConnection altitudeServiceConnection;
 
     public static GoogleApiClient getGoogleAPIClient() {
         return mGoogleApiClient;
@@ -96,9 +98,13 @@ public class ContextualTriggersService extends Service {
 
 
     private void startDataManagers() {
+        altitudeServiceConnection= new AbstractServiceConnection(this);
+        Intent adm = new Intent(this, AltitudeDataManager.class);
+        boolean b = bindService(adm, altitudeServiceConnection, 0);
+        startService(adm);
         batteryServiceConnection = new AbstractServiceConnection(this); //THIS IS REQUIRED.
         Intent bdm = new Intent(this, BatteryDataManager.class);
-        boolean b = bindService(bdm, batteryServiceConnection, 0);
+        b = bindService(bdm, batteryServiceConnection, 0);
         startService(bdm);
         notifyServiceConnection = new AbstractServiceConnection(this);
         Intent cns = new Intent(this, NotificationDataManager.class);
