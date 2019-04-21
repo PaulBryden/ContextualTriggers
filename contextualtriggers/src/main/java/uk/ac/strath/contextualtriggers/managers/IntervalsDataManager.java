@@ -39,7 +39,7 @@ import uk.ac.strath.contextualtriggers.data.WeatherData;
 import static android.Manifest.permission.ACCESS_FINE_LOCATION;
 import static com.android.volley.VolleyLog.TAG;
 
-public class IntervalsDataManager extends DataManager<TimeIntervals> implements IDataManager<TimeIntervals> {
+public class IntervalsDataManager extends DataManager<int[]> implements IDataManager<int[]> {
         Logger logger;
 private final IBinder binder = new IntervalsDataManager.LocalBinder();
 
@@ -103,7 +103,7 @@ public IntervalsDataManager()
                             //parse and display current weather status
                             TimeIntervals intervals = intervalResult.getTimeIntervals();
                             Log.d("IntervalsDM", intervals.toString());
-                            sendUpdate(intervals);
+                            sendUpdate(intervals.getTimeIntervals());
                         }
                     });
         }

@@ -11,11 +11,9 @@ import uk.ac.strath.contextualtriggers.managers.IDataManager;
  */
 public class ClearWeatherCondition extends DataCondition<WeatherData> {
 
-    private WeatherData targetWeather;
 
-    public ClearWeatherCondition(WeatherData targetWeather, IDataManager<WeatherData> dataManager) {
-        super(targetWeather, dataManager);
-        this.targetWeather = targetWeather;
+    public ClearWeatherCondition(IDataManager<WeatherData> dataManager) {
+        super(dataManager);
     }
 
     @Override

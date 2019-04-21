@@ -39,7 +39,7 @@ public class DefaultTriggers {
         notificationDataManager = ((NotificationDataManager.LocalBinder) notifyBinder).getInstance();
         Trigger.Builder builder = new Trigger.Builder();
         Condition c = new StepAndGoalRealCountCondition(StepCountCondition.LESS_THAN, stepDataManager);
-        Condition c1 = new ClearWeatherCondition(targetWeather, weatherDataManager);
+        Condition c1 = new ClearWeatherCondition(weatherDataManager);
         Condition c2 = new FrequentNotificationPreventionCondition(10, notificationDataManager);
         Action a = new SimpleMapNotificationAction("Go for a walk ya lazy. It's even sunny ootside!");
         List<Condition> conditionList = new ArrayList<>();
@@ -63,7 +63,7 @@ public class DefaultTriggers {
         notificationDataManager = ((NotificationDataManager.LocalBinder) notifyBinder).getInstance();
         Trigger.Builder builder = new Trigger.Builder();
         Condition c = new StepCountCondition(StepCountCondition.LESS_THAN, 10000, stepDataManager);
-        Condition c1 = new ClearWeatherCondition(targetWeather, weatherDataManager);
+        Condition c1 = new ClearWeatherCondition(weatherDataManager);
         Condition c2 = new FrequentNotificationPreventionCondition(10, notificationDataManager);
         Action a = new SimpleMapNotificationAction("Go for a walk ya lazy. It's even sunny ootside!");
         List<Condition> conditionList = new ArrayList<>();
@@ -101,7 +101,7 @@ public class DefaultTriggers {
         weatherDataManager = ((WeatherDataManager.LocalBinder) weatherBinder).getInstance();
         Trigger.Builder builder = new Trigger.Builder();
         Condition c = new StepCountCondition(StepCountCondition.LESS_THAN, 10000, stepDataManager);
-        Condition c1 = new ClearWeatherCondition(targetWeather, weatherDataManager);
+        Condition c1 = new ClearWeatherCondition(weatherDataManager);
         Action a = new SimpleNotificationAction("Go for a walk ya lazy. It's even sunny ootside!");
         List<Condition> conditionList = new ArrayList<>();
         conditionList.add(c);
