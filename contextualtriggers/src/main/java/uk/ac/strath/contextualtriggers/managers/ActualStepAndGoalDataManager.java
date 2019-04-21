@@ -7,7 +7,15 @@ import android.os.IBinder;
 import android.support.annotation.Nullable;
 import android.util.Log;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.util.Calendar;
+import java.util.Date;
+
 import uk.ac.strath.contextualtriggers.Logger;
+import uk.ac.strath.contextualtriggers.data.DayData;
 import uk.ac.strath.contextualtriggers.intentReceivers.StepAndGoalIntentReceiver;
 import uk.ac.strath.contextualtriggers.data.StepAndGoalData;
 
@@ -58,12 +66,21 @@ public class ActualStepAndGoalDataManager extends DataManager<StepAndGoalData> i
     }
 
     private void monitor(Intent intent){
-
-            stepGoalData.steps.steps = intent.getIntExtra("steps", 0);
-            stepGoalData.goal.steps = intent.getIntExtra("goal", 0);
-
-        logger.log("Actual Steps: " + stepGoalData.steps.steps + "\n");
-        logger.log("Actual Goal: " + stepGoalData.goal.steps + "\n");
+        DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+        Calendar cal0 = Calendar.getInstance();
+        Date today = cal0.getTime();
+        try
+        {
+            today = formatter.parse(formatter.format(today));
+        }
+        catch (ParseException e)
+        {
+            e.printStackTrace();
+        }
+        DayData day = new DayData(intent.getIntExtra("steps", 0),intent.getIntExtra("goal", 0),today);
+        stepGoalData.updateDay(day);
+        logger.log("Actual Steps: " + stepGoalData.getDay(today).steps + "\n");
+        logger.log("Actual Goal: " + stepGoalData.getDay(today).goal + "\n");
         Log.d("ActualStepAndGoalDataManager", "Starting");
         sendUpdate(stepGoalData);
     }

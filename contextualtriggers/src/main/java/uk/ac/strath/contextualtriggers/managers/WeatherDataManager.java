@@ -1,9 +1,7 @@
 package uk.ac.strath.contextualtriggers.managers;
 
-import android.Manifest;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
-import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;

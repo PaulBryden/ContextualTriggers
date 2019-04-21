@@ -178,8 +178,8 @@ public class ContextualTriggersService extends Service
         Log.d("Creating Triggers", "created");
         // triggerList.add(DefaultTriggers.createWeatherTrigger(stepServiceConnection.getDataManager(), weatherServiceConnection.getDataManager(), this));
         // triggerList.add(DefaultTriggers.createWalkIdleTrigger(stepServiceConnection.getDataManager(), this));
-        triggerList.add(DefaultTriggers.createWeatherWithNotifyLimitTrigger(stepServiceConnection.getDataManager(), weatherServiceConnection.getDataManager(), notifyServiceConnection.getDataManager(), this));
-
+       // triggerList.add(DefaultTriggers.createWeatherWithNotifyLimitTrigger(stepServiceConnection.getDataManager(), weatherServiceConnection.getDataManager(), notifyServiceConnection.getDataManager(), this));
+        triggerList.add(DefaultTriggers.createWeatherWithNotifyLimitTriggerReal(actualStepsServiceConnection.getDataManager(), weatherServiceConnection.getDataManager(), notifyServiceConnection.getDataManager(), this));
         unbindService(weatherServiceConnection);
         unbindService(stepServiceConnection);
         unbindService(notifyServiceConnection);

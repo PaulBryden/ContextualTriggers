@@ -14,8 +14,10 @@ import uk.ac.strath.contextualtriggers.actions.SimpleNotificationAction;
 import uk.ac.strath.contextualtriggers.conditions.Condition;
 import uk.ac.strath.contextualtriggers.conditions.AndCondition;
 import uk.ac.strath.contextualtriggers.conditions.NotificationHistoryCondition;
+import uk.ac.strath.contextualtriggers.conditions.StepAndGoalRealCountCondition;
 import uk.ac.strath.contextualtriggers.conditions.StepCountCondition;
 import uk.ac.strath.contextualtriggers.conditions.WeatherSunnyCondition;
+import uk.ac.strath.contextualtriggers.data.StepAndGoalData;
 import uk.ac.strath.contextualtriggers.data.StepData;
 import uk.ac.strath.contextualtriggers.data.WeatherData;
 import uk.ac.strath.contextualtriggers.managers.ActualStepAndGoalDataManager;
@@ -25,7 +27,31 @@ import uk.ac.strath.contextualtriggers.managers.SimulatedStepDataManager;
 import uk.ac.strath.contextualtriggers.managers.WeatherDataManager;
 
 public class DefaultTriggers {
+    public static ITrigger createWeatherWithNotifyLimitTriggerReal(IBinder stepBinder, IBinder weatherBinder, IBinder notifyBinder, Context t) throws ClassCastException{
+        IDataManager<StepAndGoalData> stepDataManager;
+        IDataManager<Boolean> notificationDataManager;
+        Log.d("Create Weather Trigger", stepBinder.toString());
+        IDataManager<WeatherData> weatherDataManager;
+        WeatherData targetWeather = new WeatherData();
+        targetWeather.TemperatureCelsius=1;
+        stepDataManager = ((ActualStepAndGoalDataManager.LocalBinder) stepBinder).getInstance();
+        weatherDataManager = ((WeatherDataManager.LocalBinder) weatherBinder).getInstance();
+        notificationDataManager = ((NotificationDataManager.LocalBinder) notifyBinder).getInstance();
+        Trigger.Builder builder = new Trigger.Builder();
+        Condition c = new StepAndGoalRealCountCondition(StepCountCondition.LESS_THAN, stepDataManager);
+        Condition c1 = new WeatherSunnyCondition(targetWeather, weatherDataManager);
+        Condition c2 = new NotificationHistoryCondition(10, notificationDataManager);
+        Action a = new SimpleMapNotificationAction("Go for a walk ya lazy. It's even sunny ootside!");
+        List<Condition> conditionList = new ArrayList<>();
+        conditionList.add(c);
+        conditionList.add(c1);
+        conditionList.add(c2);
+        Condition and = new AndCondition(conditionList);
+        builder.setCondition(and);
+        builder.setAction(a);
+        return builder.build();
 
+    }
     public static ITrigger createWeatherWithNotifyLimitTrigger(IBinder stepBinder, IBinder weatherBinder, IBinder notifyBinder, Context t) throws ClassCastException{
         IDataManager<StepData> stepDataManager;
         IDataManager<Boolean> notificationDataManager;
