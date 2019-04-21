@@ -13,7 +13,7 @@
 //import uk.ac.strath.contextualtriggers.conditions.AndCondition;
 //import uk.ac.strath.contextualtriggers.conditions.FrequentNotificationPreventionCondition;
 //import uk.ac.strath.contextualtriggers.conditions.StepCountCondition;
-//import uk.ac.strath.contextualtriggers.conditions.WeatherSunnyCondition;
+//import uk.ac.strath.contextualtriggers.conditions.ClearWeatherCondition;
 //import uk.ac.strath.contextualtriggers.data.WeatherData;
 //import uk.ac.strath.contextualtriggers.managers.SimulatedStepDataManager;
 //import uk.ac.strath.contextualtriggers.managers.WeatherDataManager;
@@ -29,7 +29,7 @@
 //        StepCountCondition stepCondition = new StepCountCondition(StepCountCondition.LESS_THAN,10000);
 //        WeatherData targetWeather = new WeatherData();
 //        targetWeather.TemperatureCelsius=14;
-//        WeatherSunnyCondition sunnyCondition = new WeatherSunnyCondition(targetWeather);
+//        ClearWeatherCondition sunnyCondition = new ClearWeatherCondition(targetWeather);
 //        notifyCondition = new FrequentNotificationPreventionCondition(30);
 //        /*Link Conditions to Data Manager*/
 //        SimulatedStepDataManager stepDataManager = SimulatedStepDataManager.getInstance();

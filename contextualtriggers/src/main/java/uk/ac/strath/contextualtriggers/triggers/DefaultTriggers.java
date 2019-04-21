@@ -11,12 +11,12 @@ import java.util.List;
 import uk.ac.strath.contextualtriggers.actions.Action;
 import uk.ac.strath.contextualtriggers.actions.SimpleMapNotificationAction;
 import uk.ac.strath.contextualtriggers.actions.SimpleNotificationAction;
+import uk.ac.strath.contextualtriggers.conditions.ClearWeatherCondition;
 import uk.ac.strath.contextualtriggers.conditions.Condition;
 import uk.ac.strath.contextualtriggers.conditions.AndCondition;
 import uk.ac.strath.contextualtriggers.conditions.FrequentNotificationPreventionCondition;
 import uk.ac.strath.contextualtriggers.conditions.StepAndGoalRealCountCondition;
 import uk.ac.strath.contextualtriggers.conditions.StepCountCondition;
-import uk.ac.strath.contextualtriggers.conditions.WeatherSunnyCondition;
 import uk.ac.strath.contextualtriggers.data.StepAndGoalData;
 import uk.ac.strath.contextualtriggers.data.StepData;
 import uk.ac.strath.contextualtriggers.data.WeatherData;
@@ -39,7 +39,7 @@ public class DefaultTriggers {
         notificationDataManager = ((NotificationDataManager.LocalBinder) notifyBinder).getInstance();
         Trigger.Builder builder = new Trigger.Builder();
         Condition c = new StepAndGoalRealCountCondition(StepCountCondition.LESS_THAN, stepDataManager);
-        Condition c1 = new WeatherSunnyCondition(targetWeather, weatherDataManager);
+        Condition c1 = new ClearWeatherCondition(targetWeather, weatherDataManager);
         Condition c2 = new FrequentNotificationPreventionCondition(10, notificationDataManager);
         Action a = new SimpleMapNotificationAction("Go for a walk ya lazy. It's even sunny ootside!");
         List<Condition> conditionList = new ArrayList<>();
@@ -50,7 +50,6 @@ public class DefaultTriggers {
         builder.setCondition(and);
         builder.setAction(a);
         return builder.build();
-
     }
     public static ITrigger createWeatherWithNotifyLimitTrigger(IBinder stepBinder, IBinder weatherBinder, IBinder notifyBinder, Context t) throws ClassCastException{
         IDataManager<StepData> stepDataManager;
@@ -64,7 +63,7 @@ public class DefaultTriggers {
         notificationDataManager = ((NotificationDataManager.LocalBinder) notifyBinder).getInstance();
         Trigger.Builder builder = new Trigger.Builder();
         Condition c = new StepCountCondition(StepCountCondition.LESS_THAN, 10000, stepDataManager);
-        Condition c1 = new WeatherSunnyCondition(targetWeather, weatherDataManager);
+        Condition c1 = new ClearWeatherCondition(targetWeather, weatherDataManager);
         Condition c2 = new FrequentNotificationPreventionCondition(10, notificationDataManager);
         Action a = new SimpleMapNotificationAction("Go for a walk ya lazy. It's even sunny ootside!");
         List<Condition> conditionList = new ArrayList<>();
@@ -102,7 +101,7 @@ public class DefaultTriggers {
         weatherDataManager = ((WeatherDataManager.LocalBinder) weatherBinder).getInstance();
         Trigger.Builder builder = new Trigger.Builder();
         Condition c = new StepCountCondition(StepCountCondition.LESS_THAN, 10000, stepDataManager);
-        Condition c1 = new WeatherSunnyCondition(targetWeather, weatherDataManager);
+        Condition c1 = new ClearWeatherCondition(targetWeather, weatherDataManager);
         Action a = new SimpleNotificationAction("Go for a walk ya lazy. It's even sunny ootside!");
         List<Condition> conditionList = new ArrayList<>();
         conditionList.add(c);
