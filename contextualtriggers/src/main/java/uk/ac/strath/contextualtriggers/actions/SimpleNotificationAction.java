@@ -11,7 +11,7 @@ import android.support.v4.app.NotificationManagerCompat;
 import uk.ac.strath.contextualtriggers.Logger;
 import uk.ac.strath.contextualtriggers.MainApplication;
 import uk.ac.strath.contextualtriggers.R;
-import uk.ac.strath.contextualtriggers.conditions.NotificationHistoryCondition;
+import uk.ac.strath.contextualtriggers.conditions.FrequentNotificationPreventionCondition;
 import uk.ac.strath.contextualtriggers.managers.NotificationDataManager;
 
 //import static android.support.v4.content.ContextCompat.getSystemService;
@@ -21,7 +21,7 @@ public class SimpleNotificationAction implements Action {
     private static final String CHANNEL_ID = "contextualtriggers";
     private String message;
     private Logger logger;
-    private NotificationHistoryCondition notifyCondition;
+    private FrequentNotificationPreventionCondition notifyCondition;
     private Context ct;
 
     public SimpleNotificationAction(String message) {
@@ -66,7 +66,7 @@ public class SimpleNotificationAction implements Action {
         }
     }
 
-    public void attachCondition(NotificationHistoryCondition notifyCondition) {
+    public void attachCondition(FrequentNotificationPreventionCondition notifyCondition) {
         this.notifyCondition = notifyCondition;
     }
 

@@ -13,7 +13,7 @@ import uk.ac.strath.contextualtriggers.actions.SimpleMapNotificationAction;
 import uk.ac.strath.contextualtriggers.actions.SimpleNotificationAction;
 import uk.ac.strath.contextualtriggers.conditions.Condition;
 import uk.ac.strath.contextualtriggers.conditions.AndCondition;
-import uk.ac.strath.contextualtriggers.conditions.NotificationHistoryCondition;
+import uk.ac.strath.contextualtriggers.conditions.FrequentNotificationPreventionCondition;
 import uk.ac.strath.contextualtriggers.conditions.StepAndGoalRealCountCondition;
 import uk.ac.strath.contextualtriggers.conditions.StepCountCondition;
 import uk.ac.strath.contextualtriggers.conditions.WeatherSunnyCondition;
@@ -40,7 +40,7 @@ public class DefaultTriggers {
         Trigger.Builder builder = new Trigger.Builder();
         Condition c = new StepAndGoalRealCountCondition(StepCountCondition.LESS_THAN, stepDataManager);
         Condition c1 = new WeatherSunnyCondition(targetWeather, weatherDataManager);
-        Condition c2 = new NotificationHistoryCondition(10, notificationDataManager);
+        Condition c2 = new FrequentNotificationPreventionCondition(10, notificationDataManager);
         Action a = new SimpleMapNotificationAction("Go for a walk ya lazy. It's even sunny ootside!");
         List<Condition> conditionList = new ArrayList<>();
         conditionList.add(c);
@@ -65,7 +65,7 @@ public class DefaultTriggers {
         Trigger.Builder builder = new Trigger.Builder();
         Condition c = new StepCountCondition(StepCountCondition.LESS_THAN, 10000, stepDataManager);
         Condition c1 = new WeatherSunnyCondition(targetWeather, weatherDataManager);
-        Condition c2 = new NotificationHistoryCondition(10, notificationDataManager);
+        Condition c2 = new FrequentNotificationPreventionCondition(10, notificationDataManager);
         Action a = new SimpleMapNotificationAction("Go for a walk ya lazy. It's even sunny ootside!");
         List<Condition> conditionList = new ArrayList<>();
         conditionList.add(c);

@@ -14,7 +14,6 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.NotificationManagerCompat;
 import android.support.v4.content.ContextCompat;
-import android.util.Log;
 
 import com.google.android.gms.awareness.Awareness;
 import com.google.android.gms.awareness.snapshot.LocationResult;
@@ -24,7 +23,7 @@ import uk.ac.strath.contextualtriggers.ContextualTriggersService;
 import uk.ac.strath.contextualtriggers.Logger;
 import uk.ac.strath.contextualtriggers.MainApplication;
 import uk.ac.strath.contextualtriggers.R;
-import uk.ac.strath.contextualtriggers.conditions.NotificationHistoryCondition;
+import uk.ac.strath.contextualtriggers.conditions.FrequentNotificationPreventionCondition;
 import uk.ac.strath.contextualtriggers.managers.NotificationDataManager;
 
 import static android.Manifest.permission.ACCESS_FINE_LOCATION;
@@ -36,7 +35,7 @@ public class SimpleMapNotificationAction implements Action {
     private static final String CHANNEL_ID = "contextualtriggers";
     private String message;
     private Logger logger;
-    private NotificationHistoryCondition notifyCondition;
+    private FrequentNotificationPreventionCondition notifyCondition;
     private int MY_PERMISSIONS_REQUEST_READ_CONTACTS;
     public SimpleMapNotificationAction(String message) {
         this.message = message;
@@ -121,7 +120,7 @@ public class SimpleMapNotificationAction implements Action {
         }
     }
 
-    public void attachCondition(NotificationHistoryCondition notifyCondition) {
+    public void attachCondition(FrequentNotificationPreventionCondition notifyCondition) {
         this.notifyCondition = notifyCondition;
     }
 

@@ -23,7 +23,7 @@ import uk.ac.strath.contextualtriggers.ContextualTriggersService;
 import uk.ac.strath.contextualtriggers.Logger;
 import uk.ac.strath.contextualtriggers.MainApplication;
 import uk.ac.strath.contextualtriggers.R;
-import uk.ac.strath.contextualtriggers.conditions.NotificationHistoryCondition;
+import uk.ac.strath.contextualtriggers.conditions.FrequentNotificationPreventionCondition;
 import uk.ac.strath.contextualtriggers.managers.NotificationDataManager;
 
 import static android.Manifest.permission.ACCESS_FINE_LOCATION;
@@ -36,7 +36,7 @@ public class CustomMapNotificationAction implements Action {
     private String message;
     private String queryLocation;
     private Logger logger;
-    private NotificationHistoryCondition notifyCondition;
+    private FrequentNotificationPreventionCondition notifyCondition;
     private int MY_PERMISSIONS_REQUEST_READ_CONTACTS;
     public CustomMapNotificationAction(String message, String queryLocation) {
         this.message = message;
@@ -122,7 +122,7 @@ public class CustomMapNotificationAction implements Action {
         }
     }
 
-    public void attachCondition(NotificationHistoryCondition notifyCondition) {
+    public void attachCondition(FrequentNotificationPreventionCondition notifyCondition) {
         this.notifyCondition = notifyCondition;
     }
 

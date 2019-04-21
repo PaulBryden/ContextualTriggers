@@ -11,7 +11,7 @@
 //import uk.ac.strath.contextualtriggers.conditions.Condition;
 //import uk.ac.strath.contextualtriggers.actions.SimpleNotificationAction;
 //import uk.ac.strath.contextualtriggers.conditions.AndCondition;
-//import uk.ac.strath.contextualtriggers.conditions.NotificationHistoryCondition;
+//import uk.ac.strath.contextualtriggers.conditions.FrequentNotificationPreventionCondition;
 //import uk.ac.strath.contextualtriggers.conditions.StepCountCondition;
 //import uk.ac.strath.contextualtriggers.conditions.WeatherSunnyCondition;
 //import uk.ac.strath.contextualtriggers.data.WeatherData;
@@ -21,7 +21,7 @@
 //public class ButItsSunnyOutsideTrigger implements ITrigger
 //{
 //    AndCondition conditions;
-//    NotificationHistoryCondition notifyCondition;
+//    FrequentNotificationPreventionCondition notifyCondition;
 //    public ButItsSunnyOutsideTrigger()
 //    {
 //        ArrayList<Condition> conditionList = new ArrayList<Condition>();
@@ -30,7 +30,7 @@
 //        WeatherData targetWeather = new WeatherData();
 //        targetWeather.TemperatureCelsius=14;
 //        WeatherSunnyCondition sunnyCondition = new WeatherSunnyCondition(targetWeather);
-//        notifyCondition = new NotificationHistoryCondition(30);
+//        notifyCondition = new FrequentNotificationPreventionCondition(30);
 //        /*Link Conditions to Data Manager*/
 //        SimulatedStepDataManager stepDataManager = SimulatedStepDataManager.getInstance();
 //        WeatherDataManager weatherDataManager = WeatherDataManager.getInstance();
