@@ -13,7 +13,7 @@ public class NotificationHistoryCondition extends DataCondition<Void>
     private long lastNotificationSent;
     private int minimumTimeElapsed; // in seconds
 
-    public NotificationHistoryCondition(int minimumTimeElapsed, IDataManager dataManager)
+    public NotificationHistoryCondition(int minimumTimeElapsed, IDataManager<Void> dataManager)
     {
         super(dataManager);
         this.minimumTimeElapsed = minimumTimeElapsed; /*seconds*/
