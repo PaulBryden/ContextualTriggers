@@ -35,6 +35,7 @@ public class AltitudeTransitionCondition extends DataCondition<AltitudeData>
         // Override since an update always means condition isn't satisfied,
         AltitudeTransition=data.altitude-oldAltitude.altitude;
         oldAltitude=data;
+        super.notifyUpdate(data);
     }
 
     @Override

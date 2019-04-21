@@ -53,6 +53,7 @@ public class NotNotifiedTodayCondition extends DataCondition<Void>
             e.printStackTrace();
         }
         lastNotificationSent = today;
+        super.notifyUpdate(data);
     }
 
     @Override

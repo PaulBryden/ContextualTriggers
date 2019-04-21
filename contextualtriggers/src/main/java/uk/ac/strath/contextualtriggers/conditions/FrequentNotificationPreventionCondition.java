@@ -26,6 +26,7 @@ public class FrequentNotificationPreventionCondition extends DataCondition<Void>
         // Override since an update always means condition isn't satisfied,
         // so no need to notify the Trigger of the change.
         lastNotificationSent = System.currentTimeMillis();
+        super.notifyUpdate(data);
     }
 
     @Override

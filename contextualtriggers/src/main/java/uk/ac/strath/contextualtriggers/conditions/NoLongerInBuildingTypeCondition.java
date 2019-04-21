@@ -35,6 +35,7 @@ public class NoLongerInBuildingTypeCondition extends DataCondition<List<PlaceLik
                }
            }
        }
+        super.notifyUpdate(data);
     }
 
     @Override
