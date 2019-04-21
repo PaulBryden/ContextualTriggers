@@ -22,8 +22,9 @@ public class ActivityPeriodCondition extends DataCondition<DetectedActivity>
         super(dataManager);
         this.minimumTimeElapsed = minimumTimeElapsed; /*seconds*/
         activityStarted = System.currentTimeMillis();
-        currentActivity=getData();
+        currentActivity=new DetectedActivity(0,0);
         activityTypeUnderExamination=activityType;
+
     }
 
     @Override

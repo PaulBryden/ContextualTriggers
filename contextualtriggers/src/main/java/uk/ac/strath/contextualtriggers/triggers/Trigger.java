@@ -26,7 +26,7 @@ public class Trigger implements ITrigger {
      * by that condition which might mean that the condition is satisfied.
      */
     public void notifyChange() {
-        Log.d("Trigger", String.format("Condition satisfied: %b", condition.isSatisfied()));
+        //Log.d("Trigger", String.format("Condition satisfied: %b", condition.isSatisfied()));
         if (condition.isSatisfied()) {
             action.execute();
         }
