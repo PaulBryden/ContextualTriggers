@@ -24,6 +24,7 @@ import uk.ac.strath.contextualtriggers.managers.ActualStepAndGoalDataManager;
 import uk.ac.strath.contextualtriggers.managers.AltitudeDataManager;
 import uk.ac.strath.contextualtriggers.managers.BatteryDataManager;
 import uk.ac.strath.contextualtriggers.managers.CalendarDataManager;
+import uk.ac.strath.contextualtriggers.managers.IntervalsDataManager;
 import uk.ac.strath.contextualtriggers.managers.NotificationDataManager;
 import uk.ac.strath.contextualtriggers.managers.PlacesDataManager;
 import uk.ac.strath.contextualtriggers.managers.SimulatedStepDataManager;
@@ -48,6 +49,7 @@ public class ContextualTriggersService extends Service
     private AbstractServiceConnection notifyServiceConnection;
     private AbstractServiceConnection batteryServiceConnection;
     private AbstractServiceConnection altitudeServiceConnection;
+    private AbstractServiceConnection intervalServiceConnection;
 
     public static GoogleApiClient getGoogleAPIClient()
     {
@@ -95,6 +97,7 @@ public class ContextualTriggersService extends Service
         unbindService(calendarServiceConnection);
         unbindService(batteryServiceConnection);
         unbindService(altitudeServiceConnection);
+        unbindService(intervalServiceConnection);
     }
 
 
@@ -112,9 +115,13 @@ public class ContextualTriggersService extends Service
 
     private void startDataManagers()
     {
+        intervalServiceConnection = new AbstractServiceConnection(this);
+        Intent idm = new Intent(this, IntervalsDataManager.class);
+        boolean b = bindService(idm, intervalServiceConnection, 0);
+        startService(idm);
         altitudeServiceConnection = new AbstractServiceConnection(this);
         Intent adm = new Intent(this, AltitudeDataManager.class);
-        boolean b = bindService(adm, altitudeServiceConnection, 0);
+        b = bindService(adm, altitudeServiceConnection, 0);
         startService(adm);
         batteryServiceConnection = new AbstractServiceConnection(this); //THIS IS REQUIRED.
         Intent bdm = new Intent(this, BatteryDataManager.class);
@@ -189,8 +196,7 @@ public class ContextualTriggersService extends Service
         unbindService(calendarServiceConnection);
         unbindService(batteryServiceConnection);
         unbindService(altitudeServiceConnection);
-
-
+        unbindService(intervalServiceConnection);
     }
 
     private Notification getServiceNotification()

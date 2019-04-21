@@ -84,6 +84,9 @@
         <service android:enabled="true"
             android:name=".managers.NotificationDataManager">
         </service>
+        <service android:enabled="true"
+            android:name=".managers.IntervalsDataManager">
+        </service>
         </application>
 
 </manifest>
