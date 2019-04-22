@@ -38,6 +38,6 @@ public class FrequentNotificationPreventionCondition extends DataCondition<VoidD
             return true;
         }
         long now = System.currentTimeMillis();
-        return now - lastNotificationSent > 1000 * minimumTimeElapsed;
+        return now - lastNotificationSent > minimumTimeElapsed;
     }
 }
