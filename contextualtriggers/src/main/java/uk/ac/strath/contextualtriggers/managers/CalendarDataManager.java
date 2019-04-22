@@ -28,6 +28,7 @@ import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.location.ActivityRecognitionResult;
 import com.google.android.gms.location.DetectedActivity;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -35,14 +36,15 @@ import java.util.List;
 import uk.ac.strath.contextualtriggers.ContextualTriggersService;
 import uk.ac.strath.contextualtriggers.Logger;
 import uk.ac.strath.contextualtriggers.MainApplication;
-import uk.ac.strath.contextualtriggers.data.ActivityData;
+import uk.ac.strath.contextualtriggers.data.CalendarData;
+import uk.ac.strath.contextualtriggers.data.ListCalendarData;
 import uk.ac.strath.contextualtriggers.data.WeatherData;
 
 import static android.Manifest.permission.ACCESS_FINE_LOCATION;
 import static android.Manifest.permission.READ_CALENDAR;
 //import static com.google.android.gms.internal.zzs.TAG;
 
-public class CalendarDataManager extends DataManager<ActivityData> implements IDataManager<ActivityData> {
+public class CalendarDataManager extends DataManager<ListCalendarData> implements IDataManager<ListCalendarData> {
     Logger logger;
     private final IBinder binder = new CalendarDataManager.LocalBinder();
     int MY_PERMISSIONS_REQUEST_READ_CONTACTS;
@@ -154,74 +156,22 @@ public class CalendarDataManager extends DataManager<ActivityData> implements ID
                     cursor.moveToNext();
 
                 }
+                List<CalendarData> cd = new ArrayList<>();
                 for(int i = 0; i < nameOfEvent.size();i++){
-                    Log.d("CALENDAR", nameOfEvent.get(i));
+                   // Log.d("CALENDAREVENT", nameOfEvent.get(i));
+                  //  Log.d("CALENDARTIME", startDates.get(i));
+                    SimpleDateFormat dateFormat = new SimpleDateFormat("DD/MM/yyyy hh:mm:ss a");
+                    try {
+                        CalendarData c = new CalendarData(nameOfEvent.get(i), dateFormat.parse(startDates.get(i)));
+                        cd.add(c);
+                    } catch (ParseException e ){
+                        Log.e("Calendar","Error parsing date in Calendar");
+                    }
+
                 }
+                sendUpdate(new ListCalendarData(cd));
             }
-
-
         }
-            /*Cursor calCursor =
-                    getContentResolver().
-                            query(CalendarContract.Calendars.CONTENT_URI,
-                                    EVENT_PROJECTION,
-                                    CalendarContract.Calendars.VISIBLE + " = 1",
-                                    null,
-                                    CalendarContract.Calendars._ID + " ASC");
-           while(calCursor.moveToNext()){
-               calCursor.
-               List<ContactsContract.CommonDataKinds.Event> calendars = calendarProvider.getEvents(calendar.id).getList();
-               calCursor.
-               long selectedEventId;// the event-id;
-                       String[] proj =
-                       new String[]{
-                               CalendarContract.Events._ID,
-                               CalendarContract.Events.DTSTART,
-                               CalendarContract.Events.DTEND,
-                               CalendarContract.Events.RRULE,
-                               CalendarContract.Events.TITLE};
-               Cursor cursor =
-                       getContentResolver().
-                               query(
-                                       CalendarContract.Events.CONTENT_URI,
-                                       proj,
-                                       CalendarContract.Events._ID + " = ? ",
-                                       new String[]{Long.toString(selectedEventId)},
-                                       null);
-               if (cursor.moveToFirst()) {
-                   // read event data
-               }
-
-            }*/
-
-       /* // Run query
-        Cursor cur = null;
-        ContentResolver cr = getContentResolver();
-        Uri uri = CalendarContract.Calendars.CONTENT_URI;
-        String selection = "((" + CalendarContract.Calendars.ACCOUNT_NAME + " = ?) AND ("
-                + CalendarContract.Calendars.ACCOUNT_TYPE + " = ?) AND ("
-                + CalendarContract.Calendars.OWNER_ACCOUNT + " = ?))";
-        String[] selectionArgs = new String[] {"hera@example.com", "com.example",
-                "hera@example.com"};
-// Submit the query and get a Cursor object back.
-        cur = cr.query(uri, EVENT_PROJECTION, selection, selectionArgs, null);
-        while (cur.moveToNext()) {
-            long calID = 0;
-            String displayName = null;
-            String accountName = null;
-            String ownerName = null;
-
-            // Get the field values
-            calID = cur.getLong(PROJECTION_ID_INDEX);
-            displayName = cur.getString(PROJECTION_DISPLAY_NAME_INDEX);
-            accountName = cur.getString(PROJECTION_ACCOUNT_NAME_INDEX);
-            ownerName = cur.getString(PROJECTION_OWNER_ACCOUNT_INDEX);
-
-
-            Log.d("CALENDAR", "" + calID + displayName + accountName + ownerName);
-            // Do something with the values...
-            }}}
-*/
 
 
 public static String getDate(long milliSeconds) {
