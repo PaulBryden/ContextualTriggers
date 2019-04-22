@@ -24,7 +24,7 @@ public class AltitudeTransitionCondition extends DataCondition<AltitudeData>
 
     public AltitudeTransitionCondition(int transition,IDataManager dataManager)
     {
-        super(dataManager);
+        super(dataManager, 30);
         oldAltitude = new AltitudeData();
         this.targetTransition = transition;
     }

@@ -15,7 +15,7 @@ public class AcceptableTimeCondition extends DataCondition<TimeOfDayData> {
 
     public AcceptableTimeCondition(List<Integer> targetIntervals, IDataManager<TimeOfDayData> dataManager)
     {
-        super(dataManager);
+        super(dataManager, 60);
         this.targetIntervals = targetIntervals;
     }
 

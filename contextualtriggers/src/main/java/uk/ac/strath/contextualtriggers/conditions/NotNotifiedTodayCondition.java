@@ -3,6 +3,9 @@ package uk.ac.strath.contextualtriggers.conditions;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -17,60 +20,23 @@ import uk.ac.strath.contextualtriggers.managers.IDataManager;
 public class NotNotifiedTodayCondition extends DataCondition<VoidData>
 {
 
-    private Date lastNotificationSent;
-
-    public NotNotifiedTodayCondition(IDataManager dataManager)
+    public NotNotifiedTodayCondition(IDataManager<VoidData> dataManager)
     {
         super(dataManager);
-        DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
-        Calendar cal = Calendar.getInstance();
-        cal.add(Calendar.DATE, -1);
-        Date yesterday = cal.getTime();
-        try
-        {
-            yesterday = formatter.parse(formatter.format(yesterday));
-        }
-        catch (ParseException e)
-        {
-            e.printStackTrace();
-        }
-        lastNotificationSent=yesterday;
     }
 
     @Override
-    public void notifyUpdate(VoidData data)
-    {
-        // Override since an update always means condition isn't satisfied,
-        // so no need to notify the Trigger of the change.
-        DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
-        Calendar cal0 = Calendar.getInstance();
-        Date today = cal0.getTime();
-        try
-        {
-            today = formatter.parse(formatter.format(today));
-        }
-        catch (ParseException e)
-        {
-            e.printStackTrace();
-        }
-        lastNotificationSent = today;
-        super.notifyUpdate(data);
+    public boolean hasStaleData() {
+        return false;
     }
 
     @Override
     public boolean isSatisfied()
     {
-        DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
-        Calendar cal0 = Calendar.getInstance();
-        Date today = cal0.getTime();
-        try
-        {
-            today = formatter.parse(formatter.format(today));
+        if (getData() == null) {
+            return true;
         }
-        catch (ParseException e)
-        {
-            e.printStackTrace();
-        }
-        return today.after(lastNotificationSent);
+        LocalDate date = Instant.ofEpochMilli(getData().getTimestamp()).atZone(ZoneId.systemDefault()).toLocalDate();
+        return !date.equals(LocalDate.now());
     }
 }

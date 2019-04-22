@@ -17,7 +17,7 @@ public class NoLongerInBuildingTypeCondition extends DataCondition<PlacesData> {
     long lastInPlace;
 
     public NoLongerInBuildingTypeCondition(Place.Type targetType, IDataManager<PlacesData> dataManager) {
-        super(dataManager);
+        super(dataManager, 30);
         this.targetType = targetType;
     }
 

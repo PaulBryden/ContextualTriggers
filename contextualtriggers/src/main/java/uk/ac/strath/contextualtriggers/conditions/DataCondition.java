@@ -8,10 +8,14 @@ import uk.ac.strath.contextualtriggers.managers.IDataManager;
 public abstract class DataCondition<T extends Data> extends AbstractCondition {
 
     private T data;
+    private int dataTimeout; // in minutes
 
     DataCondition(IDataManager<T> dataManager) {
-        data = null;
-        dataManager.register(this);
+        this(dataManager, 0, null);
+    }
+
+    DataCondition(IDataManager<T> dataManager, int dataTimeout) {
+        this(dataManager, dataTimeout, null);
     }
 
     @Deprecated
@@ -19,13 +23,18 @@ public abstract class DataCondition<T extends Data> extends AbstractCondition {
         // placeholder - change conditions to use data managers
     }
 
-    DataCondition(T initialData, IDataManager<T> dataManager) {
-        this(dataManager);
+    DataCondition(IDataManager<T> dataManager, int dataTimeout, T initialData) {
         data = initialData;
+        this.dataTimeout = dataTimeout;
+        dataManager.register(this);
     }
 
     public T getData() {
         return data;
+    }
+
+    public boolean hasStaleData() {
+        return data.getTimestamp() < System.currentTimeMillis() - (dataTimeout * 60000);
     }
 
     public void notifyUpdate(T data) {
@@ -36,8 +45,7 @@ public abstract class DataCondition<T extends Data> extends AbstractCondition {
         }
         catch(NullPointerException e)
         {
-            Log.d("DataCondition", this.toString() + "Trigger Not Attached");
-
+            Log.e("DataCondition", this.toString() + "Trigger Not Attached", e);
         }
     }
 

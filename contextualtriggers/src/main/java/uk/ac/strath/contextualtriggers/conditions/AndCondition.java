@@ -17,4 +17,14 @@ public class AndCondition extends CompositeCondition {
         }
         return true;
     }
+
+    @Override
+    public boolean hasStaleData() {
+        for (Condition c : components) {
+            if (c.hasStaleData()) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

@@ -18,7 +18,7 @@ public class HistoricStepsDaysUnmetCondition extends DataCondition<StepAndGoalDa
     private StepAndGoalData latestStepAndGoalData;
 
     public HistoricStepsDaysUnmetCondition(int days, IDataManager<StepAndGoalData> dataManager) {
-        super(dataManager);
+        super(dataManager, 24*60);
         latestStepAndGoalData = getData();
         daysMet=days;
     }

@@ -13,7 +13,7 @@ public class InBuildingCondition extends DataCondition<PlacesData> {
 
 
     public InBuildingCondition(IDataManager<PlacesData> dataManager) {
-        super(dataManager);
+        super(dataManager, 30);
     }
 
     @Override
