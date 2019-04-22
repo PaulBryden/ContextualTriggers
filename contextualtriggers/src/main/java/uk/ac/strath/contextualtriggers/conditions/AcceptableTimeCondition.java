@@ -11,9 +11,9 @@ import uk.ac.strath.contextualtriggers.managers.IDataManager;
  */
 public class AcceptableTimeCondition extends DataCondition<TimeOfDayData> {
 
-    private List<Integer> targetIntervals;
+    private TimeOfDayData targetIntervals;
 
-    public AcceptableTimeCondition(List<Integer> targetIntervals, IDataManager<TimeOfDayData> dataManager)
+    public AcceptableTimeCondition(TimeOfDayData targetIntervals, IDataManager<TimeOfDayData> dataManager)
     {
         super(dataManager);
         this.targetIntervals = targetIntervals;
@@ -24,8 +24,12 @@ public class AcceptableTimeCondition extends DataCondition<TimeOfDayData> {
     {
         for (int i : getData().intervals)
         {
-            if (targetIntervals.contains(i)) {
-                return true;
+            for(int x : targetIntervals.intervals)
+            {
+                if (x==i)
+                {
+                    return true;
+                }
             }
         }
         return false;

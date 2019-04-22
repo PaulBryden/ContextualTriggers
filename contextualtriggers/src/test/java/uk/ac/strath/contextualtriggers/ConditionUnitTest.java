@@ -33,8 +33,12 @@ import uk.ac.strath.contextualtriggers.conditions.GymNearbyCondition;
 import uk.ac.strath.contextualtriggers.conditions.HistoricStepsDaysUnmetCondition;
 import uk.ac.strath.contextualtriggers.conditions.InBuildingCondition;
 import uk.ac.strath.contextualtriggers.conditions.InBuildingTypeCondition;
+import uk.ac.strath.contextualtriggers.data.ActivityData;
 import uk.ac.strath.contextualtriggers.data.AltitudeData;
+import uk.ac.strath.contextualtriggers.data.PlacesData;
 import uk.ac.strath.contextualtriggers.data.StepAndGoalData;
+import uk.ac.strath.contextualtriggers.data.TimeOfDayData;
+import uk.ac.strath.contextualtriggers.data.VoidData;
 import uk.ac.strath.contextualtriggers.data.WeatherData;
 import uk.ac.strath.contextualtriggers.managers.DataManager;
 import uk.ac.strath.contextualtriggers.managers.IDataManager;
@@ -56,7 +60,7 @@ public class ConditionUnitTest
 
     @Test
     public void AcceptableTimeConditionUnitTest() {
-        class TimeIntervalsDataManager extends DataManager<int[]> implements IDataManager<int[]>
+        class TimeIntervalsDataManager extends DataManager<TimeOfDayData> implements IDataManager<TimeOfDayData>
         {
             @Nullable
             @Override
@@ -65,14 +69,14 @@ public class ConditionUnitTest
                 return null;
             }
             public void mock()
-            {int [] test = {TIME_INTERVAL_MORNING, TIME_INTERVAL_AFTERNOON};
+            {TimeOfDayData test = new TimeOfDayData(new int[]{TIME_INTERVAL_MORNING, TIME_INTERVAL_AFTERNOON});
                 sendUpdate(test);
             }
         }
 
         UnitTestAction action = new UnitTestAction();
         TimeIntervalsDataManager manager = new TimeIntervalsDataManager();
-        int[] desiredTimeInterval = {TIME_INTERVAL_AFTERNOON};
+        TimeOfDayData desiredTimeInterval = new TimeOfDayData(new int[]{TIME_INTERVAL_AFTERNOON});
         AcceptableTimeCondition periodCondition = new AcceptableTimeCondition(desiredTimeInterval,manager);
         Trigger.Builder T = new Trigger.Builder();
         T.setCondition(periodCondition);
@@ -87,7 +91,7 @@ public class ConditionUnitTest
 
     @Test
     public void ActivityPeriodConditionUnitTest() {
-        class ActivityDataManager extends DataManager<DetectedActivity> implements IDataManager<DetectedActivity>
+        class ActivityDataManager extends DataManager<ActivityData> implements IDataManager<ActivityData>
         {
             @Nullable
             @Override
@@ -97,7 +101,7 @@ public class ConditionUnitTest
             }
             public void mock()
             {
-                sendUpdate(new DetectedActivity(STILL,100));
+                sendUpdate(new ActivityData(new DetectedActivity(STILL,100)));
             }
         }
 
@@ -209,7 +213,7 @@ public class ConditionUnitTest
 
     @Test
     public void FrequentNotificationPreventionConditionUnitTest() {
-        class NotificationMockDataManager extends DataManager<Void> implements IDataManager<Void>
+        class NotificationMockDataManager extends DataManager<VoidData> implements IDataManager<VoidData>
         {
             boolean firstTime=true;
             @Nullable
@@ -250,7 +254,7 @@ public class ConditionUnitTest
 
     @Test
     public void GymNearbyConditionUnitTest() {
-        class PlacesMockDataManager extends DataManager<List<PlaceLikelihood>> implements IDataManager<List<PlaceLikelihood>>
+        class PlacesMockDataManager extends DataManager<PlacesData> implements IDataManager<PlacesData>
         {
             boolean firstTime=true;
             @Nullable
@@ -416,7 +420,7 @@ public class ConditionUnitTest
                     };
                     firstTime=false;
                     data.add(likelihood);
-                    sendUpdate(data);
+                    sendUpdate(new PlacesData(data));
             }
         }
 
@@ -471,7 +475,7 @@ public class ConditionUnitTest
     @Test
     public void InBuildingConditionUnitTest()
     {
-        class PlacesMockDataManager extends DataManager<List<PlaceLikelihood>> implements IDataManager<List<PlaceLikelihood>>
+        class PlacesMockDataManager extends DataManager<PlacesData> implements IDataManager<PlacesData>
         {
             boolean firstTime=true;
             @Nullable
@@ -637,7 +641,7 @@ public class ConditionUnitTest
                 };
                 firstTime=false;
                 data.add(likelihood);
-                sendUpdate(data);
+                sendUpdate(new PlacesData(data));
             }
         }
 
@@ -656,7 +660,7 @@ public class ConditionUnitTest
     @Test
     public void InBuildingTypeConditionUnitTest()
     {
-        class PlacesMockDataManager extends DataManager<List<PlaceLikelihood>> implements IDataManager<List<PlaceLikelihood>>
+        class PlacesMockDataManager extends DataManager<PlacesData> implements IDataManager<PlacesData>
         {
             boolean firstTime=true;
             @Nullable
@@ -822,7 +826,7 @@ public class ConditionUnitTest
                 };
                 firstTime=false;
                 data.add(likelihood);
-                sendUpdate(data);
+                sendUpdate(new PlacesData(data));
             }
         }
         UnitTestAction action = new UnitTestAction();
