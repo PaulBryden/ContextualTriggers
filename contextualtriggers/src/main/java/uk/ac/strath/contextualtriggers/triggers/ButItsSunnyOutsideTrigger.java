@@ -8,12 +8,12 @@
 //
 //import java.util.ArrayList;
 //
-//import uk.ac.strath.contextualtriggers.Condition;
-//import uk.ac.strath.contextualtriggers.actions.NotificationAction;
+//import uk.ac.strath.contextualtriggers.conditions.Condition;
+//import uk.ac.strath.contextualtriggers.actions.SimpleNotificationAction;
 //import uk.ac.strath.contextualtriggers.conditions.AndCondition;
-//import uk.ac.strath.contextualtriggers.conditions.NotificationHistoryCondition;
+//import uk.ac.strath.contextualtriggers.conditions.FrequentNotificationPreventionCondition;
 //import uk.ac.strath.contextualtriggers.conditions.StepCountCondition;
-//import uk.ac.strath.contextualtriggers.conditions.WeatherSunnyCondition;
+//import uk.ac.strath.contextualtriggers.conditions.ClearWeatherCondition;
 //import uk.ac.strath.contextualtriggers.data.WeatherData;
 //import uk.ac.strath.contextualtriggers.managers.SimulatedStepDataManager;
 //import uk.ac.strath.contextualtriggers.managers.WeatherDataManager;
@@ -21,7 +21,7 @@
 //public class ButItsSunnyOutsideTrigger implements ITrigger
 //{
 //    AndCondition conditions;
-//    NotificationHistoryCondition notifyCondition;
+//    FrequentNotificationPreventionCondition notifyCondition;
 //    public ButItsSunnyOutsideTrigger()
 //    {
 //        ArrayList<Condition> conditionList = new ArrayList<Condition>();
@@ -29,8 +29,8 @@
 //        StepCountCondition stepCondition = new StepCountCondition(StepCountCondition.LESS_THAN,10000);
 //        WeatherData targetWeather = new WeatherData();
 //        targetWeather.TemperatureCelsius=14;
-//        WeatherSunnyCondition sunnyCondition = new WeatherSunnyCondition(targetWeather);
-//        notifyCondition = new NotificationHistoryCondition(30);
+//        ClearWeatherCondition sunnyCondition = new ClearWeatherCondition(targetWeather);
+//        notifyCondition = new FrequentNotificationPreventionCondition(30);
 //        /*Link Conditions to Data Manager*/
 //        SimulatedStepDataManager stepDataManager = SimulatedStepDataManager.getInstance();
 //        WeatherDataManager weatherDataManager = WeatherDataManager.getInstance();
@@ -53,7 +53,7 @@
 //        if(conditions.isSatisfied())
 //        {
 //            notifyCondition.notifyUpdate(null);
-//            NotificationAction newAction = new NotificationAction("Go for a walk ya lazy. It's even sunny ootside!");
+//            SimpleNotificationAction newAction = new SimpleNotificationAction("Go for a walk ya lazy. It's even sunny ootside!");
 //            newAction.execute();
 //
 //        }

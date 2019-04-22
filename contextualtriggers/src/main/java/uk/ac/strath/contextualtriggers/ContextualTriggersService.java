@@ -1,20 +1,16 @@
 package uk.ac.strath.contextualtriggers;
 
-import android.app.AlarmManager;
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
-import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.IBinder;
-import android.os.SystemClock;
 import android.support.annotation.Nullable;
 import android.support.v4.app.NotificationCompat;
-import android.support.v4.app.NotificationManagerCompat;
 import android.util.Log;
 
 import com.google.android.gms.awareness.Awareness;
@@ -24,9 +20,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import uk.ac.strath.contextualtriggers.managers.ActivityDataManager;
-import uk.ac.strath.contextualtriggers.managers.ActualGoalDataManager;
-import uk.ac.strath.contextualtriggers.managers.ActualStepDataManager;
+import uk.ac.strath.contextualtriggers.managers.ActualStepAndGoalDataManager;
+import uk.ac.strath.contextualtriggers.managers.AltitudeDataManager;
+import uk.ac.strath.contextualtriggers.managers.BatteryDataManager;
 import uk.ac.strath.contextualtriggers.managers.CalendarDataManager;
+import uk.ac.strath.contextualtriggers.managers.IntervalsDataManager;
+import uk.ac.strath.contextualtriggers.managers.NotificationDataManager;
 import uk.ac.strath.contextualtriggers.managers.PlacesDataManager;
 import uk.ac.strath.contextualtriggers.managers.SimulatedStepDataManager;
 import uk.ac.strath.contextualtriggers.managers.WeatherDataManager;
@@ -34,7 +33,8 @@ import uk.ac.strath.contextualtriggers.services.AbstractServiceConnection;
 import uk.ac.strath.contextualtriggers.triggers.DefaultTriggers;
 import uk.ac.strath.contextualtriggers.triggers.ITrigger;
 
-public class ContextualTriggersService extends Service {
+public class ContextualTriggersService extends Service
+{
 
     private static GoogleApiClient mGoogleApiClient;
     private static List<ITrigger> triggerList = new ArrayList<>();
@@ -45,72 +45,100 @@ public class ContextualTriggersService extends Service {
     private AbstractServiceConnection activityServiceConnection;
     private AbstractServiceConnection placesServiceConnection;
     private AbstractServiceConnection actualStepsServiceConnection;
-    private AbstractServiceConnection actualGoalServiceConnection;
     private AbstractServiceConnection calendarServiceConnection;
+    private AbstractServiceConnection notifyServiceConnection;
+    private AbstractServiceConnection batteryServiceConnection;
+    private AbstractServiceConnection altitudeServiceConnection;
+    private AbstractServiceConnection intervalServiceConnection;
 
-    public static GoogleApiClient getGoogleAPIClient() {
+    public static GoogleApiClient getGoogleAPIClient()
+    {
         return mGoogleApiClient;
     }
 
     @Override
-    public int onStartCommand(Intent intent, int flags, int startId) {
+    public int onStartCommand(Intent intent, int flags, int startId)
+    {
         startForeground(startId, getServiceNotification());
         //noinspection MissingPermission
         mGoogleApiClient = new GoogleApiClient.Builder(this)
                 .addApi(Awareness.API)
                 .build();
-        mGoogleApiClient.registerConnectionCallbacks(new GoogleApiClient.ConnectionCallbacks() {
+        mGoogleApiClient.registerConnectionCallbacks(new GoogleApiClient.ConnectionCallbacks()
+        {
             @Override
             public void onConnected(@Nullable Bundle bundle)
             {
-                    startDataManagers();
+                startDataManagers();
             }
 
             @Override
-            public void onConnectionSuspended(int i) {
+            public void onConnectionSuspended(int i)
+            {
 
             }
         });
         mGoogleApiClient.connect();
         return START_STICKY;
     }
+
     @Override
-    public void onDestroy() {
+    public void onDestroy()
+    {
         super.onDestroy();
         Log.i("EXIT", "ondestroy!");
         //Intent broadcastIntent = new Intent(this, ContextualTriggersService.class);
         unbindService(weatherServiceConnection);
         unbindService(stepServiceConnection);
+        unbindService(notifyServiceConnection);
         unbindService(placesServiceConnection);
         unbindService(activityServiceConnection);
+        unbindService(actualStepsServiceConnection);
+        unbindService(calendarServiceConnection);
+        unbindService(batteryServiceConnection);
+        unbindService(altitudeServiceConnection);
+        unbindService(intervalServiceConnection);
     }
 
 
     // These probably won't be needed
-    public static void addTrigger(ITrigger t) {
+    public static void addTrigger(ITrigger t)
+    {
         triggerList.add(t);
     }
 
-    public static void removeTrigger(ITrigger t) {
+    public static void removeTrigger(ITrigger t)
+    {
         triggerList.remove(t);
     }
 
 
-    private void startDataManagers() {
-        /*calendarServiceConnection = new AbstractServiceConnection(this);
+    private void startDataManagers()
+    {
+        intervalServiceConnection = new AbstractServiceConnection(this);
+        Intent idm = new Intent(this, IntervalsDataManager.class);
+        boolean b = bindService(idm, intervalServiceConnection, 0);
+        startService(idm);
+        altitudeServiceConnection = new AbstractServiceConnection(this);
+        Intent adm = new Intent(this, AltitudeDataManager.class);
+        b = bindService(adm, altitudeServiceConnection, 0);
+        startService(adm);
+        batteryServiceConnection = new AbstractServiceConnection(this); //THIS IS REQUIRED.
+        Intent bdm = new Intent(this, BatteryDataManager.class);
+        b = bindService(bdm, batteryServiceConnection, 0);
+        startService(bdm);
+        notifyServiceConnection = new AbstractServiceConnection(this);
+        Intent cns = new Intent(this, NotificationDataManager.class);
+        b = bindService(cns, notifyServiceConnection, 0);
+        startService(cns);
+        calendarServiceConnection = new AbstractServiceConnection(this);
         Intent cs = new Intent(this, CalendarDataManager.class);
-        boolean b = bindService(cs, calendarServiceConnection, 0);
+        b = bindService(cs, calendarServiceConnection, 0);
         startService(cs);
-*/
         actualStepsServiceConnection = new AbstractServiceConnection(this);
-        Intent ias = new Intent(this, ActualStepDataManager.class);
-        boolean b = bindService(ias, actualStepsServiceConnection, 0);
+        Intent ias = new Intent(this, ActualStepAndGoalDataManager.class);
+        b = bindService(ias, actualStepsServiceConnection, 0);
         startService(ias);
-        actualGoalServiceConnection = new AbstractServiceConnection(this);
-        Intent iag = new Intent(this, ActualGoalDataManager.class);
-        b = bindService(iag, actualGoalServiceConnection, 0);
-        startService(iag);
-      //  pointlessTrigger();
         placesServiceConnection = new AbstractServiceConnection(this);
         Intent ip = new Intent(this, PlacesDataManager.class);
         b = bindService(ip, placesServiceConnection, 0);
@@ -122,58 +150,71 @@ public class ContextualTriggersService extends Service {
         startService(ia);
         Log.d("BindingActervice", Boolean.toString(b));
         weatherServiceConnection = new AbstractServiceConnection(this);
-            Intent iw = new Intent(this, WeatherDataManager.class);
-            b = bindService(iw, weatherServiceConnection, 0);
-            startService(iw);
-            Log.d("BindingWeatherService", Boolean.toString(b));
-            stepServiceConnection = new AbstractServiceConnection(this);
-            Intent is = new Intent(this, SimulatedStepDataManager.class);
+        Intent iw = new Intent(this, WeatherDataManager.class);
+        b = bindService(iw, weatherServiceConnection, 0);
+        startService(iw);
+        Log.d("BindingWeatherService", Boolean.toString(b));
+        stepServiceConnection = new AbstractServiceConnection(this);
+        Intent is = new Intent(this, SimulatedStepDataManager.class);
         b = bindService(is, stepServiceConnection, 0);
         startService(is);
-            Log.d("BindingStepService", Boolean.toString(b));
+        Log.d("BindingStepService", Boolean.toString(b));
     }
 
     @Nullable
     @Override
-    public IBinder onBind(Intent intent) {
+    public IBinder onBind(Intent intent)
+    {
         return null;
     }
 
-    public void notifyDataManagerOnline() {
-        if (stepServiceConnection.isConnected() && weatherServiceConnection.isConnected()) {
+    public void notifyDataManagerOnline()
+    {
+        if (stepServiceConnection.isConnected() && weatherServiceConnection.isConnected() && notifyServiceConnection.isConnected())
+        {
             Log.d("DataManagerOnline", "Data Managers online");
             createTriggers();
-        } else {
+        } else
+        {
             Log.d("DataManagerOnline", ": " + stepServiceConnection.isConnected());
         }
     }
 
-    private void createTriggers() {
+    private void createTriggers()
+    {
         Log.d("Creating Triggers", "created");
-        triggerList.add(DefaultTriggers.createWeatherTrigger(stepServiceConnection.getDataManager(), weatherServiceConnection.getDataManager()));
-        triggerList.add(DefaultTriggers.createWalkIdleTrigger(stepServiceConnection.getDataManager()));
+        // triggerList.add(DefaultTriggers.createWeatherTrigger(stepServiceConnection.getDataManager(), weatherServiceConnection.getDataManager(), this));
+        // triggerList.add(DefaultTriggers.createWalkIdleTrigger(stepServiceConnection.getDataManager(), this));
+       // triggerList.add(DefaultTriggers.createWeatherWithNotifyLimitTrigger(stepServiceConnection.getDataManager(), weatherServiceConnection.getDataManager(), notifyServiceConnection.getDataManager(), this));
+        triggerList.add(DefaultTriggers.createWeatherWithNotifyLimitTriggerReal(actualStepsServiceConnection.getDataManager(), weatherServiceConnection.getDataManager(), notifyServiceConnection.getDataManager(), this));
         unbindService(weatherServiceConnection);
         unbindService(stepServiceConnection);
+        unbindService(notifyServiceConnection);
         unbindService(placesServiceConnection);
         unbindService(activityServiceConnection);
         unbindService(actualStepsServiceConnection);
-        unbindService(actualGoalServiceConnection);
-      //  unbindService(calendarServiceConnection);
+        unbindService(calendarServiceConnection);
+        unbindService(batteryServiceConnection);
+        unbindService(altitudeServiceConnection);
+        unbindService(intervalServiceConnection);
     }
 
-    private Notification getServiceNotification(){
+    private Notification getServiceNotification()
+    {
         createNotificationChannel();
         NotificationCompat.Builder builder = new NotificationCompat.Builder(MainApplication.getAppContext(), "cts")
                 .setSmallIcon(R.drawable.powered_by_google_dark)
-                .setContentTitle("ContextualTriggerService")
-                .setContentText("Context Service Running");
+                .setContentTitle("Contextual Triggers Framework")
+                .setContentText("Contextual Triggers Service Running");
         return builder.build();
     }
 
-    private void createNotificationChannel() {
+    private void createNotificationChannel()
+    {
         // Create the NotificationChannel, but only on API 26+ because
         // the NotificationChannel class is new and not in the support library
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
+        {
             CharSequence name = "contextualtriggers";
             String description = "contextualtriggers channel";
             NotificationChannel channel = new NotificationChannel("cts", name, NotificationManager.IMPORTANCE_DEFAULT);

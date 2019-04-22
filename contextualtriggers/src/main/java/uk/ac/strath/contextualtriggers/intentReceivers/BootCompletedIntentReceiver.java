@@ -1,8 +1,10 @@
-package uk.ac.strath.contextualtriggers;
+package uk.ac.strath.contextualtriggers.intentReceivers;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+
+import uk.ac.strath.contextualtriggers.MainApplication;
 
 public class BootCompletedIntentReceiver extends BroadcastReceiver
 {

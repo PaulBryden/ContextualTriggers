@@ -1,6 +1,6 @@
 package uk.ac.strath.contextualtriggers.data;
 
-public class WeatherData
+public class WeatherData extends  AbstractData
 {
     public float TemperatureCelsius;
     public int Humidity;

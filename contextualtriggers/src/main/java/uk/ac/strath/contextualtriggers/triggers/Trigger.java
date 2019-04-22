@@ -2,8 +2,8 @@ package uk.ac.strath.contextualtriggers.triggers;
 
 import android.util.Log;
 
-import uk.ac.strath.contextualtriggers.Action;
-import uk.ac.strath.contextualtriggers.Condition;
+import uk.ac.strath.contextualtriggers.actions.Action;
+import uk.ac.strath.contextualtriggers.conditions.Condition;
 import uk.ac.strath.contextualtriggers.conditions.AbstractCondition;
 
 /**
@@ -26,7 +26,7 @@ public class Trigger implements ITrigger {
      * by that condition which might mean that the condition is satisfied.
      */
     public void notifyChange() {
-        Log.d("Trigger", String.format("Condition satisfied: %b", condition.isSatisfied()));
+        //Log.d("Trigger", String.format("Condition satisfied: %b", condition.isSatisfied()));
         if (condition.isSatisfied()) {
             action.execute();
         }
