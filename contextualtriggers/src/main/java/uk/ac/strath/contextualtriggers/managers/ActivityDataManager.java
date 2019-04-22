@@ -25,12 +25,13 @@ import com.google.android.gms.location.DetectedActivity;
 import uk.ac.strath.contextualtriggers.ContextualTriggersService;
 import uk.ac.strath.contextualtriggers.Logger;
 import uk.ac.strath.contextualtriggers.MainApplication;
+import uk.ac.strath.contextualtriggers.data.ActivityData;
 import uk.ac.strath.contextualtriggers.data.WeatherData;
 
 import static android.Manifest.permission.ACCESS_FINE_LOCATION;
 //import static com.google.android.gms.internal.zzs.TAG;
 
-public class ActivityDataManager extends DataManager<DetectedActivity> implements IDataManager<DetectedActivity> {
+public class ActivityDataManager extends DataManager<ActivityData> implements IDataManager<ActivityData> {
     Logger logger;
     private final IBinder binder = new ActivityDataManager.LocalBinder();
 
@@ -89,7 +90,7 @@ public class ActivityDataManager extends DataManager<DetectedActivity> implement
                                  ActivityRecognitionResult ar = detectedActivityResult.getActivityRecognitionResult();
                                 DetectedActivity probableActivity = ar.getMostProbableActivity();
                                 Log.d("ActivityDataManager", probableActivity.toString());
-                                sendUpdate(probableActivity);
+                                sendUpdate(new ActivityData(probableActivity));
                             }
                         });
             }

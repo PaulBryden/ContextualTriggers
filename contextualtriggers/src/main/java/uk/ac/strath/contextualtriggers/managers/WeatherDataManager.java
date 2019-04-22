@@ -105,7 +105,6 @@ public class WeatherDataManager extends DataManager<WeatherData> implements IDat
                                 //parse and display current weather status
                                 Weather weather = weatherResult.getWeather();
                                 WeatherData data = new WeatherData();
-                                data.lastUpdateTime = System.currentTimeMillis();
                                 data.TemperatureCelsius = weather.getTemperature(Weather.CELSIUS);
                                 data.Humidity = weather.getHumidity();
                                 data.Conditions = weather.getConditions();
