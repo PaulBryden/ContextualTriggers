@@ -3,15 +3,19 @@ package uk.ac.strath.contextualtriggers;
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.app.Service;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.google.android.gms.awareness.Awareness;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -19,6 +23,7 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import java.util.ArrayList;
 import java.util.List;
 
+import uk.ac.strath.contextualtriggers.intentReceivers.ToastBroadcastReceiver;
 import uk.ac.strath.contextualtriggers.managers.ActivityDataManager;
 import uk.ac.strath.contextualtriggers.managers.ActualStepAndGoalDataManager;
 import uk.ac.strath.contextualtriggers.managers.AltitudeDataManager;
@@ -50,13 +55,12 @@ public class ContextualTriggersService extends Service
     private AbstractServiceConnection batteryServiceConnection;
     private AbstractServiceConnection altitudeServiceConnection;
     private AbstractServiceConnection intervalServiceConnection;
-
+    private ToastBroadcastReceiver receiverToast;
     public static GoogleApiClient getGoogleAPIClient()
     {
         return mGoogleApiClient;
     }
 
-    @Override
     public int onStartCommand(Intent intent, int flags, int startId)
     {
         startForeground(startId, getServiceNotification());
@@ -78,6 +82,10 @@ public class ContextualTriggersService extends Service
 
             }
         });
+        receiverToast = new ToastBroadcastReceiver();
+        IntentFilter filter = new IntentFilter();
+        filter.addAction("uk.ac.strath.contextualtriggers.toast");
+        registerReceiver(receiverToast,filter);
         mGoogleApiClient.connect();
         return START_STICKY;
     }
@@ -202,10 +210,13 @@ public class ContextualTriggersService extends Service
     private Notification getServiceNotification()
     {
         createNotificationChannel();
+        Intent pIntent = new Intent(this, ToastBroadcastReceiver.class);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0, pIntent, PendingIntent.FLAG_CANCEL_CURRENT);
         NotificationCompat.Builder builder = new NotificationCompat.Builder(MainApplication.getAppContext(), "cts")
                 .setSmallIcon(R.drawable.powered_by_google_dark)
                 .setContentTitle("Contextual Triggers Framework")
-                .setContentText("Contextual Triggers Service Running");
+                .setContentText("Contextual Triggers Service Running")
+                .setContentIntent(pendingIntent);
         return builder.build();
     }
 
