@@ -2,7 +2,7 @@ package uk.ac.strath.contextualtriggers.data;
 
 import java.util.Date;
 
-public class CalendarData
+public class CalendarData extends AbstractData
 {
     public String name;
     public Date time;
