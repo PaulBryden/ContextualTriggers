@@ -3,19 +3,17 @@ package uk.ac.strath.contextualtriggers.data;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class StepAndGoalData extends  AbstractData
 {
-    private HashMap<Date,DayData> History;
+    private HashMap<Date,DayData> history;
     public StepAndGoalData()
     {
-        History= new HashMap<>();
+        history = new HashMap<>();
         /*
         POPULATE STRUCT HERE FROM HISTORY
          */
@@ -46,35 +44,28 @@ public class StepAndGoalData extends  AbstractData
             e.printStackTrace();
         }
         return now;
-
     }
+
     public Map<Date,DayData> getHistory()
     {
-        return History;
+        return history;
     }
 
     public void updateDay(DayData day)
     {
         try
         {
-            History.get(day.date).goal = day.goal;
-            History.get(day.date).steps = day.steps;
+            history.get(day.date).goal = day.goal;
+            history.get(day.date).steps = day.steps;
         }
         catch(NullPointerException e)
         {
-            History.put(day.date,day);
+            history.put(day.date,day);
         }
     }
 
-    public DayData getDay(Date day) throws NullPointerException
+    public DayData getDay(Date day)
     {
-        try
-        {
-            return History.get(day);
-        }
-        catch(NullPointerException e)
-        {
-            throw new NullPointerException("Date Not Found");
-        }
+        return history.get(day);
     }
 }
