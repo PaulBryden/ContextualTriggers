@@ -12,9 +12,9 @@ import uk.ac.strath.contextualtriggers.managers.IDataManager;
  * WeatherService to represent weather states.
  */
 public class InBuildingTypeCondition extends DataCondition<List<PlaceLikelihood>> {
-    Place.Type buildingType;
+    Place.Type  buildingType;
 
-    public InBuildingTypeCondition(Place.Type buildingType, IDataManager<List<PlaceLikelihood>> dataManager) {
+    public InBuildingTypeCondition(Place.Type  buildingType, IDataManager<List<PlaceLikelihood>> dataManager) {
         super(dataManager);
         this.buildingType=buildingType;
     }

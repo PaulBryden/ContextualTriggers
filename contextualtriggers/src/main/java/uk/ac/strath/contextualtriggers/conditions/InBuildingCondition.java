@@ -1,6 +1,6 @@
 package uk.ac.strath.contextualtriggers.conditions;
 
-import com.google.android.gms.location.places.Place;
+import com.google.android.libraries.places.api.model.Place;
 import com.google.android.libraries.places.api.model.PlaceLikelihood;
 
 import java.util.List;

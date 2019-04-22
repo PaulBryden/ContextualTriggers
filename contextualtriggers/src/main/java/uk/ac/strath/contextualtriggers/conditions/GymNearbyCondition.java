@@ -1,6 +1,6 @@
 package uk.ac.strath.contextualtriggers.conditions;
 
-import com.google.android.gms.location.places.Place;
+import com.google.android.libraries.places.api.model.Place;
 import com.google.android.libraries.places.api.model.PlaceLikelihood;
 
 import java.util.List;
@@ -23,9 +23,9 @@ public class GymNearbyCondition extends DataCondition<List<PlaceLikelihood>> {
     public boolean isSatisfied() {
         for(PlaceLikelihood p : getData())
         {
-            for(Enum type : p.getPlace().getTypes())
+            for(Place.Type type : p.getPlace().getTypes())
             {
-                if(type.equals(Place.TYPE_GYM) && p.getLikelihood()<0.5)
+                if(type.equals(Place.Type.GYM) && p.getLikelihood()<0.5)
                 {
                     return true;
                 }
