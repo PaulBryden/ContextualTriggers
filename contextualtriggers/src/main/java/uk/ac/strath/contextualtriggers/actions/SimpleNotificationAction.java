@@ -41,7 +41,7 @@ public class SimpleNotificationAction implements Action {
         }
         logger.log("*** SENDING NOTIFICATION ***\n\"" + message + "\"");
         NotificationCompat.Builder builder = new NotificationCompat.Builder(MainApplication.getAppContext(), CHANNEL_ID)
-                .setSmallIcon(R.drawable.powered_by_google_dark)
+                .setSmallIcon(R.drawable.round_directions_walk_24)
                 .setContentTitle("Notification")
                 .setContentText(message)
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT);

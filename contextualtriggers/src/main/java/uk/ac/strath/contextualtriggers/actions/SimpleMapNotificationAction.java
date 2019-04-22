@@ -84,7 +84,7 @@ public class SimpleMapNotificationAction implements Action {
                                 PendingIntent pIntent = PendingIntent.getActivity(MainApplication.getAppContext(),0,mapIntent,0);
                                 logger.log("*** SENDING NOTIFICATION ***\n\"" + message + "\"");
                                 NotificationCompat.Builder builder = new NotificationCompat.Builder(MainApplication.getAppContext(), CHANNEL_ID)
-                                        .setSmallIcon(R.drawable.powered_by_google_dark)
+                                        .setSmallIcon(R.drawable.round_directions_walk_24)
                                         .setContentTitle("Notification")
                                         .setContentText(message)
                                         .setPriority(NotificationCompat.PRIORITY_DEFAULT)
