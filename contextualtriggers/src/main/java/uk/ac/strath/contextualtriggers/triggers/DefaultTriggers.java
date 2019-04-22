@@ -29,7 +29,7 @@ import uk.ac.strath.contextualtriggers.managers.WeatherDataManager;
 public class DefaultTriggers {
     public static ITrigger createWeatherWithNotifyLimitTriggerReal(IBinder stepBinder, IBinder weatherBinder, IBinder notifyBinder, Context t) throws ClassCastException{
         IDataManager<StepAndGoalData> stepDataManager;
-        IDataManager<Boolean> notificationDataManager;
+        IDataManager<Void> notificationDataManager;
         Log.d("Create Weather Trigger", stepBinder.toString());
         IDataManager<WeatherData> weatherDataManager;
         WeatherData targetWeather = new WeatherData();
@@ -53,7 +53,7 @@ public class DefaultTriggers {
     }
     public static ITrigger createWeatherWithNotifyLimitTrigger(IBinder stepBinder, IBinder weatherBinder, IBinder notifyBinder, Context t) throws ClassCastException{
         IDataManager<StepData> stepDataManager;
-        IDataManager<Boolean> notificationDataManager;
+        IDataManager<Void> notificationDataManager;
         Log.d("Create Weather Trigger", stepBinder.toString());
         IDataManager<WeatherData> weatherDataManager;
         WeatherData targetWeather = new WeatherData();

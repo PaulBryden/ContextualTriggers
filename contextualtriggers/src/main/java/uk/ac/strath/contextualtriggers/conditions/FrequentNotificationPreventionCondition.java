@@ -13,7 +13,7 @@ public class FrequentNotificationPreventionCondition extends DataCondition<Void>
     private long lastNotificationSent;
     private int minimumTimeElapsed; // in seconds
 
-    public FrequentNotificationPreventionCondition(int minimumTimeElapsed, IDataManager dataManager)
+    public FrequentNotificationPreventionCondition(int minimumTimeElapsed, IDataManager<Void> dataManager)
     {
         super(dataManager);
         this.minimumTimeElapsed = minimumTimeElapsed; /*seconds*/
