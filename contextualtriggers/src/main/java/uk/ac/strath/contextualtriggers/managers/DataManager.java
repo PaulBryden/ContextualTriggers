@@ -7,8 +7,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import uk.ac.strath.contextualtriggers.conditions.*;
+import uk.ac.strath.contextualtriggers.data.Data;
 
-public abstract class DataManager<T> extends Service implements IDataManager<T> {
+public abstract class DataManager<T extends Data> extends Service implements IDataManager<T> {
     private List<DataCondition<T>> observers;
     private T cachedData;
 

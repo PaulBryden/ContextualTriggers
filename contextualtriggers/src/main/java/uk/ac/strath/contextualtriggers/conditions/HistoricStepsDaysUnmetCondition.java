@@ -15,11 +15,9 @@ import uk.ac.strath.contextualtriggers.managers.IDataManager;
 public class HistoricStepsDaysUnmetCondition extends DataCondition<StepAndGoalData> {
 
     private int daysMet;
-    private StepAndGoalData latestStepAndGoalData;
 
     public HistoricStepsDaysUnmetCondition(int days, IDataManager<StepAndGoalData> dataManager) {
         super(dataManager);
-        latestStepAndGoalData = getData();
         daysMet=days;
     }
     private Date getDay(int offset)
@@ -39,15 +37,6 @@ public class HistoricStepsDaysUnmetCondition extends DataCondition<StepAndGoalDa
         return day;
     }
 
-    @Override
-    public void notifyUpdate(StepAndGoalData data)
-    {
-        // Override since an update always means condition isn't satisfied,
-        // so no need to notify the Trigger of the change.
-        latestStepAndGoalData=getData();
-        super.notifyUpdate(data);
-
-    }
 
 
     @Override
@@ -56,7 +45,7 @@ public class HistoricStepsDaysUnmetCondition extends DataCondition<StepAndGoalDa
         boolean state=false;
         for(int i=0;i<daysMet;i++)
         {
-            if(latestStepAndGoalData.getDay(getDay(0)).steps<(latestStepAndGoalData.getDay(getDay(0)).goal))
+            if(getData().getDay(getDay(0)).steps<(getData().getDay(getDay(0)).goal))
             {
                 state=true;
             }

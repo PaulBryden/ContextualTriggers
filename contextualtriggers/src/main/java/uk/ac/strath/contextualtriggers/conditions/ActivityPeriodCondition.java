@@ -2,6 +2,7 @@ package uk.ac.strath.contextualtriggers.conditions;
 
 import com.google.android.gms.location.DetectedActivity;
 
+import uk.ac.strath.contextualtriggers.data.ActivityData;
 import uk.ac.strath.contextualtriggers.managers.IDataManager;
 
 /**
@@ -9,33 +10,29 @@ import uk.ac.strath.contextualtriggers.managers.IDataManager;
  * Condition is satisfied if time elapsed since last condition is more than
  * specified amount.
  */
-public class ActivityPeriodCondition extends DataCondition<DetectedActivity>
+public class ActivityPeriodCondition extends DataCondition<ActivityData>
 {
 
     private long activityStarted;
     private int activityTypeUnderExamination;
     private int minimumTimeElapsed; // in seconds
-    private DetectedActivity currentActivity;
-
-    public ActivityPeriodCondition(int minimumTimeElapsed, int activityType, IDataManager dataManager)
+    private ActivityData data;
+    public ActivityPeriodCondition(int minimumTimeElapsed, int activityType, IDataManager<ActivityData> dataManager)
     {
-        super(dataManager);
+        super(new ActivityData(new DetectedActivity(0, 0)),dataManager);
         this.minimumTimeElapsed = minimumTimeElapsed; /*seconds*/
         activityStarted = System.currentTimeMillis();
-        currentActivity=new DetectedActivity(0,0);
         activityTypeUnderExamination=activityType;
-
     }
 
     @Override
-    public void notifyUpdate(DetectedActivity data)
+    public void notifyUpdate(ActivityData data)
     {
         // Override since an update always means condition isn't satisfied,
         // so no need to notify the Trigger of the change.
-        if(currentActivity.getType()!=data.getType())
+        if(data.getActivityType() != getData().getActivityType())
         {
-            currentActivity=data;
-            activityStarted=System.currentTimeMillis();
+            activityStarted = data.getTimestamp();
         }
         super.notifyUpdate(data);
     }
@@ -43,14 +40,7 @@ public class ActivityPeriodCondition extends DataCondition<DetectedActivity>
     @Override
     public boolean isSatisfied()
     {
-
-        if(getData().getType()==currentActivity.getType() && currentActivity.getType()==activityTypeUnderExamination && System.currentTimeMillis()-activityStarted>minimumTimeElapsed)
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
+        return getData().getActivityType() == activityTypeUnderExamination &&
+                (System.currentTimeMillis() - activityStarted) > minimumTimeElapsed;
     }
 }
