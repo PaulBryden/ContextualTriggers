@@ -27,7 +27,7 @@ public class Trigger implements ITrigger {
      */
     public void notifyChange() {
         //Log.d("Trigger", String.format("Condition satisfied: %b", condition.isSatisfied()));
-        if (condition.isSatisfied()) {
+        if (condition.isSatisfied() && !condition.hasStaleData()) {
             action.execute();
         }
     }

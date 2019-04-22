@@ -17,7 +17,7 @@ public class HistoricStepsDaysUnmetCondition extends DataCondition<StepAndGoalDa
     private int daysMet;
 
     public HistoricStepsDaysUnmetCondition(int days, IDataManager<StepAndGoalData> dataManager) {
-        super(dataManager);
+        super(dataManager, 24*60);
         daysMet=days;
     }
     private Date getDay(int offset)

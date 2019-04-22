@@ -13,7 +13,7 @@ public class ClearWeatherCondition extends DataCondition<WeatherData> {
 
 
     public ClearWeatherCondition(IDataManager<WeatherData> dataManager) {
-        super(dataManager);
+        super(dataManager, 3*60);
     }
 
     @Override

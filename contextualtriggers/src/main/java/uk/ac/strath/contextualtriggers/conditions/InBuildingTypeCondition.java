@@ -14,7 +14,7 @@ public class InBuildingTypeCondition extends DataCondition<PlacesData> {
     Place.Type targetType;
 
     public InBuildingTypeCondition(Place.Type buildingType, IDataManager<PlacesData> dataManager) {
-        super(dataManager);
+        super(dataManager, 30);
         this.targetType = buildingType;
     }
 
