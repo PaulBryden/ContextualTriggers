@@ -20,7 +20,7 @@ public class SimulatedStepDataManager extends DataManager<StepData> implements I
     private final IBinder binder = new LocalBinder();
 
     public class LocalBinder extends Binder {
-        public IDataManager getInstance() {
+        public IDataManager<StepData> getInstance() {
             return SimulatedStepDataManager.this;
         }
     }

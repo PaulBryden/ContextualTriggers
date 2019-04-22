@@ -26,7 +26,7 @@ public class ActualStepAndGoalDataManager extends DataManager<StepAndGoalData> i
     private StepAndGoalIntentReceiver receiver;
     private final IBinder binder = new LocalBinder();
     public class LocalBinder extends Binder {
-        public IDataManager getInstance() {
+        public IDataManager<StepAndGoalData> getInstance() {
             return ActualStepAndGoalDataManager.this;
         }
     }
