@@ -66,17 +66,7 @@ public class ActualStepAndGoalDataManager extends DataManager<StepAndGoalData> i
     }
 
     private void monitor(Intent intent){
-        DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
-        Calendar cal0 = Calendar.getInstance();
-        Date today = cal0.getTime();
-        try
-        {
-            today = formatter.parse(formatter.format(today));
-        }
-        catch (ParseException e)
-        {
-            e.printStackTrace();
-        }
+        LocalDate today = LocalDate.now();
         DayData day = new DayData(intent.getIntExtra("steps", 0),intent.getIntExtra("goal", 0),today);
         stepGoalData.updateDay(day);
         logger.log("Actual Steps: " + stepGoalData.getDay(today).steps + "\n");
