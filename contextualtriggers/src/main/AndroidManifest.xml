@@ -36,6 +36,11 @@
                 <action android:name="android.intent.action.BATTERY_OKAY"/>
             </intent-filter>
         </receiver>
+        <receiver android:name=".intentReceivers.ToastBroadcastReceiver">
+            <intent-filter>
+                <action android:name="uk.ac.strath.contextualtriggers.toast"/>
+            </intent-filter>
+        </receiver>
 
         <meta-data
             android:name="com.google.android.awareness.API_KEY"
