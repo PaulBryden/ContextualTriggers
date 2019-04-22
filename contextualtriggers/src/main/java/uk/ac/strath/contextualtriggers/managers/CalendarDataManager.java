@@ -39,7 +39,7 @@ import uk.ac.strath.contextualtriggers.data.WeatherData;
 
 import static android.Manifest.permission.ACCESS_FINE_LOCATION;
 import static android.Manifest.permission.READ_CALENDAR;
-import static com.google.android.gms.internal.zzs.TAG;
+//import static com.google.android.gms.internal.zzs.TAG;
 
 public class CalendarDataManager extends DataManager<DetectedActivity> implements IDataManager<DetectedActivity> {
     Logger logger;

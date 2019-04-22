@@ -7,13 +7,13 @@ import uk.ac.strath.contextualtriggers.managers.IDataManager;
  * Condition is satisfied if time elapsed since last condition is more than
  * specified amount.
  */
-public class NotificationHistoryCondition extends DataCondition<Void>
+public class FrequentNotificationPreventionCondition extends DataCondition<Void>
 {
 
     private long lastNotificationSent;
     private int minimumTimeElapsed; // in seconds
 
-    public NotificationHistoryCondition(int minimumTimeElapsed, IDataManager dataManager)
+    public FrequentNotificationPreventionCondition(int minimumTimeElapsed, IDataManager dataManager)
     {
         super(dataManager);
         this.minimumTimeElapsed = minimumTimeElapsed; /*seconds*/
@@ -26,6 +26,7 @@ public class NotificationHistoryCondition extends DataCondition<Void>
         // Override since an update always means condition isn't satisfied,
         // so no need to notify the Trigger of the change.
         lastNotificationSent = System.currentTimeMillis();
+        super.notifyUpdate(data);
     }
 
     @Override

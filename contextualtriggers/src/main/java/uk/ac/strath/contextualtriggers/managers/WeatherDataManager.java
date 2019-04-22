@@ -1,9 +1,7 @@
 package uk.ac.strath.contextualtriggers.managers;
 
-import android.Manifest;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
-import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -70,7 +68,7 @@ public class WeatherDataManager extends DataManager<WeatherData> implements IDat
             Intent iw = new Intent(this, WeatherDataManager.class);
             PendingIntent alarmIntent = PendingIntent.getService(this, 0, iw, PendingIntent.FLAG_UPDATE_CURRENT);
             alarmMgr.set(AlarmManager.ELAPSED_REALTIME_WAKEUP,
-                    SystemClock.elapsedRealtime() + 5000, alarmIntent);
+                    SystemClock.elapsedRealtime() + 30000, alarmIntent);
         }
 
         private void monitor() {
@@ -107,6 +105,7 @@ public class WeatherDataManager extends DataManager<WeatherData> implements IDat
                                 //parse and display current weather status
                                 Weather weather = weatherResult.getWeather();
                                 WeatherData data = new WeatherData();
+                                data.lastUpdateTime = System.currentTimeMillis();
                                 data.TemperatureCelsius = weather.getTemperature(Weather.CELSIUS);
                                 data.Humidity = weather.getHumidity();
                                 data.Conditions = weather.getConditions();

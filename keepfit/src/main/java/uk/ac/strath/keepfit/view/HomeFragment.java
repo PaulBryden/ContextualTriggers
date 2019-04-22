@@ -127,6 +127,15 @@ public class HomeFragment extends Fragment {
             // Should not be possible - if it does happen, ignore.
         }
     };
+    private void notifyFramework()
+    {
+        Intent intent = new Intent();
+        intent.setAction("uk.ac.strath.contextualtriggers.step");
+        intent.addFlags(Intent.FLAG_INCLUDE_STOPPED_PACKAGES);
+        intent.putExtra("steps",stepCount);
+        intent.putExtra("goal",mCurrentGoal.getTarget());
+        this.getContext().sendBroadcast(intent);
+    }
 
     private void updateStepCount(int sc) {
         // Progress bar sometimes doesn't redraw - possible Android bug?
@@ -141,17 +150,7 @@ public class HomeFragment extends Fragment {
             Intent intent = new Intent(getContext(), NotificationService.class);
             getContext().startService(intent);
         }
-
-        Intent intent = new Intent();
-        intent.setAction("uk.ac.strath.contextualtriggers.step");
-        intent.addFlags(Intent.FLAG_INCLUDE_STOPPED_PACKAGES);
-        intent.putExtra("steps",stepCount);
-        this.getContext().sendBroadcast(intent);
-        Intent intent2 = new Intent();
-        intent.setAction("uk.ac.strath.contextualtriggers.goal");
-        intent2.addFlags(Intent.FLAG_INCLUDE_STOPPED_PACKAGES);
-        intent2.putExtra("goal",mCurrentGoal.getTarget());
-        this.getContext().sendBroadcast(intent2);
+        notifyFramework();
     }
 
     @Override
@@ -189,6 +188,7 @@ public class HomeFragment extends Fragment {
 
         mAddStepCountAlert = createAddStepCountAlert();
         spm.saveActiveFragmentId(R.id.navigation_home);
+        notifyFramework();
     }
 
     private void rolloverDay(CalendarDay today, int sc) {

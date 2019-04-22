@@ -16,18 +16,25 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <receiver android:name=".StepIntentReceiver" >
+        <receiver android:name=".intentReceivers.BootCompletedIntentReceiver" >
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" >
+                </action>
+            </intent-filter>
+        </receiver>
+        <receiver android:name=".intentReceivers.StepAndGoalIntentReceiver" >
         <intent-filter>
             <action android:name="uk.ac.strath.contextualtriggers.step" >
             </action>
         </intent-filter>
     </receiver>
-        <receiver android:name=".GoalIntentReceiver" >
+        <receiver android:name=".intentReceivers.BatteryLevelReceiver">
             <intent-filter>
-                <action android:name="uk.ac.strath.contextualtriggers.goal" >
-                </action>
+                <action android:name="android.intent.action.BATTERY_LOW"/>
+                <action android:name="android.intent.action.BATTERY_OKAY"/>
             </intent-filter>
         </receiver>
+
         <meta-data
             android:name="com.google.android.awareness.API_KEY"
             android:value="AIzaSyAas2dlnnxWlZMfX5-rAHVz1fLGwiyD-Cw"/>
@@ -51,16 +58,19 @@
             android:name=".ContextualTriggersService">
         </service>
         <service android:enabled="true"
-            android:name=".managers.ActualGoalDataManager">
-        </service>
-        <service android:enabled="true"
-            android:name=".managers.ActualStepDataManager">
+            android:name=".managers.ActualStepAndGoalDataManager">
         </service>
         <service android:enabled="true"
             android:name=".managers.SimulatedStepDataManager">
         </service>
         <service android:enabled="true"
             android:name=".managers.ActivityDataManager">
+        </service>
+        <service android:enabled="true"
+            android:name=".managers.BatteryDataManager">
+        </service>
+        <service android:enabled="true"
+            android:name=".managers.AltitudeDataManager">
         </service>
         <service android:enabled="true"
             android:name=".managers.PlacesDataManager">
@@ -70,6 +80,12 @@
         </service>
         <service android:enabled="true"
             android:name=".managers.CalendarDataManager">
+        </service>
+        <service android:enabled="true"
+            android:name=".managers.NotificationDataManager">
+        </service>
+        <service android:enabled="true"
+            android:name=".managers.IntervalsDataManager">
         </service>
         </application>
 

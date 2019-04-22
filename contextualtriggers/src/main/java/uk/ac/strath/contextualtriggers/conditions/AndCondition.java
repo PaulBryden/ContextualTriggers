@@ -1,7 +1,5 @@
 package uk.ac.strath.contextualtriggers.conditions;
 
-import uk.ac.strath.contextualtriggers.Condition;
-
 import java.util.List;
 
 public class AndCondition extends CompositeCondition {
