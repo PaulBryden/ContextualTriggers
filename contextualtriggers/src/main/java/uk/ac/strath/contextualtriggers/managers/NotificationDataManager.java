@@ -20,7 +20,7 @@ public class NotificationDataManager extends DataManager<Void> implements IDataM
     private final IBinder binder = new LocalBinder();
 
     public class LocalBinder extends Binder {
-        public IDataManager getInstance() {
+        public IDataManager<Void> getInstance() {
             return NotificationDataManager.this;
         }
     }
