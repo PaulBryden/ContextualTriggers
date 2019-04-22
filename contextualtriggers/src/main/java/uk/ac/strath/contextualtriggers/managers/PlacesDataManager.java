@@ -11,36 +11,28 @@ import android.os.IBinder;
 import android.os.SystemClock;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
 
-import com.google.android.gms.awareness.Awareness;
-import com.google.android.gms.awareness.snapshot.DetectedActivityResult;
-import com.google.android.gms.awareness.snapshot.PlacesResult;
 import com.google.android.gms.common.api.ApiException;
-import com.google.android.gms.common.api.ResultCallback;
-import com.google.android.gms.location.ActivityRecognitionResult;
 import com.google.android.gms.tasks.Task;
 import com.google.android.libraries.places.api.Places;
 import com.google.android.libraries.places.api.model.Place;
+import com.google.android.libraries.places.api.model.PlaceLikelihood;
 import com.google.android.libraries.places.api.net.FindCurrentPlaceRequest;
 import com.google.android.libraries.places.api.net.FindCurrentPlaceResponse;
 import com.google.android.libraries.places.api.net.PlacesClient;
-import com.google.android.libraries.places.api.model.PlaceLikelihood;
 
 import java.util.Arrays;
 import java.util.List;
 
-import uk.ac.strath.contextualtriggers.ContextualTriggersService;
 import uk.ac.strath.contextualtriggers.Logger;
-import uk.ac.strath.contextualtriggers.MainApplication;
+import uk.ac.strath.contextualtriggers.data.PlacesData;
 
 import static android.Manifest.permission.ACCESS_FINE_LOCATION;
-import static android.app.Service.START_STICKY;
 import static com.android.volley.VolleyLog.TAG;
 
-public class PlacesDataManager extends DataManager<List<PlaceLikelihood>> implements IDataManager<List<PlaceLikelihood>> {
+public class PlacesDataManager extends DataManager<PlacesData> implements IDataManager<PlacesData> {
         Logger logger;
 private final IBinder binder = new PlacesDataManager.LocalBinder();
     private int MY_PERMISSIONS_REQUEST_READ_CONTACTS;
@@ -113,7 +105,7 @@ public PlacesDataManager()
                                 placeLikelihood.getPlace().getTypes(),
                                 placeLikelihood.getLikelihood()));
                     }
-                    sendUpdate(response.getPlaceLikelihoods());
+                    sendUpdate(new PlacesData(response.getPlaceLikelihoods()));
                 } else
                 {
                     Exception exception = task.getException();

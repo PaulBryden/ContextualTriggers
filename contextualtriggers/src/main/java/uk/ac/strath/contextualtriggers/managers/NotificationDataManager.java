@@ -1,26 +1,22 @@
 package uk.ac.strath.contextualtriggers.managers;
 
-import android.app.AlarmManager;
-import android.app.PendingIntent;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Binder;
 import android.os.IBinder;
-import android.os.SystemClock;
 import android.support.annotation.Nullable;
 import android.util.Log;
 
 import uk.ac.strath.contextualtriggers.Logger;
-import uk.ac.strath.contextualtriggers.data.StepData;
+import uk.ac.strath.contextualtriggers.data.VoidData;
 
-public class NotificationDataManager extends DataManager<Void> implements IDataManager<Void> {
+public class NotificationDataManager extends DataManager<VoidData> implements IDataManager<VoidData> {
 
     Logger logger;
     Integer goal;
     private final IBinder binder = new LocalBinder();
 
     public class LocalBinder extends Binder {
-        public IDataManager getInstance() {
+        public IDataManager<VoidData> getInstance() {
             return NotificationDataManager.this;
         }
     }

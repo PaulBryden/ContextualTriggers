@@ -6,6 +6,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
+import uk.ac.strath.contextualtriggers.data.VoidData;
 import uk.ac.strath.contextualtriggers.managers.IDataManager;
 
 /**
@@ -13,7 +14,7 @@ import uk.ac.strath.contextualtriggers.managers.IDataManager;
  * Condition is satisfied if time elapsed since last condition is more than
  * specified amount.
  */
-public class NotNotifiedTodayCondition extends DataCondition<Void>
+public class NotNotifiedTodayCondition extends DataCondition<VoidData>
 {
 
     private Date lastNotificationSent;
@@ -37,7 +38,7 @@ public class NotNotifiedTodayCondition extends DataCondition<Void>
     }
 
     @Override
-    public void notifyUpdate(Void data)
+    public void notifyUpdate(VoidData data)
     {
         // Override since an update always means condition isn't satisfied,
         // so no need to notify the Trigger of the change.

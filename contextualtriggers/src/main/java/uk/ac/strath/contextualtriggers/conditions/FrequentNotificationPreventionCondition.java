@@ -1,5 +1,6 @@
 package uk.ac.strath.contextualtriggers.conditions;
 
+import uk.ac.strath.contextualtriggers.data.VoidData;
 import uk.ac.strath.contextualtriggers.managers.IDataManager;
 
 /**
@@ -7,13 +8,13 @@ import uk.ac.strath.contextualtriggers.managers.IDataManager;
  * Condition is satisfied if time elapsed since last condition is more than
  * specified amount.
  */
-public class FrequentNotificationPreventionCondition extends DataCondition<Void>
+public class FrequentNotificationPreventionCondition extends DataCondition<VoidData>
 {
 
     private long lastNotificationSent;
     private int minimumTimeElapsed; // in seconds
 
-    public FrequentNotificationPreventionCondition(int minimumTimeElapsed, IDataManager dataManager)
+    public FrequentNotificationPreventionCondition(int minimumTimeElapsed, IDataManager<VoidData> dataManager)
     {
         super(dataManager);
         this.minimumTimeElapsed = minimumTimeElapsed; /*seconds*/
@@ -21,7 +22,7 @@ public class FrequentNotificationPreventionCondition extends DataCondition<Void>
     }
 
     @Override
-    public void notifyUpdate(Void data)
+    public void notifyUpdate(VoidData data)
     {
         // Override since an update always means condition isn't satisfied,
         // so no need to notify the Trigger of the change.

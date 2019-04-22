@@ -2,9 +2,10 @@ package uk.ac.strath.contextualtriggers.conditions;
 
 import android.util.Log;
 
+import uk.ac.strath.contextualtriggers.data.Data;
 import uk.ac.strath.contextualtriggers.managers.IDataManager;
 
-public abstract class DataCondition<T> extends AbstractCondition {
+public abstract class DataCondition<T extends Data> extends AbstractCondition {
 
     private T data;
 
