@@ -1,12 +1,7 @@
 package uk.ac.strath.contextualtriggers.triggers;
 
-
-import android.app.Activity;
-import android.content.Context;
 import android.os.IBinder;
 import android.util.Log;
-
-import com.google.android.gms.awareness.state.Weather;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,16 +11,15 @@ import uk.ac.strath.contextualtriggers.actions.SimpleMapNotificationAction;
 import uk.ac.strath.contextualtriggers.actions.SimpleNotificationAction;
 import uk.ac.strath.contextualtriggers.conditions.AcceptableTimeCondition;
 import uk.ac.strath.contextualtriggers.conditions.ActivityPeriodCondition;
+import uk.ac.strath.contextualtriggers.conditions.AndCondition;
 import uk.ac.strath.contextualtriggers.conditions.ClearWeatherCondition;
 import uk.ac.strath.contextualtriggers.conditions.Condition;
-import uk.ac.strath.contextualtriggers.conditions.AndCondition;
 import uk.ac.strath.contextualtriggers.conditions.FrequentNotificationPreventionCondition;
 import uk.ac.strath.contextualtriggers.conditions.HistoricStepsDaysUnmetCondition;
 import uk.ac.strath.contextualtriggers.conditions.StepAndGoalRealCountCondition;
 import uk.ac.strath.contextualtriggers.conditions.StepCountCondition;
 import uk.ac.strath.contextualtriggers.data.ActivityData;
 import uk.ac.strath.contextualtriggers.data.StepAndGoalData;
-import uk.ac.strath.contextualtriggers.data.StepData;
 import uk.ac.strath.contextualtriggers.data.TimeOfDayData;
 import uk.ac.strath.contextualtriggers.data.VoidData;
 import uk.ac.strath.contextualtriggers.data.WeatherData;
@@ -34,7 +28,6 @@ import uk.ac.strath.contextualtriggers.managers.ActualStepAndGoalDataManager;
 import uk.ac.strath.contextualtriggers.managers.IDataManager;
 import uk.ac.strath.contextualtriggers.managers.IntervalsDataManager;
 import uk.ac.strath.contextualtriggers.managers.NotificationDataManager;
-import uk.ac.strath.contextualtriggers.managers.SimulatedStepDataManager;
 import uk.ac.strath.contextualtriggers.managers.WeatherDataManager;
 
 import static com.google.android.gms.awareness.fence.TimeFence.TIME_INTERVAL_AFTERNOON;

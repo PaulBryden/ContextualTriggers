@@ -37,7 +37,7 @@ public class IntervalsDataManager extends AlarmDataManager<TimeOfDayData> {
     }
 
     public class LocalBinder extends Binder {
-        public IDataManager getInstance() {
+        public IDataManager<TimeOfDayData> getInstance() {
             return IntervalsDataManager.this;
         }
     }
