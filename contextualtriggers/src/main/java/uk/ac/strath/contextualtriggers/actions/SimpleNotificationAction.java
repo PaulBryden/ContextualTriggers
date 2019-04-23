@@ -2,11 +2,14 @@ package uk.ac.strath.contextualtriggers.actions;
 
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Build;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.NotificationManagerCompat;
+import android.support.v4.app.TaskStackBuilder;
 
 import uk.ac.strath.contextualtriggers.Logger;
 import uk.ac.strath.contextualtriggers.MainApplication;
@@ -42,7 +45,12 @@ public class SimpleNotificationAction implements Action {
                 .setContentText(message)
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT);
         NotificationManagerCompat notificationManager = NotificationManagerCompat.from(MainApplication.getAppContext());
-        // notificationId is a unique int for each notification that you must define
+        Intent resultIntent = new Intent(Intent.ACTION_PICK);
+        resultIntent.setType("activity/keepfit");
+        PendingIntent resultPendingIntent = PendingIntent.getActivity(MainApplication.getAppContext(), 0, resultIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+        builder.setContentIntent(resultPendingIntent);
+// notificationId is a unique int for each notification that you must define
+
         notificationManager.notify(0, builder.build());
     }
 
