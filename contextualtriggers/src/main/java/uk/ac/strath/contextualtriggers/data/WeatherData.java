@@ -1,5 +1,7 @@
 package uk.ac.strath.contextualtriggers.data;
 
+import java.util.Arrays;
+
 public class WeatherData extends  AbstractData
 {
     public float TemperatureCelsius;
@@ -21,5 +23,16 @@ public class WeatherData extends  AbstractData
         }
         return loggingInfo;
 
+    }
+
+    @Override
+    public boolean equals(Object o){
+        if(o instanceof WeatherData){
+            return super.equals(o) &&
+                    ((WeatherData) o).TemperatureCelsius == (this.TemperatureCelsius) &&
+                    ((WeatherData) o).Humidity == (this.Humidity) &&
+                    Arrays.equals(((WeatherData) o).Conditions, this.Conditions);
+        }
+        return false;
     }
 }

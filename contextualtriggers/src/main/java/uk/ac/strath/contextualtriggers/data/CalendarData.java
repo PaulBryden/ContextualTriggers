@@ -13,5 +13,16 @@ public class CalendarData extends  AbstractData
         this.time = time;
     }
 
+    @Override
+    public boolean equals(Object o){
+        if(o instanceof CalendarData){
+            System.out.println(((CalendarData) o).name + " " + this.name);
+            System.out.println(((CalendarData) o).time + " " + this.time);
+            return  ((CalendarData) o).name.equals(this.name) &&
+                    ((CalendarData) o).time.equals(this.time) &&
+                    super.equals(o);
+        }
+        return false;
+    }
 
 }

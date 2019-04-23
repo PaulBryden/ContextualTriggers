@@ -38,4 +38,12 @@ public class StepAndGoalData extends  AbstractData
     {
         return history.get(day);
     }
+
+    @Override
+    public boolean equals(Object o){
+        if(o instanceof StepAndGoalData){
+            return ((StepAndGoalData) o).history.equals(this.history) && super.equals(o);
+        }
+        return false;
+    }
 }

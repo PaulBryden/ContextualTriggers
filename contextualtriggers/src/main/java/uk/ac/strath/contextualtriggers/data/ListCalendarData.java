@@ -10,4 +10,12 @@ public class ListCalendarData extends  AbstractData {
     public ListCalendarData(List<CalendarData> cd){
         this.cd = cd;
     }
+
+    @Override
+    public boolean equals(Object o){
+        if(o instanceof ListCalendarData){
+            return ((ListCalendarData) o).cd.equals(this.cd) && super.equals(o);
+        }
+        return false;
+    }
 }

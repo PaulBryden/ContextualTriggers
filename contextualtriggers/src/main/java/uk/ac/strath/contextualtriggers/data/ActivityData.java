@@ -13,4 +13,12 @@ public class ActivityData extends AbstractData {
     public int getActivityType() {
         return activity.getType();
     }
+
+    @Override
+    public boolean equals(Object o){
+        if(o instanceof ActivityData){
+            return ((ActivityData) o).activity.equals(this.activity) && super.equals(o);
+        }
+        return false;
+    }
 }
