@@ -5,7 +5,7 @@ import java.util.List;
 
 public class ListCalendarData extends  AbstractData {
 
-    public List<CalendarData> cd = new ArrayList<>();
+    private List<CalendarData> cd = new ArrayList<>();
 
     public ListCalendarData(List<CalendarData> cd){
         this.cd = cd;

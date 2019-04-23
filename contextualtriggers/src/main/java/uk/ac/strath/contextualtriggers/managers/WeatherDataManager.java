@@ -22,6 +22,7 @@ import com.google.android.gms.common.api.ResultCallback;
 import uk.ac.strath.contextualtriggers.ContextualTriggersService;
 import uk.ac.strath.contextualtriggers.Logger;
 import uk.ac.strath.contextualtriggers.MainApplication;
+import uk.ac.strath.contextualtriggers.RequestLocationPermission;
 import uk.ac.strath.contextualtriggers.data.WeatherData;
 
 import static android.Manifest.permission.ACCESS_FINE_LOCATION;
@@ -32,6 +33,9 @@ public class WeatherDataManager extends DataManager<WeatherData> implements IDat
 
     private final IBinder binder = new WeatherDataManager.LocalBinder();
 
+    private final int POLLING_PERIOD = 30000;
+    private AlarmManager alarmMgr ;
+
 
 
     @Nullable
@@ -39,6 +43,16 @@ public class WeatherDataManager extends DataManager<WeatherData> implements IDat
     public IBinder onBind(Intent intent) {
         setup();
         return binder;
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        alarmMgr = (AlarmManager)this.getSystemService(Context.ALARM_SERVICE);
+        Log.d("WEATHER", "HAS BEEN OBLITERATED");
+        Intent iw = new Intent(this, WeatherDataManager.class);
+        PendingIntent alarmIntent = PendingIntent.getService(this, 0, iw, PendingIntent.FLAG_UPDATE_CURRENT);
+        alarmMgr.cancel(alarmIntent);
     }
 
     public class LocalBinder extends Binder {
@@ -64,34 +78,28 @@ public class WeatherDataManager extends DataManager<WeatherData> implements IDat
 
 
         private void alarm() {
-            AlarmManager alarmMgr = (AlarmManager)this.getSystemService(Context.ALARM_SERVICE);
+            alarmMgr = (AlarmManager)this.getSystemService(Context.ALARM_SERVICE);
             Intent iw = new Intent(this, WeatherDataManager.class);
             PendingIntent alarmIntent = PendingIntent.getService(this, 0, iw, PendingIntent.FLAG_UPDATE_CURRENT);
             alarmMgr.set(AlarmManager.ELAPSED_REALTIME_WAKEUP,
-                    SystemClock.elapsedRealtime() + 30000, alarmIntent);
+                    SystemClock.elapsedRealtime() + POLLING_PERIOD, alarmIntent);
         }
 
         private void monitor() {
-            if (ContextCompat.checkSelfPermission(this,
-                    ACCESS_FINE_LOCATION)
-                    != PackageManager.PERMISSION_GRANTED) {
-
-                // Permission is not granted
-                // Should we show an explanation?
+            if (ContextCompat.checkSelfPermission(this, ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED)
+            {  
                 if (ActivityCompat.shouldShowRequestPermissionRationale(MainApplication.getAppActivity(),
                         ACCESS_FINE_LOCATION)) {
-                    // Show an explanation to the user *asynchronously* -- don't block
-                    // this thread waiting for the user's response! After the user
-                    // sees the explanation, try again to request the permission.
+                    Intent i = new Intent(this, RequestLocationPermission.class);
+                    startActivity(i);
+
                 } else {
-                    // No explanation needed; request the permission
                     ActivityCompat.requestPermissions(MainApplication.getAppActivity(),
                             new String[]{ACCESS_FINE_LOCATION},
                             MY_PERMISSIONS_REQUEST_READ_CONTACTS);
 
                 }
             } else {
-                // Permission has already been granted
                 Awareness.SnapshotApi.getWeather(ContextualTriggersService.getGoogleAPIClient())
                         .setResultCallback(new ResultCallback<WeatherResult>() {
                             @Override
