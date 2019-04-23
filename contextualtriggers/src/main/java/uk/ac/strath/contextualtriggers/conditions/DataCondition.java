@@ -1,12 +1,15 @@
 package uk.ac.strath.contextualtriggers.conditions;
 
+import android.support.annotation.Nullable;
 import android.util.Log;
 
 import uk.ac.strath.contextualtriggers.data.Data;
+import uk.ac.strath.contextualtriggers.exceptions.TriggerNotConnectedException;
 import uk.ac.strath.contextualtriggers.managers.IDataManager;
 
 public abstract class DataCondition<T extends Data> extends AbstractCondition {
 
+    @Nullable
     private T data;
     private int dataTimeout; // in minutes
 
@@ -34,6 +37,9 @@ public abstract class DataCondition<T extends Data> extends AbstractCondition {
     }
 
     public boolean hasStaleData() {
+        if (data == null) {
+            return false;
+        }
         return data.getTimestamp() < System.currentTimeMillis() - (dataTimeout * 60000);
     }
 
@@ -43,9 +49,9 @@ public abstract class DataCondition<T extends Data> extends AbstractCondition {
         {
             getTrigger().notifyChange();
         }
-        catch(NullPointerException e)
+        catch(TriggerNotConnectedException e)
         {
-            Log.e("DataCondition", this.toString() + "Trigger Not Attached", e);
+            Log.d("DataCondition",  e.getMessage());
         }
     }
 
