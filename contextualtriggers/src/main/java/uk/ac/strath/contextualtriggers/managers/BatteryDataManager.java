@@ -5,20 +5,28 @@ import android.content.IntentFilter;
 import android.os.Binder;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
+import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 
 import uk.ac.strath.contextualtriggers.Logger;
 import uk.ac.strath.contextualtriggers.data.BatteryData;
-import uk.ac.strath.contextualtriggers.data.StepAndGoalData;
 import uk.ac.strath.contextualtriggers.intentReceivers.BatteryLevelReceiver;
-import uk.ac.strath.contextualtriggers.intentReceivers.StepAndGoalIntentReceiver;
 
-public class BatteryDataManager extends DataManager<BatteryData> implements IDataManager<BatteryData> {
+public class BatteryDataManager extends DataManager<BatteryData> {
+
+    public static final String LPM_BOOL_NAME = "LPM";
+    public static final String LPM_ACTION_NAME = "MANAGERS/LPM";
 
     Logger logger;
     BatteryData batteryData;
     private BatteryLevelReceiver receiver;
     private final IBinder binder = new LocalBinder();
+
+    @Override
+    public void setLowPowerMode(boolean lpm) {
+        // This one should always run as normal
+    }
+
     public class LocalBinder extends Binder {
         public IDataManager getInstance() {
             return BatteryDataManager.this;
@@ -61,11 +69,14 @@ public class BatteryDataManager extends DataManager<BatteryData> implements IDat
     }
 
     private void monitor(Intent intent){
-
         batteryData.isLow = intent.getBooleanExtra("level", false);
-        logger.log("Battery Low: " + batteryData.isLow);
-        Log.d("BatteryDataManager", "Starting");
+        Log.d("BatteryDataManager", "Battery low: " + batteryData.isLow);
         sendUpdate(batteryData);
+        LocalBroadcastManager lbm = LocalBroadcastManager.getInstance(this);
+        Intent i = new Intent();
+        i.setAction(LPM_ACTION_NAME);
+        i.putExtra(LPM_BOOL_NAME, batteryData.isLow);
+        lbm.sendBroadcast(i);
     }
 
 }
