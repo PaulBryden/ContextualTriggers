@@ -10,6 +10,7 @@ import android.os.IBinder;
 import android.os.SystemClock;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
 
@@ -34,6 +35,8 @@ import java.util.List;
 
 import uk.ac.strath.contextualtriggers.ContextualTriggersService;
 import uk.ac.strath.contextualtriggers.Logger;
+import uk.ac.strath.contextualtriggers.MainApplication;
+import uk.ac.strath.contextualtriggers.RequestLocationPermission;
 import uk.ac.strath.contextualtriggers.data.TimeOfDayData;
 import uk.ac.strath.contextualtriggers.data.WeatherData;
 
@@ -45,6 +48,8 @@ public class IntervalsDataManager extends DataManager<TimeOfDayData> implements 
 private final IBinder binder = new IntervalsDataManager.LocalBinder();
 private final int POLLING_PERIOD = 60000;
     private AlarmManager alarmMgr;
+
+    private int MY_PERMISSIONS_REQUEST_READ_CONTACTS;
 
     @Nullable
 @Override
@@ -98,10 +103,22 @@ public IntervalsDataManager()
     private void monitor()
     {
 
+        if (ContextCompat.checkSelfPermission(this, ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED)
+               {   // Permission is not granted
+                   // Should we show an explanation?
+                    if (ActivityCompat.shouldShowRequestPermissionRationale(MainApplication.getAppActivity(),
+                            ACCESS_FINE_LOCATION)) {
+                        Intent i = new Intent(this, RequestLocationPermission.class);
+                        startActivity(i);
 
-// Call findCurrentPlace and handle the response (first check that the user has granted permission).
-        if (ContextCompat.checkSelfPermission(this, ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED)
-        {
+                    } else {
+                        // No explanation needed; request the permission
+                        ActivityCompat.requestPermissions(MainApplication.getAppActivity(),
+                                new String[]{ACCESS_FINE_LOCATION},
+                                MY_PERMISSIONS_REQUEST_READ_CONTACTS);
+
+                    }
+                } else {
             Awareness.SnapshotApi.getTimeIntervals(ContextualTriggersService.getGoogleAPIClient())
                     .setResultCallback(new ResultCallback<TimeIntervalsResult>() {
                         @Override
