@@ -18,6 +18,7 @@ import com.google.android.gms.common.api.ResultCallback;
 import uk.ac.strath.contextualtriggers.ContextualTriggersService;
 import uk.ac.strath.contextualtriggers.Logger;
 import uk.ac.strath.contextualtriggers.MainApplication;
+import uk.ac.strath.contextualtriggers.RequestLocationPermission;
 import uk.ac.strath.contextualtriggers.data.WeatherData;
 
 import static android.Manifest.permission.ACCESS_FINE_LOCATION;
@@ -34,6 +35,7 @@ public class WeatherDataManager extends AlarmDataManager<WeatherData> {
         setup();
         return binder;
     }
+
 
     public class LocalBinder extends Binder {
         public IDataManager<WeatherData> getInstance() {
@@ -59,33 +61,27 @@ public class WeatherDataManager extends AlarmDataManager<WeatherData> {
     }
 
     private void monitor() {
-        if (ContextCompat.checkSelfPermission(this,
-                ACCESS_FINE_LOCATION)
-                != PackageManager.PERMISSION_GRANTED) {
-
-            // Permission is not granted
-            // Should we show an explanation?
+        if (ContextCompat.checkSelfPermission(this, ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED)
+        {
             if (ActivityCompat.shouldShowRequestPermissionRationale(MainApplication.getAppActivity(),
                     ACCESS_FINE_LOCATION)) {
-                // Show an explanation to the user *asynchronously* -- don't block
-                // this thread waiting for the user's response! After the user
-                // sees the explanation, try again to request the permission.
+                Intent i = new Intent(this, RequestLocationPermission.class);
+                startActivity(i);
+
             } else {
-                // No explanation needed; request the permission
                 ActivityCompat.requestPermissions(MainApplication.getAppActivity(),
                         new String[]{ACCESS_FINE_LOCATION},
                         MY_PERMISSIONS_REQUEST_READ_CONTACTS);
 
             }
         } else {
-            // Permission has already been granted
             Awareness.SnapshotApi.getWeather(ContextualTriggersService.getGoogleAPIClient())
                     .setResultCallback(new ResultCallback<WeatherResult>() {
                         @Override
                         public void onResult(@NonNull WeatherResult weatherResult) {
                             if (!weatherResult.getStatus().isSuccess()) {
                                 Log.d("WeatherDM", weatherResult.getStatus().toString());
-                                Log.e("WeatherDataManager", weatherResult.getStatus().getStatusMessage() + " ");
+                                Log.e("WeatherDataManager", weatherResult.getStatus().getStatusMessage()+" ");
                                 return;
                             }
 

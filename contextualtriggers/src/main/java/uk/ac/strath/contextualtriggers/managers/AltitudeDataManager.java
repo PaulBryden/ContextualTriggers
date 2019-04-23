@@ -18,6 +18,7 @@ import com.google.android.gms.common.api.ResultCallback;
 import uk.ac.strath.contextualtriggers.ContextualTriggersService;
 import uk.ac.strath.contextualtriggers.Logger;
 import uk.ac.strath.contextualtriggers.MainApplication;
+import uk.ac.strath.contextualtriggers.RequestLocationPermission;
 import uk.ac.strath.contextualtriggers.data.AltitudeData;
 
 import static android.Manifest.permission.ACCESS_FINE_LOCATION;
@@ -66,43 +67,46 @@ public class AltitudeDataManager extends AlarmDataManager<AltitudeData> {
     /*This Could be setup to fire on a transition, instead of a poll*/
     private void monitor()
     {
+        Log.d("ALT", "Before check perm");
 
 
 // Call findCurrentPlace and handle the response (first check that the user has granted permission).
-        if (ContextCompat.checkSelfPermission(this, ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED)
-        {  if (ContextCompat.checkSelfPermission(this,
-                ACCESS_FINE_LOCATION)
-                != PackageManager.PERMISSION_GRANTED) {
-
-            // Permission is not granted
+        if (ContextCompat.checkSelfPermission(this, ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED)
+        {   // Permission is not granted
+            Log.d("ALT", "After check perm");
             // Should we show an explanation?
             if (ActivityCompat.shouldShowRequestPermissionRationale(MainApplication.getAppActivity(),
                     ACCESS_FINE_LOCATION)) {
-                // Show an explanation to the user *asynchronously* -- don't block
-                // this thread waiting for the user's response! After the user
-                // sees the explanation, try again to request the permission.
+                Log.d("ALT", "Show rationale check perm");
+                Intent i = new Intent(this, RequestLocationPermission.class);
+                startActivity(i);
+
             } else {
                 // No explanation needed; request the permission
                 ActivityCompat.requestPermissions(MainApplication.getAppActivity(),
                         new String[]{ACCESS_FINE_LOCATION},
                         MY_PERMISSIONS_REQUEST_READ_CONTACTS);
+                Log.d("ALT", "Request check perm");
 
             }
         } else {
+            // try {
             // Permission has already been granted
+            Log.d("ALT", "Accepted check perm");
             Awareness.SnapshotApi.getLocation(ContextualTriggersService.getGoogleAPIClient())
                     .setResultCallback(new ResultCallback<LocationResult>() {
                         @Override
                         public void onResult(@NonNull LocationResult locationResult) {
                             if (locationResult.getStatus().isSuccess()) {
                                 Location location = locationResult.getLocation();
-                                altData.altitude=location.getAltitude();
-                                Log.d("AltitudeDataManager","Altitude:"+altData.altitude);
+                                altData.altitude = location.getAltitude();
+                                Log.d("AltitudeDataManager", "Altitude:" + altData.altitude);
                                 sendUpdate(altData);
+                            } else {
+                                Log.d("altitudeDataManager", "Failed " + locationResult.getStatus().toString());
                             }
                         }
                     });
-            }
         }
     }
 }

@@ -5,6 +5,7 @@ import android.content.pm.PackageManager;
 import android.os.Binder;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
 
@@ -21,7 +22,9 @@ import java.util.Arrays;
 import java.util.List;
 
 import uk.ac.strath.contextualtriggers.Logger;
+import uk.ac.strath.contextualtriggers.MainApplication;
 import uk.ac.strath.contextualtriggers.R;
+import uk.ac.strath.contextualtriggers.RequestLocationPermission;
 import uk.ac.strath.contextualtriggers.data.PlacesData;
 
 import static android.Manifest.permission.ACCESS_FINE_LOCATION;
@@ -31,7 +34,6 @@ public class PlacesDataManager extends AlarmDataManager<PlacesData> {
     Logger logger;
     private final IBinder binder = new PlacesDataManager.LocalBinder();
     private int MY_PERMISSIONS_REQUEST_READ_CONTACTS;
-
 
     @Nullable
     @Override
@@ -75,8 +77,22 @@ public class PlacesDataManager extends AlarmDataManager<PlacesData> {
         FindCurrentPlaceRequest request =
                 FindCurrentPlaceRequest.builder(placeFields).build();
 
-// Call findCurrentPlace and handle the response (first check that the user has granted permission).
-        if (ContextCompat.checkSelfPermission(this, ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+        if (ContextCompat.checkSelfPermission(this, ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED)
+        {   // Permission is not granted
+            // Should we show an explanation?
+            if (ActivityCompat.shouldShowRequestPermissionRationale(MainApplication.getAppActivity(),
+                    ACCESS_FINE_LOCATION)) {
+                Intent i = new Intent(this, RequestLocationPermission.class);
+                startActivity(i);
+
+            } else {
+                // No explanation needed; request the permission
+                ActivityCompat.requestPermissions(MainApplication.getAppActivity(),
+                        new String[]{ACCESS_FINE_LOCATION},
+                        MY_PERMISSIONS_REQUEST_READ_CONTACTS);
+
+            }
+        } else {
             Task<FindCurrentPlaceResponse> placeResponse = placesClient.findCurrentPlace(request);
             placeResponse.addOnCompleteListener(task ->
             {

@@ -20,6 +20,8 @@ import java.util.List;
 
 import uk.ac.strath.contextualtriggers.Logger;
 import uk.ac.strath.contextualtriggers.MainApplication;
+import uk.ac.strath.contextualtriggers.RequestCalendarPermission;
+import uk.ac.strath.contextualtriggers.RequestLocationPermission;
 import uk.ac.strath.contextualtriggers.data.CalendarData;
 import uk.ac.strath.contextualtriggers.data.ListCalendarData;
 
@@ -86,9 +88,8 @@ public class CalendarDataManager extends AlarmDataManager<ListCalendarData> {
             // Should we show an explanation?
             if (ActivityCompat.shouldShowRequestPermissionRationale(MainApplication.getAppActivity(),
                     READ_CALENDAR)) {
-                // Show an explanation to the user *asynchronously* -- don't block
-                // this thread waiting for the user's response! After the user
-                // sees the explanation, try again to request the permission.
+                Intent i = new Intent(this, RequestCalendarPermission.class);
+                startActivity(i);
             } else {
                 // No explanation needed; request the permission
                 ActivityCompat.requestPermissions(MainApplication.getAppActivity(),
