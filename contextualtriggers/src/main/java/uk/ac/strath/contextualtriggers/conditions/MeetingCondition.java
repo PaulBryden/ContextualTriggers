@@ -36,4 +36,9 @@ public class MeetingCondition extends DataCondition<CalendarData> {
         return name;
     }
 
+    @Override
+    public boolean hasStaleData() {
+        return false;
+    }
+
 }
