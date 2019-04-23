@@ -18,6 +18,7 @@ public class SimulatedStepDataManager extends DataManager<StepData> implements I
     Logger logger;
     StepData stepData;
     private final IBinder binder = new LocalBinder();
+    private final int POLLING_PERIOD = 5000;
 
     public class LocalBinder extends Binder {
         public IDataManager<StepData> getInstance() {
@@ -57,7 +58,7 @@ public class SimulatedStepDataManager extends DataManager<StepData> implements I
         Intent isd = new Intent(this, SimulatedStepDataManager.class);
         PendingIntent alarmIntent = PendingIntent.getService(this, 0, isd, PendingIntent.FLAG_UPDATE_CURRENT);
         alarmMgr.set(AlarmManager.ELAPSED_REALTIME_WAKEUP,
-                SystemClock.elapsedRealtime() + 5000, alarmIntent);
+                SystemClock.elapsedRealtime() + POLLING_PERIOD, alarmIntent);
     }
 
     private void monitor(){

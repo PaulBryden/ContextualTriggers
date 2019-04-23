@@ -11,6 +11,7 @@ import android.os.IBinder;
 import android.os.SystemClock;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
 
@@ -27,6 +28,9 @@ import java.util.Arrays;
 import java.util.List;
 
 import uk.ac.strath.contextualtriggers.Logger;
+import uk.ac.strath.contextualtriggers.MainApplication;
+import uk.ac.strath.contextualtriggers.R;
+import uk.ac.strath.contextualtriggers.RequestLocationPermission;
 import uk.ac.strath.contextualtriggers.data.PlacesData;
 
 import static android.Manifest.permission.ACCESS_FINE_LOCATION;
@@ -35,7 +39,10 @@ import static com.android.volley.VolleyLog.TAG;
 public class PlacesDataManager extends DataManager<PlacesData> implements IDataManager<PlacesData> {
         Logger logger;
 private final IBinder binder = new PlacesDataManager.LocalBinder();
+private final int POLLING_PERIOD = 60000;
     private int MY_PERMISSIONS_REQUEST_READ_CONTACTS;
+
+    private AlarmManager alarmMgr;
 
 
     @Nullable
@@ -44,6 +51,16 @@ public IBinder onBind(Intent intent) {
         setup();
         return binder;
         }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        alarmMgr = (AlarmManager)this.getSystemService(Context.ALARM_SERVICE);
+        Log.d("PLACES", "HAS BEEN OBLITERATED");
+        Intent ip = new Intent(this, PlacesDataManager.class);
+        PendingIntent alarmIntent = PendingIntent.getService(this, 0, ip, PendingIntent.FLAG_UPDATE_CURRENT);
+        alarmMgr.cancel(alarmIntent);
+    }
 
 public class LocalBinder extends Binder
 {
@@ -69,18 +86,18 @@ public PlacesDataManager()
     }
 
     private void alarm(){
-        AlarmManager alarmMgr = (AlarmManager)this.getSystemService(Context.ALARM_SERVICE);
+        alarmMgr = (AlarmManager)this.getSystemService(Context.ALARM_SERVICE);
         Intent ip = new Intent(this, PlacesDataManager.class);
         PendingIntent alarmIntent = PendingIntent.getService(this, 0, ip, PendingIntent.FLAG_UPDATE_CURRENT);
         alarmMgr.set(AlarmManager.ELAPSED_REALTIME_WAKEUP,
-                SystemClock.elapsedRealtime() + 60000, alarmIntent);
+                SystemClock.elapsedRealtime() + POLLING_PERIOD, alarmIntent);
     }
 
     /*This Could be setup to fire on a transition, instead of a poll*/
     private void monitor()
     {
         PlacesClient placesClient;
-        Places.initialize(this,"AIzaSyAas2dlnnxWlZMfX5-rAHVz1fLGwiyD-Cw");
+        Places.initialize(this, getString(R.string.API_key));
         placesClient = Places.createClient(this);
         // Use fields to define the data types to return.
         List<Place.Field> placeFields = Arrays.asList(Place.Field.NAME,Place.Field.TYPES);
@@ -89,9 +106,22 @@ public PlacesDataManager()
         FindCurrentPlaceRequest request =
                 FindCurrentPlaceRequest.builder(placeFields).build();
 
-// Call findCurrentPlace and handle the response (first check that the user has granted permission).
-        if (ContextCompat.checkSelfPermission(this, ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED)
-        {
+        if (ContextCompat.checkSelfPermission(this, ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED)
+        {   // Permission is not granted
+            // Should we show an explanation?
+            if (ActivityCompat.shouldShowRequestPermissionRationale(MainApplication.getAppActivity(),
+                    ACCESS_FINE_LOCATION)) {
+                Intent i = new Intent(this, RequestLocationPermission.class);
+                startActivity(i);
+
+            } else {
+                // No explanation needed; request the permission
+                ActivityCompat.requestPermissions(MainApplication.getAppActivity(),
+                        new String[]{ACCESS_FINE_LOCATION},
+                        MY_PERMISSIONS_REQUEST_READ_CONTACTS);
+
+            }
+        } else {
             Task<FindCurrentPlaceResponse> placeResponse = placesClient.findCurrentPlace(request);
             placeResponse.addOnCompleteListener(task ->
             {

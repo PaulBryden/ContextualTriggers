@@ -34,6 +34,7 @@ import static android.Manifest.permission.ACCESS_FINE_LOCATION;
 public class ActivityDataManager extends DataManager<ActivityData> implements IDataManager<ActivityData> {
     Logger logger;
     private final IBinder binder = new ActivityDataManager.LocalBinder();
+    private final int POLLING_PERIOD = 5000;
 
 
     @Nullable
@@ -66,19 +67,17 @@ public class ActivityDataManager extends DataManager<ActivityData> implements ID
         }
 
         private void alarm(){
-
             AlarmManager alarmMgr = (AlarmManager)this.getSystemService(Context.ALARM_SERVICE);
             Intent ia = new Intent(this, ActivityDataManager.class);
             PendingIntent alarmIntent = PendingIntent.getService(this, 0, ia, PendingIntent.FLAG_UPDATE_CURRENT);
             alarmMgr.set(AlarmManager.ELAPSED_REALTIME_WAKEUP,
-                    SystemClock.elapsedRealtime() + 5000,
+                    SystemClock.elapsedRealtime() + POLLING_PERIOD,
                     alarmIntent);
         }
 
 
         /*This Could be setup to fire on a transition, instead of a poll*/
         private void monitor() {
-                // Permission has already been granted
                 Awareness.SnapshotApi.getDetectedActivity(ContextualTriggersService.getGoogleAPIClient())
                         .setResultCallback(new ResultCallback<DetectedActivityResult>() {
                             @Override
@@ -94,6 +93,5 @@ public class ActivityDataManager extends DataManager<ActivityData> implements ID
                             }
                         });
             }
-
     }
 

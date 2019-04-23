@@ -26,7 +26,7 @@ import uk.ac.strath.contextualtriggers.Logger;
 import uk.ac.strath.contextualtriggers.MainApplication;
 import uk.ac.strath.contextualtriggers.data.EventData;
 import uk.ac.strath.contextualtriggers.data.CalendarData;
-
+import uk.ac.strath.contextualtriggers.RequestCalendarPermission;
 import static android.Manifest.permission.READ_CALENDAR;
 //import static com.google.android.gms.internal.zzs.TAG;
 
@@ -35,7 +35,6 @@ public class CalendarDataManager extends DataManager<CalendarData> implements ID
     Logger logger;
     private final IBinder binder = new CalendarDataManager.LocalBinder();
     int MY_PERMISSIONS_REQUEST_READ_CONTACTS;
-
     // Projection array. Creating indices for this array instead of doing
 // dynamic lookups improves performance.
     public static final String[] EVENT_PROJECTION = new String[] {
@@ -102,9 +101,8 @@ public class CalendarDataManager extends DataManager<CalendarData> implements ID
             // Should we show an explanation?
             if (ActivityCompat.shouldShowRequestPermissionRationale(MainApplication.getAppActivity(),
                     READ_CALENDAR)) {
-                // Show an explanation to the user *asynchronously* -- don't block
-                // this thread waiting for the user's response! After the user
-                // sees the explanation, try again to request the permission.
+                Intent i = new Intent(this, RequestCalendarPermission.class);
+                startActivity(i);
             } else {
                 // No explanation needed; request the permission
                 ActivityCompat.requestPermissions(MainApplication.getAppActivity(),

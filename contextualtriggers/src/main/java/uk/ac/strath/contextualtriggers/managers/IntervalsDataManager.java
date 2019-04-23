@@ -10,6 +10,7 @@ import android.os.IBinder;
 import android.os.SystemClock;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
 
@@ -34,6 +35,8 @@ import java.util.List;
 
 import uk.ac.strath.contextualtriggers.ContextualTriggersService;
 import uk.ac.strath.contextualtriggers.Logger;
+import uk.ac.strath.contextualtriggers.MainApplication;
+import uk.ac.strath.contextualtriggers.RequestLocationPermission;
 import uk.ac.strath.contextualtriggers.data.TimeOfDayData;
 import uk.ac.strath.contextualtriggers.data.WeatherData;
 
@@ -43,7 +46,10 @@ import static com.android.volley.VolleyLog.TAG;
 public class IntervalsDataManager extends DataManager<TimeOfDayData> implements IDataManager<TimeOfDayData> {
         Logger logger;
 private final IBinder binder = new IntervalsDataManager.LocalBinder();
+private final int POLLING_PERIOD = 60000;
+    private AlarmManager alarmMgr;
 
+    private int MY_PERMISSIONS_REQUEST_READ_CONTACTS;
 
     @Nullable
 @Override
@@ -51,6 +57,16 @@ public IBinder onBind(Intent intent) {
         setup();
         return binder;
         }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        alarmMgr = (AlarmManager)this.getSystemService(Context.ALARM_SERVICE);
+        Log.d("INTERVALS", "HAS BEEN OBLITERATED");
+        Intent ii = new Intent(this,IntervalsDataManager.class);
+        PendingIntent alarmIntent = PendingIntent.getService(this, 0, ii, PendingIntent.FLAG_UPDATE_CURRENT);
+        alarmMgr.cancel(alarmIntent);
+    }
 
 public class LocalBinder extends Binder
 {
@@ -76,21 +92,33 @@ public IntervalsDataManager()
     }
 
     private void alarm(){
-        AlarmManager alarmMgr = (AlarmManager)this.getSystemService(Context.ALARM_SERVICE);
+        alarmMgr = (AlarmManager)this.getSystemService(Context.ALARM_SERVICE);
         Intent ip = new Intent(this, IntervalsDataManager.class);
         PendingIntent alarmIntent = PendingIntent.getService(this, 0, ip, PendingIntent.FLAG_UPDATE_CURRENT);
         alarmMgr.set(AlarmManager.ELAPSED_REALTIME_WAKEUP,
-                SystemClock.elapsedRealtime() + 60000, alarmIntent);
+                SystemClock.elapsedRealtime() + POLLING_PERIOD, alarmIntent);
     }
 
     /*This Could be setup to fire on a transition, instead of a poll*/
     private void monitor()
     {
 
+        if (ContextCompat.checkSelfPermission(this, ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED)
+               {   // Permission is not granted
+                   // Should we show an explanation?
+                    if (ActivityCompat.shouldShowRequestPermissionRationale(MainApplication.getAppActivity(),
+                            ACCESS_FINE_LOCATION)) {
+                        Intent i = new Intent(this, RequestLocationPermission.class);
+                        startActivity(i);
 
-// Call findCurrentPlace and handle the response (first check that the user has granted permission).
-        if (ContextCompat.checkSelfPermission(this, ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED)
-        {
+                    } else {
+                        // No explanation needed; request the permission
+                        ActivityCompat.requestPermissions(MainApplication.getAppActivity(),
+                                new String[]{ACCESS_FINE_LOCATION},
+                                MY_PERMISSIONS_REQUEST_READ_CONTACTS);
+
+                    }
+                } else {
             Awareness.SnapshotApi.getTimeIntervals(ContextualTriggersService.getGoogleAPIClient())
                     .setResultCallback(new ResultCallback<TimeIntervalsResult>() {
                         @Override
