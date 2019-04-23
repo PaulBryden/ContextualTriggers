@@ -250,7 +250,7 @@ public class ContextualTriggersService extends Service
         Intent pIntent = new Intent(this, ToastBroadcastReceiver.class);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0, pIntent, PendingIntent.FLAG_CANCEL_CURRENT);
         NotificationCompat.Builder builder = new NotificationCompat.Builder(MainApplication.getAppContext(), "cts")
-                .setSmallIcon(R.drawable.powered_by_google_dark)
+                .setSmallIcon(R.drawable.round_directions_walk_24)
                 .setContentTitle("Contextual Triggers Framework")
                 .setContentText("Contextual Triggers Service Running")
                 .setContentIntent(pendingIntent);
