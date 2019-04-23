@@ -14,12 +14,10 @@ import com.google.android.gms.location.ActivityRecognitionResult;
 import com.google.android.gms.location.DetectedActivity;
 
 import uk.ac.strath.contextualtriggers.ContextualTriggersService;
-import uk.ac.strath.contextualtriggers.Logger;
 import uk.ac.strath.contextualtriggers.data.ActivityData;
 //import static com.google.android.gms.internal.zzs.TAG;
 
 public class ActivityDataManager extends AlarmDataManager<ActivityData> {
-    Logger logger;
     private final IBinder binder = new ActivityDataManager.LocalBinder();
 
     @Nullable
@@ -41,7 +39,6 @@ public class ActivityDataManager extends AlarmDataManager<ActivityData> {
     }
 
     private void setup() {
-        logger = Logger.getInstance();
     }
 
     @Override

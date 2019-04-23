@@ -6,12 +6,10 @@ import android.os.IBinder;
 import android.support.annotation.Nullable;
 import android.util.Log;
 
-import uk.ac.strath.contextualtriggers.Logger;
 import uk.ac.strath.contextualtriggers.data.StepData;
 
 public class SimulatedStepDataManager extends AlarmDataManager<StepData> {
 
-    Logger logger;
     StepData stepData;
     private final IBinder binder = new LocalBinder();
 
@@ -38,7 +36,6 @@ public class SimulatedStepDataManager extends AlarmDataManager<StepData> {
 
     private void setup() {
         stepData = new StepData();
-        logger = Logger.getInstance();
     }
 
     @Override
@@ -51,7 +48,6 @@ public class SimulatedStepDataManager extends AlarmDataManager<StepData> {
 
     private void monitor(){
         stepData.steps += 100;
-        logger.log("Steps: " + stepData.steps + "\n");
         Log.d("SimulatedStepDataManage", "Starting");
         sendUpdate(stepData);
     }

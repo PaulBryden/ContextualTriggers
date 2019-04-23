@@ -9,14 +9,12 @@ import android.util.Log;
 
 import java.time.LocalDate;
 
-import uk.ac.strath.contextualtriggers.Logger;
 import uk.ac.strath.contextualtriggers.data.DayData;
 import uk.ac.strath.contextualtriggers.data.StepAndGoalData;
 import uk.ac.strath.contextualtriggers.intentReceivers.StepAndGoalIntentReceiver;
 
 public class ActualStepAndGoalDataManager extends DataManager<StepAndGoalData> {
 
-    Logger logger;
     StepAndGoalData stepGoalData;
     private StepAndGoalIntentReceiver receiver;
     private final IBinder binder = new LocalBinder();
@@ -50,7 +48,6 @@ public class ActualStepAndGoalDataManager extends DataManager<StepAndGoalData> {
 
     private void setup() {
         stepGoalData = new StepAndGoalData();
-        logger = Logger.getInstance();
     }
 
     @Override
@@ -64,8 +61,6 @@ public class ActualStepAndGoalDataManager extends DataManager<StepAndGoalData> {
         LocalDate today = LocalDate.now();
         DayData day = new DayData(intent.getIntExtra("steps", 0),intent.getIntExtra("goal", 0),today);
         stepGoalData.updateDay(day);
-        logger.log("Actual Steps: " + stepGoalData.getDay(today).steps + "\n");
-        logger.log("Actual Goal: " + stepGoalData.getDay(today).goal + "\n");
         Log.d("ActualStepAndGoalDataManager", "Starting");
         sendUpdate(stepGoalData);
     }

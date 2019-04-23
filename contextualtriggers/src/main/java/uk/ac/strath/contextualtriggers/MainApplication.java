@@ -15,7 +15,6 @@ public class MainApplication extends AppCompatActivity {
     private static AppCompatActivity mAppActivity;
     private static Context context;
     private Intent i;
-    Logger logger;
 
     // Trigger sunnyOotsideTrigger;
     public static Context getAppContext() {
@@ -64,8 +63,6 @@ public class MainApplication extends AppCompatActivity {
         setContentView(R.layout.scrollable_textview);
         TextView textView = findViewById(R.id.text_view);
         textView.setMovementMethod(new ScrollingMovementMethod());
-        logger = Logger.getInstance();
-        logger.setLogger(textView);
         Intent i = new Intent(this, ContextualTriggersService.class);
     }
 
