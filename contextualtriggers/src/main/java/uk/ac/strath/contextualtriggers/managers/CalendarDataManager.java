@@ -2,7 +2,6 @@ package uk.ac.strath.contextualtriggers.managers;
 
 import android.app.AlarmManager;
 import android.app.PendingIntent;
-import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -13,38 +12,26 @@ import android.os.Binder;
 import android.os.IBinder;
 import android.os.SystemClock;
 import android.provider.CalendarContract;
-import android.provider.ContactsContract;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
-
-import com.google.android.gms.awareness.Awareness;
-import com.google.android.gms.awareness.snapshot.DetectedActivityResult;
-import com.google.android.gms.awareness.snapshot.WeatherResult;
-import com.google.android.gms.awareness.state.Weather;
-import com.google.android.gms.common.api.ResultCallback;
-import com.google.android.gms.location.ActivityRecognitionResult;
-import com.google.android.gms.location.DetectedActivity;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
-import uk.ac.strath.contextualtriggers.ContextualTriggersService;
 import uk.ac.strath.contextualtriggers.Logger;
 import uk.ac.strath.contextualtriggers.MainApplication;
+import uk.ac.strath.contextualtriggers.data.EventData;
 import uk.ac.strath.contextualtriggers.data.CalendarData;
-import uk.ac.strath.contextualtriggers.data.ListCalendarData;
-import uk.ac.strath.contextualtriggers.data.WeatherData;
 
-import static android.Manifest.permission.ACCESS_FINE_LOCATION;
 import static android.Manifest.permission.READ_CALENDAR;
 //import static com.google.android.gms.internal.zzs.TAG;
 
-public class CalendarDataManager extends DataManager<ListCalendarData> implements IDataManager<ListCalendarData> {
+public class CalendarDataManager extends DataManager<CalendarData> implements IDataManager<CalendarData> {
+    private static final int POLLING_PERIOD = 30 * 60 * 1000; // 30 min
     Logger logger;
     private final IBinder binder = new CalendarDataManager.LocalBinder();
     int MY_PERMISSIONS_REQUEST_READ_CONTACTS;
@@ -100,7 +87,7 @@ public class CalendarDataManager extends DataManager<ListCalendarData> implement
         Intent ic = new Intent(this, CalendarDataManager.class);
         PendingIntent alarmIntent = PendingIntent.getService(this, 0, ic, PendingIntent.FLAG_UPDATE_CURRENT);
         alarmMgr.set(AlarmManager.ELAPSED_REALTIME_WAKEUP,
-                SystemClock.elapsedRealtime() + 5000,
+                SystemClock.elapsedRealtime() + POLLING_PERIOD,
                 alarmIntent);
     }
 
@@ -156,20 +143,20 @@ public class CalendarDataManager extends DataManager<ListCalendarData> implement
                     cursor.moveToNext();
 
                 }
-                List<CalendarData> cd = new ArrayList<>();
+                List<EventData> cd = new ArrayList<>();
                 for(int i = 0; i < nameOfEvent.size();i++){
                    // Log.d("CALENDAREVENT", nameOfEvent.get(i));
                   //  Log.d("CALENDARTIME", startDates.get(i));
                     SimpleDateFormat dateFormat = new SimpleDateFormat("DD/MM/yyyy hh:mm:ss a");
                     try {
-                        CalendarData c = new CalendarData(nameOfEvent.get(i), dateFormat.parse(startDates.get(i)));
+                        EventData c = new EventData(nameOfEvent.get(i), dateFormat.parse(startDates.get(i)));
                         cd.add(c);
                     } catch (ParseException e ){
                         Log.e("Calendar","Error parsing date in Calendar");
                     }
 
                 }
-                sendUpdate(new ListCalendarData(cd));
+                sendUpdate(new CalendarData(cd));
             }
         }
 
