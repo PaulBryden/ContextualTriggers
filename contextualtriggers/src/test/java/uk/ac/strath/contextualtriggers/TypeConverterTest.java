@@ -102,9 +102,16 @@ public class TypeConverterTest {
 
     @Test
     public void StepAndGoalTest(){
-        Data d = new StepAndGoalData();
+        StepAndGoalData d = new StepAndGoalData();
+        d.setup();
+
         String s = DataConverter.DataToString(d);
         Data d2 = DataConverter.StringToData(s);
+
+        System.out.println(d.getHistory());
+
+        System.out.println(((StepAndGoalData) d2).getHistory());
+
         assertEquals(StepAndGoalData.class, d2.getClass());
         assertEquals(true, d.equals(d2));
     }
