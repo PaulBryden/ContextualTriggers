@@ -7,4 +7,8 @@ public interface Condition {
      */
     boolean isSatisfied();
 
+    /**
+     * @return true iff condition should not be considered satisfied because data is too old.
+     */
+    boolean hasStaleData();
 }

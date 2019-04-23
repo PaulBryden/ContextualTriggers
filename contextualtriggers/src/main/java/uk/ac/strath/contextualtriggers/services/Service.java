@@ -1,6 +1,7 @@
 package uk.ac.strath.contextualtriggers.services;
 
 import uk.ac.strath.contextualtriggers.conditions.DataCondition;
+import uk.ac.strath.contextualtriggers.data.Data;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,7 +12,7 @@ import java.util.List;
  *
  * @param <T> The type of data passed to observers.
  */
-abstract class Service<T> {
+abstract class Service<T extends Data> {
 
     private List<DataCondition<T>> conditions;
 

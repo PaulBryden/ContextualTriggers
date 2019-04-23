@@ -1,6 +1,11 @@
 package uk.ac.strath.contextualtriggers.data;
 
-public class AbstractData
+public class AbstractData implements Data
 {
-    public double lastUpdateTime;
+    private long timestamp = System.currentTimeMillis();
+
+    @Override
+    public long getTimestamp() {
+        return timestamp;
+    }
 }

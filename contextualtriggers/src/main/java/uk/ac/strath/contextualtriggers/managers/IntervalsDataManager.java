@@ -34,12 +34,13 @@ import java.util.List;
 
 import uk.ac.strath.contextualtriggers.ContextualTriggersService;
 import uk.ac.strath.contextualtriggers.Logger;
+import uk.ac.strath.contextualtriggers.data.TimeOfDayData;
 import uk.ac.strath.contextualtriggers.data.WeatherData;
 
 import static android.Manifest.permission.ACCESS_FINE_LOCATION;
 import static com.android.volley.VolleyLog.TAG;
 
-public class IntervalsDataManager extends DataManager<int[]> implements IDataManager<int[]> {
+public class IntervalsDataManager extends DataManager<TimeOfDayData> implements IDataManager<TimeOfDayData> {
         Logger logger;
 private final IBinder binder = new IntervalsDataManager.LocalBinder();
 
@@ -103,7 +104,7 @@ public IntervalsDataManager()
                             //parse and display current weather status
                             TimeIntervals intervals = intervalResult.getTimeIntervals();
                             Log.d("IntervalsDM", intervals.toString());
-                            sendUpdate(intervals.getTimeIntervals());
+                            sendUpdate(new TimeOfDayData(intervals.getTimeIntervals()));
                         }
                     });
         }

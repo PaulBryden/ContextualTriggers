@@ -3,6 +3,7 @@ package uk.ac.strath.contextualtriggers.data;
 import java.util.Date;
 
 public class CalendarData extends AbstractData
+
 {
     public String name;
     public Date time;
@@ -12,6 +13,4 @@ public class CalendarData extends AbstractData
         this.name = name;
         this.time = time;
     }
-
-
 }

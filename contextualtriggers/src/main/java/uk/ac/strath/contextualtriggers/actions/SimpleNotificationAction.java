@@ -17,8 +17,6 @@ import uk.ac.strath.contextualtriggers.R;
 import uk.ac.strath.contextualtriggers.conditions.FrequentNotificationPreventionCondition;
 import uk.ac.strath.contextualtriggers.managers.NotificationDataManager;
 
-//import static android.support.v4.content.ContextCompat.getSystemService;
-
 public class SimpleNotificationAction implements Action {
 
     private static final String CHANNEL_ID = "contextualtriggers";
@@ -33,8 +31,6 @@ public class SimpleNotificationAction implements Action {
         createNotificationChannel();
     }
 
-
-
     @Override
     public void execute() {
         Intent cs = new Intent(MainApplication.getAppContext(), NotificationDataManager.class);
@@ -44,7 +40,7 @@ public class SimpleNotificationAction implements Action {
         }
         logger.log("*** SENDING NOTIFICATION ***\n\"" + message + "\"");
         NotificationCompat.Builder builder = new NotificationCompat.Builder(MainApplication.getAppContext(), CHANNEL_ID)
-                .setSmallIcon(R.drawable.powered_by_google_dark)
+                .setSmallIcon(R.drawable.round_directions_walk_24)
                 .setContentTitle("Notification")
                 .setContentText(message)
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT);
@@ -54,6 +50,7 @@ public class SimpleNotificationAction implements Action {
         PendingIntent resultPendingIntent = PendingIntent.getActivity(MainApplication.getAppContext(), 0, resultIntent, PendingIntent.FLAG_UPDATE_CURRENT);
         builder.setContentIntent(resultPendingIntent);
 // notificationId is a unique int for each notification that you must define
+
         notificationManager.notify(0, builder.build());
     }
 

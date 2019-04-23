@@ -43,10 +43,10 @@ public class StepAndGoalRealCountCondition extends DataCondition<StepAndGoalData
             return false;
         }
         if (this.mode == LESS_THAN) {
-            return getData().getDay(today).steps < getData().getDay(today).goal;
+            return (getData().getDay(today).steps < getData().getDay(today).goal);
         }
         if (this.mode == GREATER_THAN) {
-            return  getData().getDay(today).steps > getData().getDay(today).goal;
+            return  (getData().getDay(today).steps > getData().getDay(today).goal);
         }
         return false;
     }

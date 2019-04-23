@@ -1,47 +1,38 @@
 package uk.ac.strath.contextualtriggers.conditions;
 
-import com.google.android.gms.awareness.state.TimeIntervals;
-import com.google.android.gms.awareness.state.Weather;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
-import uk.ac.strath.contextualtriggers.data.WeatherData;
+import uk.ac.strath.contextualtriggers.data.TimeOfDayData;
 import uk.ac.strath.contextualtriggers.managers.IDataManager;
 
 /**
  * Condition satisfied if current weather matches a target value. Use constants defined in
  * WeatherService to represent weather states.
  */
-public class AcceptableTimeCondition extends DataCondition<int[]> {
+public class AcceptableTimeCondition extends DataCondition<TimeOfDayData> {
 
-    private int[] targetIntervals;
+    private TimeOfDayData targetIntervals;
 
-    public AcceptableTimeCondition(int[] targetIntervals, IDataManager<int[]> dataManager)
+    public AcceptableTimeCondition(TimeOfDayData targetIntervals, IDataManager<TimeOfDayData> dataManager)
     {
-        super(targetIntervals, dataManager);
+        super(dataManager, 60);
         this.targetIntervals = targetIntervals;
     }
 
     @Override
     public boolean isSatisfied()
-    {   boolean equivalent=true;
-        System.out.println(Arrays.toString(getData()));
-        System.out.println(Arrays.toString(targetIntervals));
-        ArrayList<Integer> currentList = new ArrayList<Integer>();
-        ArrayList<Integer> targetList = new ArrayList<Integer>();
-        for (int i : getData())
+    {
+        for (int i : getData().intervals)
         {
-            currentList.add(i);
+            for(int x : targetIntervals.intervals)
+            {
+                if (x==i)
+                {
+                    return true;
+                }
+            }
         }
-        for (int i : targetIntervals)
-        {
-            targetList.add(i);
-        }
-
-        return Collections.indexOfSubList(currentList,targetList)!=-1;
+        return false;
     }
 
 }

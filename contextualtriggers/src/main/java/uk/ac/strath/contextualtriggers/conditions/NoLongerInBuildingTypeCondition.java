@@ -1,35 +1,36 @@
 package uk.ac.strath.contextualtriggers.conditions;
 
-import com.google.android.gms.location.places.Place;
+import com.google.android.libraries.places.api.model.Place;
 import com.google.android.libraries.places.api.model.PlaceLikelihood;
 
-import java.util.List;
-
+import uk.ac.strath.contextualtriggers.data.PlacesData;
 import uk.ac.strath.contextualtriggers.managers.IDataManager;
 
 /**
  * Condition satisfied if current weather matches a target value. Use constants defined in
  * WeatherService to represent weather states.
  */
-public class NoLongerInBuildingTypeCondition extends DataCondition<List<PlaceLikelihood>> {
-    int placeType;
+public class NoLongerInBuildingTypeCondition extends DataCondition<PlacesData> {
+    Place.Type targetType;
     boolean isInPlace;
     boolean justLeftPlace;
     long lastInPlace;
-    public NoLongerInBuildingTypeCondition(int PlaceType, IDataManager<List<PlaceLikelihood>> dataManager) {
-        super(dataManager);
 
+    public NoLongerInBuildingTypeCondition(Place.Type targetType, IDataManager<PlacesData> dataManager) {
+        super(dataManager, 30);
+        this.targetType = targetType;
     }
+
     @Override
-    public void notifyUpdate(List<PlaceLikelihood> data)
+    public void notifyUpdate(PlacesData data)
     {
         // Override since an update always means condition isn't satisfied,
         // so no need to notify the Trigger of the change.
-       for(PlaceLikelihood p : data)
+       for(PlaceLikelihood p : data.places)
        {
-           for(Enum type : p.getPlace().getTypes())
+           for(Place.Type type : p.getPlace().getTypes())
            {
-               if(type.equals(placeType) && p.getLikelihood()>0.75)
+               if(type == targetType && p.getLikelihood()>0.75)
                {
                    isInPlace =true;
                }
@@ -40,11 +41,11 @@ public class NoLongerInBuildingTypeCondition extends DataCondition<List<PlaceLik
 
     @Override
     public boolean isSatisfied()
-    {   for(PlaceLikelihood p : getData())
+    {   for(PlaceLikelihood p : getData().places)
         {
-            for(Enum type : p.getPlace().getTypes())
+            for(Place.Type type : p.getPlace().getTypes())
             {
-                if(type.equals(placeType) && p.getLikelihood()<0.35)
+                if(type == targetType && p.getLikelihood()<0.35)
                 {
                     if(isInPlace)
                     {
