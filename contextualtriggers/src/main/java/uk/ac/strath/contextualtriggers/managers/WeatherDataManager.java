@@ -87,7 +87,7 @@ public class WeatherDataManager extends DataManager<WeatherData> implements IDat
 
         private void monitor() {
             if (ContextCompat.checkSelfPermission(this, ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED)
-            {  
+            {
                 if (ActivityCompat.shouldShowRequestPermissionRationale(MainApplication.getAppActivity(),
                         ACCESS_FINE_LOCATION)) {
                     Intent i = new Intent(this, RequestLocationPermission.class);
