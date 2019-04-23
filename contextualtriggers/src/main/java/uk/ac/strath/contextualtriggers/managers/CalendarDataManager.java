@@ -20,15 +20,13 @@ import java.util.List;
 
 import uk.ac.strath.contextualtriggers.Logger;
 import uk.ac.strath.contextualtriggers.MainApplication;
-import uk.ac.strath.contextualtriggers.RequestCalendarPermission;
-import uk.ac.strath.contextualtriggers.RequestLocationPermission;
+import uk.ac.strath.contextualtriggers.data.EventData;
 import uk.ac.strath.contextualtriggers.data.CalendarData;
-import uk.ac.strath.contextualtriggers.data.ListCalendarData;
-
+import uk.ac.strath.contextualtriggers.RequestCalendarPermission;
 import static android.Manifest.permission.READ_CALENDAR;
 //import static com.google.android.gms.internal.zzs.TAG;
 
-public class CalendarDataManager extends AlarmDataManager<ListCalendarData> {
+public class CalendarDataManager extends AlarmDataManager<CalendarData> {
     Logger logger;
     private final IBinder binder = new CalendarDataManager.LocalBinder();
     int MY_PERMISSIONS_REQUEST_READ_CONTACTS;
@@ -139,9 +137,21 @@ public class CalendarDataManager extends AlarmDataManager<ListCalendarData> {
                 } catch (ParseException e) {
                     Log.e("Calendar", "Error parsing date in Calendar");
                 }
+                List<EventData> cd = new ArrayList<>();
+                for(int i = 0; i < nameOfEvent.size();i++){
+                   // Log.d("CALENDAREVENT", nameOfEvent.get(i));
+                  //  Log.d("CALENDARTIME", startDates.get(i));
+                    SimpleDateFormat dateFormat = new SimpleDateFormat("DD/MM/yyyy hh:mm:ss a");
+                    try {
+                        EventData c = new EventData(nameOfEvent.get(i), dateFormat.parse(startDates.get(i)));
+                        cd.add(c);
+                    } catch (ParseException e ){
+                        Log.e("Calendar","Error parsing date in Calendar");
+                    }
 
+                }
+                sendUpdate(new CalendarData(cd));
             }
-            sendUpdate(new ListCalendarData(cd));
         }
     }
 
