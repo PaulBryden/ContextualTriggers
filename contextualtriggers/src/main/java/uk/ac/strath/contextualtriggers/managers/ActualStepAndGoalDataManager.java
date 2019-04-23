@@ -7,19 +7,14 @@ import android.os.IBinder;
 import android.support.annotation.Nullable;
 import android.util.Log;
 
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.util.Calendar;
-import java.util.Date;
 
 import uk.ac.strath.contextualtriggers.Logger;
 import uk.ac.strath.contextualtriggers.data.DayData;
-import uk.ac.strath.contextualtriggers.intentReceivers.StepAndGoalIntentReceiver;
 import uk.ac.strath.contextualtriggers.data.StepAndGoalData;
+import uk.ac.strath.contextualtriggers.intentReceivers.StepAndGoalIntentReceiver;
 
-public class ActualStepAndGoalDataManager extends DataManager<StepAndGoalData> implements IDataManager<StepAndGoalData> {
+public class ActualStepAndGoalDataManager extends DataManager<StepAndGoalData> {
 
     Logger logger;
     StepAndGoalData stepGoalData;
