@@ -852,6 +852,13 @@ public class ConditionUnitTest
         System.out.println("InBuildingConditionUnitTest");
     }
 
+    @Test
+    public void MeetingConditionTest() {
+        class MockCalendarDataManager {
+            // TODO implement mock calendar data mananger
+        }
+        // TODO implement meeting condition test
+    }
 
     @Test
     public void NoLongerInBuildingTypeConditionUnitTest()
