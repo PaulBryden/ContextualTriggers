@@ -5,9 +5,11 @@ import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
-import android.content.BroadcastReceiver;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.ServiceConnection;
+import android.content.BroadcastReceiver;
 import android.content.IntentFilter;
 import android.os.Build;
 import android.os.Bundle;
@@ -34,28 +36,63 @@ import uk.ac.strath.contextualtriggers.managers.NotificationDataManager;
 import uk.ac.strath.contextualtriggers.managers.PlacesDataManager;
 import uk.ac.strath.contextualtriggers.managers.SimulatedStepDataManager;
 import uk.ac.strath.contextualtriggers.managers.WeatherDataManager;
-import uk.ac.strath.contextualtriggers.services.AbstractServiceConnection;
 import uk.ac.strath.contextualtriggers.triggers.DefaultTriggers;
 import uk.ac.strath.contextualtriggers.triggers.ITrigger;
 
 public class ContextualTriggersService extends Service
 {
 
+    private class BaseServiceConnection implements ServiceConnection {
+
+        private ContextualTriggersService mainService;
+
+        private IBinder dataManager;
+        private boolean connected;
+
+        public BaseServiceConnection(ContextualTriggersService mainService) {
+            this.mainService = mainService;
+            connected = false;
+        }
+
+        @Override
+        public void onServiceConnected(ComponentName name, IBinder service) {
+            Log.d("AbstractService", "Are we here?");
+            dataManager = service;
+            connected = true;
+            mainService.notifyDataManagerOnline();
+        }
+
+        @Override
+        public void onServiceDisconnected(ComponentName name) {
+            connected = false;
+        }
+
+        public boolean isConnected() {
+            return connected;
+        }
+
+        public IBinder getDataManager(){
+            return dataManager;
+        }
+    }
+
     private static GoogleApiClient mGoogleApiClient;
     private static List<ITrigger> triggerList = new ArrayList<>();
     private static List<IBinder> serviceList = new ArrayList<>();
 
-    private AbstractServiceConnection stepServiceConnection;
-    private AbstractServiceConnection weatherServiceConnection;
-    private AbstractServiceConnection activityServiceConnection;
-    private AbstractServiceConnection placesServiceConnection;
-    private AbstractServiceConnection actualStepsServiceConnection;
-    private AbstractServiceConnection calendarServiceConnection;
-    private AbstractServiceConnection notifyServiceConnection;
-    private AbstractServiceConnection batteryServiceConnection;
-    private AbstractServiceConnection altitudeServiceConnection;
-    private AbstractServiceConnection intervalServiceConnection;
+    private BaseServiceConnection stepServiceConnection;
+    private BaseServiceConnection weatherServiceConnection;
+    private BaseServiceConnection activityServiceConnection;
+    private BaseServiceConnection placesServiceConnection;
+    private BaseServiceConnection actualStepsServiceConnection;
+    private BaseServiceConnection calendarServiceConnection;
+    private BaseServiceConnection notifyServiceConnection;
+    private BaseServiceConnection batteryServiceConnection;
+    private BaseServiceConnection altitudeServiceConnection;
+    private BaseServiceConnection intervalServiceConnection;
+
     private ToastBroadcastReceiver receiverToast;
+    
     public static GoogleApiClient getGoogleAPIClient()
     {
         return mGoogleApiClient;
@@ -123,46 +160,46 @@ public class ContextualTriggersService extends Service
 
     private void startDataManagers()
     {
-        intervalServiceConnection = new AbstractServiceConnection(this);
+        intervalServiceConnection = new BaseServiceConnection(this);
         Intent idm = new Intent(this, IntervalsDataManager.class);
         boolean b = bindService(idm, intervalServiceConnection, 0);
         startService(idm);
-        altitudeServiceConnection = new AbstractServiceConnection(this);
+        altitudeServiceConnection = new BaseServiceConnection(this);
         Intent adm = new Intent(this, AltitudeDataManager.class);
         b = bindService(adm, altitudeServiceConnection, 0);
         startService(adm);
-        batteryServiceConnection = new AbstractServiceConnection(this); //THIS IS REQUIRED.
+        batteryServiceConnection = new BaseServiceConnection(this); //THIS IS REQUIRED.
         Intent bdm = new Intent(this, BatteryDataManager.class);
         b = bindService(bdm, batteryServiceConnection, 0);
         startService(bdm);
-        notifyServiceConnection = new AbstractServiceConnection(this);
+        notifyServiceConnection = new BaseServiceConnection(this);
         Intent cns = new Intent(this, NotificationDataManager.class);
         b = bindService(cns, notifyServiceConnection, 0);
         startService(cns);
-        calendarServiceConnection = new AbstractServiceConnection(this);
+        calendarServiceConnection = new BaseServiceConnection(this);
         Intent cs = new Intent(this, CalendarDataManager.class);
         b = bindService(cs, calendarServiceConnection, 0);
         startService(cs);
-        actualStepsServiceConnection = new AbstractServiceConnection(this);
+        actualStepsServiceConnection = new BaseServiceConnection(this);
         Intent ias = new Intent(this, ActualStepAndGoalDataManager.class);
         b = bindService(ias, actualStepsServiceConnection, 0);
         startService(ias);
-        placesServiceConnection = new AbstractServiceConnection(this);
+        placesServiceConnection = new BaseServiceConnection(this);
         Intent ip = new Intent(this, PlacesDataManager.class);
         b = bindService(ip, placesServiceConnection, 0);
         startService(ip);
         Log.d("BindingActervice", Boolean.toString(b));
-        activityServiceConnection = new AbstractServiceConnection(this);
+        activityServiceConnection = new BaseServiceConnection(this);
         Intent ia = new Intent(this, ActivityDataManager.class);
         b = bindService(ia, activityServiceConnection, 0);
         startService(ia);
         Log.d("BindingActervice", Boolean.toString(b));
-        weatherServiceConnection = new AbstractServiceConnection(this);
+        weatherServiceConnection = new BaseServiceConnection(this);
         Intent iw = new Intent(this, WeatherDataManager.class);
         b = bindService(iw, weatherServiceConnection, 0);
         startService(iw);
         Log.d("BindingWeatherService", Boolean.toString(b));
-        stepServiceConnection = new AbstractServiceConnection(this);
+        stepServiceConnection = new BaseServiceConnection(this);
         Intent is = new Intent(this, SimulatedStepDataManager.class);
         b = bindService(is, stepServiceConnection, 0);
         startService(is);

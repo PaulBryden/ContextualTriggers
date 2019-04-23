@@ -1,16 +1,17 @@
 package uk.ac.strath.contextualtriggers.data;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 public class DayData
 {
-    public DayData(int steps, int goal, Date date)
-    {
-        this.steps=steps;
-        this.goal=goal;
-        this.date=date;
-    }
     public int steps;
     public int goal;
-    public Date date;
+    public LocalDate date;
+
+    public DayData(int steps, int goal, LocalDate date)
+    {
+        this.steps = steps;
+        this.goal = goal;
+        this.date = date;
+    }
 }

@@ -28,7 +28,7 @@ import uk.ac.strath.contextualtriggers.managers.SimulatedStepDataManager;
 import uk.ac.strath.contextualtriggers.managers.WeatherDataManager;
 
 public class DefaultTriggers {
-    public static ITrigger createWeatherWithNotifyLimitTriggerReal(IBinder stepBinder, IBinder weatherBinder, IBinder notifyBinder, Context t) throws ClassCastException{
+    public static ITrigger createWeatherWithNotifyLimitTriggerReal(IBinder stepBinder, IBinder weatherBinder, IBinder notifyBinder, Context t) {
         IDataManager<StepAndGoalData> stepDataManager;
         IDataManager<VoidData> notificationDataManager;
         Log.d("Create Weather Trigger", stepBinder.toString());
@@ -52,7 +52,8 @@ public class DefaultTriggers {
         builder.setAction(a);
         return builder.build();
     }
-    public static ITrigger createWeatherWithNotifyLimitTrigger(IBinder stepBinder, IBinder weatherBinder, IBinder notifyBinder, Context t) throws ClassCastException{
+
+    public static ITrigger createWeatherWithNotifyLimitTrigger(IBinder stepBinder, IBinder weatherBinder, IBinder notifyBinder, Context t) {
         IDataManager<StepData> stepDataManager;
         IDataManager<VoidData> notificationDataManager;
         Log.d("Create Weather Trigger", stepBinder.toString());
@@ -79,20 +80,19 @@ public class DefaultTriggers {
     }
     //This is a POINTLESS TRIGGER DO NOT USE THIS
     //should probably throw an exception on casting rather than deal with it here
-    @SuppressWarnings("unchecked")
-    public static ITrigger createStepMonitorTrigger(IBinder binder) throws ClassCastException{
-        IDataManager<StepData> dataManager;
-            dataManager = ((ActualStepAndGoalDataManager.LocalBinder) binder).getInstance();
-            Trigger.Builder builder = new Trigger.Builder();
-            Condition c = new StepCountCondition(StepCountCondition.LESS_THAN, 10000, dataManager);
-            Action a = new SimpleNotificationAction("Go for a walk ya lazy. It's even sunny ootside!");
-            builder.setCondition(c);
-            builder.setAction(a);
-            return builder.build();
+    public static ITrigger createStepMonitorTrigger(IBinder binder) {
+        // ActualStepAndGoalDataManager provides wrong type of data!! Either add another
+        // data manager, or completely rewrite StepCountCondition.
+        IDataManager<StepData> dataManager = ((SimulatedStepDataManager.LocalBinder) binder).getInstance();
+        Trigger.Builder builder = new Trigger.Builder();
+        Condition c = new StepCountCondition(StepCountCondition.LESS_THAN, 10000, dataManager);
+        Action a = new SimpleNotificationAction("Go for a walk ya lazy. It's even sunny ootside!");
+        builder.setCondition(c);
+        builder.setAction(a);
+        return builder.build();
     }
 
-    @SuppressWarnings("unchecked")
-    public static ITrigger createWeatherTrigger(IBinder stepBinder, IBinder weatherBinder) throws ClassCastException{
+    public static ITrigger createWeatherTrigger(IBinder stepBinder, IBinder weatherBinder) {
         IDataManager<StepData> stepDataManager;
         Log.d("Create Weather Trigger", stepBinder.toString());
         IDataManager<WeatherData> weatherDataManager;
@@ -114,8 +114,7 @@ public class DefaultTriggers {
 
     }
 
-    @SuppressWarnings("unchecked")
-    public static ITrigger createWalkIdleTrigger(IBinder stepBinder) throws ClassCastException{
+    public static ITrigger createWalkIdleTrigger(IBinder stepBinder) {
         IDataManager<StepData> stepDataManager;
         Log.d("Create Weather Trigger", stepBinder.toString());
 

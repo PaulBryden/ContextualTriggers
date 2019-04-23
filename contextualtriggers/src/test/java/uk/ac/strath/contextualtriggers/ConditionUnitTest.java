@@ -22,6 +22,7 @@ import org.junit.Test;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -1134,17 +1135,7 @@ public class ConditionUnitTest
                 else
                 {
                     StepAndGoalData fulfilled = new StepAndGoalData();
-                    DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
-                    Calendar cal0 = Calendar.getInstance();
-                    Date today = cal0.getTime();
-                    try
-                    {
-                        today = formatter.parse(formatter.format(today));
-                    }
-                    catch (ParseException e)
-                    {
-                        e.printStackTrace();
-                    }
+                    LocalDate today = LocalDate.now();
                     DayData day = fulfilled.getDay(today);
                     day.steps=100000;
                     fulfilled.updateDay(day);
