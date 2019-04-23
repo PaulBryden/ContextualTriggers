@@ -1,5 +1,6 @@
 package uk.ac.strath.contextualtriggers.conditions;
 
+import uk.ac.strath.contextualtriggers.exceptions.TriggerNotConnectedException;
 import uk.ac.strath.contextualtriggers.triggers.ITrigger;
 
 /**
@@ -13,13 +14,13 @@ public abstract class AbstractCondition implements Condition {
         this.trigger = trigger;
     }
 
-    ITrigger getTrigger() {
+    ITrigger getTrigger() throws TriggerNotConnectedException{
         if (trigger!=null)
         {
             return trigger;
         }else
         {
-            throw new NullPointerException();
+            throw new TriggerNotConnectedException();
         }
     }
 }
