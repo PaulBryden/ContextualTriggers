@@ -8,10 +8,13 @@ import android.support.annotation.Nullable;
 import android.util.Log;
 
 import com.google.android.gms.awareness.Awareness;
+import com.google.android.gms.awareness.snapshot.DetectedActivityResponse;
 import com.google.android.gms.awareness.snapshot.DetectedActivityResult;
 import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.location.ActivityRecognitionResult;
 import com.google.android.gms.location.DetectedActivity;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 
 import uk.ac.strath.contextualtriggers.ContextualTriggersService;
 import uk.ac.strath.contextualtriggers.data.ActivityData;
@@ -52,20 +55,20 @@ public class ActivityDataManager extends AlarmDataManager<ActivityData> {
     /*This Could be setup to fire on a transition, instead of a poll*/
     private void monitor() {
         // Permission has already been granted
-        Awareness.SnapshotApi.getDetectedActivity(ContextualTriggersService.getGoogleAPIClient())
-                .setResultCallback(new ResultCallback<DetectedActivityResult>() {
-                    @Override
-                    public void onResult(@NonNull DetectedActivityResult detectedActivityResult) {
-                        if (!detectedActivityResult.getStatus().isSuccess()) {
-                            Log.d("ActivityDataManager", "Could not get the current activity.");
-                            return;
-                        }
-                        ActivityRecognitionResult ar = detectedActivityResult.getActivityRecognitionResult();
-                        DetectedActivity probableActivity = ar.getMostProbableActivity();
-                        Log.d("ActivityDataManager", probableActivity.toString());
-                        sendUpdate(new ActivityData(probableActivity));
-                    }
-                });
+        Awareness.getSnapshotClient(getApplicationContext()).getDetectedActivity().addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                // TODO log
+            }
+        }).addOnSuccessListener(new OnSuccessListener<DetectedActivityResponse>() {
+            @Override
+            public void onSuccess(DetectedActivityResponse detectedActivityResponse) {
+                ActivityRecognitionResult ar = detectedActivityResponse.getActivityRecognitionResult();
+                DetectedActivity probableActivity = ar.getMostProbableActivity();
+                Log.d("ActivityDataManager", probableActivity.toString());
+                sendUpdate(new ActivityData(probableActivity));
+            }
+        });
     }
 
 }

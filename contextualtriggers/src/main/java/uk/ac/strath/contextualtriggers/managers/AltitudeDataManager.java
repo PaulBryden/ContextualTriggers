@@ -12,8 +12,11 @@ import android.support.v4.content.ContextCompat;
 import android.util.Log;
 
 import com.google.android.gms.awareness.Awareness;
+import com.google.android.gms.awareness.snapshot.LocationResponse;
 import com.google.android.gms.awareness.snapshot.LocationResult;
 import com.google.android.gms.common.api.ResultCallback;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 
 import uk.ac.strath.contextualtriggers.ContextualTriggersService;
 import uk.ac.strath.contextualtriggers.MainApplication;
@@ -90,20 +93,20 @@ public class AltitudeDataManager extends AlarmDataManager<AltitudeData> {
             // try {
             // Permission has already been granted
             Log.d("ALT", "Accepted check perm");
-            Awareness.SnapshotApi.getLocation(ContextualTriggersService.getGoogleAPIClient())
-                    .setResultCallback(new ResultCallback<LocationResult>() {
-                        @Override
-                        public void onResult(@NonNull LocationResult locationResult) {
-                            if (locationResult.getStatus().isSuccess()) {
-                                Location location = locationResult.getLocation();
-                                altData.altitude = location.getAltitude();
-                                Log.d("AltitudeDataManager", "Altitude:" + altData.altitude);
-                                sendUpdate(altData);
-                            } else {
-                                Log.d("altitudeDataManager", "Failed " + locationResult.getStatus().toString());
-                            }
-                        }
-                    });
+            Awareness.getSnapshotClient(getApplicationContext()).getLocation().addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    // TODO log
+                }
+            }).addOnSuccessListener(new OnSuccessListener<LocationResponse>() {
+                @Override
+                public void onSuccess(LocationResponse locationResponse) {
+                    Location location = locationResponse.getLocation();
+                    altData.altitude = location.getAltitude();
+                    Log.d("AltitudeDataManager", "Altitude:" + altData.altitude);
+                    sendUpdate(altData);
+                }
+            });
         }
     }
 }
