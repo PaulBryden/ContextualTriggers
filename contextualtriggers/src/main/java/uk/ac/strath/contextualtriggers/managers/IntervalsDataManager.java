@@ -43,7 +43,7 @@ import static com.android.volley.VolleyLog.TAG;
 public class IntervalsDataManager extends DataManager<TimeOfDayData> implements IDataManager<TimeOfDayData> {
         Logger logger;
 private final IBinder binder = new IntervalsDataManager.LocalBinder();
-
+private final int POLLING_PERIOD = 60000;
 
     @Nullable
 @Override
@@ -80,7 +80,7 @@ public IntervalsDataManager()
         Intent ip = new Intent(this, IntervalsDataManager.class);
         PendingIntent alarmIntent = PendingIntent.getService(this, 0, ip, PendingIntent.FLAG_UPDATE_CURRENT);
         alarmMgr.set(AlarmManager.ELAPSED_REALTIME_WAKEUP,
-                SystemClock.elapsedRealtime() + 60000, alarmIntent);
+                SystemClock.elapsedRealtime() + POLLING_PERIOD, alarmIntent);
     }
 
     /*This Could be setup to fire on a transition, instead of a poll*/

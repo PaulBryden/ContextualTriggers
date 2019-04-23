@@ -32,6 +32,8 @@ public class WeatherDataManager extends DataManager<WeatherData> implements IDat
 
     private final IBinder binder = new WeatherDataManager.LocalBinder();
 
+    private final int POLLING_PERIOD = 30000;
+
 
 
     @Nullable
@@ -68,7 +70,7 @@ public class WeatherDataManager extends DataManager<WeatherData> implements IDat
             Intent iw = new Intent(this, WeatherDataManager.class);
             PendingIntent alarmIntent = PendingIntent.getService(this, 0, iw, PendingIntent.FLAG_UPDATE_CURRENT);
             alarmMgr.set(AlarmManager.ELAPSED_REALTIME_WAKEUP,
-                    SystemClock.elapsedRealtime() + 30000, alarmIntent);
+                    SystemClock.elapsedRealtime() + POLLING_PERIOD, alarmIntent);
         }
 
         private void monitor() {

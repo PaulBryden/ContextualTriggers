@@ -48,7 +48,7 @@ public class CalendarDataManager extends DataManager<ListCalendarData> implement
     Logger logger;
     private final IBinder binder = new CalendarDataManager.LocalBinder();
     int MY_PERMISSIONS_REQUEST_READ_CONTACTS;
-
+private final int POLLING_PERIOD = 5000;
     // Projection array. Creating indices for this array instead of doing
 // dynamic lookups improves performance.
     public static final String[] EVENT_PROJECTION = new String[] {
@@ -100,7 +100,7 @@ public class CalendarDataManager extends DataManager<ListCalendarData> implement
         Intent ic = new Intent(this, CalendarDataManager.class);
         PendingIntent alarmIntent = PendingIntent.getService(this, 0, ic, PendingIntent.FLAG_UPDATE_CURRENT);
         alarmMgr.set(AlarmManager.ELAPSED_REALTIME_WAKEUP,
-                SystemClock.elapsedRealtime() + 5000,
+                SystemClock.elapsedRealtime() + POLLING_PERIOD,
                 alarmIntent);
     }
 

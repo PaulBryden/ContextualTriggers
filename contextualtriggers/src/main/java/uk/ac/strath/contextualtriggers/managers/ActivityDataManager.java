@@ -34,6 +34,7 @@ import static android.Manifest.permission.ACCESS_FINE_LOCATION;
 public class ActivityDataManager extends DataManager<ActivityData> implements IDataManager<ActivityData> {
     Logger logger;
     private final IBinder binder = new ActivityDataManager.LocalBinder();
+    private final int POLLING_PERIOD = 5000;
 
 
     @Nullable
@@ -71,7 +72,7 @@ public class ActivityDataManager extends DataManager<ActivityData> implements ID
             Intent ia = new Intent(this, ActivityDataManager.class);
             PendingIntent alarmIntent = PendingIntent.getService(this, 0, ia, PendingIntent.FLAG_UPDATE_CURRENT);
             alarmMgr.set(AlarmManager.ELAPSED_REALTIME_WAKEUP,
-                    SystemClock.elapsedRealtime() + 5000,
+                    SystemClock.elapsedRealtime() + POLLING_PERIOD,
                     alarmIntent);
         }
 

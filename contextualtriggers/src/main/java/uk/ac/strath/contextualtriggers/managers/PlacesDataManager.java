@@ -27,6 +27,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import uk.ac.strath.contextualtriggers.Logger;
+import uk.ac.strath.contextualtriggers.R;
 import uk.ac.strath.contextualtriggers.data.PlacesData;
 
 import static android.Manifest.permission.ACCESS_FINE_LOCATION;
@@ -35,6 +36,7 @@ import static com.android.volley.VolleyLog.TAG;
 public class PlacesDataManager extends DataManager<PlacesData> implements IDataManager<PlacesData> {
         Logger logger;
 private final IBinder binder = new PlacesDataManager.LocalBinder();
+private final int POLLING_PERIOD = 60000;
     private int MY_PERMISSIONS_REQUEST_READ_CONTACTS;
 
 
@@ -73,14 +75,14 @@ public PlacesDataManager()
         Intent ip = new Intent(this, PlacesDataManager.class);
         PendingIntent alarmIntent = PendingIntent.getService(this, 0, ip, PendingIntent.FLAG_UPDATE_CURRENT);
         alarmMgr.set(AlarmManager.ELAPSED_REALTIME_WAKEUP,
-                SystemClock.elapsedRealtime() + 60000, alarmIntent);
+                SystemClock.elapsedRealtime() + POLLING_PERIOD, alarmIntent);
     }
 
     /*This Could be setup to fire on a transition, instead of a poll*/
     private void monitor()
     {
         PlacesClient placesClient;
-        Places.initialize(this,"AIzaSyAas2dlnnxWlZMfX5-rAHVz1fLGwiyD-Cw");
+        Places.initialize(this, getString(R.string.API_key));
         placesClient = Places.createClient(this);
         // Use fields to define the data types to return.
         List<Place.Field> placeFields = Arrays.asList(Place.Field.NAME,Place.Field.TYPES);
