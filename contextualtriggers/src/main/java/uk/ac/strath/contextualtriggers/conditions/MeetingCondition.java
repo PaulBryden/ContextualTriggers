@@ -24,7 +24,7 @@ public class MeetingCondition extends DataCondition<CalendarData> {
         c.add(Calendar.HOUR, 2);
         Date t2 = c.getTime();
         for (EventData event : getData().getEventsBetween(t, t2)) {
-            if (StringUtils.containsIgnoreCase(event.name, "meeting")) {
+            if (StringUtils.containsIgnoreCase(event.name, "meet")) {
                 name = event.name;
                 return true;
             }
