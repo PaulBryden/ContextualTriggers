@@ -44,7 +44,7 @@ public class WeatherDataManager extends DataManager<WeatherData> implements IDat
     }
 
     public class LocalBinder extends Binder {
-        public IDataManager getInstance() {
+        public IDataManager<WeatherData> getInstance() {
             return WeatherDataManager.this;
         }
     }

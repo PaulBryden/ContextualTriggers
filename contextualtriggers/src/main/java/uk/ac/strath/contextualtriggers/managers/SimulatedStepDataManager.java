@@ -21,7 +21,7 @@ public class SimulatedStepDataManager extends DataManager<StepData> implements I
     private final int POLLING_PERIOD = 5000;
 
     public class LocalBinder extends Binder {
-        public IDataManager getInstance() {
+        public IDataManager<StepData> getInstance() {
             return SimulatedStepDataManager.this;
         }
     }
