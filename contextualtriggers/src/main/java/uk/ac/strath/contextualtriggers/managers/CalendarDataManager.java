@@ -18,16 +18,15 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
-import uk.ac.strath.contextualtriggers.Logger;
 import uk.ac.strath.contextualtriggers.MainApplication;
-import uk.ac.strath.contextualtriggers.data.EventData;
-import uk.ac.strath.contextualtriggers.data.CalendarData;
 import uk.ac.strath.contextualtriggers.RequestCalendarPermission;
+import uk.ac.strath.contextualtriggers.data.CalendarData;
+import uk.ac.strath.contextualtriggers.data.EventData;
+
 import static android.Manifest.permission.READ_CALENDAR;
 //import static com.google.android.gms.internal.zzs.TAG;
 
 public class CalendarDataManager extends AlarmDataManager<CalendarData> {
-    Logger logger;
     private final IBinder binder = new CalendarDataManager.LocalBinder();
     int MY_PERMISSIONS_REQUEST_READ_CONTACTS;
     // Projection array. Creating indices for this array instead of doing
@@ -65,7 +64,6 @@ public class CalendarDataManager extends AlarmDataManager<CalendarData> {
     }
 
     private void setup() {
-        logger = Logger.getInstance();
     }
 
     @Override

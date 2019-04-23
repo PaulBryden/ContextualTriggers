@@ -8,7 +8,6 @@ import android.support.annotation.Nullable;
 import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 
-import uk.ac.strath.contextualtriggers.Logger;
 import uk.ac.strath.contextualtriggers.data.BatteryData;
 import uk.ac.strath.contextualtriggers.intentReceivers.BatteryLevelReceiver;
 
@@ -17,7 +16,6 @@ public class BatteryDataManager extends DataManager<BatteryData> {
     public static final String LPM_BOOL_NAME = "LPM";
     public static final String LPM_ACTION_NAME = "MANAGERS/LPM";
 
-    Logger logger;
     BatteryData batteryData;
     private BatteryLevelReceiver receiver;
     private final IBinder binder = new LocalBinder();
@@ -58,7 +56,6 @@ public class BatteryDataManager extends DataManager<BatteryData> {
 
     private void setup() {
         batteryData = new BatteryData();
-        logger = Logger.getInstance();
     }
 
     @Override

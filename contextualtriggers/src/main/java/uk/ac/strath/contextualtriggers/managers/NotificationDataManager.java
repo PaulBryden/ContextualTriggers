@@ -6,12 +6,10 @@ import android.os.IBinder;
 import android.support.annotation.Nullable;
 import android.util.Log;
 
-import uk.ac.strath.contextualtriggers.Logger;
 import uk.ac.strath.contextualtriggers.data.VoidData;
 
 public class NotificationDataManager extends DataManager<VoidData> {
 
-    Logger logger;
     Integer goal;
     private final IBinder binder = new LocalBinder();
 
@@ -37,7 +35,6 @@ public class NotificationDataManager extends DataManager<VoidData> {
 
     private void setup() {
         goal = 10000;
-        logger = Logger.getInstance();
     }
 
     @Override

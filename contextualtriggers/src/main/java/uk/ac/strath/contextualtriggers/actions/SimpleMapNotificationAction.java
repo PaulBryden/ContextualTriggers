@@ -20,7 +20,6 @@ import com.google.android.gms.awareness.snapshot.LocationResult;
 import com.google.android.gms.common.api.ResultCallback;
 
 import uk.ac.strath.contextualtriggers.ContextualTriggersService;
-import uk.ac.strath.contextualtriggers.Logger;
 import uk.ac.strath.contextualtriggers.MainApplication;
 import uk.ac.strath.contextualtriggers.R;
 import uk.ac.strath.contextualtriggers.conditions.FrequentNotificationPreventionCondition;
@@ -32,13 +31,11 @@ public class SimpleMapNotificationAction implements Action {
 
     private static final String CHANNEL_ID = "contextualtriggers";
     private String message;
-    private Logger logger;
     private FrequentNotificationPreventionCondition notifyCondition;
     private int MY_PERMISSIONS_REQUEST_READ_CONTACTS;
 
     public SimpleMapNotificationAction(String message) {
         this.message = message;
-        logger = Logger.getInstance();
         createNotificationChannel();
     }
 
@@ -77,7 +74,6 @@ public class SimpleMapNotificationAction implements Action {
                                     Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
                                     mapIntent.setPackage("com.google.android.apps.maps");
                                     PendingIntent pIntent = PendingIntent.getActivity(MainApplication.getAppContext(), 0, mapIntent, 0);
-                                    logger.log("*** SENDING NOTIFICATION ***\n\"" + message + "\"");
                                     NotificationCompat.Builder builder = new NotificationCompat.Builder(MainApplication.getAppContext(), CHANNEL_ID)
                                             .setSmallIcon(R.drawable.round_directions_walk_24)
                                             .setContentTitle("Notification")

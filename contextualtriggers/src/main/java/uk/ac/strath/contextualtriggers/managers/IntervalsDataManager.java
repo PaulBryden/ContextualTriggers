@@ -16,7 +16,6 @@ import com.google.android.gms.awareness.state.TimeIntervals;
 import com.google.android.gms.common.api.ResultCallback;
 
 import uk.ac.strath.contextualtriggers.ContextualTriggersService;
-import uk.ac.strath.contextualtriggers.Logger;
 import uk.ac.strath.contextualtriggers.MainApplication;
 import uk.ac.strath.contextualtriggers.RequestLocationPermission;
 import uk.ac.strath.contextualtriggers.data.TimeOfDayData;
@@ -24,7 +23,6 @@ import uk.ac.strath.contextualtriggers.data.TimeOfDayData;
 import static android.Manifest.permission.ACCESS_FINE_LOCATION;
 
 public class IntervalsDataManager extends AlarmDataManager<TimeOfDayData> {
-    Logger logger;
     private final IBinder binder = new IntervalsDataManager.LocalBinder();
 
     private int MY_PERMISSIONS_REQUEST_READ_CONTACTS;
@@ -48,7 +46,6 @@ public class IntervalsDataManager extends AlarmDataManager<TimeOfDayData> {
     }
 
     private void setup() {
-        logger = Logger.getInstance();
     }
 
     @Override

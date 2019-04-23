@@ -16,7 +16,6 @@ import com.google.android.gms.awareness.state.Weather;
 import com.google.android.gms.common.api.ResultCallback;
 
 import uk.ac.strath.contextualtriggers.ContextualTriggersService;
-import uk.ac.strath.contextualtriggers.Logger;
 import uk.ac.strath.contextualtriggers.MainApplication;
 import uk.ac.strath.contextualtriggers.RequestLocationPermission;
 import uk.ac.strath.contextualtriggers.data.WeatherData;
@@ -25,7 +24,6 @@ import static android.Manifest.permission.ACCESS_FINE_LOCATION;
 
 public class WeatherDataManager extends AlarmDataManager<WeatherData> {
     int MY_PERMISSIONS_REQUEST_READ_CONTACTS;
-    Logger logger;
 
     private final IBinder binder = new WeatherDataManager.LocalBinder();
 
@@ -49,7 +47,6 @@ public class WeatherDataManager extends AlarmDataManager<WeatherData> {
     }
 
     private void setup() {
-        logger = Logger.getInstance();
     }
 
     @Override
@@ -93,7 +90,6 @@ public class WeatherDataManager extends AlarmDataManager<WeatherData> {
                             data.Conditions = weather.getConditions();
                             Log.d("WeatherDM", data.toString());
                             data.printData();
-                            logger.log(data.toString());
                             sendUpdate(data);
                         }
                     });

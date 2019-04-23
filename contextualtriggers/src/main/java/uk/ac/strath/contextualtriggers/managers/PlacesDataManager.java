@@ -21,7 +21,6 @@ import com.google.android.libraries.places.api.net.PlacesClient;
 import java.util.Arrays;
 import java.util.List;
 
-import uk.ac.strath.contextualtriggers.Logger;
 import uk.ac.strath.contextualtriggers.MainApplication;
 import uk.ac.strath.contextualtriggers.R;
 import uk.ac.strath.contextualtriggers.RequestLocationPermission;
@@ -31,7 +30,6 @@ import static android.Manifest.permission.ACCESS_FINE_LOCATION;
 import static com.android.volley.VolleyLog.TAG;
 
 public class PlacesDataManager extends AlarmDataManager<PlacesData> {
-    Logger logger;
     private final IBinder binder = new PlacesDataManager.LocalBinder();
     private int MY_PERMISSIONS_REQUEST_READ_CONTACTS;
 
@@ -54,7 +52,6 @@ public class PlacesDataManager extends AlarmDataManager<PlacesData> {
     }
 
     private void setup() {
-        logger = Logger.getInstance();
     }
 
     @Override
