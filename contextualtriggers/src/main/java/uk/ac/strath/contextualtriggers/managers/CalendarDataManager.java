@@ -2,7 +2,6 @@ package uk.ac.strath.contextualtriggers.managers;
 
 import android.app.AlarmManager;
 import android.app.PendingIntent;
-import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -13,34 +12,23 @@ import android.os.Binder;
 import android.os.IBinder;
 import android.os.SystemClock;
 import android.provider.CalendarContract;
-import android.provider.ContactsContract;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
-
-import com.google.android.gms.awareness.Awareness;
-import com.google.android.gms.awareness.snapshot.DetectedActivityResult;
-import com.google.android.gms.awareness.snapshot.WeatherResult;
-import com.google.android.gms.awareness.state.Weather;
-import com.google.android.gms.common.api.ResultCallback;
-import com.google.android.gms.location.ActivityRecognitionResult;
-import com.google.android.gms.location.DetectedActivity;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
-import uk.ac.strath.contextualtriggers.ContextualTriggersService;
 import uk.ac.strath.contextualtriggers.Logger;
 import uk.ac.strath.contextualtriggers.MainApplication;
+import uk.ac.strath.contextualtriggers.RequestCalendarPermission;
+import uk.ac.strath.contextualtriggers.RequestLocationPermission;
 import uk.ac.strath.contextualtriggers.data.CalendarData;
 import uk.ac.strath.contextualtriggers.data.ListCalendarData;
-import uk.ac.strath.contextualtriggers.data.WeatherData;
 
-import static android.Manifest.permission.ACCESS_FINE_LOCATION;
 import static android.Manifest.permission.READ_CALENDAR;
 //import static com.google.android.gms.internal.zzs.TAG;
 
@@ -115,9 +103,8 @@ private final int POLLING_PERIOD = 5000;
             // Should we show an explanation?
             if (ActivityCompat.shouldShowRequestPermissionRationale(MainApplication.getAppActivity(),
                     READ_CALENDAR)) {
-                // Show an explanation to the user *asynchronously* -- don't block
-                // this thread waiting for the user's response! After the user
-                // sees the explanation, try again to request the permission.
+                Intent i = new Intent(this, RequestCalendarPermission.class);
+                startActivity(i);
             } else {
                 // No explanation needed; request the permission
                 ActivityCompat.requestPermissions(MainApplication.getAppActivity(),

@@ -39,6 +39,8 @@ private final IBinder binder = new PlacesDataManager.LocalBinder();
 private final int POLLING_PERIOD = 60000;
     private int MY_PERMISSIONS_REQUEST_READ_CONTACTS;
 
+    private AlarmManager alarmMgr;
+
 
     @Nullable
 @Override
@@ -46,6 +48,16 @@ public IBinder onBind(Intent intent) {
         setup();
         return binder;
         }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        alarmMgr = (AlarmManager)this.getSystemService(Context.ALARM_SERVICE);
+        Log.d("PLACES", "HAS BEEN OBLITERATED");
+        Intent ip = new Intent(this, PlacesDataManager.class);
+        PendingIntent alarmIntent = PendingIntent.getService(this, 0, ip, PendingIntent.FLAG_UPDATE_CURRENT);
+        alarmMgr.cancel(alarmIntent);
+    }
 
 public class LocalBinder extends Binder
 {
@@ -71,7 +83,7 @@ public PlacesDataManager()
     }
 
     private void alarm(){
-        AlarmManager alarmMgr = (AlarmManager)this.getSystemService(Context.ALARM_SERVICE);
+        alarmMgr = (AlarmManager)this.getSystemService(Context.ALARM_SERVICE);
         Intent ip = new Intent(this, PlacesDataManager.class);
         PendingIntent alarmIntent = PendingIntent.getService(this, 0, ip, PendingIntent.FLAG_UPDATE_CURRENT);
         alarmMgr.set(AlarmManager.ELAPSED_REALTIME_WAKEUP,

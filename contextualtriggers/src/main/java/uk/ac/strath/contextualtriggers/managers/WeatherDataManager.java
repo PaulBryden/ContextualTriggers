@@ -33,6 +33,7 @@ public class WeatherDataManager extends DataManager<WeatherData> implements IDat
     private final IBinder binder = new WeatherDataManager.LocalBinder();
 
     private final int POLLING_PERIOD = 30000;
+    private AlarmManager alarmMgr ;
 
 
 
@@ -41,6 +42,16 @@ public class WeatherDataManager extends DataManager<WeatherData> implements IDat
     public IBinder onBind(Intent intent) {
         setup();
         return binder;
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        alarmMgr = (AlarmManager)this.getSystemService(Context.ALARM_SERVICE);
+        Log.d("WEATHER", "HAS BEEN OBLITERATED");
+        Intent iw = new Intent(this, WeatherDataManager.class);
+        PendingIntent alarmIntent = PendingIntent.getService(this, 0, iw, PendingIntent.FLAG_UPDATE_CURRENT);
+        alarmMgr.cancel(alarmIntent);
     }
 
     public class LocalBinder extends Binder {
@@ -66,7 +77,7 @@ public class WeatherDataManager extends DataManager<WeatherData> implements IDat
 
 
         private void alarm() {
-            AlarmManager alarmMgr = (AlarmManager)this.getSystemService(Context.ALARM_SERVICE);
+            alarmMgr = (AlarmManager)this.getSystemService(Context.ALARM_SERVICE);
             Intent iw = new Intent(this, WeatherDataManager.class);
             PendingIntent alarmIntent = PendingIntent.getService(this, 0, iw, PendingIntent.FLAG_UPDATE_CURRENT);
             alarmMgr.set(AlarmManager.ELAPSED_REALTIME_WAKEUP,

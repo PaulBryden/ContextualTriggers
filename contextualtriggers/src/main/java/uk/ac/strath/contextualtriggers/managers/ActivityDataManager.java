@@ -67,7 +67,6 @@ public class ActivityDataManager extends DataManager<ActivityData> implements ID
         }
 
         private void alarm(){
-
             AlarmManager alarmMgr = (AlarmManager)this.getSystemService(Context.ALARM_SERVICE);
             Intent ia = new Intent(this, ActivityDataManager.class);
             PendingIntent alarmIntent = PendingIntent.getService(this, 0, ia, PendingIntent.FLAG_UPDATE_CURRENT);
@@ -79,7 +78,6 @@ public class ActivityDataManager extends DataManager<ActivityData> implements ID
 
         /*This Could be setup to fire on a transition, instead of a poll*/
         private void monitor() {
-                // Permission has already been granted
                 Awareness.SnapshotApi.getDetectedActivity(ContextualTriggersService.getGoogleAPIClient())
                         .setResultCallback(new ResultCallback<DetectedActivityResult>() {
                             @Override
@@ -95,6 +93,5 @@ public class ActivityDataManager extends DataManager<ActivityData> implements ID
                             }
                         });
             }
-
     }
 

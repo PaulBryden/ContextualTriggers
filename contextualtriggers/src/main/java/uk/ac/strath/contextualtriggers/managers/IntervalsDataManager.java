@@ -44,6 +44,7 @@ public class IntervalsDataManager extends DataManager<TimeOfDayData> implements 
         Logger logger;
 private final IBinder binder = new IntervalsDataManager.LocalBinder();
 private final int POLLING_PERIOD = 60000;
+    private AlarmManager alarmMgr;
 
     @Nullable
 @Override
@@ -51,6 +52,16 @@ public IBinder onBind(Intent intent) {
         setup();
         return binder;
         }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        alarmMgr = (AlarmManager)this.getSystemService(Context.ALARM_SERVICE);
+        Log.d("INTERVALS", "HAS BEEN OBLITERATED");
+        Intent ii = new Intent(this,IntervalsDataManager.class);
+        PendingIntent alarmIntent = PendingIntent.getService(this, 0, ii, PendingIntent.FLAG_UPDATE_CURRENT);
+        alarmMgr.cancel(alarmIntent);
+    }
 
 public class LocalBinder extends Binder
 {
@@ -76,7 +87,7 @@ public IntervalsDataManager()
     }
 
     private void alarm(){
-        AlarmManager alarmMgr = (AlarmManager)this.getSystemService(Context.ALARM_SERVICE);
+        alarmMgr = (AlarmManager)this.getSystemService(Context.ALARM_SERVICE);
         Intent ip = new Intent(this, IntervalsDataManager.class);
         PendingIntent alarmIntent = PendingIntent.getService(this, 0, ip, PendingIntent.FLAG_UPDATE_CURRENT);
         alarmMgr.set(AlarmManager.ELAPSED_REALTIME_WAKEUP,
