@@ -55,7 +55,7 @@ public class ActivityDataManager extends AlarmDataManager<ActivityData> {
         Awareness.getSnapshotClient(getApplicationContext()).getDetectedActivity().addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                // TODO log
+                Log.d("ActivityDataManager", e.getMessage());
             }
         }).addOnSuccessListener(new OnSuccessListener<DetectedActivityResponse>() {
             @Override

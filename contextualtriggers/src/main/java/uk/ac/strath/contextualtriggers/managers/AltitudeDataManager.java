@@ -93,7 +93,7 @@ public class AltitudeDataManager extends AlarmDataManager<AltitudeData> {
             Awareness.getSnapshotClient(getApplicationContext()).getLocation().addOnFailureListener(new OnFailureListener() {
                 @Override
                 public void onFailure(@NonNull Exception e) {
-                    // TODO log
+                    Log.d("AltitudeDataManager", e.getMessage());
                 }
             }).addOnSuccessListener(new OnSuccessListener<LocationResponse>() {
                 @Override

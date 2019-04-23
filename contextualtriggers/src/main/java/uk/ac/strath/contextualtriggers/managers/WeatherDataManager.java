@@ -75,7 +75,7 @@ public class WeatherDataManager extends AlarmDataManager<WeatherData> {
             Awareness.getSnapshotClient(getApplicationContext()).getWeather().addOnFailureListener(new OnFailureListener() {
                 @Override
                 public void onFailure(@NonNull Exception e) {
-                    // TODO log
+                    Log.d("WeatherDataManager", e.getMessage());
                 }
             }).addOnSuccessListener(new OnSuccessListener<WeatherResponse>() {
                 @Override
