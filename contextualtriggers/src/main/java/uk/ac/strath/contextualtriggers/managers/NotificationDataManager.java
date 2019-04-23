@@ -9,7 +9,7 @@ import android.util.Log;
 import uk.ac.strath.contextualtriggers.Logger;
 import uk.ac.strath.contextualtriggers.data.VoidData;
 
-public class NotificationDataManager extends DataManager<VoidData> implements IDataManager<VoidData> {
+public class NotificationDataManager extends DataManager<VoidData> {
 
     Logger logger;
     Integer goal;

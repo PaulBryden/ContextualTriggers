@@ -1,11 +1,5 @@
 package uk.ac.strath.contextualtriggers.conditions;
 
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-
 import uk.ac.strath.contextualtriggers.data.AltitudeData;
 import uk.ac.strath.contextualtriggers.managers.IDataManager;
 
@@ -22,7 +16,7 @@ public class AltitudeTransitionCondition extends DataCondition<AltitudeData>
     private int targetTransition;
 
 
-    public AltitudeTransitionCondition(int transition,IDataManager dataManager)
+    public AltitudeTransitionCondition(int transition,IDataManager<AltitudeData> dataManager)
     {
         super(dataManager, 30);
         oldAltitude = new AltitudeData();
