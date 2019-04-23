@@ -30,7 +30,7 @@ public class ActivityDataManager extends AlarmDataManager<ActivityData> {
     }
 
     public class LocalBinder extends Binder {
-        public IDataManager getInstance() {
+        public IDataManager<ActivityData> getInstance() {
             return ActivityDataManager.this;
         }
     }

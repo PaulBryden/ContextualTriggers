@@ -126,32 +126,20 @@ public class CalendarDataManager extends AlarmDataManager<CalendarData> {
                 cursor.moveToNext();
 
             }
-            List<CalendarData> cd = new ArrayList<>();
-            for (int i = 0; i < nameOfEvent.size(); i++) {
-                // Log.d("CALENDAREVENT", nameOfEvent.get(i));
-                //  Log.d("CALENDARTIME", startDates.get(i));
+            List<EventData> cd = new ArrayList<>();
+            for(int i = 0; i < nameOfEvent.size();i++){
+               // Log.d("CALENDAREVENT", nameOfEvent.get(i));
+              //  Log.d("CALENDARTIME", startDates.get(i));
                 SimpleDateFormat dateFormat = new SimpleDateFormat("DD/MM/yyyy hh:mm:ss a");
                 try {
-                    CalendarData c = new CalendarData(nameOfEvent.get(i), dateFormat.parse(startDates.get(i)));
+                    EventData c = new EventData(nameOfEvent.get(i), dateFormat.parse(startDates.get(i)));
                     cd.add(c);
-                } catch (ParseException e) {
-                    Log.e("Calendar", "Error parsing date in Calendar");
+                } catch (ParseException e ){
+                    Log.e("Calendar","Error parsing date in Calendar");
                 }
-                List<EventData> cd = new ArrayList<>();
-                for(int i = 0; i < nameOfEvent.size();i++){
-                   // Log.d("CALENDAREVENT", nameOfEvent.get(i));
-                  //  Log.d("CALENDARTIME", startDates.get(i));
-                    SimpleDateFormat dateFormat = new SimpleDateFormat("DD/MM/yyyy hh:mm:ss a");
-                    try {
-                        EventData c = new EventData(nameOfEvent.get(i), dateFormat.parse(startDates.get(i)));
-                        cd.add(c);
-                    } catch (ParseException e ){
-                        Log.e("Calendar","Error parsing date in Calendar");
-                    }
 
-                }
-                sendUpdate(new CalendarData(cd));
             }
+            sendUpdate(new CalendarData(cd));
         }
     }
 
