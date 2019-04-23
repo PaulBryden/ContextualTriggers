@@ -23,7 +23,7 @@ import java.util.List;
 
 import uk.ac.strath.contextualtriggers.MainApplication;
 import uk.ac.strath.contextualtriggers.R;
-import uk.ac.strath.contextualtriggers.RequestLocationPermission;
+import uk.ac.strath.contextualtriggers.permissions.RequestLocationPermission;
 import uk.ac.strath.contextualtriggers.data.PlacesData;
 
 import static android.Manifest.permission.ACCESS_FINE_LOCATION;

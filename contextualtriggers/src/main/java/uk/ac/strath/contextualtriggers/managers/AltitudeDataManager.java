@@ -17,7 +17,7 @@ import com.google.android.gms.common.api.ResultCallback;
 
 import uk.ac.strath.contextualtriggers.ContextualTriggersService;
 import uk.ac.strath.contextualtriggers.MainApplication;
-import uk.ac.strath.contextualtriggers.RequestLocationPermission;
+import uk.ac.strath.contextualtriggers.permissions.RequestLocationPermission;
 import uk.ac.strath.contextualtriggers.data.AltitudeData;
 
 import static android.Manifest.permission.ACCESS_FINE_LOCATION;

@@ -1,4 +1,4 @@
-package uk.ac.strath.contextualtriggers;
+package uk.ac.strath.contextualtriggers.permissions;
 
 import android.app.Activity;
 import android.content.DialogInterface;

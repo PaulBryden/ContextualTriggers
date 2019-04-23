@@ -19,7 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import uk.ac.strath.contextualtriggers.MainApplication;
-import uk.ac.strath.contextualtriggers.RequestCalendarPermission;
+import uk.ac.strath.contextualtriggers.permissions.RequestCalendarPermission;
 import uk.ac.strath.contextualtriggers.data.CalendarData;
 import uk.ac.strath.contextualtriggers.data.EventData;
 
