@@ -45,13 +45,10 @@ public abstract class DataCondition<T extends Data> extends AbstractCondition {
 
     public void notifyUpdate(T data) {
         this.data = data;
-        try
-        {
+        try {
             getTrigger().notifyChange();
-        }
-        catch(TriggerNotConnectedException e)
-        {
-            Log.d("DataCondition",  e.getMessage());
+        } catch (TriggerNotConnectedException e) {
+            Log.d("DataCondition", e.getMessage());
         }
     }
 

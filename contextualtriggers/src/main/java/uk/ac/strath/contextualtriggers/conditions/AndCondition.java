@@ -27,4 +27,5 @@ public class AndCondition extends CompositeCondition {
         }
         return false;
     }
+
 }
