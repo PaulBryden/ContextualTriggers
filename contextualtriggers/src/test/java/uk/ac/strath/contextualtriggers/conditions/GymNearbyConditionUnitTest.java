@@ -355,7 +355,7 @@ public class GymNearbyConditionUnitTest {
     }
 
     /**
-     * Tests what happens when there might be a gym nearby but the odds are 3,720 to 1.
+     * Tests what happens when the user is already in a gym.
      */
     @Test
     public void GymNearbyConditionUnitTest3() {
@@ -495,7 +495,7 @@ public class GymNearbyConditionUnitTest {
 
                     @Override
                     public double getLikelihood() {
-                        return 1 / 3720;
+                        return 0.99;
                     }
                 };
                 firstTime = false;
