@@ -4,6 +4,7 @@ import android.arch.persistence.room.Dao;
 import android.arch.persistence.room.Delete;
 import android.arch.persistence.room.Insert;
 import android.arch.persistence.room.Query;
+import android.arch.persistence.room.Update;
 
 import java.util.List;
 
@@ -16,6 +17,12 @@ public interface DataDAO {
 
     @Delete
     void delete(DataEntity e);
+
+    @Update
+    void update(DataEntity e);
+
+    @Query("SELECT * FROM data_cache")
+    List<DataEntity> getAll();
 
     @Query("DELETE FROM data_cache")
     void deleteAll();
