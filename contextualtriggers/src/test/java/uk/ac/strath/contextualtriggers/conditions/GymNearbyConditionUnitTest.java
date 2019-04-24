@@ -182,14 +182,11 @@ public class GymNearbyConditionUnitTest {
 
         UnitTestAction action = new UnitTestAction();
         PlacesMockDataManager manager = new PlacesMockDataManager();
-        GymNearbyCondition altTransCondition = new GymNearbyCondition(manager);
-        Trigger.Builder T = new Trigger.Builder();
-        T.setCondition(altTransCondition);
-        T.setAction(action);
-        Trigger trig = T.build();
+        GymNearbyCondition condition = new GymNearbyCondition(manager);
+        new Trigger.Builder().setCondition(condition).setAction(action).build();
         System.out.println("GymNearbyConditionUnitTest");
         manager.mock();
-        assertEquals(true, altTransCondition.isSatisfied());
+        assertEquals(true, condition.isSatisfied());
     }
 
     /**
@@ -344,14 +341,11 @@ public class GymNearbyConditionUnitTest {
 
         UnitTestAction action = new UnitTestAction();
         PlacesMockDataManager manager = new PlacesMockDataManager();
-        GymNearbyCondition altTransCondition = new GymNearbyCondition(manager);
-        Trigger.Builder T = new Trigger.Builder();
-        T.setCondition(altTransCondition);
-        T.setAction(action);
-        Trigger trig = T.build();
+        GymNearbyCondition condition = new GymNearbyCondition(manager);
+        new Trigger.Builder().setCondition(condition).setAction(action).build();
         System.out.println("GymNearbyConditionUnitTest2");
         manager.mock();
-        assertEquals(false, altTransCondition.isSatisfied());
+        assertEquals(false, condition.isSatisfied());
     }
 
     /**
@@ -506,14 +500,11 @@ public class GymNearbyConditionUnitTest {
 
         UnitTestAction action = new UnitTestAction();
         PlacesMockDataManager manager = new PlacesMockDataManager();
-        GymNearbyCondition altTransCondition = new GymNearbyCondition(manager);
-        Trigger.Builder T = new Trigger.Builder();
-        T.setCondition(altTransCondition);
-        T.setAction(action);
-        Trigger trig = T.build();
+        GymNearbyCondition condition = new GymNearbyCondition(manager);
+        new Trigger.Builder().setCondition(condition).setAction(action).build();
         System.out.println("GymNearbyConditionUnitTest3");
         manager.mock();
-        assertEquals(false, altTransCondition.isSatisfied());
+        assertEquals(false, condition.isSatisfied());
     }
 
 }

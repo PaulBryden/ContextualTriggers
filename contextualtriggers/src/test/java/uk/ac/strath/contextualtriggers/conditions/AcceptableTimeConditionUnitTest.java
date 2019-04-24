@@ -42,17 +42,14 @@ public class AcceptableTimeConditionUnitTest {
 
         UnitTestAction action = new UnitTestAction();
         TimeIntervalsDataManager manager = new TimeIntervalsDataManager();
-        TimeOfDayData desiredTimeInterval = new TimeOfDayData(new int[]{TIME_INTERVAL_AFTERNOON});
-        AcceptableTimeCondition periodCondition = new AcceptableTimeCondition(desiredTimeInterval, manager);
-        Trigger.Builder T = new Trigger.Builder();
-        T.setCondition(periodCondition);
-        T.setAction(action);
-        Trigger trig = T.build();
+        TimeOfDayData data = new TimeOfDayData(new int[]{TIME_INTERVAL_AFTERNOON});
+        AcceptableTimeCondition condition = new AcceptableTimeCondition(data, manager);
+        new Trigger.Builder().setCondition(condition).setAction(action).build();
         manager.mock();
-        assertEquals(true, periodCondition.isSatisfied());
+        assertEquals(true, condition.isSatisfied());
         System.out.println("AcceptableTimeConditionUnitTest");
         manager.mock();
-        assertEquals(true, periodCondition.isSatisfied());
+        assertEquals(true, condition.isSatisfied());
     }
 
     /**
@@ -76,17 +73,14 @@ public class AcceptableTimeConditionUnitTest {
 
         UnitTestAction action = new UnitTestAction();
         TimeIntervalsDataManager manager = new TimeIntervalsDataManager();
-        TimeOfDayData desiredTimeInterval = new TimeOfDayData(new int[]{TIME_INTERVAL_EVENING, TIME_INTERVAL_WEEKEND});
-        AcceptableTimeCondition periodCondition = new AcceptableTimeCondition(desiredTimeInterval, manager);
-        Trigger.Builder T = new Trigger.Builder();
-        T.setCondition(periodCondition);
-        T.setAction(action);
-        Trigger trig = T.build();
+        TimeOfDayData data = new TimeOfDayData(new int[]{TIME_INTERVAL_EVENING, TIME_INTERVAL_WEEKEND});
+        AcceptableTimeCondition condition = new AcceptableTimeCondition(data, manager);
+        new Trigger.Builder().setCondition(condition).setAction(action).build();
         manager.mock();
-        assertEquals(false, periodCondition.isSatisfied());
+        assertEquals(false, condition.isSatisfied());
         System.out.println("AcceptableTimeConditionUnitTest2");
         manager.mock();
-        assertEquals(false, periodCondition.isSatisfied());
+        assertEquals(false, condition.isSatisfied());
     }
 
 }

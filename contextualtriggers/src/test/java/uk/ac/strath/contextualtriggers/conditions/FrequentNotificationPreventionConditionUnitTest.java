@@ -38,15 +38,12 @@ public class FrequentNotificationPreventionConditionUnitTest {
 
         UnitTestAction action = new UnitTestAction();
         NotificationMockDataManager manager = new NotificationMockDataManager();
-        FrequentNotificationPreventionCondition altTransCondition = new FrequentNotificationPreventionCondition(10000,manager);
-        Trigger.Builder T = new Trigger.Builder();
-        T.setCondition(altTransCondition);
-        T.setAction(action);
-        Trigger trig = T.build();
-        assertEquals(true,altTransCondition.isSatisfied());
+        FrequentNotificationPreventionCondition condition = new FrequentNotificationPreventionCondition(10000,manager);
+        new Trigger.Builder().setCondition(condition).setAction(action).build();
+        assertEquals(true,condition.isSatisfied());
         System.out.println("FrequentNotificationPreventionConditionUnitTest");
         manager.mock();
-        assertEquals(false,altTransCondition.isSatisfied());
+        assertEquals(false,condition.isSatisfied());
         try
         {
             Thread.sleep(10500);
@@ -54,9 +51,9 @@ public class FrequentNotificationPreventionConditionUnitTest {
         {
             e.printStackTrace();
         }
-        assertEquals(true,altTransCondition.isSatisfied());
+        assertEquals(true,condition.isSatisfied());
         manager.mock();
-        assertEquals(false,altTransCondition.isSatisfied());
+        assertEquals(false,condition.isSatisfied());
 
     }
 

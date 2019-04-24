@@ -42,13 +42,10 @@ public class HistoricStepsDaysUnmetConditionUnitTest {
 
         UnitTestAction action = new UnitTestAction();
         StepAndGoalMockDataManager manager = new StepAndGoalMockDataManager();
-        HistoricStepsDaysUnmetCondition altTransCondition = new HistoricStepsDaysUnmetCondition(3, manager);
-        Trigger.Builder T = new Trigger.Builder();
-        T.setCondition(altTransCondition);
-        T.setAction(action);
-        Trigger trig = T.build();
+        HistoricStepsDaysUnmetCondition condition = new HistoricStepsDaysUnmetCondition(3, manager);
+        new Trigger.Builder().setCondition(condition).setAction(action).build();
         manager.mock();
-        assertEquals(true, altTransCondition.isSatisfied());
+        assertEquals(true, condition.isSatisfied());
         System.out.println("HistoricStepsDaysUnmetConditionUnitTest");
     }
 

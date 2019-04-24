@@ -209,15 +209,12 @@ public class NoLongerInBuildingTypeConditionUnitTest {
         }
         UnitTestAction action = new UnitTestAction();
         PlacesMockDataManager manager = new PlacesMockDataManager();
-        NoLongerInBuildingTypeCondition altTransCondition = new NoLongerInBuildingTypeCondition(Place.Type.CAFE, manager);
-        Trigger.Builder T = new Trigger.Builder();
-        T.setCondition(altTransCondition);
-        T.setAction(action);
-        Trigger trig = T.build();
+        NoLongerInBuildingTypeCondition condition = new NoLongerInBuildingTypeCondition(Place.Type.CAFE, manager);
+        new Trigger.Builder().setCondition(condition).setAction(action).build();
         manager.mock();
-        assertEquals(false, altTransCondition.isSatisfied());
+        assertEquals(false, condition.isSatisfied());
         manager.mock();
-        assertEquals(true, altTransCondition.isSatisfied());
+        assertEquals(true, condition.isSatisfied());
         System.out.println("NoLongerInBuildingConditionUnitTest");
     }
 

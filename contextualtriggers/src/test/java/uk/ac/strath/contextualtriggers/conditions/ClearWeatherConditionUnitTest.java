@@ -46,16 +46,13 @@ public class ClearWeatherConditionUnitTest {
 
         UnitTestAction action = new UnitTestAction();
         ClearWeatherMockManager manager = new ClearWeatherMockManager();
-        ClearWeatherCondition altTransCondition = new ClearWeatherCondition(manager);
-        Trigger.Builder T = new Trigger.Builder();
-        T.setCondition(altTransCondition);
-        T.setAction(action);
-        Trigger trig = T.build();
+        ClearWeatherCondition condition = new ClearWeatherCondition(manager);
+        new Trigger.Builder().setCondition(condition).setAction(action).build();
         manager.mock();
-        assertEquals(false, altTransCondition.isSatisfied());
+        assertEquals(false, condition.isSatisfied());
         System.out.println("AcceptableTimeConditionUnitTest");
         manager.mock();
-        assertEquals(true, altTransCondition.isSatisfied());
+        assertEquals(true, condition.isSatisfied());
     }
 
     /**
@@ -86,16 +83,13 @@ public class ClearWeatherConditionUnitTest {
 
         UnitTestAction action = new UnitTestAction();
         ClearWeatherMockManager manager = new ClearWeatherMockManager();
-        ClearWeatherCondition altTransCondition = new ClearWeatherCondition(manager);
-        Trigger.Builder T = new Trigger.Builder();
-        T.setCondition(altTransCondition);
-        T.setAction(action);
-        Trigger trig = T.build();
+        ClearWeatherCondition condition = new ClearWeatherCondition(manager);
+        new Trigger.Builder().setCondition(condition).setAction(action).build();
         manager.mock();
-        assertEquals(true, altTransCondition.isSatisfied());
+        assertEquals(true, condition.isSatisfied());
         System.out.println("AcceptableTimeConditionUnitTest2");
         manager.mock();
-        assertEquals(false, altTransCondition.isSatisfied());
+        assertEquals(false, condition.isSatisfied());
     }
 
 }

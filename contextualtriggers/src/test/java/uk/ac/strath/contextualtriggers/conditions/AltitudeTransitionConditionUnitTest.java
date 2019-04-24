@@ -44,16 +44,13 @@ public class AltitudeTransitionConditionUnitTest {
 
         UnitTestAction action = new UnitTestAction();
         AltitudeMockManager manager = new AltitudeMockManager();
-        AltitudeTransitionCondition altTransCondition = new AltitudeTransitionCondition(19, manager);
-        Trigger.Builder T = new Trigger.Builder();
-        T.setCondition(altTransCondition);
-        T.setAction(action);
-        Trigger trig = T.build();
+        AltitudeTransitionCondition condition = new AltitudeTransitionCondition(19, manager);
+        new Trigger.Builder().setCondition(condition).setAction(action).build();
         manager.mock();
-        assertEquals(false, altTransCondition.isSatisfied());
+        assertEquals(false, condition.isSatisfied());
         System.out.println("AcceptableTimeConditionUnitTest");
         manager.mock();
-        assertEquals(true, altTransCondition.isSatisfied());
+        assertEquals(true, condition.isSatisfied());
     }
 
     /**
@@ -84,16 +81,13 @@ public class AltitudeTransitionConditionUnitTest {
 
         UnitTestAction action = new UnitTestAction();
         AltitudeMockManager manager = new AltitudeMockManager();
-        AltitudeTransitionCondition altTransCondition = new AltitudeTransitionCondition(19, manager);
-        Trigger.Builder T = new Trigger.Builder();
-        T.setCondition(altTransCondition);
-        T.setAction(action);
-        Trigger trig = T.build();
+        AltitudeTransitionCondition condition = new AltitudeTransitionCondition(19, manager);
+        new Trigger.Builder().setCondition(condition).setAction(action).build();
         manager.mock();
-        assertEquals(false, altTransCondition.isSatisfied());
+        assertEquals(false, condition.isSatisfied());
         System.out.println("AcceptableTimeConditionUnitTest2");
         manager.mock();
-        assertEquals(false, altTransCondition.isSatisfied());
+        assertEquals(false, condition.isSatisfied());
     }
 
     /**
@@ -124,16 +118,13 @@ public class AltitudeTransitionConditionUnitTest {
 
         UnitTestAction action = new UnitTestAction();
         AltitudeMockManager manager = new AltitudeMockManager();
-        AltitudeTransitionCondition altTransCondition = new AltitudeTransitionCondition(19, manager);
-        Trigger.Builder T = new Trigger.Builder();
-        T.setCondition(altTransCondition);
-        T.setAction(action);
-        Trigger trig = T.build();
+        AltitudeTransitionCondition condition = new AltitudeTransitionCondition(19, manager);
+        new Trigger.Builder().setCondition(condition).setAction(action).build();
         manager.mock();
-        assertEquals(false, altTransCondition.isSatisfied());
+        assertEquals(false, condition.isSatisfied());
         System.out.println("AcceptableTimeConditionUnitTest3");
         manager.mock();
-        assertEquals(false, altTransCondition.isSatisfied());
+        assertEquals(false, condition.isSatisfied());
     }
 
 }

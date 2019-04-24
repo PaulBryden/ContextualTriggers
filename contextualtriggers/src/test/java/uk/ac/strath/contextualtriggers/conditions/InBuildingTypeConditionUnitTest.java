@@ -181,13 +181,10 @@ public class InBuildingTypeConditionUnitTest {
         }
         UnitTestAction action = new UnitTestAction();
         PlacesMockDataManager manager = new PlacesMockDataManager();
-        InBuildingTypeCondition altTransCondition = new InBuildingTypeCondition(Place.Type.GYM, manager);
-        Trigger.Builder T = new Trigger.Builder();
-        T.setCondition(altTransCondition);
-        T.setAction(action);
-        Trigger trig = T.build();
+        InBuildingTypeCondition condition = new InBuildingTypeCondition(Place.Type.GYM, manager);
+        new Trigger.Builder().setCondition(condition).setAction(action).build();
         manager.mock();
-        assertEquals(true, altTransCondition.isSatisfied());
+        assertEquals(true, condition.isSatisfied());
         System.out.println("InBuildingConditionUnitTest");
     }
 
@@ -343,13 +340,10 @@ public class InBuildingTypeConditionUnitTest {
         }
         UnitTestAction action = new UnitTestAction();
         PlacesMockDataManager manager = new PlacesMockDataManager();
-        InBuildingTypeCondition altTransCondition = new InBuildingTypeCondition(Place.Type.GYM, manager);
-        Trigger.Builder T = new Trigger.Builder();
-        T.setCondition(altTransCondition);
-        T.setAction(action);
-        Trigger trig = T.build();
+        InBuildingTypeCondition condition = new InBuildingTypeCondition(Place.Type.GYM, manager);
+        new Trigger.Builder().setCondition(condition).setAction(action).build();
         manager.mock();
-        assertEquals(false, altTransCondition.isSatisfied());
+        assertEquals(false, condition.isSatisfied());
         System.out.println("InBuildingConditionUnitTest2");
     }
 

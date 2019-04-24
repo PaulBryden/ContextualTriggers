@@ -48,7 +48,7 @@ public class MeetingConditionUnitTest {
         MockCalendarDataManager manager = new MockCalendarDataManager();
         MeetingCondition condition = new MeetingCondition(manager);
         UnitTestAction action = new UnitTestAction();
-        Trigger trigger = new Trigger.Builder().setCondition(condition).setAction(action).build();
+        new Trigger.Builder().setCondition(condition).setAction(action).build();
         manager.mock();
         assertTrue(condition.isSatisfied());
         System.out.println("MeetingConditionUnitTest");
@@ -79,7 +79,7 @@ public class MeetingConditionUnitTest {
         MockCalendarDataManager manager = new MockCalendarDataManager();
         MeetingCondition condition = new MeetingCondition(manager);
         UnitTestAction action = new UnitTestAction();
-        Trigger trigger = new Trigger.Builder().setCondition(condition).setAction(action).build();
+        new Trigger.Builder().setCondition(condition).setAction(action).build();
         manager.mock();
         assertFalse(condition.isSatisfied());
         System.out.println("MeetingConditionUnitTest2");
@@ -110,7 +110,7 @@ public class MeetingConditionUnitTest {
         MockCalendarDataManager manager = new MockCalendarDataManager();
         MeetingCondition condition = new MeetingCondition(manager);
         UnitTestAction action = new UnitTestAction();
-        Trigger trigger = new Trigger.Builder().setCondition(condition).setAction(action).build();
+        new Trigger.Builder().setCondition(condition).setAction(action).build();
         manager.mock();
         assertFalse(condition.isSatisfied());
         System.out.println("MeetingConditionUnitTest3");

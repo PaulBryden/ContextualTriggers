@@ -38,14 +38,11 @@ public class NotNotifiedTodayConditionUnitTest {
 
         UnitTestAction action = new UnitTestAction();
         MockNotificationDataManager manager = new MockNotificationDataManager();
-        NotNotifiedTodayCondition altTransCondition = new NotNotifiedTodayCondition(manager);
-        Trigger.Builder T = new Trigger.Builder();
-        T.setCondition(altTransCondition);
-        T.setAction(action);
-        Trigger trig = T.build();
-        assertEquals(true, altTransCondition.isSatisfied());
+        NotNotifiedTodayCondition condition = new NotNotifiedTodayCondition(manager);
+        new Trigger.Builder().setCondition(condition).setAction(action).build();
+        assertEquals(true, condition.isSatisfied());
         manager.mock();
-        assertEquals(false, altTransCondition.isSatisfied());
+        assertEquals(false, condition.isSatisfied());
         System.out.println("NotNotifiedTodayConditionUnitTest");
     }
 

@@ -39,13 +39,10 @@ public class ActivityPeriodConditionUnitTest {
 
         UnitTestAction action = new UnitTestAction();
         ActivityDataManager manager = new ActivityDataManager();
-        ActivityPeriodCondition periodCondition = new ActivityPeriodCondition(10000, STILL, manager);
-        Trigger.Builder T = new Trigger.Builder();
-        T.setCondition(periodCondition);
-        T.setAction(action);
-        Trigger trig = T.build();
+        ActivityPeriodCondition condition = new ActivityPeriodCondition(10000, STILL, manager);
+        new Trigger.Builder().setCondition(condition).setAction(action).build();
         manager.mock();
-        assertEquals(false, periodCondition.isSatisfied());
+        assertEquals(false, condition.isSatisfied());
         System.out.println("ActivityPeriodConditionUnitTest");
         try {
             Thread.sleep(10500);
@@ -53,7 +50,7 @@ public class ActivityPeriodConditionUnitTest {
             e.printStackTrace();
         }
         manager.mock();
-        assertEquals(true, periodCondition.isSatisfied());
+        assertEquals(true, condition.isSatisfied());
     }
 
     /**
@@ -76,13 +73,10 @@ public class ActivityPeriodConditionUnitTest {
 
         UnitTestAction action = new UnitTestAction();
         ActivityDataManager manager = new ActivityDataManager();
-        ActivityPeriodCondition periodCondition = new ActivityPeriodCondition(10000, STILL, manager);
-        Trigger.Builder T = new Trigger.Builder();
-        T.setCondition(periodCondition);
-        T.setAction(action);
-        Trigger trig = T.build();
+        ActivityPeriodCondition condition = new ActivityPeriodCondition(10000, STILL, manager);
+        new Trigger.Builder().setCondition(condition).setAction(action).build();
         manager.mock();
-        assertEquals(false, periodCondition.isSatisfied());
+        assertEquals(false, condition.isSatisfied());
         System.out.println("ActivityPeriodConditionUnitTest2");
         try {
             Thread.sleep(5000);
@@ -90,7 +84,7 @@ public class ActivityPeriodConditionUnitTest {
             e.printStackTrace();
         }
         manager.mock();
-        assertEquals(false, periodCondition.isSatisfied());
+        assertEquals(false, condition.isSatisfied());
     }
 
     /**
@@ -113,13 +107,10 @@ public class ActivityPeriodConditionUnitTest {
 
         UnitTestAction action = new UnitTestAction();
         ActivityDataManager manager = new ActivityDataManager();
-        ActivityPeriodCondition periodCondition = new ActivityPeriodCondition(10000, STILL, manager);
-        Trigger.Builder T = new Trigger.Builder();
-        T.setCondition(periodCondition);
-        T.setAction(action);
-        Trigger trig = T.build();
+        ActivityPeriodCondition condition = new ActivityPeriodCondition(10000, STILL, manager);
+        new Trigger.Builder().setCondition(condition).setAction(action).build();
         manager.mock();
-        assertEquals(false, periodCondition.isSatisfied());
+        assertEquals(false, condition.isSatisfied());
         System.out.println("ActivityPeriodConditionUnitTest3");
         try {
             Thread.sleep(10500);
@@ -127,7 +118,7 @@ public class ActivityPeriodConditionUnitTest {
             e.printStackTrace();
         }
         manager.mock();
-        assertEquals(false, periodCondition.isSatisfied());
+        assertEquals(false, condition.isSatisfied());
     }
 
 }

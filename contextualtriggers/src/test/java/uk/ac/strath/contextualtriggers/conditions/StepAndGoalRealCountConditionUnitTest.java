@@ -56,15 +56,12 @@ public class StepAndGoalRealCountConditionUnitTest {
 
         UnitTestAction action = new UnitTestAction();
         MockStepAndGoalCountManager manager = new MockStepAndGoalCountManager();
-        StepAndGoalRealCountCondition altTransCondition = new StepAndGoalRealCountCondition(LESS_THAN, manager);
-        Trigger.Builder T = new Trigger.Builder();
-        T.setCondition(altTransCondition);
-        T.setAction(action);
-        Trigger trig = T.build();
+        StepAndGoalRealCountCondition condition = new StepAndGoalRealCountCondition(LESS_THAN, manager);
+        new Trigger.Builder().setCondition(condition).setAction(action).build();
         manager.mock();
-        assertEquals(true, altTransCondition.isSatisfied());
+        assertEquals(true, condition.isSatisfied());
         manager.mock();
-        assertEquals(false, altTransCondition.isSatisfied());
+        assertEquals(false, condition.isSatisfied());
         System.out.println("NotNotifiedTodayConditionUnitTest");
     }
 
