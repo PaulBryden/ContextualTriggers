@@ -9,6 +9,14 @@ import android.arch.persistence.room.TypeConverter;
 @Entity(tableName = "data_cache")
 public class DataEntity {
 
+    public DataEntity(){
+
+    }
+    public DataEntity(Data d){
+        type = d.getClass().toString();
+        data = d;
+    }
+
 
     @PrimaryKey(autoGenerate = true)
     public int id;

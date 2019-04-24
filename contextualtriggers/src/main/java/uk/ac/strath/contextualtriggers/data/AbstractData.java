@@ -1,6 +1,8 @@
 package uk.ac.strath.contextualtriggers.data;
 
-public class AbstractData implements Data
+import java.lang.reflect.Type;
+
+public abstract class AbstractData implements Data
 {
     private long timestamp = System.currentTimeMillis();
 
@@ -16,4 +18,9 @@ public class AbstractData implements Data
         }
         return false;
     }
+
+    public static Type getType(){
+        return AbstractData.class;
+    }
+
 }

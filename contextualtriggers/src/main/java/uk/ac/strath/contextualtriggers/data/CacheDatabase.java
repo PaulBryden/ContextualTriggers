@@ -4,26 +4,31 @@ import android.arch.persistence.db.SupportSQLiteDatabase;
 import android.arch.persistence.room.Database;
 import android.arch.persistence.room.Room;
 import android.arch.persistence.room.RoomDatabase;
+import android.arch.persistence.room.TypeConverters;
 import android.content.Context;
 import android.support.annotation.NonNull;
 
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
-@Database(entities = {DataEntity.class}, version = 0)
+import uk.ac.strath.contextualtriggers.managers.DataManager;
+
+@Database(entities = {DataEntity.class}, version = 1, exportSchema = false)
+@TypeConverters({DataConverter.class})
 public abstract class CacheDatabase extends RoomDatabase{
 
     public abstract DataDAO DataDao();
 
-    public static volatile CacheDatabase INSTANCE;
+    private static volatile CacheDatabase INSTANCE;
 
     public static int cache_keeptime = 30;
 
     private ExecutorService executor = Executors.newSingleThreadExecutor();
 
-    static CacheDatabase getDatabase(final Context context) {
+    public static CacheDatabase getDatabase(final Context context) {
         if (INSTANCE == null) {
             synchronized (CacheDatabase.class) {
                 if (INSTANCE == null) {
@@ -45,11 +50,20 @@ public abstract class CacheDatabase extends RoomDatabase{
             // If you want to keep the data through app restarts,
             // comment out the following line.
             Executors.newSingleThreadExecutor().execute(() -> {
-                long oldestTimestamp = cache_keeptime * 1000 * 60 * 60 * 24;
-                for(DataEntity d : INSTANCE.DataDao().getAll()){
-                    if(d.data.getTimestamp() < oldestTimestamp){
-                        INSTANCE.DataDao().delete(d);
+                long oldestTimestamp = System.currentTimeMillis() - (cache_keeptime * 1000 * 60 * 60 * 24);
+                try {
+                    List<DataEntity> l = INSTANCE.getAll().get();
+                    for(DataEntity d : l){
+                        if(d.data.getTimestamp() < oldestTimestamp){
+                            INSTANCE.delete(d);
+                        }
                     }
+                } catch (InterruptedException e) {
+                    System.out.println(e.getMessage());
+                    e.printStackTrace();
+                } catch (ExecutionException e) {
+                    System.out.println(e.getMessage());
+                    e.printStackTrace();
                 }
             });
         }
@@ -60,6 +74,13 @@ public abstract class CacheDatabase extends RoomDatabase{
 
     public void insert(DataEntity e){
         executor.submit(() -> {
+            DataDao().insert(e);
+        });
+    }
+
+    public void insert(Data d){
+        executor.submit(() -> {
+            DataEntity e = new DataEntity(d);
             DataDao().insert(e);
         });
     }
@@ -105,6 +126,21 @@ public abstract class CacheDatabase extends RoomDatabase{
     }
     /*********************************************************/
 
+    public Future<DataEntity> getLatestOfType(String type){
+        return executor.submit(() -> {
+           List<DataEntity> l = DataDao().getAllOfType(type);
+           if(l.size() == 0){
+               return null;
+           }
+           DataEntity max = l.get(0);
+           for(int i = 1; i < l.size(); i++){
+               if(l.get(i).data.getTimestamp() > max.data.getTimestamp()){
+                   max = l.get(i);
+               }
+           }
+           return max;
+        });
+    }
 
 
 

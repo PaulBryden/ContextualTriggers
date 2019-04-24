@@ -1,5 +1,6 @@
 package uk.ac.strath.contextualtriggers.data;
 
+import java.lang.reflect.Type;
 import java.util.Date;
 
 public class EventData extends AbstractData {
@@ -24,4 +25,11 @@ public class EventData extends AbstractData {
         }
         return false;
     }
+
+
+    public static Type getType() {
+        return EventData.class;
+    }
+
+
 }

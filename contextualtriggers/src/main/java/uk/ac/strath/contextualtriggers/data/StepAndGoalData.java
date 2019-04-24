@@ -1,5 +1,6 @@
 package uk.ac.strath.contextualtriggers.data;
 
+import java.lang.reflect.Type;
 import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Map;
@@ -13,6 +14,7 @@ public class StepAndGoalData extends  AbstractData
         /*
         POPULATE STRUCT HERE FROM HISTORY
          */
+        //setup();
 
 
     }
@@ -54,5 +56,10 @@ public class StepAndGoalData extends  AbstractData
             return b;
         }
         return false;
+    }
+
+
+    public static Type getType() {
+        return StepAndGoalData.class;
     }
 }

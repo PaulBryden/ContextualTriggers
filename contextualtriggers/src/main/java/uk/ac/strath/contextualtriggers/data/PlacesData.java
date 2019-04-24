@@ -2,6 +2,7 @@ package uk.ac.strath.contextualtriggers.data;
 
 import com.google.android.libraries.places.api.model.PlaceLikelihood;
 
+import java.lang.reflect.Type;
 import java.util.List;
 
 public class PlacesData extends AbstractData {
@@ -18,4 +19,10 @@ public class PlacesData extends AbstractData {
         }
         return false;
     }
+
+
+    public static Type getType() {
+        return PlacesData.class;
+    }
+
 }

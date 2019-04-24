@@ -1,5 +1,7 @@
 package uk.ac.strath.contextualtriggers.data;
 
+import java.lang.reflect.Type;
+
 /**
  * Wrapper for Void data type with timestamp
  */
@@ -10,6 +12,10 @@ public class VoidData extends AbstractData {
             return super.equals(o);
         }
         return false;
+    }
+
+    public static Type getType() {
+        return VoidData.class;
     }
 
 }

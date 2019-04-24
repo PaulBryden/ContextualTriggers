@@ -1,5 +1,6 @@
 package uk.ac.strath.contextualtriggers.data;
 
+import java.lang.reflect.Type;
 import java.util.Arrays;
 
 public class WeatherData extends  AbstractData
@@ -34,5 +35,9 @@ public class WeatherData extends  AbstractData
                     Arrays.equals(((WeatherData) o).Conditions, this.Conditions);
         }
         return false;
+    }
+
+    public static Type getType() {
+        return WeatherData.class;
     }
 }

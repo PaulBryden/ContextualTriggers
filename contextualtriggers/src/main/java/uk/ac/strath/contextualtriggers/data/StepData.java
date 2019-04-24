@@ -1,5 +1,7 @@
 package uk.ac.strath.contextualtriggers.data;
 
+import java.lang.reflect.Type;
+
 public class StepData extends  AbstractData
 {
     public int steps;
@@ -11,4 +13,10 @@ public class StepData extends  AbstractData
         }
         return false;
     }
+
+
+    public static Type getType() {
+        return StepData.class;
+    }
+
 }

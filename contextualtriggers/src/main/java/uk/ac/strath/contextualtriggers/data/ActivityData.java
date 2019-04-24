@@ -2,6 +2,8 @@ package uk.ac.strath.contextualtriggers.data;
 
 import com.google.android.gms.location.DetectedActivity;
 
+import java.lang.reflect.Type;
+
 public class ActivityData extends AbstractData {
 
     private DetectedActivity activity;
@@ -20,5 +22,9 @@ public class ActivityData extends AbstractData {
             return ((ActivityData) o).activity.equals(this.activity) && super.equals(o);
         }
         return false;
+    }
+
+    public static Type getType() {
+        return ActivityData.class;
     }
 }

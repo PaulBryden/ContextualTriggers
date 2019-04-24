@@ -1,5 +1,6 @@
 package uk.ac.strath.contextualtriggers.data;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Comparator;
@@ -60,4 +61,8 @@ public class CalendarData extends AbstractData {
         return false;
     }
 
+
+    public static Type getType() {
+        return CalendarData.class;
+    }
 }

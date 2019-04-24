@@ -1,5 +1,7 @@
 package uk.ac.strath.contextualtriggers.data;
 
+import java.lang.reflect.Type;
+
 public class NotificationData extends  AbstractData
 {
     public long LastNotified;
@@ -11,4 +13,10 @@ public class NotificationData extends  AbstractData
         }
         return false;
     }
+
+
+    public static Type getType() {
+        return NotificationData.class;
+    }
+
 }
