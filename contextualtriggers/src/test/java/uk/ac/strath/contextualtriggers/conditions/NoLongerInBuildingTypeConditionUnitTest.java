@@ -30,6 +30,9 @@ import static org.junit.Assert.assertEquals;
 
 public class NoLongerInBuildingTypeConditionUnitTest {
 
+    /**
+     * Tests what happens when the user has left the building.
+     */
     @Test
     public void NoLongerInBuildingTypeConditionUnitTest() {
         class PlacesMockDataManager extends DataManager<PlacesData> implements IDataManager<PlacesData> {

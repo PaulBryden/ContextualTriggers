@@ -20,6 +20,9 @@ import static uk.ac.strath.contextualtriggers.conditions.StepAndGoalRealCountCon
 
 public class StepAndGoalRealCountConditionUnitTest {
 
+    /**
+     * Tests what happens when the user has not, and has, met their goal.
+     */
     @Test
     public void StepAndGoalRealCountConditionUnitTest() {
         class MockStepAndGoalCountManager extends DataManager<StepAndGoalData> implements IDataManager<StepAndGoalData> {

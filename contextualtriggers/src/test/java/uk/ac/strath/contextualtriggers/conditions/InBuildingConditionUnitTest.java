@@ -30,6 +30,9 @@ import static org.junit.Assert.assertEquals;
 
 public class InBuildingConditionUnitTest {
 
+    /**
+     * Tests what happens when the user is in a gym.
+     */
     @Test
     public void InBuildingConditionUnitTest() {
         class PlacesMockDataManager extends DataManager<PlacesData> implements IDataManager<PlacesData> {
@@ -187,6 +190,168 @@ public class InBuildingConditionUnitTest {
         manager.mock();
         assertEquals(true, altTransCondition.isSatisfied());
         System.out.println("InBuildingConditionUnitTest");
+    }
+
+    /**
+     * Tests what happens when the user is in a park.
+     */
+    @Test
+    public void InBuildingConditionUnitTest2() {
+        class PlacesMockDataManager extends DataManager<PlacesData> implements IDataManager<PlacesData> {
+            boolean firstTime = true;
+
+            @Nullable
+            @Override
+            public IBinder onBind(Intent intent) {
+                return null;
+            }
+
+            public void mock() {
+                List<PlaceLikelihood> data = new ArrayList<PlaceLikelihood>();
+                Place park = new Place() {
+                    @Override
+                    public int describeContents() {
+                        return 0;
+                    }
+
+                    @Override
+                    public void writeToParcel(Parcel parcel, int i) {
+
+                    }
+
+                    @Override
+                    public String getId() {
+                        return null;
+                    }
+
+
+                    @Nullable
+                    @Override
+                    public String getAddress() {
+                        return null;
+                    }
+
+                    @Nullable
+                    @Override
+                    public AddressComponents getAddressComponents() {
+                        return null;
+                    }
+
+                    @Nullable
+                    @Override
+                    public List<String> getAttributions() {
+                        return null;
+                    }
+
+                    @Nullable
+                    @Override
+                    public OpeningHours getOpeningHours() {
+                        return null;
+                    }
+
+                    @Nullable
+                    @Override
+                    public String getPhoneNumber() {
+                        return null;
+                    }
+
+                    @Override
+                    public LatLng getLatLng() {
+                        return null;
+                    }
+
+                    @Nullable
+                    @Override
+                    public String getName() {
+                        return null;
+                    }
+
+                    @Override
+                    public LatLngBounds getViewport() {
+                        return null;
+                    }
+
+                    @Override
+                    public Uri getWebsiteUri() {
+                        return null;
+                    }
+
+                    @Nullable
+                    @Override
+                    public List<PhotoMetadata> getPhotoMetadatas() {
+                        return null;
+                    }
+
+                    @Nullable
+                    @Override
+                    public PlusCode getPlusCode() {
+                        return null;
+                    }
+
+                    @Nullable
+                    @Override
+                    public Integer getPriceLevel() {
+                        return null;
+                    }
+
+                    @Nullable
+                    @Override
+                    public Double getRating() {
+                        return null;
+                    }
+
+                    @Nullable
+                    @Override
+                    public List<Type> getTypes() {
+                        ArrayList<Type> types = new ArrayList<Type>();
+                        types.add(Type.PARK);
+                        return types;
+                    }
+
+                    @Nullable
+                    @Override
+                    public Integer getUserRatingsTotal() {
+                        return null;
+                    }
+                };
+                PlaceLikelihood likelihood = new PlaceLikelihood() {
+
+                    @Override
+                    public int describeContents() {
+                        return 0;
+                    }
+
+                    @Override
+                    public void writeToParcel(Parcel parcel, int i) {
+
+                    }
+
+                    @Override
+                    public Place getPlace() {
+                        return park;
+                    }
+
+                    @Override
+                    public double getLikelihood() {
+                        return 0.76;
+                    }
+                };
+                firstTime = false;
+                data.add(likelihood);
+                sendUpdate(new PlacesData(data));
+            }
+        }
+
+        UnitTestAction action = new UnitTestAction();
+        PlacesMockDataManager manager = new PlacesMockDataManager();
+        InBuildingCondition altTransCondition = new InBuildingCondition(manager);
+        Trigger.Builder T = new Trigger.Builder();
+        T.setCondition(altTransCondition);
+        T.setAction(action);
+        Trigger trig = T.build();
+        manager.mock();
+        assertEquals(false, altTransCondition.isSatisfied());
+        System.out.println("InBuildingConditionUnitTest2");
     }
 
 }

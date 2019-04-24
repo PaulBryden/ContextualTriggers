@@ -16,6 +16,9 @@ import static org.junit.Assert.assertEquals;
 
 public class NotNotifiedTodayConditionUnitTest {
 
+    /**
+     * Tests what happens when the user has not, and has, been notified today.
+     */
     @Test
     public void NotNotifiedTodayConditionUnitTest() {
         class MockNotificationDataManager extends DataManager<VoidData> implements IDataManager<VoidData> {

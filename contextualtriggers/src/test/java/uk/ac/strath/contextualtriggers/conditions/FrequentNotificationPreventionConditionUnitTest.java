@@ -16,6 +16,9 @@ import static org.junit.Assert.assertEquals;
 
 public class FrequentNotificationPreventionConditionUnitTest {
 
+    /**
+     * Tests what happens immediately after, and 10.5 seconds after, the user is notified.
+     */
     @Test
     public void FrequentNotificationPreventionConditionUnitTest() {
         class NotificationMockDataManager extends DataManager<VoidData> implements IDataManager<VoidData>

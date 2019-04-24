@@ -18,6 +18,9 @@ import static org.junit.Assert.assertEquals;
 
 public class ClearWeatherConditionUnitTest {
 
+    /**
+     * Tests what happens when the weather changes from ICY to CLEAR.
+     */
     @Test
     public void ClearWeatherConditionUnitTest() {
         class ClearWeatherMockManager extends DataManager<WeatherData> implements IDataManager<WeatherData> {
@@ -53,6 +56,46 @@ public class ClearWeatherConditionUnitTest {
         System.out.println("AcceptableTimeConditionUnitTest");
         manager.mock();
         assertEquals(true, altTransCondition.isSatisfied());
+    }
+
+    /**
+     * Checks what happens when the weather changes from CLEAR to ICY.
+     */
+    @Test
+    public void ClearWeatherConditionUnitTest2() {
+        class ClearWeatherMockManager extends DataManager<WeatherData> implements IDataManager<WeatherData> {
+            boolean firstTime = true;
+
+            @Nullable
+            @Override
+            public IBinder onBind(Intent intent) {
+                return null;
+            }
+
+            public void mock() {
+                WeatherData data = new WeatherData();
+                if (firstTime) {
+                    data.Conditions = new int[]{Weather.CONDITION_CLEAR};
+                    firstTime = false;
+                } else {
+                    data.Conditions = new int[]{Weather.CONDITION_ICY};
+                }
+                sendUpdate(data);
+            }
+        }
+
+        UnitTestAction action = new UnitTestAction();
+        ClearWeatherMockManager manager = new ClearWeatherMockManager();
+        ClearWeatherCondition altTransCondition = new ClearWeatherCondition(manager);
+        Trigger.Builder T = new Trigger.Builder();
+        T.setCondition(altTransCondition);
+        T.setAction(action);
+        Trigger trig = T.build();
+        manager.mock();
+        assertEquals(true, altTransCondition.isSatisfied());
+        System.out.println("AcceptableTimeConditionUnitTest2");
+        manager.mock();
+        assertEquals(false, altTransCondition.isSatisfied());
     }
 
 }

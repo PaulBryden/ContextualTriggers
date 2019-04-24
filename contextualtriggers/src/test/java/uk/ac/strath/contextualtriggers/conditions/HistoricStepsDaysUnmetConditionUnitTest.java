@@ -16,6 +16,9 @@ import static org.junit.Assert.assertEquals;
 
 public class HistoricStepsDaysUnmetConditionUnitTest {
 
+    /**
+     * Tests what happens when the user has not met their goal.
+     */
     @Test
     public void HistoricStepsDaysUnmetConditionUnitTest() {
         class StepAndGoalMockDataManager extends DataManager<StepAndGoalData> implements IDataManager<StepAndGoalData> {
@@ -47,7 +50,6 @@ public class HistoricStepsDaysUnmetConditionUnitTest {
         manager.mock();
         assertEquals(true, altTransCondition.isSatisfied());
         System.out.println("HistoricStepsDaysUnmetConditionUnitTest");
-
     }
 
 }
