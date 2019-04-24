@@ -1,6 +1,8 @@
 package uk.ac.strath.contextualtriggers.data;
 
-public class AbstractData implements Data
+import java.lang.reflect.Type;
+
+public abstract class AbstractData implements Data
 {
     private final long timestamp;
 
@@ -16,4 +18,17 @@ public class AbstractData implements Data
     public long getTimestamp() {
         return timestamp;
     }
+
+    @Override
+    public boolean equals(Object o){
+        if(o instanceof AbstractData){
+            return ((AbstractData) o).timestamp == this.timestamp;
+        }
+        return false;
+    }
+
+    public static Type getType(){
+        return AbstractData.class;
+    }
+
 }

@@ -1,6 +1,8 @@
 package uk.ac.strath.contextualtriggers.data;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
@@ -8,7 +10,7 @@ import java.util.List;
 public class CalendarData extends AbstractData {
 
 
-    public List<EventData> cd = new ArrayList<>();
+    public List<EventData> cd;
 
     public CalendarData(List<EventData> cd) {
         // Sort events in ascending time order.
@@ -42,4 +44,25 @@ public class CalendarData extends AbstractData {
         return events;
     }
 
+
+    @Override
+    public boolean equals(Object o){
+        if (o instanceof CalendarData){
+            if(!super.equals(o) || cd.size() != ((CalendarData) o).cd.size()){
+                return false;
+            }
+            for(int i = 0; i < cd.size() ; i++){
+                if(!cd.get(i).equals(((CalendarData) o).cd.get(i))){
+                    return false;
+                }
+            }
+            return true;
+        }
+        return false;
+    }
+
+
+    public static Type getType() {
+        return CalendarData.class;
+    }
 }
