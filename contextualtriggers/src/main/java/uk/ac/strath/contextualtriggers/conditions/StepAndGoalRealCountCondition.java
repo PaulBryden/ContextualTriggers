@@ -7,15 +7,16 @@ import uk.ac.strath.contextualtriggers.managers.IDataManager;
 
 /**
  * A condition that compares the number of steps the user has taken today and their goal. It has two
- * modes, LESS_THAN and GREATER_THAN. In LESS_THAN mode, it is satisfied if the number of steps the
- * user has taken today is less than their goal. In GREATER_THAN mode, the opposite is true.
+ * modes, LESS_THAN and GREATER_THAN_OR_EQUAL_TO. In LESS_THAN mode, it is satisfied if the number
+ * of steps the user has taken today is less than their goal. In GREATER_THAN_OR_EQUAL_TO mode, the
+ * opposite is true.
  */
 public class StepAndGoalRealCountCondition extends DataCondition<StepAndGoalData> {
 
     private int mode;
 
     public final static int LESS_THAN = 0;
-    public final static int GREATER_THAN = 1;
+    public final static int GREATER_THAN_OR_EQUAL_TO = 1;
 
     public StepAndGoalRealCountCondition(int mode, IDataManager<StepAndGoalData> dataManager) {
         super(dataManager);
@@ -36,8 +37,8 @@ public class StepAndGoalRealCountCondition extends DataCondition<StepAndGoalData
         if (this.mode == LESS_THAN) {
             return (getData().getDay(today).steps < getData().getDay(today).goal);
         }
-        if (this.mode == GREATER_THAN) {
-            return (getData().getDay(today).steps > getData().getDay(today).goal);
+        if (this.mode == GREATER_THAN_OR_EQUAL_TO) {
+            return (getData().getDay(today).steps >= getData().getDay(today).goal);
         }
         return false;
     }
