@@ -18,11 +18,15 @@ public class DayData
     @Override
     public boolean equals(Object o){
         if(o instanceof DayData){
-            return super.equals(o) &&
-                    ((DayData) o).steps == (this.steps) &&
+            return  ((DayData) o).steps == (this.steps) &&
                     ((DayData) o).goal == (this.goal) &&
                     ((DayData) o).date.equals(this.date);
         }
         return false;
+    }
+
+    @Override
+    public String toString(){
+        return String.format("DayData : {steps : %s, goal : %s, date: %s}", steps, goal, date);
     }
 }

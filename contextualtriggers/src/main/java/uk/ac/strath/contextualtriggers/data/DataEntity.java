@@ -14,8 +14,6 @@ public class DataEntity {
     public int id;
 
     @ColumnInfo
-    public String type;
-
     public Data data;
 
 

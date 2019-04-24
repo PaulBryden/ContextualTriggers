@@ -39,7 +39,8 @@ public class TypeConverterTest {
 
     @Test
     public void AltitudeTest(){
-        Data d = new AltitudeData();
+        AltitudeData d = new AltitudeData();
+        d.altitude = 12345;
         String s = DataConverter.DataToString(d);
         Data d2 = DataConverter.StringToData(s);
         assertEquals(AltitudeData.class, d2.getClass());
@@ -108,6 +109,13 @@ public class TypeConverterTest {
         String s = DataConverter.DataToString(d);
         Data d2 = DataConverter.StringToData(s);
 
+        for(String k : d.getHistory().keySet()){
+            System.out.println(k);
+            System.out.println(d.getHistory().get(k));
+
+            System.out.println(((StepAndGoalData) d2).getHistory().get(k));
+
+        }
         System.out.println(d.getHistory());
 
         System.out.println(((StepAndGoalData) d2).getHistory());

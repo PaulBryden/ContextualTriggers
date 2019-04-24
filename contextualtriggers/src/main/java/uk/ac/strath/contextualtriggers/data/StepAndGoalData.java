@@ -40,7 +40,7 @@ public class StepAndGoalData extends  AbstractData
 
     public DayData getDay(LocalDate day)
     {
-        return history.get(day);
+        return history.get(day.toString());
     }
 
     @Override
