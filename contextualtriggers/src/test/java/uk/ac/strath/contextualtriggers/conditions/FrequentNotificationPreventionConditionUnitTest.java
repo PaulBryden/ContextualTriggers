@@ -6,55 +6,60 @@ import android.support.annotation.Nullable;
 
 import org.junit.Test;
 
-import uk.ac.strath.contextualtriggers.actions.UnitTestAction;
 import uk.ac.strath.contextualtriggers.data.VoidData;
 import uk.ac.strath.contextualtriggers.managers.DataManager;
-import uk.ac.strath.contextualtriggers.managers.IDataManager;
-import uk.ac.strath.contextualtriggers.triggers.Trigger;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 public class FrequentNotificationPreventionConditionUnitTest {
 
-    /**
-     * Tests what happens immediately after, and 10.5 seconds after, the user is notified.
-     */
-    @Test
-    public void FrequentNotificationPreventionConditionUnitTest() {
-        class NotificationMockDataManager extends DataManager<VoidData> implements IDataManager<VoidData>
+    private class MockNotificationDataManager extends DataManager<VoidData>
+    {
+        @Nullable
+        @Override
+        public IBinder onBind(Intent intent)
         {
-            boolean firstTime=true;
-            @Nullable
-            @Override
-            public IBinder onBind(Intent intent)
-            {
-                return null;
-            }
-            public void mock()
-            {
-                sendUpdate(null);
-            }
+            return null;
         }
 
-        UnitTestAction action = new UnitTestAction();
-        NotificationMockDataManager manager = new NotificationMockDataManager();
-        FrequentNotificationPreventionCondition condition = new FrequentNotificationPreventionCondition(10000,manager);
-        new Trigger.Builder().setCondition(condition).setAction(action).build();
-        assertEquals(true,condition.isSatisfied());
-        System.out.println("FrequentNotificationPreventionConditionUnitTest");
-        manager.mock();
-        assertEquals(false,condition.isSatisfied());
-        try
-        {
-            Thread.sleep(10500);
-        } catch (InterruptedException e)
-        {
-            e.printStackTrace();
+        public void sendMockUpdate(long timestamp) {
+            this.sendUpdate(new VoidData(timestamp));
         }
-        assertEquals(true,condition.isSatisfied());
-        manager.mock();
-        assertEquals(false,condition.isSatisfied());
-
     }
+
+    @Test
+    public void testConditionSatisfiedWhenNoNotificationSent() {
+        MockNotificationDataManager manager = new MockNotificationDataManager();
+        FrequentNotificationPreventionCondition condition = new FrequentNotificationPreventionCondition(10, manager);
+        assertTrue(condition.isSatisfied());
+    }
+
+
+    @Test
+    public void testConditionNotSatisfiedWhenNotificationSent() {
+        MockNotificationDataManager manager = new MockNotificationDataManager();
+        FrequentNotificationPreventionCondition condition = new FrequentNotificationPreventionCondition(10, manager);
+        manager.sendMockUpdate(System.currentTimeMillis());
+        assertFalse(condition.isSatisfied());
+    }
+
+    @Test
+    public void testConditionSatisfiedWhenNotificationSentWithinTimeout() {
+        MockNotificationDataManager manager = new MockNotificationDataManager();
+        FrequentNotificationPreventionCondition condition = new FrequentNotificationPreventionCondition(10, manager);
+        manager.sendMockUpdate(System.currentTimeMillis() - 9000);
+        assertFalse(condition.isSatisfied());
+    }
+
+
+    @Test
+    public void testConditionSatisfiedWhenNotificationSentBeforeTimeout() {
+        MockNotificationDataManager manager = new MockNotificationDataManager();
+        FrequentNotificationPreventionCondition condition = new FrequentNotificationPreventionCondition(10, manager);
+        manager.sendMockUpdate(System.currentTimeMillis() - 20000);
+        assertTrue(condition.isSatisfied());
+    }
+
 
 }

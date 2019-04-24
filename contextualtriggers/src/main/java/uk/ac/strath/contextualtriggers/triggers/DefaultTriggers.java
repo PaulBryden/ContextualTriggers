@@ -105,7 +105,7 @@ public class DefaultTriggers {
         IDataManager<StepAndGoalData> stepDataManager;
         IDataManager<VoidData> notificationDataManager;
         IDataManager<TimeOfDayData> intervalDataManager;
-        Log.d("HalfAndHalf Trigger","");
+        Log.d("HalfAndHalf Trigger","")
         stepDataManager = ((ActualStepAndGoalDataManager.LocalBinder) stepBinder).getInstance();
         intervalDataManager = ((IntervalsDataManager.LocalBinder) intervalBinder).getInstance();
         notificationDataManager = ((NotificationDataManager.LocalBinder) notifyBinder).getInstance();
@@ -132,8 +132,7 @@ public class DefaultTriggers {
         Log.d("Create Weather Trigger", stepBinder.toString());
         IDataManager<WeatherData> weatherDataManager;
         IDataManager<ActivityData> activityDataManager;
-        WeatherData targetWeather = new WeatherData();
-        targetWeather.Conditions=new int[]{Weather.CONDITION_CLEAR};
+        WeatherData targetWeather = new WeatherData(1, 0, new int[]{Weather.CONDITION_CLEAR});
         stepDataManager = ((ActualStepAndGoalDataManager.LocalBinder) stepBinder).getInstance();
         weatherDataManager = ((WeatherDataManager.LocalBinder) weatherBinder).getInstance();
         notificationDataManager = ((NotificationDataManager.LocalBinder) notifyBinder).getInstance();
@@ -161,8 +160,7 @@ public class DefaultTriggers {
         Log.d("Create Weather Trigger", stepBinder.toString());
         IDataManager<AltitudeData> altitudeDataManager;
         IDataManager<PlacesData> placesDataManager;
-        WeatherData targetWeather = new WeatherData();
-        targetWeather.Conditions=new int[]{Weather.CONDITION_CLEAR};
+        WeatherData targetWeather = new WeatherData(1, 0, new int[]{Weather.CONDITION_CLEAR});
         stepDataManager = ((ActualStepAndGoalDataManager.LocalBinder) stepBinder).getInstance();
         placesDataManager = ((PlacesDataManager.LocalBinder) placesBinder).getInstance();
         notificationDataManager = ((NotificationDataManager.LocalBinder) notifyBinder).getInstance();
@@ -234,8 +232,8 @@ public class DefaultTriggers {
         IDataManager<VoidData> notificationDataManager;
         Log.d("Create Weather Trigger", stepBinder.toString());
         IDataManager<TimeOfDayData> timeOfDayDataManager;
-        WeatherData targetWeather = new WeatherData();
-        targetWeather.TemperatureCelsius=1;
+        IDataManager<WeatherData> weatherDataManager;
+        WeatherData targetWeather = new WeatherData(1, 0, new int[0]);
         stepDataManager = ((ActualStepAndGoalDataManager.LocalBinder) stepBinder).getInstance();
         timeOfDayDataManager = ((IntervalsDataManager.LocalBinder) intervalBinder).getInstance();
         notificationDataManager = ((NotificationDataManager.LocalBinder) notifyBinder).getInstance();
