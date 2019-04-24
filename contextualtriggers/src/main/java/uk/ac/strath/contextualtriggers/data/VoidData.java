@@ -18,4 +18,12 @@ public class VoidData extends AbstractData {
         return VoidData.class;
     }
 
+    public VoidData() {
+        super();
+    }
+
+    public VoidData(long timestamp) {
+        super(timestamp);
+    }
+
 }

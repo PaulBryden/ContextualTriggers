@@ -4,7 +4,19 @@ import java.lang.reflect.Type;
 
 public class AltitudeData extends  AbstractData
 {
-    public double altitude;
+    public static Type getType() {
+        return AltitudeData.class;
+    }
+
+    private final double altitude;
+
+    public AltitudeData(double altitude) {
+        this.altitude = altitude;
+    }
+
+    public double getAltitude() {
+        return altitude;
+    }
 
     @Override
     public boolean equals(Object o){
@@ -12,10 +24,5 @@ public class AltitudeData extends  AbstractData
             return ((AltitudeData) o).altitude == (this.altitude) && super.equals(o);
         }
         return false;
-    }
-
-
-    public static Type getType() {
-        return AltitudeData.class;
     }
 }
