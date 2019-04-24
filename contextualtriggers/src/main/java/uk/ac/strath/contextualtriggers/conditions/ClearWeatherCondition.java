@@ -11,17 +11,14 @@ import uk.ac.strath.contextualtriggers.managers.IDataManager;
  */
 public class ClearWeatherCondition extends DataCondition<WeatherData> {
 
-
     public ClearWeatherCondition(IDataManager<WeatherData> dataManager) {
-        super(dataManager, 3*60);
+        super(dataManager, 3 * 60);
     }
 
     @Override
     public boolean isSatisfied() {
-        for(Integer i : getData().Conditions)
-        {
-            if(i.equals(Weather.CONDITION_CLEAR))
-            {
+        for (Integer i : getData().Conditions) {
+            if (i.equals(Weather.CONDITION_CLEAR)) {
                 return true;
             }
         }

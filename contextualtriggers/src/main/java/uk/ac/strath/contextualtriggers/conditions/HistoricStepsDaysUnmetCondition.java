@@ -6,13 +6,16 @@ import uk.ac.strath.contextualtriggers.data.DayData;
 import uk.ac.strath.contextualtriggers.data.StepAndGoalData;
 import uk.ac.strath.contextualtriggers.managers.IDataManager;
 
+/**
+ * A condition that is satisfied if the user failed to meet any of their recent goals.
+ */
 public class HistoricStepsDaysUnmetCondition extends DataCondition<StepAndGoalData> {
 
     private int daysMet;
 
     public HistoricStepsDaysUnmetCondition(int days, IDataManager<StepAndGoalData> dataManager) {
         super(dataManager);
-        daysMet=days;
+        daysMet = days;
     }
 
     @Override
@@ -21,17 +24,15 @@ public class HistoricStepsDaysUnmetCondition extends DataCondition<StepAndGoalDa
     }
 
     @Override
-    public boolean isSatisfied()
-    {
+    public boolean isSatisfied() {
         DayData day;
-        for (int i=0; i < daysMet; i++)
-        {
+        for (int i = 0; i < daysMet; i++) {
             day = getData().getDay(LocalDate.now().minusDays(i));
-            if(day.steps < day.goal)
-            {
+            if (day.steps < day.goal) {
                 return true;
             }
         }
         return false;
     }
+
 }

@@ -3,6 +3,11 @@ package uk.ac.strath.contextualtriggers.conditions;
 import uk.ac.strath.contextualtriggers.data.StepData;
 import uk.ac.strath.contextualtriggers.managers.IDataManager;
 
+/**
+ * A condition that compares the number of steps the user has taken today and the target. It has two
+ * modes, LESS_THAN and GREATER_THAN. In LESS_THAN mode, it is satisfied if the number of steps the
+ * user has taken today is less than their goal. In GREATER_THAN mode, the opposite is true.
+ */
 public class StepCountCondition extends DataCondition<StepData> {
 
     private int matchCount;
@@ -26,8 +31,9 @@ public class StepCountCondition extends DataCondition<StepData> {
             return getData().steps < matchCount;
         }
         if (this.mode == GREATER_THAN) {
-            return  getData().steps > matchCount;
+            return getData().steps > matchCount;
         }
         return false;
     }
+
 }

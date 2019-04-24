@@ -9,6 +9,9 @@ import uk.ac.strath.contextualtriggers.data.CalendarData;
 import uk.ac.strath.contextualtriggers.data.EventData;
 import uk.ac.strath.contextualtriggers.managers.IDataManager;
 
+/**
+ * A condition that checks the user's calendar for meetings in the next couple of hours.
+ */
 public class MeetingCondition extends DataCondition<CalendarData> {
 
     private String name;

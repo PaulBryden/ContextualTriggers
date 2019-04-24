@@ -11,4 +11,5 @@ public interface Condition {
      * @return true iff condition should not be considered satisfied because data is too old.
      */
     boolean hasStaleData();
+
 }

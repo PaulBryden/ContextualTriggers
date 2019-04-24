@@ -1,8 +1,8 @@
 package uk.ac.strath.contextualtriggers.conditions;
 
-import uk.ac.strath.contextualtriggers.triggers.ITrigger;
-
 import java.util.List;
+
+import uk.ac.strath.contextualtriggers.triggers.ITrigger;
 
 /**
  * Base class for composite conditions (conditions that depend on multiple other conditions,
