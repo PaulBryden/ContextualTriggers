@@ -72,7 +72,7 @@ public class WeatherDataManager extends AlarmDataManager<WeatherData> {
 
             }
         } else {
-            Awareness.getSnapshotClient(getApplicationContext()).getWeather().addOnFailureListener(new OnFailureListener() {
+            Awareness.getSnapshotClient(this).getWeather().addOnFailureListener(new OnFailureListener() {
                 @Override
                 public void onFailure(@NonNull Exception e) {
                     Log.d("WeatherDataManager", e.getMessage());

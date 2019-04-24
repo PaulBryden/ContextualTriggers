@@ -52,7 +52,7 @@ public class ActivityDataManager extends AlarmDataManager<ActivityData> {
     /*This Could be setup to fire on a transition, instead of a poll*/
     private void monitor() {
         // Permission has already been granted
-        Awareness.getSnapshotClient(getApplicationContext()).getDetectedActivity().addOnFailureListener(new OnFailureListener() {
+        Awareness.getSnapshotClient(this).getDetectedActivity().addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
                 Log.d("ActivityDataManager", e.getMessage());
