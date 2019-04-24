@@ -105,7 +105,7 @@ public class DefaultTriggers {
         IDataManager<StepAndGoalData> stepDataManager;
         IDataManager<VoidData> notificationDataManager;
         IDataManager<TimeOfDayData> intervalDataManager;
-        Log.d("HalfAndHalf Trigger","")
+        Log.d("HalfAndHalf Trigger","");
         stepDataManager = ((ActualStepAndGoalDataManager.LocalBinder) stepBinder).getInstance();
         intervalDataManager = ((IntervalsDataManager.LocalBinder) intervalBinder).getInstance();
         notificationDataManager = ((NotificationDataManager.LocalBinder) notifyBinder).getInstance();
