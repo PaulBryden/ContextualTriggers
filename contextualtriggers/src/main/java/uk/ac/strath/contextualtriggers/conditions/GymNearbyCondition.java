@@ -19,7 +19,7 @@ public class GymNearbyCondition extends DataCondition<PlacesData> {
     public boolean isSatisfied() {
         for (PlaceLikelihood p : getData().places) {
             for (Place.Type type : p.getPlace().getTypes()) {
-                if (type == Place.Type.GYM && p.getLikelihood() < 0.5) {
+                if (type == Place.Type.GYM && p.getLikelihood() > 0.5) {
                     return true;
                 }
             }
