@@ -28,13 +28,13 @@ import uk.ac.strath.contextualtriggers.triggers.Trigger;
 
 import static org.junit.Assert.assertEquals;
 
-public class InBuildingTypeConditionUnitTest {
+public class InPlaceTypeConditionUnitTest {
 
     /**
      * Tests what happens when the user is in a gym.
      */
     @Test
-    public void InBuildingTypeConditionUnitTest() {
+    public void InPlaceTypeConditionUnitTest() {
         class PlacesMockDataManager extends DataManager<PlacesData> implements IDataManager<PlacesData> {
             boolean firstTime = true;
 
@@ -181,7 +181,7 @@ public class InBuildingTypeConditionUnitTest {
         }
         UnitTestAction action = new UnitTestAction();
         PlacesMockDataManager manager = new PlacesMockDataManager();
-        InBuildingTypeCondition condition = new InBuildingTypeCondition(Place.Type.GYM, manager);
+        InPlaceTypeCondition condition = new InPlaceTypeCondition(Place.Type.GYM, manager);
         new Trigger.Builder().setCondition(condition).setAction(action).build();
         manager.mock();
         assertEquals(true, condition.isSatisfied());
@@ -340,7 +340,7 @@ public class InBuildingTypeConditionUnitTest {
         }
         UnitTestAction action = new UnitTestAction();
         PlacesMockDataManager manager = new PlacesMockDataManager();
-        InBuildingTypeCondition condition = new InBuildingTypeCondition(Place.Type.GYM, manager);
+        InPlaceTypeCondition condition = new InPlaceTypeCondition(Place.Type.GYM, manager);
         new Trigger.Builder().setCondition(condition).setAction(action).build();
         manager.mock();
         assertEquals(false, condition.isSatisfied());
