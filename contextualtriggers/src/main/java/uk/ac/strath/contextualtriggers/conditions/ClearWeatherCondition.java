@@ -17,7 +17,10 @@ public class ClearWeatherCondition extends DataCondition<WeatherData> {
 
     @Override
     public boolean isSatisfied() {
-        for (Integer i : getData().Conditions) {
+        if (getData() == null) {
+            return false;
+        }
+        for (Integer i : getData().getConditions()) {
             if (i.equals(Weather.CONDITION_CLEAR)) {
                 return true;
             }

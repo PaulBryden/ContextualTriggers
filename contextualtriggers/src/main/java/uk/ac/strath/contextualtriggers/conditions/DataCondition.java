@@ -32,6 +32,7 @@ public abstract class DataCondition<T extends Data> extends AbstractCondition {
         dataManager.register(this);
     }
 
+    @Nullable
     public T getData() {
         return data;
     }
@@ -48,7 +49,7 @@ public abstract class DataCondition<T extends Data> extends AbstractCondition {
         try {
             getTrigger().notifyChange();
         } catch (TriggerNotConnectedException e) {
-            Log.d("DataCondition", e.getMessage());
+            // Do nothing, as this is expected behaviour during initialisation.
         }
     }
 
