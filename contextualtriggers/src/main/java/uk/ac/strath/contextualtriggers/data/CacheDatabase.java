@@ -50,6 +50,7 @@ public abstract class CacheDatabase extends RoomDatabase{
             // If you want to keep the data through app restarts,
             // comment out the following line.
             Executors.newSingleThreadExecutor().execute(() -> {
+                INSTANCE.deleteAll();
                 long oldestTimestamp = System.currentTimeMillis() - (cache_keeptime * 1000 * 60 * 60 * 24);
                 try {
                     List<DataEntity> l = INSTANCE.getAll().get();

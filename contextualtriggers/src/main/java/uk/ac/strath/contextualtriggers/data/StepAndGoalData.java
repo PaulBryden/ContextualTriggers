@@ -14,7 +14,7 @@ public class StepAndGoalData extends  AbstractData
         /*
         POPULATE STRUCT HERE FROM HISTORY
          */
-        //setup();
+        setup();
 
 
     }
