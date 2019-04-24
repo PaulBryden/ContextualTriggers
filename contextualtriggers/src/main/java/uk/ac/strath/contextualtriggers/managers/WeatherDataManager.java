@@ -11,11 +11,11 @@ import android.support.v4.content.ContextCompat;
 import android.util.Log;
 
 import com.google.android.gms.awareness.Awareness;
-import com.google.android.gms.awareness.snapshot.WeatherResult;
+import com.google.android.gms.awareness.snapshot.WeatherResponse;
 import com.google.android.gms.awareness.state.Weather;
-import com.google.android.gms.common.api.ResultCallback;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 
-import uk.ac.strath.contextualtriggers.ContextualTriggersService;
 import uk.ac.strath.contextualtriggers.MainApplication;
 import uk.ac.strath.contextualtriggers.permissions.RequestLocationPermission;
 import uk.ac.strath.contextualtriggers.data.WeatherData;
@@ -72,27 +72,25 @@ public class WeatherDataManager extends AlarmDataManager<WeatherData> {
 
             }
         } else {
-            Awareness.SnapshotApi.getWeather(ContextualTriggersService.getGoogleAPIClient())
-                    .setResultCallback(new ResultCallback<WeatherResult>() {
-                        @Override
-                        public void onResult(@NonNull WeatherResult weatherResult) {
-                            if (!weatherResult.getStatus().isSuccess()) {
-                                Log.d("WeatherDM", weatherResult.getStatus().toString());
-                                Log.e("WeatherDataManager", weatherResult.getStatus().getStatusMessage()+" ");
-                                return;
-                            }
-
-                            //parse and display current weather status
-                            Weather weather = weatherResult.getWeather();
-                            WeatherData data = new WeatherData();
-                            data.TemperatureCelsius = weather.getTemperature(Weather.CELSIUS);
-                            data.Humidity = weather.getHumidity();
-                            data.Conditions = weather.getConditions();
-                            Log.d("WeatherDM", data.toString());
-                            data.printData();
-                            sendUpdate(data);
-                        }
-                    });
+            Awareness.getSnapshotClient(getApplicationContext()).getWeather().addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Log.d("WeatherDataManager", e.getMessage());
+                }
+            }).addOnSuccessListener(new OnSuccessListener<WeatherResponse>() {
+                @Override
+                public void onSuccess(WeatherResponse weatherResponse) {
+                    // parse and display current weather status
+                    Weather weather = weatherResponse.getWeather();
+                    WeatherData data = new WeatherData();
+                    data.TemperatureCelsius = weather.getTemperature(Weather.CELSIUS);
+                    data.Humidity = weather.getHumidity();
+                    data.Conditions = weather.getConditions();
+                    Log.d("WeatherDM", data.toString());
+                    data.printData();
+                    sendUpdate(data);
+                }
+            });
         }
     }
 }
