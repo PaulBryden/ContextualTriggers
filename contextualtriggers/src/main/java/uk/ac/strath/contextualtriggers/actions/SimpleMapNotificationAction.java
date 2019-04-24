@@ -75,7 +75,8 @@ public class SimpleMapNotificationAction implements Action {
                                 .setContentTitle("Notification")
                                 .setContentText(message)
                                 .setPriority(NotificationCompat.PRIORITY_DEFAULT)
-                                .setContentIntent(pIntent);
+                                .setContentIntent(pIntent)
+                                .setAutoCancel(true);
                         NotificationManagerCompat notificationManager = NotificationManagerCompat.from(MainApplication.getAppContext());
                         // notificationId is a unique int for each notification that you must define
                         notificationManager.notify(0, builder.build());

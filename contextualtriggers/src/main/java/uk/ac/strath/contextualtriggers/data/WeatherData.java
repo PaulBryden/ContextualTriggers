@@ -43,9 +43,9 @@ public class WeatherData extends  AbstractData
     public boolean equals(Object o){
         if(o instanceof WeatherData){
             return super.equals(o) &&
-                    ((WeatherData) o).TemperatureCelsius == (this.TemperatureCelsius) &&
-                    ((WeatherData) o).Humidity == (this.Humidity) &&
-                    Arrays.equals(((WeatherData) o).Conditions, this.Conditions);
+                    ((WeatherData) o).temperatureCelsius == (this.temperatureCelsius) &&
+                    ((WeatherData) o).humidity == (this.humidity) &&
+                    Arrays.equals(((WeatherData) o).conditions, this.conditions);
         }
         return false;
     }

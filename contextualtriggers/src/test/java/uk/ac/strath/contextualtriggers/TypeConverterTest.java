@@ -41,8 +41,7 @@ public class TypeConverterTest {
 
     @Test
     public void AltitudeTest(){
-        AltitudeData d = new AltitudeData();
-        d.altitude = 12345;
+        AltitudeData d = new AltitudeData(12345);
         String s = DataConverter.DataToString(d);
         Data d2 = DataConverter.StringToData(s);
         assertEquals(AltitudeData.class, d2.getClass());
@@ -158,7 +157,7 @@ public class TypeConverterTest {
 
     @Test
     public void WeatherTest(){
-        Data d = new WeatherData();
+        Data d = new WeatherData(0.0f, 0, new int[0]);
         String s = DataConverter.DataToString(d);
         Data d2 = DataConverter.StringToData(s);
         assertEquals(WeatherData.class, d2.getClass());

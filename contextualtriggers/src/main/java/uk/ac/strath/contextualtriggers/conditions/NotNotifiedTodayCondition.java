@@ -8,11 +8,14 @@ import uk.ac.strath.contextualtriggers.data.VoidData;
 import uk.ac.strath.contextualtriggers.managers.IDataManager;
 
 /**
- * A condition that is satisfied if the user has not been notified today.
+ * Basic condition that checks if a notification has been sent recently.
+ * Condition is satisfied if time elapsed since last condition is more than
+ * specified amount.
  */
-public class NotNotifiedTodayCondition extends DataCondition<VoidData> {
-
-    public NotNotifiedTodayCondition(IDataManager<VoidData> dataManager) {
+public class NotNotifiedTodayCondition extends DataCondition<VoidData>
+{
+    public NotNotifiedTodayCondition(IDataManager<VoidData> dataManager)
+    {
         super(dataManager);
     }
 
@@ -22,12 +25,18 @@ public class NotNotifiedTodayCondition extends DataCondition<VoidData> {
     }
 
     @Override
-    public boolean isSatisfied() {
+    public void notifyUpdate(VoidData data)
+    {
+        super.notifyUpdate(data);
+    }
+
+    @Override
+    public boolean isSatisfied()
+    {
         if (getData() == null) {
             return true;
         }
         LocalDate date = Instant.ofEpochMilli(getData().getTimestamp()).atZone(ZoneId.systemDefault()).toLocalDate();
         return !date.equals(LocalDate.now());
     }
-
 }
