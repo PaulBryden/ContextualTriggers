@@ -132,6 +132,7 @@ public class CalendarDataManager extends AlarmDataManager<CalendarData> {
                 try {
                     EventData c = new EventData(nameOfEvent.get(i), dateFormat.parse(startDates.get(i)));
                     cd.add(c);
+                    Log.d("Calendar Event",c.name+c.time);
                 } catch (ParseException e ){
                     Log.e("Calendar","Error parsing date in Calendar");
                 }
