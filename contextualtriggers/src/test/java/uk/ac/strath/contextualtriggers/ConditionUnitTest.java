@@ -19,15 +19,11 @@ import com.google.android.libraries.places.api.model.PlusCode;
 
 import org.junit.Test;
 
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 
 import uk.ac.strath.contextualtriggers.actions.UnitTestAction;
 import uk.ac.strath.contextualtriggers.conditions.AcceptableTimeCondition;
@@ -38,7 +34,7 @@ import uk.ac.strath.contextualtriggers.conditions.FrequentNotificationPrevention
 import uk.ac.strath.contextualtriggers.conditions.GymNearbyCondition;
 import uk.ac.strath.contextualtriggers.conditions.HistoricStepsDaysUnmetCondition;
 import uk.ac.strath.contextualtriggers.conditions.InBuildingCondition;
-import uk.ac.strath.contextualtriggers.conditions.InBuildingTypeCondition;
+import uk.ac.strath.contextualtriggers.conditions.InPlaceTypeCondition;
 import uk.ac.strath.contextualtriggers.conditions.MeetingCondition;
 import uk.ac.strath.contextualtriggers.conditions.NoLongerInBuildingTypeCondition;
 import uk.ac.strath.contextualtriggers.conditions.NotNotifiedTodayCondition;
@@ -55,7 +51,6 @@ import uk.ac.strath.contextualtriggers.data.VoidData;
 import uk.ac.strath.contextualtriggers.data.WeatherData;
 import uk.ac.strath.contextualtriggers.managers.DataManager;
 import uk.ac.strath.contextualtriggers.managers.IDataManager;
-import uk.ac.strath.contextualtriggers.managers.NotificationDataManager;
 import uk.ac.strath.contextualtriggers.triggers.Trigger;
 
 import static com.google.android.gms.awareness.fence.TimeFence.TIME_INTERVAL_AFTERNOON;
@@ -845,7 +840,7 @@ public class ConditionUnitTest
         }
         UnitTestAction action = new UnitTestAction();
         PlacesMockDataManager manager = new PlacesMockDataManager();
-        InBuildingTypeCondition altTransCondition = new InBuildingTypeCondition(Place.Type.CAFE,manager);
+        InPlaceTypeCondition altTransCondition = new InPlaceTypeCondition(Place.Type.CAFE,manager);
         Trigger.Builder T = new Trigger.Builder();
         T.setCondition(altTransCondition);
         T.setAction(action);
