@@ -1,0 +1,68 @@
+package uk.ac.strath.contextualtriggers.conditions;
+
+import android.content.Intent;
+import android.os.IBinder;
+import android.support.annotation.Nullable;
+
+import org.junit.Test;
+
+import java.time.LocalDate;
+
+import uk.ac.strath.contextualtriggers.actions.UnitTestAction;
+import uk.ac.strath.contextualtriggers.data.DayData;
+import uk.ac.strath.contextualtriggers.data.StepAndGoalData;
+import uk.ac.strath.contextualtriggers.managers.DataManager;
+import uk.ac.strath.contextualtriggers.managers.IDataManager;
+import uk.ac.strath.contextualtriggers.triggers.Trigger;
+
+import static org.junit.Assert.assertEquals;
+import static uk.ac.strath.contextualtriggers.conditions.StepAndGoalRealCountCondition.LESS_THAN;
+
+public class StepAndGoalRealCountConditionUnitTest {
+
+    /**
+     * Tests what happens when the user has not, and has, met their goal.
+     */
+    @Test
+    public void StepAndGoalRealCountConditionUnitTest() {
+        class MockStepAndGoalCountManager extends DataManager<StepAndGoalData> implements IDataManager<StepAndGoalData> {
+
+            public MockStepAndGoalCountManager() {
+                firstTime = true;
+            }
+
+            boolean firstTime;
+
+            @Nullable
+            @Override
+            public IBinder onBind(Intent intent) {
+                return null;
+            }
+
+            public void mock() {
+                if (firstTime) {
+                    sendUpdate(new StepAndGoalData());
+                    firstTime = false;
+                } else {
+                    StepAndGoalData fulfilled = new StepAndGoalData();
+                    LocalDate today = LocalDate.now();
+                    DayData day = fulfilled.getDay(today);
+                    day.steps = 100000;
+                    fulfilled.updateDay(day);
+                    sendUpdate(fulfilled);
+                }
+            }
+        }
+
+        UnitTestAction action = new UnitTestAction();
+        MockStepAndGoalCountManager manager = new MockStepAndGoalCountManager();
+        StepAndGoalRealCountCondition condition = new StepAndGoalRealCountCondition(LESS_THAN, manager);
+        new Trigger.Builder().setCondition(condition).setAction(action).build();
+        manager.mock();
+        assertEquals(true, condition.isSatisfied());
+        manager.mock();
+        assertEquals(false, condition.isSatisfied());
+        System.out.println("NotNotifiedTodayConditionUnitTest");
+    }
+
+}

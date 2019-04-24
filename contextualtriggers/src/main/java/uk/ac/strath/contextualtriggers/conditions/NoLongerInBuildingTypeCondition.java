@@ -7,10 +7,10 @@ import uk.ac.strath.contextualtriggers.data.PlacesData;
 import uk.ac.strath.contextualtriggers.managers.IDataManager;
 
 /**
- * Condition satisfied if current weather matches a target value. Use constants defined in
- * WeatherService to represent weather states.
+ * A condition that is satisfied if the user leaves a building of the target type.
  */
 public class NoLongerInBuildingTypeCondition extends DataCondition<PlacesData> {
+
     Place.Type targetType;
     boolean isInPlace;
     boolean justLeftPlace;
@@ -22,45 +22,35 @@ public class NoLongerInBuildingTypeCondition extends DataCondition<PlacesData> {
     }
 
     @Override
-    public void notifyUpdate(PlacesData data)
-    {
+    public void notifyUpdate(PlacesData data) {
         // Override since an update always means condition isn't satisfied,
         // so no need to notify the Trigger of the change.
-       for(PlaceLikelihood p : data.places)
-       {
-           for(Place.Type type : p.getPlace().getTypes())
-           {
-               if(type == targetType && p.getLikelihood()>0.75)
-               {
-                   isInPlace =true;
-               }
-           }
-       }
+        for (PlaceLikelihood p : data.places) {
+            for (Place.Type type : p.getPlace().getTypes()) {
+                if (type == targetType && p.getLikelihood() > 0.75) {
+                    isInPlace = true;
+                }
+            }
+        }
         super.notifyUpdate(data);
     }
 
     @Override
-    public boolean isSatisfied()
-    {   for(PlaceLikelihood p : getData().places)
-        {
-            for(Place.Type type : p.getPlace().getTypes())
-            {
-                if(type == targetType && p.getLikelihood()<0.35)
-                {
-                    if(isInPlace)
-                    {
+    public boolean isSatisfied() {
+        for (PlaceLikelihood p : getData().places) {
+            for (Place.Type type : p.getPlace().getTypes()) {
+                if (type == targetType && p.getLikelihood() < 0.35) {
+                    if (isInPlace) {
                         isInPlace = false;
                         justLeftPlace = true;
-                        lastInPlace=System.currentTimeMillis();
+                        lastInPlace = System.currentTimeMillis();
                     }
                 }
             }
         }
-        if(System.currentTimeMillis()-lastInPlace<600000)
-        {
+        if (System.currentTimeMillis() - lastInPlace < 600000) {
             return justLeftPlace;
-        }else
-        {
+        } else {
             return false;
         }
     }

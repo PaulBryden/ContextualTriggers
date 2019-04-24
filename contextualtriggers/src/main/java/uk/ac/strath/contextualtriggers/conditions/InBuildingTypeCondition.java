@@ -7,10 +7,10 @@ import uk.ac.strath.contextualtriggers.data.PlacesData;
 import uk.ac.strath.contextualtriggers.managers.IDataManager;
 
 /**
- * Condition satisfied if current weather matches a target value. Use constants defined in
- * WeatherService to represent weather states.
+ * A condition that is satisfied if the user is in a building of the target type.
  */
 public class InBuildingTypeCondition extends DataCondition<PlacesData> {
+
     Place.Type targetType;
 
     public InBuildingTypeCondition(Place.Type buildingType, IDataManager<PlacesData> dataManager) {
@@ -20,18 +20,14 @@ public class InBuildingTypeCondition extends DataCondition<PlacesData> {
 
     @Override
     public boolean isSatisfied() {
-        for(PlaceLikelihood p : getData().places)
-        {
-          if(p.getLikelihood()>0.75)
-          {
-              for(Place.Type type : p.getPlace().getTypes())
-              {
-                  if(type == targetType)
-                  {
-                      return true;
-                  }
-              }
-          }
+        for (PlaceLikelihood p : getData().places) {
+            if (p.getLikelihood() > 0.75) {
+                for (Place.Type type : p.getPlace().getTypes()) {
+                    if (type == targetType) {
+                        return true;
+                    }
+                }
+            }
         }
         return false;
     }
