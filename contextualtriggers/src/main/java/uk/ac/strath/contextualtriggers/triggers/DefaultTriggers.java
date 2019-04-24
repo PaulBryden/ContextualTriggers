@@ -26,7 +26,7 @@ import uk.ac.strath.contextualtriggers.conditions.FrequentNotificationPrevention
 import uk.ac.strath.contextualtriggers.conditions.GymNearbyCondition;
 import uk.ac.strath.contextualtriggers.conditions.HistoricStepsDaysUnmetCondition;
 import uk.ac.strath.contextualtriggers.conditions.InBuildingCondition;
-import uk.ac.strath.contextualtriggers.conditions.InBuildingTypeCondition;
+import uk.ac.strath.contextualtriggers.conditions.InPlaceTypeCondition;
 import uk.ac.strath.contextualtriggers.conditions.MeetingCondition;
 import uk.ac.strath.contextualtriggers.conditions.NoLongerInBuildingTypeCondition;
 import uk.ac.strath.contextualtriggers.conditions.NotNotifiedTodayCondition;
@@ -217,7 +217,7 @@ public class DefaultTriggers {
         notificationDataManager = ((NotificationDataManager.LocalBinder) notifyBinder).getInstance();
         Trigger.Builder builder = new Trigger.Builder();
         Condition c = new StepAndGoalRealCountCondition(StepCountCondition.LESS_THAN, stepDataManager);
-        Condition c1 = new InBuildingTypeCondition(Place.Type.FOOD, placesDataManager);
+        Condition c1 = new InPlaceTypeCondition(Place.Type.FOOD, placesDataManager);
         Condition c2 = new FrequentNotificationPreventionCondition(10000, notificationDataManager);
         Action a = new SimpleMapNotificationAction("We hope you enjoyed your lunch. Let's walk it off.");
         List<Condition> conditionList = new ArrayList<>();

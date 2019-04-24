@@ -104,7 +104,7 @@ public class ContextualTriggersService extends Service
         startForeground(startId, getServiceNotification());
         //noinspection MissingPermission
         mGoogleApiClient = new GoogleApiClient.Builder(this)
-                .addApi(Awareness.API)
+                .addApi(Awareness.getSnapshotClient(getApplicationContext()).getApi())
                 .build();
         mGoogleApiClient.registerConnectionCallbacks(new GoogleApiClient.ConnectionCallbacks()
         {
