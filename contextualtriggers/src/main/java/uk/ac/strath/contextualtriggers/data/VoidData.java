@@ -5,4 +5,12 @@ package uk.ac.strath.contextualtriggers.data;
  */
 public class VoidData extends AbstractData {
 
+    public VoidData() {
+        super();
+    }
+
+    public VoidData(long timestamp) {
+        super(timestamp);
+    }
+
 }

@@ -10,6 +10,11 @@ public class ActivityData extends AbstractData {
         this.activity = activity;
     }
 
+    public ActivityData(DetectedActivity activity, long timestamp) {
+        super(timestamp);
+        this.activity = activity;
+    }
+
     public int getActivityType() {
         return activity.getType();
     }

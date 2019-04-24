@@ -51,7 +51,7 @@ public class AltitudeDataManager extends AlarmDataManager<AltitudeData> {
 
     private void setup() {
         Log.d("AltitudeDataManager","Setting Up Altitude Data Manager");
-        altData = new AltitudeData();
+        altData = null;
     }
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
@@ -99,8 +99,8 @@ public class AltitudeDataManager extends AlarmDataManager<AltitudeData> {
                 @Override
                 public void onSuccess(LocationResponse locationResponse) {
                     Location location = locationResponse.getLocation();
-                    altData.altitude = location.getAltitude();
-                    Log.d("AltitudeDataManager", "Altitude:" + altData.altitude);
+                    altData = new AltitudeData(location.getAltitude());
+                    Log.d("AltitudeDataManager", "Altitude:" + altData.getAltitude());
                     sendUpdate(altData);
                 }
             });

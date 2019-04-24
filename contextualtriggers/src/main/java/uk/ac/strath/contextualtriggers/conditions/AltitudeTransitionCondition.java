@@ -8,27 +8,27 @@ import uk.ac.strath.contextualtriggers.managers.IDataManager;
  */
 public class AltitudeTransitionCondition extends DataCondition<AltitudeData> {
 
-    private double AltitudeTransition = 0;
-    private AltitudeData oldAltitude;
-    private int targetTransition;
+    private double altitudeTransition;
+    private double targetTransition;
 
     public AltitudeTransitionCondition(int transition, IDataManager<AltitudeData> dataManager) {
         super(dataManager, 30);
-        oldAltitude = new AltitudeData();
+        altitudeTransition = 0;
         this.targetTransition = transition;
     }
 
     @Override
     public void notifyUpdate(AltitudeData data) {
         // Override since an update always means condition isn't satisfied,
-        AltitudeTransition = data.altitude - oldAltitude.altitude;
-        oldAltitude = data;
+        if (getData() != null) {
+            altitudeTransition = data.getAltitude() - getData().getAltitude();
+        }
         super.notifyUpdate(data);
     }
 
     @Override
     public boolean isSatisfied() {
-        return AltitudeTransition > targetTransition;
+        return altitudeTransition > targetTransition;
     }
 
 }

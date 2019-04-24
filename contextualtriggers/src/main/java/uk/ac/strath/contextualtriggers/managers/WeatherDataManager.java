@@ -82,12 +82,8 @@ public class WeatherDataManager extends AlarmDataManager<WeatherData> {
                 public void onSuccess(WeatherResponse weatherResponse) {
                     // parse and display current weather status
                     Weather weather = weatherResponse.getWeather();
-                    WeatherData data = new WeatherData();
-                    data.TemperatureCelsius = weather.getTemperature(Weather.CELSIUS);
-                    data.Humidity = weather.getHumidity();
-                    data.Conditions = weather.getConditions();
+                    WeatherData data = new WeatherData(weather.getTemperature(Weather.CELSIUS), weather.getHumidity(), weather.getConditions());
                     Log.d("WeatherDM", data.toString());
-                    data.printData();
                     sendUpdate(data);
                 }
             });
