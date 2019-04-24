@@ -60,8 +60,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".RequestLocationPermission" />
-        <activity android:name=".RequestCalendarPermission" />
+        <activity android:name=".permissions.RequestLocationPermission" />
+        <activity android:name=".permissions.RequestCalendarPermission" />
 
         <service android:enabled="true"
             android:name=".ContextualTriggersService">

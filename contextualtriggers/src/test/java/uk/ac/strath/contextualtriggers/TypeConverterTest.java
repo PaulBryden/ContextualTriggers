@@ -6,6 +6,7 @@ import org.junit.Test;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 
 import uk.ac.strath.contextualtriggers.data.ActivityData;
@@ -15,6 +16,7 @@ import uk.ac.strath.contextualtriggers.data.CalendarData;
 import uk.ac.strath.contextualtriggers.data.Data;
 import uk.ac.strath.contextualtriggers.data.DataConverter;
 import uk.ac.strath.contextualtriggers.data.DayData;
+import uk.ac.strath.contextualtriggers.data.EventData;
 import uk.ac.strath.contextualtriggers.data.GoalData;
 import uk.ac.strath.contextualtriggers.data.ListCalendarData;
 import uk.ac.strath.contextualtriggers.data.NotificationData;
@@ -58,7 +60,10 @@ public class TypeConverterTest {
 
     @Test
     public void CalendarTest(){
-        Data d = new CalendarData("test", new Date(2001, 1, 1));
+        CalendarData d = new CalendarData(new ArrayList<>());
+        d.cd.add(new EventData("event1", new Date(1970, 1, 1)));
+        d.cd.add(new EventData("event2", new Date(2001, 1, 1)));
+        d.cd.add(new EventData("event3", new Date(2020, 6, 6)));
         String s = DataConverter.DataToString(d);
         Data d2 = DataConverter.StringToData(s);
         assertEquals(CalendarData.class, d2.getClass());
