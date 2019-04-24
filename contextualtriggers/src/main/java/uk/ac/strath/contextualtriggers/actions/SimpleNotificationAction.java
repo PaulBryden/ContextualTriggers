@@ -40,7 +40,8 @@ public class SimpleNotificationAction implements Action {
                 .setSmallIcon(R.drawable.round_directions_walk_24)
                 .setContentTitle("Notification")
                 .setContentText(message)
-                .setPriority(NotificationCompat.PRIORITY_DEFAULT);
+                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                .setAutoCancel(true);
         NotificationManagerCompat notificationManager = NotificationManagerCompat.from(MainApplication.getAppContext());
         // notificationId is a unique int for each notification that you must define
         notificationManager.notify(0, builder.build());

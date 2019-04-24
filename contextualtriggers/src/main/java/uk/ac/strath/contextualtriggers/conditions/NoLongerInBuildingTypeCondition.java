@@ -30,7 +30,7 @@ public class NoLongerInBuildingTypeCondition extends DataCondition<PlacesData> {
        {
            for(Place.Type type : p.getPlace().getTypes())
            {
-               if(type == targetType && p.getLikelihood()>0.75)
+               if(type == targetType && p.getLikelihood()>0.30)
                {
                    isInPlace =true;
                }
@@ -45,7 +45,7 @@ public class NoLongerInBuildingTypeCondition extends DataCondition<PlacesData> {
         {
             for(Place.Type type : p.getPlace().getTypes())
             {
-                if(type == targetType && p.getLikelihood()<0.35)
+                if(type == targetType && p.getLikelihood()<0.30)
                 {
                     if(isInPlace)
                     {

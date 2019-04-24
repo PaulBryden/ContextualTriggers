@@ -17,7 +17,7 @@ public class GymNearbyCondition extends DataCondition<PlacesData> {
 
 
     public GymNearbyCondition(IDataManager<PlacesData> dataManager) {
-        super(dataManager);
+        super(dataManager,20);
     }
 
     @Override

@@ -18,14 +18,13 @@ public class AltitudeTransitionCondition extends DataCondition<AltitudeData>
 {
 
     private double AltitudeTransition=0;
-    private AltitudeData oldAltitude;
+    private double oldAltitude=0;
     private int targetTransition;
 
 
     public AltitudeTransitionCondition(int transition,IDataManager dataManager)
     {
-        super(dataManager, 30);
-        oldAltitude = new AltitudeData();
+        super(dataManager, 30,new AltitudeData());
         this.targetTransition = transition;
     }
 
@@ -33,8 +32,8 @@ public class AltitudeTransitionCondition extends DataCondition<AltitudeData>
     public void notifyUpdate(AltitudeData data)
     {
         // Override since an update always means condition isn't satisfied,
-        AltitudeTransition=data.altitude-oldAltitude.altitude;
-        oldAltitude=data;
+        AltitudeTransition=data.altitude-oldAltitude;
+        oldAltitude=data.altitude;
         super.notifyUpdate(data);
     }
 

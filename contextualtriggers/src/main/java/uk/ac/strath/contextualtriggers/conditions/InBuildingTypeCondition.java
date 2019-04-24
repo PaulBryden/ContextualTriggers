@@ -22,7 +22,7 @@ public class InBuildingTypeCondition extends DataCondition<PlacesData> {
     public boolean isSatisfied() {
         for(PlaceLikelihood p : getData().places)
         {
-          if(p.getLikelihood()>0.75)
+          if(p.getLikelihood()>0.30)
           {
               for(Place.Type type : p.getPlace().getTypes())
               {

@@ -31,6 +31,11 @@ public class FrequentNotificationPreventionCondition extends DataCondition<VoidD
     }
 
     @Override
+    public boolean hasStaleData() {
+        return false;
+    }
+
+    @Override
     public boolean isSatisfied()
     {
         if (lastNotificationSent < 0)
