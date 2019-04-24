@@ -128,7 +128,7 @@ public class CalendarDataManager extends AlarmDataManager<CalendarData> {
             for(int i = 0; i < nameOfEvent.size();i++){
                // Log.d("CALENDAREVENT", nameOfEvent.get(i));
               //  Log.d("CALENDARTIME", startDates.get(i));
-                SimpleDateFormat dateFormat = new SimpleDateFormat("DD/MM/yyyy hh:mm:ss a");
+                SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss a");
                 try {
                     EventData c = new EventData(nameOfEvent.get(i), dateFormat.parse(startDates.get(i)));
                     cd.add(c);
