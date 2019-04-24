@@ -11,11 +11,11 @@ import android.support.v4.content.ContextCompat;
 import android.util.Log;
 
 import com.google.android.gms.awareness.Awareness;
-import com.google.android.gms.awareness.snapshot.TimeIntervalsResult;
+import com.google.android.gms.awareness.snapshot.TimeIntervalsResponse;
 import com.google.android.gms.awareness.state.TimeIntervals;
-import com.google.android.gms.common.api.ResultCallback;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 
-import uk.ac.strath.contextualtriggers.ContextualTriggersService;
 import uk.ac.strath.contextualtriggers.MainApplication;
 import uk.ac.strath.contextualtriggers.permissions.RequestLocationPermission;
 import uk.ac.strath.contextualtriggers.data.TimeOfDayData;
@@ -75,22 +75,20 @@ public class IntervalsDataManager extends AlarmDataManager<TimeOfDayData> {
 
                     }
                 } else {
-            Awareness.SnapshotApi.getTimeIntervals(ContextualTriggersService.getGoogleAPIClient())
-                    .setResultCallback(new ResultCallback<TimeIntervalsResult>() {
-                        @Override
-                        public void onResult(@NonNull TimeIntervalsResult intervalResult) {
-                            if (!intervalResult.getStatus().isSuccess()) {
-                                Log.d("IntervalsDM", intervalResult.getStatus().toString());
-                                Log.e("IntervalsDataManager", intervalResult.getStatus().getStatusMessage() + " ");
-                                return;
-                            }
-
-                            //parse and display current weather status
-                            TimeIntervals intervals = intervalResult.getTimeIntervals();
-                            Log.d("IntervalsDM", intervals.toString());
-                            sendUpdate(new TimeOfDayData(intervals.getTimeIntervals()));
-                        }
-                    });
+            Awareness.getSnapshotClient(getApplicationContext()).getTimeIntervals().addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Log.d("IntervalsDataManager", e.getMessage());
+                }
+            }).addOnSuccessListener(new OnSuccessListener<TimeIntervalsResponse>() {
+                @Override
+                public void onSuccess(TimeIntervalsResponse timeIntervalsResponse) {
+                    // parse and display current weather status
+                    TimeIntervals intervals = timeIntervalsResponse.getTimeIntervals();
+                    Log.d("IntervalsDM", intervals.toString());
+                    sendUpdate(new TimeOfDayData(intervals.getTimeIntervals()));
+                }
+            });
         }
     }
 }
