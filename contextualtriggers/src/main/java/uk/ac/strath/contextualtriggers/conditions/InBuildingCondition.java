@@ -9,7 +9,7 @@ import uk.ac.strath.contextualtriggers.data.PlacesData;
 import uk.ac.strath.contextualtriggers.managers.IDataManager;
 
 /**
- * Condition satisfied if any place with a likelihood greater than a threshold value matches
+ * A condition satisfied if any place with a likelihood greater than a threshold value matches
  * a place type considered a building.
  */
 public class InBuildingCondition extends InPlaceTypeCondition {

@@ -14,13 +14,12 @@ public abstract class AbstractCondition implements Condition {
         this.trigger = trigger;
     }
 
-    ITrigger getTrigger() throws TriggerNotConnectedException{
-        if (trigger!=null)
-        {
+    ITrigger getTrigger() throws TriggerNotConnectedException {
+        if (trigger != null) {
             return trigger;
-        }else
-        {
+        } else {
             throw new TriggerNotConnectedException();
         }
     }
+
 }
