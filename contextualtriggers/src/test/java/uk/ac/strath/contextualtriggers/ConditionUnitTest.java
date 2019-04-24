@@ -39,12 +39,15 @@ import uk.ac.strath.contextualtriggers.conditions.GymNearbyCondition;
 import uk.ac.strath.contextualtriggers.conditions.HistoricStepsDaysUnmetCondition;
 import uk.ac.strath.contextualtriggers.conditions.InBuildingCondition;
 import uk.ac.strath.contextualtriggers.conditions.InBuildingTypeCondition;
+import uk.ac.strath.contextualtriggers.conditions.MeetingCondition;
 import uk.ac.strath.contextualtriggers.conditions.NoLongerInBuildingTypeCondition;
 import uk.ac.strath.contextualtriggers.conditions.NotNotifiedTodayCondition;
 import uk.ac.strath.contextualtriggers.conditions.StepAndGoalRealCountCondition;
 import uk.ac.strath.contextualtriggers.data.ActivityData;
 import uk.ac.strath.contextualtriggers.data.AltitudeData;
+import uk.ac.strath.contextualtriggers.data.CalendarData;
 import uk.ac.strath.contextualtriggers.data.DayData;
+import uk.ac.strath.contextualtriggers.data.EventData;
 import uk.ac.strath.contextualtriggers.data.PlacesData;
 import uk.ac.strath.contextualtriggers.data.StepAndGoalData;
 import uk.ac.strath.contextualtriggers.data.TimeOfDayData;
@@ -852,6 +855,32 @@ public class ConditionUnitTest
         System.out.println("InBuildingConditionUnitTest");
     }
 
+    @Test
+    public void MeetingConditionTest() {
+        class MockCalendarDataManager extends DataManager<CalendarData> implements IDataManager<CalendarData> {
+            @Nullable
+            @Override
+            public IBinder onBind(Intent intent) {
+                return null;
+            }
+            public void mock() {
+                List<EventData> data = new ArrayList<>();
+                Calendar c = Calendar.getInstance();
+                c.add(Calendar.HOUR, 1);
+                Date t = c.getTime();
+                // Schedule a meeting in 1 h.
+                data.add(new EventData("Meeting", t));
+                sendUpdate(new CalendarData(data));
+            }
+        }
+        MockCalendarDataManager manager = new MockCalendarDataManager();
+        MeetingCondition condition = new MeetingCondition(manager);
+        UnitTestAction action = new UnitTestAction();
+        Trigger trigger = new Trigger.Builder().setCondition(condition).setAction(action).build();
+        manager.mock();
+        assertTrue(condition.isSatisfied());
+        System.out.println("MeetingConditionTest");
+    }
 
     @Test
     public void NoLongerInBuildingTypeConditionUnitTest()

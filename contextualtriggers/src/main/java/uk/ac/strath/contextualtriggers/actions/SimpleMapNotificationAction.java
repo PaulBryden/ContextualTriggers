@@ -9,18 +9,15 @@ import android.content.pm.PackageManager;
 import android.location.Location;
 import android.net.Uri;
 import android.os.Build;
-import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.NotificationManagerCompat;
 import android.support.v4.content.ContextCompat;
 
 import com.google.android.gms.awareness.Awareness;
-import com.google.android.gms.awareness.snapshot.LocationResult;
-import com.google.android.gms.common.api.ResultCallback;
+import com.google.android.gms.awareness.snapshot.LocationResponse;
+import com.google.android.gms.tasks.OnSuccessListener;
 
-import uk.ac.strath.contextualtriggers.ContextualTriggersService;
-import uk.ac.strath.contextualtriggers.Logger;
 import uk.ac.strath.contextualtriggers.MainApplication;
 import uk.ac.strath.contextualtriggers.R;
 import uk.ac.strath.contextualtriggers.conditions.FrequentNotificationPreventionCondition;
@@ -32,13 +29,11 @@ public class SimpleMapNotificationAction implements Action {
 
     private static final String CHANNEL_ID = "contextualtriggers";
     private String message;
-    private Logger logger;
     private FrequentNotificationPreventionCondition notifyCondition;
     private int MY_PERMISSIONS_REQUEST_READ_CONTACTS;
 
     public SimpleMapNotificationAction(String message) {
         this.message = message;
-        logger = Logger.getInstance();
         createNotificationChannel();
     }
 
@@ -62,35 +57,31 @@ public class SimpleMapNotificationAction implements Action {
                 }
             } else {
                 // Permission has already been granted
-                Awareness.SnapshotApi.getLocation(ContextualTriggersService.getGoogleAPIClient())
-                        .setResultCallback(new ResultCallback<LocationResult>() {
-                            @Override
-                            public void onResult(@NonNull LocationResult locationResult) {
-                                if (locationResult.getStatus().isSuccess()) {
-                                    Location localLocation = locationResult.getLocation();
-                                    Intent cs = new Intent(MainApplication.getAppContext(), NotificationDataManager.class);
-                                    MainApplication.getAppContext().startService(cs);
-                                    if (notifyCondition != null) {
-                                        notifyCondition.notifyUpdate(null);
-                                    }
-                                    Uri gmmIntentUri = Uri.parse("google.navigation:q=" + Double.toString(localLocation.getLatitude() + 0.01) + "," + Double.toString(localLocation.getLongitude() + 0.01) + "&mode=w");
-                                    Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
-                                    mapIntent.setPackage("com.google.android.apps.maps");
-                                    PendingIntent pIntent = PendingIntent.getActivity(MainApplication.getAppContext(), 0, mapIntent, 0);
-                                    logger.log("*** SENDING NOTIFICATION ***\n\"" + message + "\"");
-                                    NotificationCompat.Builder builder = new NotificationCompat.Builder(MainApplication.getAppContext(), CHANNEL_ID)
-                                            .setSmallIcon(R.drawable.round_directions_walk_24)
-                                            .setContentTitle("Notification")
-                                            .setContentText(message)
-                                            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
-                                            .setContentIntent(pIntent)
-                                            .setAutoCancel(true);
-                                    NotificationManagerCompat notificationManager = NotificationManagerCompat.from(MainApplication.getAppContext());
-                                    // notificationId is a unique int for each notification that you must define
-                                    notificationManager.notify(0, builder.build());
-                                }
-                            }
-                        });
+                Awareness.getSnapshotClient(MainApplication.getAppContext()).getLocation().addOnSuccessListener(new OnSuccessListener<LocationResponse>() {
+                    @Override
+                    public void onSuccess(LocationResponse locationResponse) {
+                        Location localLocation = locationResponse.getLocation();
+                        Intent cs = new Intent(MainApplication.getAppContext(), NotificationDataManager.class);
+                        MainApplication.getAppContext().startService(cs);
+                        if (notifyCondition != null) {
+                            notifyCondition.notifyUpdate(null);
+                        }
+                        Uri gmmIntentUri = Uri.parse("google.navigation:q=" + Double.toString(localLocation.getLatitude() + 0.01) + "," + Double.toString(localLocation.getLongitude() + 0.01) + "&mode=w");
+                        Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
+                        mapIntent.setPackage("com.google.android.apps.maps");
+                        PendingIntent pIntent = PendingIntent.getActivity(MainApplication.getAppContext(), 0, mapIntent, 0);
+                        NotificationCompat.Builder builder = new NotificationCompat.Builder(MainApplication.getAppContext(), CHANNEL_ID)
+                                .setSmallIcon(R.drawable.round_directions_walk_24)
+                                .setContentTitle("Notification")
+                                .setContentText(message)
+                                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                                .setContentIntent(pIntent)
+                                .setAutoCancel(true);
+                        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(MainApplication.getAppContext());
+                        // notificationId is a unique int for each notification that you must define
+                        notificationManager.notify(0, builder.build());
+                    }
+                });
             }
         }
     }

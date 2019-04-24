@@ -2,13 +2,13 @@ package uk.ac.strath.contextualtriggers.actions;
 
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.NotificationManagerCompat;
 
-import uk.ac.strath.contextualtriggers.Logger;
 import uk.ac.strath.contextualtriggers.MainApplication;
 import uk.ac.strath.contextualtriggers.R;
 import uk.ac.strath.contextualtriggers.conditions.FrequentNotificationPreventionCondition;
@@ -18,13 +18,11 @@ public class SimpleNotificationAction implements Action {
 
     private static final String CHANNEL_ID = "contextualtriggers";
     private String message;
-    private Logger logger;
     private FrequentNotificationPreventionCondition notifyCondition;
     private Context ct;
 
     public SimpleNotificationAction(String message) {
         this.message = message;
-        logger = Logger.getInstance();
         createNotificationChannel();
     }
 
@@ -35,7 +33,6 @@ public class SimpleNotificationAction implements Action {
         if (notifyCondition != null) {
             notifyCondition.notifyUpdate(null);
         }
-        logger.log("*** SENDING NOTIFICATION ***\n\"" + message + "\"");
         NotificationCompat.Builder builder = new NotificationCompat.Builder(MainApplication.getAppContext(), CHANNEL_ID)
                 .setSmallIcon(R.drawable.round_directions_walk_24)
                 .setContentTitle("Notification")
@@ -43,7 +40,12 @@ public class SimpleNotificationAction implements Action {
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT)
                 .setAutoCancel(true);
         NotificationManagerCompat notificationManager = NotificationManagerCompat.from(MainApplication.getAppContext());
-        // notificationId is a unique int for each notification that you must define
+        Intent resultIntent = new Intent(Intent.ACTION_PICK);
+        resultIntent.setType("activity/keepfit");
+        PendingIntent resultPendingIntent = PendingIntent.getActivity(MainApplication.getAppContext(), 0, resultIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+        builder.setContentIntent(resultPendingIntent);
+// notificationId is a unique int for each notification that you must define
+
         notificationManager.notify(0, builder.build());
     }
 

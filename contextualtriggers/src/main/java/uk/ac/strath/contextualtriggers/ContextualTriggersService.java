@@ -21,6 +21,7 @@ import android.widget.Toast;
 
 import com.google.android.gms.awareness.Awareness;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.common.internal.safeparcel.SafeParcelable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -228,7 +229,7 @@ public class ContextualTriggersService extends Service
     private void createTriggers()
     {
         Log.d("Creating Triggers", "created");
-        // triggerList.add(DefaultTriggers.createWeatherTrigger(stepServiceConnection.getDataManager(), weatherServiceConnection.getDataManager(), this));
+        // triggerList.add(DefaultTriggers.createWeatherTrigger(stepServiceConnection.getDataManager(), weatherServiceConnection.getDataManager()));
         // triggerList.add(DefaultTriggers.createWalkIdleTrigger(stepServiceConnection.getDataManager(), this));
        // triggerList.add(DefaultTriggers.createWeatherWithNotifyLimitTrigger(stepServiceConnection.getDataManager(), weatherServiceConnection.getDataManager(), notifyServiceConnection.getDataManager(), this));
      //   triggerList.add(DefaultTriggers.createWeatherWithNotifyLimitTriggerReal(actualStepsServiceConnection.getDataManager(), weatherServiceConnection.getDataManager(), notifyServiceConnection.getDataManager(), this));
@@ -258,7 +259,7 @@ public class ContextualTriggersService extends Service
         Intent pIntent = new Intent(this, ToastBroadcastReceiver.class);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0, pIntent, PendingIntent.FLAG_CANCEL_CURRENT);
         NotificationCompat.Builder builder = new NotificationCompat.Builder(MainApplication.getAppContext(), "cts")
-                .setSmallIcon(R.drawable.powered_by_google_dark)
+                .setSmallIcon(R.drawable.round_directions_walk_24)
                 .setContentTitle("Contextual Triggers Framework")
                 .setContentText("Contextual Triggers Service Running")
                 .setContentIntent(pendingIntent);
@@ -281,4 +282,6 @@ public class ContextualTriggersService extends Service
             notificationManager.createNotificationChannel(channel);
         }
     }
+
+
 }

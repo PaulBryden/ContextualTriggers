@@ -3,11 +3,11 @@ package uk.ac.strath.contextualtriggers;
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.text.method.ScrollingMovementMethod;
+import android.util.Log;
 import android.widget.TextView;
 
 public class MainApplication extends AppCompatActivity {
@@ -15,7 +15,6 @@ public class MainApplication extends AppCompatActivity {
     private static AppCompatActivity mAppActivity;
     private static Context context;
     private Intent i;
-    Logger logger;
 
     // Trigger sunnyOotsideTrigger;
     public static Context getAppContext() {
@@ -52,6 +51,7 @@ public class MainApplication extends AppCompatActivity {
 
     @TargetApi(26)
     private void emptyActivity(){
+        Log.d("MainApplication", "Starting empty activity");
         this.setTheme(R.style.Theme_Transparent);
         i = new Intent(this, ContextualTriggersService.class);
         startForegroundService(i);
@@ -63,8 +63,6 @@ public class MainApplication extends AppCompatActivity {
         setContentView(R.layout.scrollable_textview);
         TextView textView = findViewById(R.id.text_view);
         textView.setMovementMethod(new ScrollingMovementMethod());
-        logger = Logger.getInstance();
-        logger.setLogger(textView);
         Intent i = new Intent(this, ContextualTriggersService.class);
     }
 
