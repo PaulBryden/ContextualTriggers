@@ -17,14 +17,22 @@ public class GymNearbyCondition extends DataCondition<PlacesData> {
 
     @Override
     public boolean isSatisfied() {
+        if (getData() == null) {
+            return false;
+        }
+        boolean nearGym = false;
         for (PlaceLikelihood p : getData().places) {
             for (Place.Type type : p.getPlace().getTypes()) {
-                if (type == Place.Type.GYM && p.getLikelihood() < 0.5) {
-                    return true;
+                if (type == Place.Type.GYM) {
+                    if (p.getLikelihood() < 0.5) {
+                        nearGym = true;
+                    } else {
+                        return false;
+                    }
                 }
             }
         }
-        return false;
+        return nearGym;
     }
 
 }

@@ -1,43 +1,33 @@
 package uk.ac.strath.contextualtriggers.conditions;
 
-import android.content.Intent;
-import android.os.IBinder;
-import android.support.annotation.Nullable;
-
 import org.junit.Test;
 
 import uk.ac.strath.contextualtriggers.data.AltitudeData;
-import uk.ac.strath.contextualtriggers.managers.DataManager;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 public class AltitudeTransitionConditionUnitTest {
 
-    private class MockAltitudeDataManager extends DataManager<AltitudeData> {
-
-        @Nullable
-        @Override
-        public IBinder onBind(Intent intent) {
-            return null;
-        }
-
-        public void sendMockUpdate(double altitude) {
-            AltitudeData data = new AltitudeData(altitude);
-            sendUpdate(data);
-        }
+    @Test
+    public void testConditionNotSatisfiedBeforeReceivingData() {
+        MockDataManager<AltitudeData> manager = new MockDataManager<>();
+        AltitudeTransitionCondition condition = new AltitudeTransitionCondition(19, manager);
+        assertFalse(condition.isSatisfied());
+        manager.sendUpdate(new AltitudeData(20.0));
+        assertFalse(condition.isSatisfied());
     }
 
     /**
      * Tests what happens when the user's altitude increases.
      */
     @Test
-    public void AltitudeTransitionConditionUnitTest() {
-        MockAltitudeDataManager manager = new MockAltitudeDataManager();
+    public void testConditionSatisfied() {
+        MockDataManager<AltitudeData> manager = new MockDataManager<>();
         AltitudeTransitionCondition condition = new AltitudeTransitionCondition(19, manager);
-        manager.sendMockUpdate(0.0);
+        manager.sendUpdate(new AltitudeData(0.0));
         assertFalse(condition.isSatisfied());
-        manager.sendMockUpdate(20.0);
+        manager.sendUpdate(new AltitudeData(20.0));
         assertTrue(condition.isSatisfied());
     }
 
@@ -45,12 +35,12 @@ public class AltitudeTransitionConditionUnitTest {
      * Tests what happens when the user's altitude decreases.
      */
     @Test
-    public void AltitudeTransitionConditionUnitTest2() {
-        MockAltitudeDataManager manager = new MockAltitudeDataManager();
+    public void testConditionNotSatisfiedWithIncorrectSign() {
+        MockDataManager<AltitudeData> manager = new MockDataManager<>();
         AltitudeTransitionCondition condition = new AltitudeTransitionCondition(19, manager);
-        manager.sendMockUpdate(0.0);
+        manager.sendUpdate(new AltitudeData(0.0));
         assertFalse(condition.isSatisfied());
-        manager.sendMockUpdate(-20.0);
+        manager.sendUpdate(new AltitudeData(-20.0));
         assertFalse(condition.isSatisfied());
     }
 
@@ -58,13 +48,12 @@ public class AltitudeTransitionConditionUnitTest {
      * Tests what happens when the user's altitude increases too slowly.
      */
     @Test
-    public void AltitudeTransitionConditionUnitTest3() {
-        MockAltitudeDataManager manager = new MockAltitudeDataManager();
+    public void testConditionNotSatisfiedByInsuffcientIncrease() {
+        MockDataManager<AltitudeData> manager = new MockDataManager<>();
         AltitudeTransitionCondition condition = new AltitudeTransitionCondition(19, manager);
-        manager.sendMockUpdate(0.0);
+        manager.sendUpdate(new AltitudeData(0.0));
         assertFalse(condition.isSatisfied());
-        System.out.println("AcceptableTimeConditionUnitTest3");
-        manager.sendMockUpdate(10.0);
+        manager.sendUpdate(new AltitudeData(10.0));
         assertFalse(condition.isSatisfied());
     }
 

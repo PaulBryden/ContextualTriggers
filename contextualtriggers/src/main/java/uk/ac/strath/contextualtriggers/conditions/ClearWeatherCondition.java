@@ -20,8 +20,8 @@ public class ClearWeatherCondition extends DataCondition<WeatherData> {
         if (getData() == null) {
             return false;
         }
-        for (Integer i : getData().getConditions()) {
-            if (i.equals(Weather.CONDITION_CLEAR)) {
+        for (int i : getData().getConditions()) {
+            if (i == Weather.CONDITION_CLEAR) {
                 return true;
             }
         }

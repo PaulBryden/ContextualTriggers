@@ -18,7 +18,7 @@ import uk.ac.strath.contextualtriggers.data.CacheDatabase;
 import uk.ac.strath.contextualtriggers.data.Data;
 
 public abstract class DataManager<T extends Data> extends Service implements IDataManager<T> {
-    private List<DataCondition<T>> observers;
+    protected List<DataCondition<T>> observers;
     private T cachedData;
     private CacheDatabase cache;
 

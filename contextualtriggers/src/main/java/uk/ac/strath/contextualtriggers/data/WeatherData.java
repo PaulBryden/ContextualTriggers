@@ -5,21 +5,21 @@ import java.util.Arrays;
 
 public class WeatherData extends  AbstractData
 {
-    private final float temperatureCelsius;
-    private final int humidity;
+    private final double temperatureCelsius;
+    private final double humidity;
     private final int[] conditions;
 
-    public WeatherData(float temperature, int humidity, int[] conditions) {
+    public WeatherData(double temperature, double humidity, int[] conditions) {
         this.temperatureCelsius = temperature;
         this.humidity = humidity;
         this.conditions = conditions;
     }
 
-    public float getTemperatureCelsius() {
+    public double getTemperatureCelsius() {
         return temperatureCelsius;
     }
 
-    public int getHumidity() {
+    public double getHumidity() {
         return humidity;
     }
 
