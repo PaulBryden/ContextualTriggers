@@ -18,6 +18,9 @@ public class AcceptableTimeCondition extends DataCondition<TimeOfDayData> {
 
     @Override
     public boolean isSatisfied() {
+        if (getData() == null) {
+            return false;
+        }
         for (int i : getData().intervals) {
             for (int x : targetIntervals.intervals) {
                 if (x == i) {
