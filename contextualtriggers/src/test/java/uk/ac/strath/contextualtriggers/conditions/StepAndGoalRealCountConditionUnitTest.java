@@ -1,68 +1,55 @@
 package uk.ac.strath.contextualtriggers.conditions;
 
-import android.content.Intent;
-import android.os.IBinder;
-import android.support.annotation.Nullable;
-
+import org.junit.Before;
 import org.junit.Test;
 
 import java.time.LocalDate;
 
-import uk.ac.strath.contextualtriggers.actions.UnitTestAction;
 import uk.ac.strath.contextualtriggers.data.DayData;
 import uk.ac.strath.contextualtriggers.data.StepAndGoalData;
-import uk.ac.strath.contextualtriggers.managers.DataManager;
-import uk.ac.strath.contextualtriggers.managers.IDataManager;
-import uk.ac.strath.contextualtriggers.triggers.Trigger;
 
-import static org.junit.Assert.assertEquals;
+import static junit.framework.TestCase.assertTrue;
+import static org.junit.Assert.assertFalse;
+import static uk.ac.strath.contextualtriggers.conditions.StepAndGoalRealCountCondition.GREATER_THAN_OR_EQUAL_TO;
 import static uk.ac.strath.contextualtriggers.conditions.StepAndGoalRealCountCondition.LESS_THAN;
 
 public class StepAndGoalRealCountConditionUnitTest {
 
-    /**
-     * Tests what happens when the user has not, and has, met their goal.
-     */
+    private MockDataManager<StepAndGoalData> manager;
+    private StepAndGoalRealCountCondition lessThanCondition;
+    private StepAndGoalRealCountCondition greaterThanCondition;
+    private StepAndGoalData lowStepCountData;
+    private StepAndGoalData highStepCountData;
+
+    @Before
+    public void setup() {
+        manager = new MockDataManager<>();
+        lessThanCondition = new StepAndGoalRealCountCondition(LESS_THAN, manager);
+        greaterThanCondition = new StepAndGoalRealCountCondition(GREATER_THAN_OR_EQUAL_TO, manager);
+        lowStepCountData = new StepAndGoalData();
+        lowStepCountData.updateDay(new DayData(10000, 12000, LocalDate.now()));
+        highStepCountData = new StepAndGoalData();
+        highStepCountData.updateDay(new DayData(15000, 12000, LocalDate.now()));
+    }
+
     @Test
-    public void StepAndGoalRealCountConditionUnitTest() {
-        class MockStepAndGoalCountManager extends DataManager<StepAndGoalData> implements IDataManager<StepAndGoalData> {
+    public void testNoDataReceivedYet() {
+        assertTrue(lessThanCondition.isSatisfied());
+        assertFalse(greaterThanCondition.isSatisfied());
+    }
 
-            public MockStepAndGoalCountManager() {
-                firstTime = true;
-            }
+    @Test
+    public void testLowStepCount() {
+        manager.sendUpdate(lowStepCountData);
+        assertTrue(lessThanCondition.isSatisfied());
+        assertFalse(greaterThanCondition.isSatisfied());
+    }
 
-            boolean firstTime;
-
-            @Nullable
-            @Override
-            public IBinder onBind(Intent intent) {
-                return null;
-            }
-
-            public void mock() {
-                if (firstTime) {
-                    sendUpdate(new StepAndGoalData());
-                    firstTime = false;
-                } else {
-                    StepAndGoalData fulfilled = new StepAndGoalData();
-                    LocalDate today = LocalDate.now();
-                    DayData day = fulfilled.getDay(today);
-                    day.steps = 100000;
-                    fulfilled.updateDay(day);
-                    sendUpdate(fulfilled);
-                }
-            }
-        }
-
-        UnitTestAction action = new UnitTestAction();
-        MockStepAndGoalCountManager manager = new MockStepAndGoalCountManager();
-        StepAndGoalRealCountCondition condition = new StepAndGoalRealCountCondition(LESS_THAN, manager);
-        new Trigger.Builder().setCondition(condition).setAction(action).build();
-        manager.mock();
-        assertEquals(true, condition.isSatisfied());
-        manager.mock();
-        assertEquals(false, condition.isSatisfied());
-        System.out.println("NotNotifiedTodayConditionUnitTest");
+    @Test
+    public void testHighStepCount() {
+        manager.sendUpdate(highStepCountData);
+        assertFalse(lessThanCondition.isSatisfied());
+        assertTrue(greaterThanCondition.isSatisfied());
     }
 
 }

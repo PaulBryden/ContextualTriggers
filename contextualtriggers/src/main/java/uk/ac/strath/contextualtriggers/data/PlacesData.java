@@ -12,6 +12,11 @@ public class PlacesData extends AbstractData {
         this.places = places;
     }
 
+    public PlacesData(List<PlaceLikelihood> places, long timestamp) {
+        super(timestamp);
+        this.places = places;
+    }
+
     @Override
     public boolean equals(Object o){
         if(o instanceof PlacesData){

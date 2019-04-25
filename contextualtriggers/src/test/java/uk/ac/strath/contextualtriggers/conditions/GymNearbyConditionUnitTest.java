@@ -2,6 +2,7 @@ package uk.ac.strath.contextualtriggers.conditions;
 
 import com.google.android.libraries.places.api.model.PlaceLikelihood;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import java.util.Arrays;
@@ -18,10 +19,18 @@ import static org.junit.Assert.assertTrue;
 
 public class GymNearbyConditionUnitTest {
 
+    private MockDataManager<PlacesData> manager;
+    private GymNearbyCondition condition;
+
+    @Before
+    public void setup() {
+        manager = new MockDataManager<>();
+        condition = new GymNearbyCondition(manager);
+    }
+
+
     @Test
     public void testConditionNotSatisfiedWhenNoDataReceived() {
-        MockDataManager<PlacesData> manager = new MockDataManager<>();
-        GymNearbyCondition condition = new GymNearbyCondition(manager);
         assertFalse(condition.isSatisfied());
     }
 
@@ -30,8 +39,6 @@ public class GymNearbyConditionUnitTest {
      */
     @Test
     public void testConditionSatisfiedByLikelyGymProximity() {
-        MockDataManager<PlacesData> manager = new MockDataManager<>();
-        GymNearbyCondition condition = new GymNearbyCondition(manager);
         PlaceLikelihood likelihood = new MockPlaceLikelihood(new MockPlace(GYM), 0.25);
         manager.sendUpdate(new PlacesData(Collections.singletonList(likelihood)));
         assertTrue(condition.isSatisfied());
@@ -42,8 +49,6 @@ public class GymNearbyConditionUnitTest {
      */
     @Test
     public void testConditionNotSatisfiedWithoutGymProximity() {
-        MockDataManager<PlacesData> manager = new MockDataManager<>();
-        GymNearbyCondition condition = new GymNearbyCondition(manager);
         PlaceLikelihood likelihood = new MockPlaceLikelihood(new MockPlace(CAFE), 0.25);
         manager.sendUpdate(new PlacesData(Collections.singletonList(likelihood)));
         assertFalse(condition.isSatisfied());
@@ -54,8 +59,6 @@ public class GymNearbyConditionUnitTest {
      */
     @Test
     public void testConditionSatisfiedWithGymProximityMultiple() {
-        MockDataManager<PlacesData> manager = new MockDataManager<>();
-        GymNearbyCondition condition = new GymNearbyCondition(manager);
         PlaceLikelihood likelihood_cafe = new MockPlaceLikelihood(new MockPlace(CAFE), 0.25);
         PlaceLikelihood likelihood_gym = new MockPlaceLikelihood(new MockPlace(GYM), 0.25);
         PlaceLikelihood likelihood_gym2 = new MockPlaceLikelihood(new MockPlace(GYM), 0.1);
@@ -69,8 +72,6 @@ public class GymNearbyConditionUnitTest {
      */
     @Test
     public void testConditionNotSatisfiedWithoutGymProximityMultiple() {
-        MockDataManager<PlacesData> manager = new MockDataManager<>();
-        GymNearbyCondition condition = new GymNearbyCondition(manager);
         PlaceLikelihood likelihood_cafe = new MockPlaceLikelihood(new MockPlace(CAFE), 0.25);
         PlaceLikelihood likelihood_park = new MockPlaceLikelihood(new MockPlace(PARK), 0.2);
         PlaceLikelihood likelihood_airport = new MockPlaceLikelihood(new MockPlace(AIRPORT), 0.22);
@@ -83,8 +84,6 @@ public class GymNearbyConditionUnitTest {
      */
     @Test
     public void testConditionNotSatisfiedByTooHighLikelihood() {
-        MockDataManager<PlacesData> manager = new MockDataManager<>();
-        GymNearbyCondition condition = new GymNearbyCondition(manager);
         PlaceLikelihood likelihood = new MockPlaceLikelihood(new MockPlace(GYM), 0.75);
         manager.sendUpdate(new PlacesData(Collections.singletonList(likelihood)));
         assertFalse(condition.isSatisfied());
@@ -95,8 +94,6 @@ public class GymNearbyConditionUnitTest {
      */
     @Test
     public void testConditionNotSatisfiedByTooHighLikelihoodWhenAlsoNearGym() {
-        MockDataManager<PlacesData> manager = new MockDataManager<>();
-        GymNearbyCondition condition = new GymNearbyCondition(manager);
         PlaceLikelihood likelihood_gym = new MockPlaceLikelihood(new MockPlace(GYM), 0.1);
         PlaceLikelihood likelihood_gym2 = new MockPlaceLikelihood(new MockPlace(GYM), 0.75);
         manager.sendUpdate(new PlacesData(Arrays.asList(likelihood_gym, likelihood_gym2)));

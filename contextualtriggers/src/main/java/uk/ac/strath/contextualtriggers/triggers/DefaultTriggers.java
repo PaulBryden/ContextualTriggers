@@ -1,8 +1,6 @@
 package uk.ac.strath.contextualtriggers.triggers;
 
 
-import android.app.Activity;
-import android.content.Context;
 import android.os.IBinder;
 import android.util.Log;
 
@@ -28,7 +26,7 @@ import uk.ac.strath.contextualtriggers.conditions.HistoricStepsDaysUnmetConditio
 import uk.ac.strath.contextualtriggers.conditions.InBuildingCondition;
 import uk.ac.strath.contextualtriggers.conditions.InPlaceTypeCondition;
 import uk.ac.strath.contextualtriggers.conditions.MeetingCondition;
-import uk.ac.strath.contextualtriggers.conditions.NoLongerInBuildingTypeCondition;
+import uk.ac.strath.contextualtriggers.conditions.NoLongerInPlaceTypeCondition;
 import uk.ac.strath.contextualtriggers.conditions.NotNotifiedTodayCondition;
 import uk.ac.strath.contextualtriggers.conditions.StepAndGoalRealCountCondition;
 import uk.ac.strath.contextualtriggers.conditions.StepCountCondition;
@@ -37,7 +35,6 @@ import uk.ac.strath.contextualtriggers.data.AltitudeData;
 import uk.ac.strath.contextualtriggers.data.CalendarData;
 import uk.ac.strath.contextualtriggers.data.PlacesData;
 import uk.ac.strath.contextualtriggers.data.StepAndGoalData;
-import uk.ac.strath.contextualtriggers.data.StepData;
 import uk.ac.strath.contextualtriggers.data.TimeOfDayData;
 import uk.ac.strath.contextualtriggers.data.VoidData;
 import uk.ac.strath.contextualtriggers.data.WeatherData;
@@ -49,7 +46,6 @@ import uk.ac.strath.contextualtriggers.managers.IDataManager;
 import uk.ac.strath.contextualtriggers.managers.IntervalsDataManager;
 import uk.ac.strath.contextualtriggers.managers.NotificationDataManager;
 import uk.ac.strath.contextualtriggers.managers.PlacesDataManager;
-import uk.ac.strath.contextualtriggers.managers.SimulatedStepDataManager;
 import uk.ac.strath.contextualtriggers.managers.WeatherDataManager;
 
 import static com.google.android.gms.awareness.fence.TimeFence.TIME_INTERVAL_AFTERNOON;
@@ -260,7 +256,7 @@ public class DefaultTriggers {
         placesDataManager = ((PlacesDataManager.LocalBinder) placesBinder).getInstance();
         notificationDataManager = ((NotificationDataManager.LocalBinder) notifyBinder).getInstance();
         Trigger.Builder builder = new Trigger.Builder();
-        Condition c = new NoLongerInBuildingTypeCondition(Place.Type.GYM, placesDataManager);
+        Condition c = new NoLongerInPlaceTypeCondition(Place.Type.GYM, placesDataManager);
         Condition c1 = new FrequentNotificationPreventionCondition(10000, notificationDataManager);
         Action a = new SimpleNotificationAction("You went to the gym! Congratulations.");
         List<Condition> conditionList = new ArrayList<>();

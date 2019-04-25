@@ -22,6 +22,9 @@ public class MeetingCondition extends DataCondition<CalendarData> {
 
     @Override
     public boolean isSatisfied() {
+        if (getData() == null) {
+            return false;
+        }
         Calendar c = Calendar.getInstance();
         Date t = c.getTime();
         c.add(Calendar.HOUR, 2);

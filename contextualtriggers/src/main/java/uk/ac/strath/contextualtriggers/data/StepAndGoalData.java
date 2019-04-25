@@ -1,5 +1,7 @@
 package uk.ac.strath.contextualtriggers.data;
 
+import android.support.annotation.Nullable;
+
 import java.lang.reflect.Type;
 import java.time.LocalDate;
 import java.util.HashMap;
@@ -8,26 +10,13 @@ import java.util.Map;
 public class StepAndGoalData extends  AbstractData
 {
     private HashMap<String, DayData> history;
-    public StepAndGoalData()
-    {
-        history = new HashMap<>();
-        /*
-        POPULATE STRUCT HERE FROM HISTORY
-         */
-        setup();
 
-
+    public StepAndGoalData(HashMap<String, DayData> data) {
+        this.history = data;
     }
 
-    public void setup(){
-        DayData tempDay1= new DayData(500,5000, LocalDate.now());
-        DayData tempDay2= new DayData(500,5000, LocalDate.now().minusDays(1));
-        DayData tempDay3= new DayData(500,5000, LocalDate.now().minusDays(2));
-        DayData tempDay4= new DayData(500,5000, LocalDate.now().minusDays(3));
-        updateDay(tempDay1);
-        updateDay(tempDay2);
-        updateDay(tempDay3);
-        updateDay(tempDay4);
+    public StepAndGoalData() {
+        this(new HashMap<>());
     }
 
     public Map<String, DayData> getHistory()
@@ -40,6 +29,7 @@ public class StepAndGoalData extends  AbstractData
         history.put(day.date.toString(),day);
     }
 
+    @Nullable
     public DayData getDay(LocalDate day)
     {
         return history.get(day.toString());
@@ -57,7 +47,6 @@ public class StepAndGoalData extends  AbstractData
         }
         return false;
     }
-
 
     public static Type getType() {
         return StepAndGoalData.class;

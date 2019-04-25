@@ -2,6 +2,7 @@ package uk.ac.strath.contextualtriggers.conditions;
 
 import com.google.android.gms.location.DetectedActivity;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import uk.ac.strath.contextualtriggers.data.ActivityData;
@@ -13,13 +14,20 @@ import static org.junit.Assert.assertTrue;
 
 public class ActivityPeriodConditionUnitTest {
 
+    private MockDataManager<ActivityData> manager;
+    private ActivityPeriodCondition condition;
+
+    @Before
+    public void setup() {
+        manager = new MockDataManager<>();
+        condition = new ActivityPeriodCondition(10000, STILL, manager);
+    }
+
     /**
      * Tests what happens when no activity has been sent to the condition yet.
      */
     @Test
     public void testNoActivityDataReceivedYet() {
-        MockDataManager<ActivityData> manager = new MockDataManager<>();
-        ActivityPeriodCondition condition = new ActivityPeriodCondition(10000, STILL, manager);
         assertFalse(condition.isSatisfied());
     }
 
@@ -28,8 +36,6 @@ public class ActivityPeriodConditionUnitTest {
      */
     @Test
     public void testStillActivitySatisfied() {
-        MockDataManager<ActivityData> manager = new MockDataManager<>();
-        ActivityPeriodCondition condition = new ActivityPeriodCondition(10000, STILL, manager);
         manager.sendUpdate(new ActivityData(new DetectedActivity(STILL, 100), System.currentTimeMillis() - 20000));
         assertTrue(condition.isSatisfied());
     }
@@ -40,8 +46,6 @@ public class ActivityPeriodConditionUnitTest {
      */
     @Test
     public void testStillConditionNotSatisfiedForMinimumTime() {
-        MockDataManager<ActivityData> manager = new MockDataManager<>();
-        ActivityPeriodCondition condition = new ActivityPeriodCondition(10000, STILL, manager);
         manager.sendUpdate(new ActivityData(new DetectedActivity(STILL, 100), System.currentTimeMillis() - 5000));
         assertFalse(condition.isSatisfied());
     }
@@ -51,8 +55,6 @@ public class ActivityPeriodConditionUnitTest {
      */
     @Test
     public void testStillConditionNotSatisfiedAsIncorrectActivity() {
-        MockDataManager<ActivityData> manager = new MockDataManager<>();
-        ActivityPeriodCondition condition = new ActivityPeriodCondition(10000, STILL, manager);
         manager.sendUpdate(new ActivityData(new DetectedActivity(STILL, 100), System.currentTimeMillis() - 30000));
         manager.sendUpdate(new ActivityData(new DetectedActivity(ON_BICYCLE, 100), System.currentTimeMillis() - 20000));
         assertFalse(condition.isSatisfied());

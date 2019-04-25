@@ -30,6 +30,9 @@ public class StepAndGoalRealCountCondition extends DataCondition<StepAndGoalData
 
     @Override
     public boolean isSatisfied() {
+        if (getData() == null) {
+            return mode == LESS_THAN;
+        }
         LocalDate today = LocalDate.now();
         if (getData().getDay(today).steps < 0) { // no step count updates received yet
             return false;

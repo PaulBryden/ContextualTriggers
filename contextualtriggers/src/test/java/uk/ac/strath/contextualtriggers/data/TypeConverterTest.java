@@ -1,4 +1,4 @@
-package uk.ac.strath.contextualtriggers;
+package uk.ac.strath.contextualtriggers.data;
 
 import com.google.android.gms.location.DetectedActivity;
 
@@ -107,8 +107,8 @@ public class TypeConverterTest {
 
     @Test
     public void StepAndGoalTest(){
+        // TODO: Insert dummy data
         StepAndGoalData d = new StepAndGoalData();
-        d.setup();
 
         String s = DataConverter.DataToString(d);
         Data d2 = DataConverter.StringToData(s);
