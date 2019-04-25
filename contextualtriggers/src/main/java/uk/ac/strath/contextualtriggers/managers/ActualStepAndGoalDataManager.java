@@ -8,7 +8,11 @@ import android.support.annotation.Nullable;
 import android.util.Log;
 
 import java.time.LocalDate;
+import java.util.List;
+import java.util.concurrent.ExecutionException;
 
+import uk.ac.strath.contextualtriggers.data.CacheDatabase;
+import uk.ac.strath.contextualtriggers.data.DataEntity;
 import uk.ac.strath.contextualtriggers.data.DayData;
 import uk.ac.strath.contextualtriggers.data.StepAndGoalData;
 import uk.ac.strath.contextualtriggers.intentReceivers.StepAndGoalIntentReceiver;
@@ -18,6 +22,9 @@ public class ActualStepAndGoalDataManager extends DataManager<StepAndGoalData> {
     StepAndGoalData stepGoalData;
     private StepAndGoalIntentReceiver receiver;
     private final IBinder binder = new LocalBinder();
+
+    CacheDatabase db;
+
     public class LocalBinder extends Binder {
         public IDataManager<StepAndGoalData> getInstance() {
             return ActualStepAndGoalDataManager.this;
@@ -26,7 +33,16 @@ public class ActualStepAndGoalDataManager extends DataManager<StepAndGoalData> {
 
     public ActualStepAndGoalDataManager(){
         Log.d("StepAndGoalIntentReceiver","Starting");
-        setup();
+        try {
+            setup();
+        } catch (ExecutionException e) {
+            System.err.println(e.getMessage());
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+
+            System.err.println(e.getMessage());
+            e.printStackTrace();
+        }
     }
 
     private void configureReceiver() {
@@ -46,8 +62,17 @@ public class ActualStepAndGoalDataManager extends DataManager<StepAndGoalData> {
         return binder;
     }
 
-    private void setup() {
-        stepGoalData = new StepAndGoalData();
+    private void setup() throws ExecutionException, InterruptedException {
+        db = CacheDatabase.getDatabase(this);
+
+        List<DataEntity> l = db.getAllOfType(StepAndGoalData.class.toString()).get();
+
+        if(l.size() == 0){
+            stepGoalData = new StepAndGoalData();
+        }
+        else{
+            stepGoalData = (StepAndGoalData) l.get(0).data;
+        }
     }
 
     @Override

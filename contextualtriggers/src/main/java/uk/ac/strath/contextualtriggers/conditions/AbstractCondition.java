@@ -1,5 +1,7 @@
 package uk.ac.strath.contextualtriggers.conditions;
 
+import android.support.annotation.NonNull;
+
 import uk.ac.strath.contextualtriggers.exceptions.TriggerNotConnectedException;
 import uk.ac.strath.contextualtriggers.triggers.ITrigger;
 
@@ -14,7 +16,8 @@ public abstract class AbstractCondition implements Condition {
         this.trigger = trigger;
     }
 
-    ITrigger getTrigger() throws TriggerNotConnectedException {
+    @NonNull
+    protected ITrigger getTrigger() throws TriggerNotConnectedException {
         if (trigger != null) {
             return trigger;
         } else {

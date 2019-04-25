@@ -11,14 +11,12 @@ import uk.ac.strath.contextualtriggers.managers.IDataManager;
 public class FrequentNotificationPreventionCondition extends DataCondition<VoidData>
 {
 
-    private long lastNotificationSent;
     private int minimumTimeElapsed; // in seconds
 
     public FrequentNotificationPreventionCondition(int minimumTimeElapsed, IDataManager<VoidData> dataManager)
     {
         super(dataManager);
         this.minimumTimeElapsed = minimumTimeElapsed; /*seconds*/
-        lastNotificationSent = -1;
     }
 
     @Override
@@ -26,7 +24,6 @@ public class FrequentNotificationPreventionCondition extends DataCondition<VoidD
     {
         // Override since an update always means condition isn't satisfied,
         // so no need to notify the Trigger of the change.
-        lastNotificationSent = System.currentTimeMillis();
         super.notifyUpdate(data);
     }
 
@@ -35,14 +32,10 @@ public class FrequentNotificationPreventionCondition extends DataCondition<VoidD
         return false;
     }
 
-    @Override
-    public boolean isSatisfied()
-    {
-        if (lastNotificationSent < 0)
-        {
+    public boolean isSatisfied() {
+        if (getData() == null) {
             return true;
         }
-        long now = System.currentTimeMillis();
-        return now - lastNotificationSent > minimumTimeElapsed;
+        return System.currentTimeMillis() - getData().getTimestamp() > minimumTimeElapsed * 1000;
     }
 }

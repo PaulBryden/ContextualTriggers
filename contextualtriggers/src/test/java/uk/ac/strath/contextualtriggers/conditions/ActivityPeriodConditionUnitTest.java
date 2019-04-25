@@ -1,56 +1,37 @@
 package uk.ac.strath.contextualtriggers.conditions;
 
-import android.content.Intent;
-import android.os.IBinder;
-import android.support.annotation.Nullable;
-
 import com.google.android.gms.location.DetectedActivity;
 
 import org.junit.Test;
 
-import uk.ac.strath.contextualtriggers.actions.UnitTestAction;
 import uk.ac.strath.contextualtriggers.data.ActivityData;
-import uk.ac.strath.contextualtriggers.managers.DataManager;
-import uk.ac.strath.contextualtriggers.managers.IDataManager;
-import uk.ac.strath.contextualtriggers.triggers.Trigger;
 
+import static com.google.android.gms.location.DetectedActivity.ON_BICYCLE;
 import static com.google.android.gms.location.DetectedActivity.STILL;
-import static com.google.android.gms.location.DetectedActivity.UNKNOWN;
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 public class ActivityPeriodConditionUnitTest {
+
+    /**
+     * Tests what happens when no activity has been sent to the condition yet.
+     */
+    @Test
+    public void testNoActivityDataReceivedYet() {
+        MockDataManager<ActivityData> manager = new MockDataManager<>();
+        ActivityPeriodCondition condition = new ActivityPeriodCondition(10000, STILL, manager);
+        assertFalse(condition.isSatisfied());
+    }
 
     /**
      * Tests what happens when the user has been still for 10 seconds.
      */
     @Test
-    public void ActivityPeriodConditionUnitTest() {
-        class ActivityDataManager extends DataManager<ActivityData> implements IDataManager<ActivityData> {
-            @Nullable
-            @Override
-            public IBinder onBind(Intent intent) {
-                return null;
-            }
-
-            public void mock() {
-                sendUpdate(new ActivityData(new DetectedActivity(STILL, 100)));
-            }
-        }
-
-        UnitTestAction action = new UnitTestAction();
-        ActivityDataManager manager = new ActivityDataManager();
+    public void testStillActivitySatisfied() {
+        MockDataManager<ActivityData> manager = new MockDataManager<>();
         ActivityPeriodCondition condition = new ActivityPeriodCondition(10000, STILL, manager);
-        new Trigger.Builder().setCondition(condition).setAction(action).build();
-        manager.mock();
-        assertEquals(false, condition.isSatisfied());
-        System.out.println("ActivityPeriodConditionUnitTest");
-        try {
-            Thread.sleep(10500);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        manager.mock();
-        assertEquals(true, condition.isSatisfied());
+        manager.sendUpdate(new ActivityData(new DetectedActivity(STILL, 100), System.currentTimeMillis() - 20000));
+        assertTrue(condition.isSatisfied());
     }
 
     /**
@@ -58,67 +39,23 @@ public class ActivityPeriodConditionUnitTest {
      * been still for 5 seconds.
      */
     @Test
-    public void ActivityPeriodConditionUnitTest2() {
-        class ActivityDataManager extends DataManager<ActivityData> implements IDataManager<ActivityData> {
-            @Nullable
-            @Override
-            public IBinder onBind(Intent intent) {
-                return null;
-            }
-
-            public void mock() {
-                sendUpdate(new ActivityData(new DetectedActivity(STILL, 100)));
-            }
-        }
-
-        UnitTestAction action = new UnitTestAction();
-        ActivityDataManager manager = new ActivityDataManager();
+    public void testStillConditionNotSatisfiedForMinimumTime() {
+        MockDataManager<ActivityData> manager = new MockDataManager<>();
         ActivityPeriodCondition condition = new ActivityPeriodCondition(10000, STILL, manager);
-        new Trigger.Builder().setCondition(condition).setAction(action).build();
-        manager.mock();
-        assertEquals(false, condition.isSatisfied());
-        System.out.println("ActivityPeriodConditionUnitTest2");
-        try {
-            Thread.sleep(5000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        manager.mock();
-        assertEquals(false, condition.isSatisfied());
+        manager.sendUpdate(new ActivityData(new DetectedActivity(STILL, 100), System.currentTimeMillis() - 5000));
+        assertFalse(condition.isSatisfied());
     }
 
     /**
-     * Tests what happens when the user has not been still for 10 seconds because their activity is
-     * unknown.
+     * Tests what happens when the user is not still.
      */
     @Test
-    public void ActivityPeriodConditionUnitTest3() {
-        class ActivityDataManager extends DataManager<ActivityData> implements IDataManager<ActivityData> {
-            @Nullable
-            @Override
-            public IBinder onBind(Intent intent) {
-                return null;
-            }
-
-            public void mock() {
-                sendUpdate(new ActivityData(new DetectedActivity(UNKNOWN, 100)));
-            }
-        }
-
-        UnitTestAction action = new UnitTestAction();
-        ActivityDataManager manager = new ActivityDataManager();
+    public void testStillConditionNotSatisfiedAsIncorrectActivity() {
+        MockDataManager<ActivityData> manager = new MockDataManager<>();
         ActivityPeriodCondition condition = new ActivityPeriodCondition(10000, STILL, manager);
-        new Trigger.Builder().setCondition(condition).setAction(action).build();
-        manager.mock();
-        assertEquals(false, condition.isSatisfied());
-        System.out.println("ActivityPeriodConditionUnitTest3");
-        try {
-            Thread.sleep(10500);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        manager.mock();
-        assertEquals(false, condition.isSatisfied());
+        manager.sendUpdate(new ActivityData(new DetectedActivity(STILL, 100), System.currentTimeMillis() - 30000));
+        manager.sendUpdate(new ActivityData(new DetectedActivity(ON_BICYCLE, 100), System.currentTimeMillis() - 20000));
+        assertFalse(condition.isSatisfied());
     }
 
 }

@@ -8,31 +8,52 @@ import android.content.IntentFilter;
 import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 import uk.ac.strath.contextualtriggers.conditions.DataCondition;
+import uk.ac.strath.contextualtriggers.data.CacheDatabase;
 import uk.ac.strath.contextualtriggers.data.Data;
 
 public abstract class DataManager<T extends Data> extends Service implements IDataManager<T> {
-    private List<DataCondition<T>> observers;
+    protected List<DataCondition<T>> observers;
     private T cachedData;
+    private CacheDatabase cache;
 
     public DataManager() {
         observers = new ArrayList<DataCondition<T>>();
-        cachedData = null;
+
+
     }
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         int res = super.onStartCommand(intent, flags, startId);
         registerBatteryBroadcastReceiver();
+
+        cache = CacheDatabase.getDatabase(this);
+        try {
+            cachedData = (T) cache.getLatestOfType(T.getType().toString()).get().data;
+        } catch (InterruptedException e) {
+            System.out.println(e.getMessage());
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+
+            System.out.println(e.getMessage());
+            e.printStackTrace();
+        } catch (NullPointerException e){
+            ; //This is fine, simply means no cached data exists
+        }
+
         return res;
     }
 
     @Override
     public void register(DataCondition<T> dataCondition) {
         observers.add(dataCondition);
+
         if (cachedData != null) {
             Log.d("DataManager", "Registering condition, cachedData = " + cachedData.toString());
             dataCondition.notifyUpdate(cachedData);
@@ -41,6 +62,8 @@ public abstract class DataManager<T extends Data> extends Service implements IDa
 
     protected void sendUpdate(T data) {
         cachedData = data;
+        cache.insert(data);
+
         for (DataCondition<T> i : observers) {
             i.notifyUpdate(data);
         }
