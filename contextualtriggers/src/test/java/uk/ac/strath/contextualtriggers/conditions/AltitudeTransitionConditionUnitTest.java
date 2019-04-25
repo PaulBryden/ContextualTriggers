@@ -10,7 +10,7 @@ import static org.junit.Assert.assertTrue;
 public class AltitudeTransitionConditionUnitTest {
 
     @Test
-    public void testConditionNotSatisfiedBeforeReceivingData() {
+    public void testNoDataReceivedYet() {
         MockDataManager<AltitudeData> manager = new MockDataManager<>();
         AltitudeTransitionCondition condition = new AltitudeTransitionCondition(19, manager);
         assertFalse(condition.isSatisfied());

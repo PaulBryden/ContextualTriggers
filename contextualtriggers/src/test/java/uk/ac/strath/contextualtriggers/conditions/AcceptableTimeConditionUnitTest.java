@@ -14,6 +14,14 @@ import static org.junit.Assert.assertTrue;
 
 public class AcceptableTimeConditionUnitTest {
 
+    @Test
+    public void testNoDataReceivedYet() {
+        MockDataManager<TimeOfDayData> manager = new MockDataManager<>();
+        TimeOfDayData data = new TimeOfDayData(new int[]{TIME_INTERVAL_AFTERNOON});
+        AcceptableTimeCondition condition = new AcceptableTimeCondition(data, manager);
+        assertFalse(condition.isSatisfied());
+    }
+
     /**
      * Tests what happens when the current time intervals are MORNING and AFTERNOON and the target
      * time interval is MORNING.
