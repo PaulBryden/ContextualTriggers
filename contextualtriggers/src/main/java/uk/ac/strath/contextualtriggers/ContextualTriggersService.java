@@ -26,8 +26,6 @@ import com.google.android.gms.common.internal.safeparcel.SafeParcelable;
 import java.util.ArrayList;
 import java.util.List;
 
-import uk.ac.strath.contextualtriggers.actions.CustomMapNotificationAction;
-import uk.ac.strath.contextualtriggers.actions.SimpleMapNotificationAction;
 import uk.ac.strath.contextualtriggers.intentReceivers.ToastBroadcastReceiver;
 import uk.ac.strath.contextualtriggers.managers.ActivityDataManager;
 import uk.ac.strath.contextualtriggers.managers.ActualStepAndGoalDataManager;
