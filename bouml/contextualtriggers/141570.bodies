@@ -1,0 +1,8 @@
+class BootCompletedIntentReceiver
+!!!149506.java!!!	onReceive(inout context : Context, inout intent : Intent) : void
+
+        if ("android.intent.action.BOOT_COMPLETED".equals(intent.getAction()))
+        {
+            Intent pushIntent = new Intent(context, MainApplication.class);
+            context.startActivity(pushIntent);
+        }

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Documentation produced by the Html generator of Bouml (http://www.bouml.fr) -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:svg="http://www.w3.org/2000/svg">
+
+<head>
+<title>Class SimulatedStepDataManager</title>
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body bgcolor="#ffffff">
+
+<div class = "title">Class SimulatedStepDataManager</div>
+<p></p>
+
+<!-- ============================================================= -->
+
+<a name="ref4_137730"></a>
+<p>Declaration :</p><ul>
+<li>Java : public class SimulatedStepDataManager extends <a href="class135426.html#ref4_135426"><b>AlarmDataManager</b></a>&lt;&gt; </li></ul><p>Artifact : <a href="index.html#ref8_135682"><b>SimulatedStepDataManager</b></a></p>
+<div class="sub">
+<a name="ref0_140290"></a>
+<table><tr><td><div class="element">Relation <b>stepData (&lt;unidirectional association&gt;)</b></div></td></tr></table><p>Declaration :</p><ul><li>Uml : ~ stepData : <a href="class133506.html#ref4_133506"><b>StepData</b></a></li><li>Java : package <a href="class133506.html#ref4_133506"><b>StepData</b></a> stepData</li></ul><a name="ref1_139522"></a>
+<table><tr><td><div class="element">Attribute <b>binder</b></div></td></tr></table>
+<p>Declaration :</p><ul><li>Uml : - binder : IBinder =  new LocalBinder(), read only</li><li>Java : private final IBinder binder</li></ul><table><tr><td><div class="element">Class <b><a href="class137858.html#ref4_137858"><b>LocalBinder</b></a></b></div></td></tr></table>
+<a name="ref2_152194"></a>
+<table><tr><td><div class="element">Operation <b>SimulatedStepDataManager</b></div></td></tr></table><p>Declaration :</p><ul><li>Uml : + SimulatedStepDataManager() : </li><li>Java : public SimulatedStepDataManager()</li></ul><a name="ref2_152322"></a>
+<table><tr><td><div class="element">Operation <b>onBind</b></div></td></tr></table><p>Declaration :</p><ul><li>Uml : + onBind(inout intent : Intent) : IBinder</li><li>Java : public IBinder onBind(Intent intent)</li></ul><p> Java annotation(s) :</p><div class="sub"><p>&#64;Nullable<br />&#64;Override<br /></p></div><a name="ref2_152450"></a>
+<table><tr><td><div class="element">Operation <b>setup</b></div></td></tr></table><p>Declaration :</p><ul><li>Uml : - setup() : void</li><li>Java : private void setup()</li></ul><a name="ref2_152578"></a>
+<table><tr><td><div class="element">Operation <b>onStartCommand</b></div></td></tr></table><p>Declaration :</p><ul><li>Uml : + onStartCommand(inout intent : Intent, in flags : int, in startId : int) : int</li><li>Java : public int onStartCommand(Intent intent, int flags, int startId)</li></ul><p> Java annotation(s) :</p><div class="sub"><p>&#64;Override<br /></p></div><a name="ref2_152706"></a>
+<table><tr><td><div class="element">Operation <b>monitor</b></div></td></tr></table><p>Declaration :</p><ul><li>Uml : - monitor() : void</li><li>Java : private void monitor()</li></ul></div>
+<p>All public operations : <a href="class137730.html#ref2_152322"><b>onBind</b></a> , <a href="class135426.html#ref2_145154"><b>onDestroy</b></a> , <a href="class135554.html#ref2_144258"><b>onStartCommand</b></a> , <a href="class137730.html#ref2_152578"><b>onStartCommand</b></a> , <a href="class135554.html#ref2_144386"><b>register</b></a> , <a href="class130690.html#ref2_143874"><b>register</b></a> , <a href="class135426.html#ref2_145282"><b>setLowPowerMode</b></a> , <a href="class135554.html#ref2_144770"><b>setLowPowerMode</b></a> , <a href="class130690.html#ref2_144002"><b>setLowPowerMode</b></a> </p>
+</body>
+</html>

@@ -1,0 +1,67 @@
+format 221
+
+classcanvas 130050 class_ref 144514 // WeatherDataManager
+  classdiagramsettings member_max_width 0 end
+  xyz 1232 247 2005
+end
+classcanvas 130178 class_ref 143490 // IntervalsDataManager
+  classdiagramsettings member_max_width 0 end
+  xyz 40 247 2010
+end
+classcanvas 130306 class_ref 142722 // AltitudeDataManager
+  classdiagramsettings member_max_width 0 end
+  xyz 832 247 2015
+end
+classcanvas 130818 class_ref 145410 // PlacesDataManager
+  classdiagramsettings member_max_width 0 end
+  xyz 436 247 2000
+end
+classcanvas 130946 class_ref 145666 // RequestLocationPermission
+  classdiagramsettings member_max_width 0 end
+  xyz 832 39 2000
+end
+textcanvas 131586 "<<Intent>>"
+  xyzwh 135 215 2016 74 16
+textcanvas 131714 "<<Intent>>"
+  xyzwh 539 215 2016 74 16
+textcanvas 131842 "<<Intent>>"
+  xyzwh 941 215 2016 74 16
+textcanvas 131970 "<<Intent>>"
+  xyzwh 1340 215 2016 74 16
+relationcanvas 131074 relation_ref 148226 // <generalisation>
+  geometry VHV unfixed
+  decenter_begin 487
+  decenter_end 509
+  from ref 130178 z 2011 to point 213 208
+  line 132098 z 2011 to point 1013 208
+  line 132226 z 2011 to ref 130946
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 131202 relation_ref 148354 // <generalisation>
+  geometry VHV unfixed
+  decenter_begin 509
+  decenter_end 509
+  from ref 130050 z 2006 to point 1413 208
+  line 132610 z 2006 to point 1013 208
+  line 132738 z 2006 to ref 130946
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 131330 relation_ref 148482 // <generalisation>
+  decenter_begin 509
+  decenter_end 509
+  from ref 130306 z 2016 to ref 130946
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 131458 relation_ref 148610 // <generalisation>
+  geometry VHV unfixed
+  decenter_end 509
+  from ref 130818 z 2001 to point 614 208
+  line 132354 z 2001 to point 1013 208
+  line 132482 z 2001 to ref 130946
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+end

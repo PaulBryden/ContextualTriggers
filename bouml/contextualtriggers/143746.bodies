@@ -1,0 +1,16 @@
+class NotificationDataManager
+!!!156674.java!!!	NotificationDataManager()
+        setup();
+!!!156802.java!!!	onBind(inout intent : Intent) : IBinder
+        //Not sure if this is required
+        //Needed if onStartCommand not called automatically
+        Log.d("NotificationDataManage", "Binding");
+        return binder;
+!!!156930.java!!!	setup() : void
+        goal = 10000;
+!!!157058.java!!!	onStartCommand(inout intent : Intent, in flags : int, in startId : int) : int
+        super.onStartCommand(intent, flags, startId);
+        monitor();
+        return START_STICKY;
+!!!157186.java!!!	monitor() : void
+        sendUpdate(new VoidData());

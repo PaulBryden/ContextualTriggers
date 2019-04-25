@@ -1,0 +1,57 @@
+class AltitudeDataManager
+!!!153090.java!!!	onBind(inout intent : Intent) : IBinder
+        setup();
+        return binder;
+!!!153346.java!!!	AltitudeDataManager()
+        super(60, 240);
+        setup();
+!!!153474.java!!!	setup() : void
+        Log.d("AltitudeDataManager","Setting Up Altitude Data Manager");
+        altData = new AltitudeData();
+!!!153602.java!!!	onStartCommand(inout intent : Intent, in flags : int, in startId : int) : int
+        super.onStartCommand(intent, flags, startId);
+        monitor();
+        alarm();
+        return START_STICKY;
+!!!153730.java!!!	monitor() : void
+        Log.d("ALT", "Before check perm");
+
+
+// Call findCurrentPlace and handle the response (first check that the user has granted permission).
+        if (ContextCompat.checkSelfPermission(this, ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED)
+        {   // Permission is not granted
+            Log.d("ALT", "After check perm");
+            // Should we show an explanation?
+            if (ActivityCompat.shouldShowRequestPermissionRationale(MainApplication.getAppActivity(),
+                    ACCESS_FINE_LOCATION)) {
+                Log.d("ALT", "Show rationale check perm");
+                Intent i = new Intent(this, RequestLocationPermission.class);
+                startActivity(i);
+
+            } else {
+                // No explanation needed; request the permission
+                ActivityCompat.requestPermissions(MainApplication.getAppActivity(),
+                        new String[]{ACCESS_FINE_LOCATION},
+                        MY_PERMISSIONS_REQUEST_READ_CONTACTS);
+                Log.d("ALT", "Request check perm");
+
+            }
+        } else {
+            // try {
+            // Permission has already been granted
+            Log.d("ALT", "Accepted check perm");
+            Awareness.getSnapshotClient(getApplicationContext()).getLocation().addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Log.d("AltitudeDataManager", e.getMessage());
+                }
+            }).addOnSuccessListener(new OnSuccessListener<LocationResponse>() {
+                @Override
+                public void onSuccess(LocationResponse locationResponse) {
+                    Location location = locationResponse.getLocation();
+                    altData.altitude = location.getAltitude();
+                    Log.d("AltitudeDataManager", "Altitude:" + altData.altitude);
+                    sendUpdate(altData);
+                }
+            });
+        }

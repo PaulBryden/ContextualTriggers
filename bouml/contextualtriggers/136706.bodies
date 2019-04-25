@@ -1,0 +1,3 @@
+class TimeOfDayData
+!!!148738.java!!!	TimeOfDayData(inout intervals : int [[]])
+        this.intervals = intervals;

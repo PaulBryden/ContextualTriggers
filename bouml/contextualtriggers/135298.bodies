@@ -1,0 +1,32 @@
+class MainApplication
+!!!136578.java!!!	getAppContext() : Context
+        return MainApplication.context;
+!!!136706.java!!!	getAppActivity() : AppCompatActivity
+        return mAppActivity;
+!!!136834.java!!!	onPostCreate(inout savedInstanceState : Bundle) : void
+        super.onPostCreate(savedInstanceState);
+        mAppActivity=this;
+        if(serviceMode){
+            emptyActivity();
+        } else {
+            logActivity();
+        }
+!!!136962.java!!!	onCreate(inout savedInstanceState : Bundle) : void
+        super.onCreate(savedInstanceState);
+        MainApplication.context = getApplicationContext();
+
+!!!137090.java!!!	onResume() : void
+        super.onResume();
+
+!!!137218.java!!!	emptyActivity() : void
+        Log.d("MainApplication", "Starting empty activity");
+        this.setTheme(R.style.Theme_Transparent);
+        i = new Intent(this, ContextualTriggersService.class);
+        startForegroundService(i);
+        finish();
+
+!!!137346.java!!!	logActivity() : void
+        setContentView(R.layout.scrollable_textview);
+        TextView textView = findViewById(R.id.text_view);
+        textView.setMovementMethod(new ScrollingMovementMethod());
+        Intent i = new Intent(this, ContextualTriggersService.class);

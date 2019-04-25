@@ -1,0 +1,31 @@
+class DataManager
+!!!150146.java!!!	DataManager()
+        observers = new ArrayList<DataCondition<T>>();
+        cachedData = null;
+!!!150274.java!!!	onStartCommand(inout intent : Intent, in flags : int, in startId : int) : int
+        int res = super.onStartCommand(intent, flags, startId);
+        registerBatteryBroadcastReceiver();
+        return res;
+!!!150402.java!!!	register(inout dataCondition : DataCondition) : void
+        observers.add(dataCondition);
+        if (cachedData != null) {
+            Log.d("DataManager", "Registering condition, cachedData = " + cachedData.toString());
+            dataCondition.notifyUpdate(cachedData);
+        }
+!!!150530.java!!!	sendUpdate(inout data : T) : void
+        cachedData = data;
+        for (DataCondition<T> i : observers) {
+            i.notifyUpdate(data);
+        }
+!!!150658.java!!!	registerBatteryBroadcastReceiver() : void
+        LocalBroadcastManager lbm = LocalBroadcastManager.getInstance(this);
+        BroadcastReceiver receiver = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                setLowPowerMode(intent.getBooleanExtra(BatteryDataManager.LPM_BOOL_NAME, false));
+                Log.d("DataManager", this.getClass().toString() + ":  lpm " + intent.getBooleanExtra(BatteryDataManager.LPM_BOOL_NAME, false));
+            }
+        };
+        lbm.registerReceiver(receiver, new IntentFilter(BatteryDataManager.LPM_ACTION_NAME));
+!!!150786.java!!!	setLowPowerMode(inout lpm : boolean) : void
+        // By default, do nothing

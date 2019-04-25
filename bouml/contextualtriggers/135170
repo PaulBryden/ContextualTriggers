@@ -1,0 +1,466 @@
+format 221
+"triggers" // uk::ac::strath::contextualtriggers::triggers
+  revision 1
+  modified_by 2 "paul"
+  // class settings
+  
+  classdiagramsettings member_max_width 0 end
+  
+  classcompositediagramsettings end
+  
+  usecasediagramsettings end
+  
+  sequencediagramsettings end
+  
+  collaborationdiagramsettings end
+  
+  objectdiagramsettings end
+  
+  objectcompositediagramsettings end
+  
+  componentdiagramsettings
+   end
+  
+  deploymentdiagramsettings
+   end
+  
+  statediagramsettings
+   end
+  
+  activitydiagramsettings
+   end
+  
+  java_dir "/home/paul/CS551/ContextualTriggers/contextualtriggers/src/main/java/uk/ac/strath/contextualtriggers/triggers/"
+  java_package "uk.ac.strath.contextualtriggers.triggers"
+  classview 134786 "triggers"
+    
+    classdiagramsettings member_max_width 0 end
+    
+    classcompositediagramsettings end
+    
+    collaborationdiagramsettings end
+    
+    objectdiagramsettings end
+    
+    objectcompositediagramsettings end
+    
+    sequencediagramsettings end
+    
+    statediagramsettings
+     end
+    
+    
+    activitydiagramsettings
+     end
+    class 135042 "ITrigger"
+      visibility public stereotype "interface"
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${static}interface ${name}${extends} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      operation 161794 "notifyChange"
+	public explicit_return_type "void"
+	nparams 0
+	
+	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Called by the condition (or any component condition) whenever new data is received
+by that condition which might mean that the condition is satisfied.
+"
+      end
+    end
+
+    class 145026 "DefaultTriggers"
+      visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      operation 160642 "TimeToWalk"
+	class_operation public return_type class_ref 135042 // ITrigger
+	nparams 3
+	  param inout name "activityBinder" explicit_type "IBinder"
+	  param inout name "intervalBinder" explicit_type "IBinder"
+	  param inout name "notifyBinder" explicit_type "IBinder"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}, ${t1} ${p1}, ${t2} ${p2}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 160770 "GyminyCricket"
+	class_operation public return_type class_ref 135042 // ITrigger
+	nparams 2
+	  param inout name "placesBinder" explicit_type "IBinder"
+	  param inout name "notifyBinder" explicit_type "IBinder"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}, ${t1} ${p1}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 160898 "HalfAndHalf"
+	class_operation public return_type class_ref 135042 // ITrigger
+	nparams 3
+	  param inout name "stepBinder" explicit_type "IBinder"
+	  param inout name "intervalBinder" explicit_type "IBinder"
+	  param inout name "notifyBinder" explicit_type "IBinder"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}, ${t1} ${p1}, ${t2} ${p2}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 161026 "ButItsSunnyOutside"
+	class_operation public return_type class_ref 135042 // ITrigger
+	nparams 4
+	  param inout name "stepBinder" explicit_type "IBinder"
+	  param inout name "weatherBinder" explicit_type "IBinder"
+	  param inout name "activityBinder" explicit_type "IBinder"
+	  param inout name "notifyBinder" explicit_type "IBinder"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}, ${t1} ${p1}, ${t2} ${p2}, ${t3} ${p3}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 161154 "GoingDown"
+	class_operation public return_type class_ref 135042 // ITrigger
+	nparams 4
+	  param inout name "stepBinder" explicit_type "IBinder"
+	  param inout name "placesBinder" explicit_type "IBinder"
+	  param inout name "altitudeBinder" explicit_type "IBinder"
+	  param inout name "notifyBinder" explicit_type "IBinder"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}, ${t1} ${p1}, ${t2} ${p2}, ${t3} ${p3}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 161282 "WalkAndTalk"
+	class_operation public return_type class_ref 135042 // ITrigger
+	nparams 3
+	  param inout name "stepBinder" explicit_type "IBinder"
+	  param inout name "calendarBinder" explicit_type "IBinder"
+	  param inout name "notifyBinder" explicit_type "IBinder"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}, ${t1} ${p1}, ${t2} ${p2}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 161410 "DanceForYourDinner"
+	class_operation public return_type class_ref 135042 // ITrigger
+	nparams 3
+	  param inout name "stepBinder" explicit_type "IBinder"
+	  param inout name "placesBinder" explicit_type "IBinder"
+	  param inout name "notifyBinder" explicit_type "IBinder"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}, ${t1} ${p1}, ${t2} ${p2}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 161538 "WalkToWorkOnWeekdays"
+	class_operation public return_type class_ref 135042 // ITrigger
+	nparams 3
+	  param inout name "stepBinder" explicit_type "IBinder"
+	  param inout name "intervalBinder" explicit_type "IBinder"
+	  param inout name "notifyBinder" explicit_type "IBinder"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}, ${t1} ${p1}, ${t2} ${p2}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 161666 "Congratulations"
+	class_operation public return_type class_ref 135042 // ITrigger
+	nparams 2
+	  param inout name "placesBinder" explicit_type "IBinder"
+	  param inout name "notifyBinder" explicit_type "IBinder"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}, ${t1} ${p1}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+    end
+
+    class 145154 "Trigger"
+      visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      comment "Triggers basically just link conditions to actions. If data relevant to the condition changes,
+the Trigger checks if the condition is satisfied, and if so executes the action.
+"
+      classrelation 147074 // <realization>
+	relation 147074 -_-|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 147074 // <realization>
+	  b parent class_ref 135042 // ITrigger
+      end
+
+      classrelation 147202 // condition (<unidirectional association>)
+	relation 147202 --->
+	  a role_name "condition" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 147202 // condition (<unidirectional association>)
+	  b parent class_ref 136322 // Condition
+      end
+
+      classrelation 147330 // action (<unidirectional association>)
+	relation 147330 --->
+	  a role_name "action" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 147330 // action (<unidirectional association>)
+	  b parent class_ref 135554 // Action
+      end
+
+      operation 161922 "Trigger"
+	package explicit_return_type ""
+	nparams 2
+	  param inout name "condition" type class_ref 136322 // Condition
+	  param inout name "action" type class_ref 135554 // Action
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${t0} ${p0}, ${t1} ${p1}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 162050 "notifyChange"
+	public explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Called by the condition (or any component condition) whenever new data is received
+by that condition which might mean that the condition is satisfied.
+"
+      end
+
+      class 145282 "Builder"
+	visibility public 
+	cpp_decl ""
+	static java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+	php_decl ""
+	python_2_2 python_decl ""
+	idl_decl ""
+	explicit_switch_type ""
+	mysql_decl ""
+	
+	classrelation 147458 // condition (<unidirectional association>)
+	  relation 147458 --->
+	    a role_name "condition" private
+	      java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	      classrelation_ref 147458 // condition (<unidirectional association>)
+	    b parent class_ref 136322 // Condition
+	end
+
+	classrelation 147586 // action (<unidirectional association>)
+	  relation 147586 --->
+	    a role_name "action" private
+	      java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	      classrelation_ref 147586 // action (<unidirectional association>)
+	    b parent class_ref 135554 // Action
+	end
+
+	operation 162178 "setCondition"
+	  public return_type class_ref 145282 // Builder
+	  nparams 1
+	    param inout name "condition" type class_ref 136322 // Condition
+	  
+	  preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	  
+	  
+	  
+	end
+
+	operation 162306 "setAction"
+	  public return_type class_ref 145282 // Builder
+	  nparams 1
+	    param inout name "action" type class_ref 135554 // Action
+	  
+	  preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	  
+	  
+	  
+	end
+
+	operation 162434 "build"
+	  public return_type class_ref 145154 // Trigger
+	  nparams 0
+	  
+	  preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	  
+	  
+	  
+	end
+      end
+    end
+  end
+
+  deploymentview 135554 "triggers"
+    //deployment diagram settings
+    deploymentdiagramsettings
+     end
+    artifact 142722 "DefaultTriggers"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import android.app.Activity;
+import android.content.Context;
+import android.os.IBinder;
+import android.util.Log;
+import com.google.android.gms.awareness.state.Weather;
+import com.google.android.libraries.places.api.model.Place;
+import java.util.ArrayList;
+import java.util.List;
+import uk.ac.strath.contextualtriggers.actions.Action;
+import uk.ac.strath.contextualtriggers.actions.CustomMapNotificationAction;
+import uk.ac.strath.contextualtriggers.actions.SimpleMapNotificationAction;
+import uk.ac.strath.contextualtriggers.actions.SimpleNotificationAction;
+import uk.ac.strath.contextualtriggers.conditions.AcceptableTimeCondition;
+import uk.ac.strath.contextualtriggers.conditions.ActivityPeriodCondition;
+import uk.ac.strath.contextualtriggers.conditions.AltitudeTransitionCondition;
+import uk.ac.strath.contextualtriggers.conditions.ClearWeatherCondition;
+import uk.ac.strath.contextualtriggers.conditions.Condition;
+import uk.ac.strath.contextualtriggers.conditions.AndCondition;
+import uk.ac.strath.contextualtriggers.conditions.FrequentNotificationPreventionCondition;
+import uk.ac.strath.contextualtriggers.conditions.GymNearbyCondition;
+import uk.ac.strath.contextualtriggers.conditions.HistoricStepsDaysUnmetCondition;
+import uk.ac.strath.contextualtriggers.conditions.InBuildingCondition;
+import uk.ac.strath.contextualtriggers.conditions.InPlaceTypeCondition;
+import uk.ac.strath.contextualtriggers.conditions.MeetingCondition;
+import uk.ac.strath.contextualtriggers.conditions.NoLongerInBuildingTypeCondition;
+import uk.ac.strath.contextualtriggers.conditions.NotNotifiedTodayCondition;
+import uk.ac.strath.contextualtriggers.conditions.StepAndGoalRealCountCondition;
+import uk.ac.strath.contextualtriggers.conditions.StepCountCondition;
+import uk.ac.strath.contextualtriggers.data.ActivityData;
+import uk.ac.strath.contextualtriggers.data.AltitudeData;
+import uk.ac.strath.contextualtriggers.data.CalendarData;
+import uk.ac.strath.contextualtriggers.data.PlacesData;
+import uk.ac.strath.contextualtriggers.data.StepAndGoalData;
+import uk.ac.strath.contextualtriggers.data.StepData;
+import uk.ac.strath.contextualtriggers.data.TimeOfDayData;
+import uk.ac.strath.contextualtriggers.data.VoidData;
+import uk.ac.strath.contextualtriggers.data.WeatherData;
+import uk.ac.strath.contextualtriggers.managers.ActivityDataManager;
+import uk.ac.strath.contextualtriggers.managers.ActualStepAndGoalDataManager;
+import uk.ac.strath.contextualtriggers.managers.AltitudeDataManager;
+import uk.ac.strath.contextualtriggers.managers.CalendarDataManager;
+import uk.ac.strath.contextualtriggers.managers.IDataManager;
+import uk.ac.strath.contextualtriggers.managers.IntervalsDataManager;
+import uk.ac.strath.contextualtriggers.managers.NotificationDataManager;
+import uk.ac.strath.contextualtriggers.managers.PlacesDataManager;
+import uk.ac.strath.contextualtriggers.managers.SimulatedStepDataManager;
+import uk.ac.strath.contextualtriggers.managers.WeatherDataManager;
+import static com.google.android.gms.awareness.fence.TimeFence.TIME_INTERVAL_AFTERNOON;
+import static com.google.android.gms.awareness.fence.TimeFence.TIME_INTERVAL_EVENING;
+import static com.google.android.gms.awareness.fence.TimeFence.TIME_INTERVAL_MORNING;
+import static com.google.android.gms.awareness.fence.TimeFence.TIME_INTERVAL_WEEKDAY;
+import static com.google.android.gms.location.DetectedActivity.STILL;
+import static uk.ac.strath.contextualtriggers.conditions.StepAndGoalRealCountCondition.LESS_THAN;
+${definition}"
+      associated_elems
+	class_ref 145026 // DefaultTriggers
+      end
+    end
+
+    artifact 142850 "ITrigger"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+${definition}"
+      associated_elems
+	class_ref 135042 // ITrigger
+      end
+    end
+
+    artifact 142978 "Trigger"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import android.util.Log;
+import uk.ac.strath.contextualtriggers.actions.Action;
+import uk.ac.strath.contextualtriggers.conditions.Condition;
+import uk.ac.strath.contextualtriggers.conditions.AbstractCondition;
+${definition}"
+      associated_elems
+	class_ref 145154 // Trigger
+      end
+    end
+  end
+end

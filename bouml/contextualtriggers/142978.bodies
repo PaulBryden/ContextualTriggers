@@ -1,0 +1,33 @@
+class BatteryDataManager
+!!!153858.java!!!	setLowPowerMode(inout lpm : boolean) : void
+        // This one should always run as normal
+!!!154114.java!!!	BatteryDataManager()
+        Log.d("StepAndGoalIntentReceiver","Starting");
+        setup();
+!!!154242.java!!!	configureReceiver() : void
+        IntentFilter filter = new IntentFilter();
+        filter.addAction("android.intent.action.BATTERY_LOW");
+        filter.addAction("android.intent.action.BATTERY_OKAY");
+        receiver = new BatteryLevelReceiver();
+        registerReceiver(receiver, filter);
+!!!154370.java!!!	onBind(inout intent : Intent) : IBinder
+        //Not sure if this is required
+        //Needed if onStartCommand not called automatically
+        Log.d("BatteryDataManager", "Binding");
+        configureReceiver();
+        return binder;
+!!!154498.java!!!	setup() : void
+        batteryData = new BatteryData();
+!!!154626.java!!!	onStartCommand(inout intent : Intent, in flags : int, in startId : int) : int
+        super.onStartCommand(intent, flags, startId);
+        monitor(intent);
+        return START_STICKY;
+!!!154754.java!!!	monitor(inout intent : Intent) : void
+        batteryData.isLow = intent.getBooleanExtra("level", false);
+        Log.d("BatteryDataManager", "Battery low: " + batteryData.isLow);
+        sendUpdate(batteryData);
+        LocalBroadcastManager lbm = LocalBroadcastManager.getInstance(this);
+        Intent i = new Intent();
+        i.setAction(LPM_ACTION_NAME);
+        i.putExtra(LPM_BOOL_NAME, batteryData.isLow);
+        lbm.sendBroadcast(i);

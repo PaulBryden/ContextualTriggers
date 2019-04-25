@@ -1,0 +1,16 @@
+class StepCountCondition
+!!!146562.java!!!	StepCountCondition(in mode : int, in count : int, inout dataManager : IDataManager)
+        super(dataManager);
+        this.mode = mode;
+        this.matchCount = count;
+!!!146690.java!!!	isSatisfied() : boolean
+        if (getData().steps < 0) { // no step count updates received yet
+            return false;
+        }
+        if (this.mode == LESS_THAN) {
+            return getData().steps < matchCount;
+        }
+        if (this.mode == GREATER_THAN_OR_EQUAL_TO) {
+            return getData().steps >= matchCount;
+        }
+        return false;

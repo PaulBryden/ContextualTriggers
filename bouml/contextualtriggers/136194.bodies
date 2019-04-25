@@ -1,0 +1,9 @@
+class AbstractCondition
+!!!139650.java!!!	attachTrigger(inout trigger : ITrigger) : void
+        this.trigger = trigger;
+!!!139778.java!!!	getTrigger() : ITrigger
+        if (trigger != null) {
+            return trigger;
+        } else {
+            throw new TriggerNotConnectedException();
+        }

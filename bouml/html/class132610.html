@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Documentation produced by the Html generator of Bouml (http://www.bouml.fr) -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:svg="http://www.w3.org/2000/svg">
+
+<head>
+<title>Class InPlaceTypeCondition</title>
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body bgcolor="#ffffff">
+
+<div class = "title">Class InPlaceTypeCondition</div>
+<p></p>
+
+<!-- ============================================================= -->
+
+<a name="ref4_132610"></a>
+<p>Condition satisfied if any place with a likelihood greater than a threshold value matches<br />any target place type.<br /><br /></p>
+<p>Declaration :</p><ul>
+<li>Java : public class InPlaceTypeCondition extends <a href="class130434.html#ref4_130434"><b>DataCondition</b></a>&lt;&gt; </li></ul><p>Directly inherited by : <a href="class132482.html#ref4_132482"><b>InBuildingCondition</b></a> </p>
+<p>Artifact : <a href="index.html#ref8_130434"><b>InPlaceTypeCondition</b></a></p>
+<div class="sub">
+<a name="ref1_131970"></a>
+<table><tr><td><div class="element">Attribute <b>DEFAULT_THRESHOLD</b></div></td></tr></table>
+<p>Declaration :</p><ul><li>Uml : static, # DEFAULT_THRESHOLD : double =  0.5, read only</li><li>Java : protected static final double DEFAULT_THRESHOLD</li></ul><a name="ref1_132098"></a>
+<table><tr><td><div class="element">Attribute <b>targetTypes</b></div></td></tr></table>
+<p>Declaration :</p><ul><li>Uml : - targetTypes : Place.Type</li><li>Java : private List&lt;Place.Type&gt; targetTypes</li></ul><p>Stereotype: List</p>
+<a name="ref1_132226"></a>
+<table><tr><td><div class="element">Attribute <b>threshold</b></div></td></tr></table>
+<p>Declaration :</p><ul><li>Uml : - threshold : double</li><li>Java : private double threshold</li></ul><a name="ref2_137858"></a>
+<table><tr><td><div class="element">Operation <b>InPlaceTypeCondition</b></div></td></tr></table><p>Declaration :</p><ul><li>Uml : + InPlaceTypeCondition(inout buildingType : Place.Type, inout dataManager : <a href="class130690.html#ref4_130690"><b>IDataManager</b></a>) : </li><li>Java : public InPlaceTypeCondition(Place.Type buildingType, <a href="class130690.html#ref4_130690"><b>IDataManager</b></a>&lt;PlacesData&gt; dataManager)</li></ul><a name="ref2_137986"></a>
+<table><tr><td><div class="element">Operation <b>InPlaceTypeCondition</b></div></td></tr></table><p>Declaration :</p><ul><li>Uml : + InPlaceTypeCondition(inout buildingType : Place.Type, in threshold : double, inout dataManager : <a href="class130690.html#ref4_130690"><b>IDataManager</b></a>) : </li><li>Java : public InPlaceTypeCondition(Place.Type buildingType, double threshold, <a href="class130690.html#ref4_130690"><b>IDataManager</b></a>&lt;PlacesData&gt; dataManager)</li></ul><a name="ref2_138114"></a>
+<table><tr><td><div class="element">Operation <b>InPlaceTypeCondition</b></div></td></tr></table><p>Declaration :</p><ul><li>Uml : + InPlaceTypeCondition(inout buildingTypes : List&lt;Place.Type&gt;, inout dataManager : <a href="class130690.html#ref4_130690"><b>IDataManager</b></a>) : </li><li>Java : public InPlaceTypeCondition(List&lt;Place.Type&gt; buildingTypes, <a href="class130690.html#ref4_130690"><b>IDataManager</b></a>&lt;PlacesData&gt; dataManager)</li></ul><a name="ref2_138242"></a>
+<table><tr><td><div class="element">Operation <b>InPlaceTypeCondition</b></div></td></tr></table><p>Declaration :</p><ul><li>Uml : + InPlaceTypeCondition(inout buildingTypes : List&lt;Place.Type&gt;, in threshold : double, inout dataManager : <a href="class130690.html#ref4_130690"><b>IDataManager</b></a>) : </li><li>Java : public InPlaceTypeCondition(List&lt;Place.Type&gt; buildingTypes, double threshold, <a href="class130690.html#ref4_130690"><b>IDataManager</b></a>&lt;PlacesData&gt; dataManager)</li></ul><a name="ref2_138370"></a>
+<table><tr><td><div class="element">Operation <b>isSatisfied</b></div></td></tr></table><p>Declaration :</p><ul><li>Uml : + isSatisfied() : boolean</li><li>Java : public boolean isSatisfied()</li></ul><p> Java annotation(s) :</p><div class="sub"><p>&#64;Override<br /></p></div></div>
+<p>All public operations : <a href="class129794.html#ref2_133634"><b>attachTrigger</b></a> , <a href="class130434.html#ref2_134402"><b>getData</b></a> , <a href="class129922.html#ref2_133506"><b>hasStaleData</b></a> , <a href="class130434.html#ref2_134530"><b>hasStaleData</b></a> , <a href="class129922.html#ref2_133378"><b>isSatisfied</b></a> , <a href="class132610.html#ref2_138370"><b>isSatisfied</b></a> , <a href="class130434.html#ref2_134658"><b>notifyUpdate</b></a> </p>
+</body>
+</html>

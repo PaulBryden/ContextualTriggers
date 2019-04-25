@@ -1,0 +1,19 @@
+class FrequentNotificationPreventionCondition
+!!!142722.java!!!	FrequentNotificationPreventionCondition(in minimumTimeElapsed : int, inout dataManager : IDataManager)
+        super(dataManager);
+        this.minimumTimeElapsed = minimumTimeElapsed; /*seconds*/
+        lastNotificationSent = -1;
+!!!142850.java!!!	notifyUpdate(inout data : VoidData) : void
+        // Override since an update always means condition isn't satisfied,
+        // so no need to notify the Trigger of the change.
+        lastNotificationSent = System.currentTimeMillis();
+        super.notifyUpdate(data);
+!!!142978.java!!!	hasStaleData() : boolean
+        return false;
+!!!143106.java!!!	isSatisfied() : boolean
+        if (lastNotificationSent < 0)
+        {
+            return true;
+        }
+        long now = System.currentTimeMillis();
+        return now - lastNotificationSent > minimumTimeElapsed;

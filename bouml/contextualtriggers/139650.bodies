@@ -1,0 +1,11 @@
+class NotNotifiedTodayCondition
+!!!145666.java!!!	NotNotifiedTodayCondition(inout dataManager : IDataManager)
+        super(dataManager);
+        date=LocalDate.ofEpochDay(0);
+!!!145794.java!!!	hasStaleData() : boolean
+        return false;
+!!!145922.java!!!	notifyUpdate(inout data : VoidData) : void
+        date = LocalDate.now();
+        super.notifyUpdate(data);
+!!!146050.java!!!	isSatisfied() : boolean
+        return !date.equals(LocalDate.now());

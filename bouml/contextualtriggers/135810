@@ -1,0 +1,1085 @@
+format 221
+"data" // uk::ac::strath::contextualtriggers::data
+  revision 1
+  modified_by 2 "paul"
+  // class settings
+  
+  classdiagramsettings member_max_width 0 end
+  
+  classcompositediagramsettings end
+  
+  usecasediagramsettings end
+  
+  sequencediagramsettings end
+  
+  collaborationdiagramsettings end
+  
+  objectdiagramsettings end
+  
+  objectcompositediagramsettings end
+  
+  componentdiagramsettings
+   end
+  
+  deploymentdiagramsettings
+   end
+  
+  statediagramsettings
+   end
+  
+  activitydiagramsettings
+   end
+  
+  java_dir "/home/paul/CS551/ContextualTriggers/contextualtriggers/src/main/java/uk/ac/strath/contextualtriggers/data/"
+  java_package "uk.ac.strath.contextualtriggers.data"
+  classview 135426 "data"
+    
+    classdiagramsettings member_max_width 0 end
+    
+    classcompositediagramsettings end
+    
+    collaborationdiagramsettings end
+    
+    objectdiagramsettings end
+    
+    objectcompositediagramsettings end
+    
+    sequencediagramsettings end
+    
+    statediagramsettings
+     end
+    
+    
+    activitydiagramsettings
+     end
+    class 136706 "TimeOfDayData"
+      visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 141826 // <generalisation>
+	relation 141826 ---|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 141826 // <generalisation>
+	  b parent class_ref 140162 // AbstractData
+      end
+
+      attribute 142082 "intervals"
+	public explicit_type "int"
+	multiplicity "[]"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type}${multiplicity} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      operation 148738 "TimeOfDayData"
+	public explicit_return_type ""
+	nparams 1
+	  param inout name "intervals" explicit_type "int"
+	multiplicity "[]"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${t0}[] ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+    end
+
+    class 136962 "Data"
+      visibility public stereotype "interface"
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${static}interface ${name}${extends} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      operation 146818 "getTimestamp"
+	public explicit_return_type "long"
+	nparams 0
+	
+	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+    end
+
+    class 137346 "ActivityData"
+      visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 140034 // <generalisation>
+	relation 140034 ---|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 140034 // <generalisation>
+	  b parent class_ref 140162 // AbstractData
+      end
+
+      attribute 140546 "activity"
+	private explicit_type "DetectedActivity"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      operation 147074 "ActivityData"
+	public explicit_return_type ""
+	nparams 1
+	  param inout name "activity" explicit_type "DetectedActivity"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 147202 "getActivityType"
+	public explicit_return_type "int"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+    end
+
+    class 137602 "AltitudeData"
+      visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 140162 // <generalisation>
+	relation 140162 ---|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 140162 // <generalisation>
+	  b parent class_ref 140162 // AbstractData
+      end
+
+      attribute 140674 "altitude"
+	public explicit_type "double"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+    end
+
+    class 138114 "WeatherData"
+      visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 142082 // <generalisation>
+	relation 142082 ---|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 142082 // <generalisation>
+	  b parent class_ref 140162 // AbstractData
+      end
+
+      attribute 142210 "TemperatureCelsius"
+	public explicit_type "float"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 142338 "Humidity"
+	public explicit_type "int"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 142466 "Conditions"
+	public explicit_type "int"
+	multiplicity "[]"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type}${multiplicity} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      operation 148866 "printData"
+	public explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 148994 "toString"
+	public explicit_return_type "String"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+    end
+
+    class 138370 "VoidData"
+      visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      comment "Wrapper for Void data type with timestamp
+"
+      classrelation 141954 // <generalisation>
+	relation 141954 ---|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 141954 // <generalisation>
+	  b parent class_ref 140162 // AbstractData
+      end
+    end
+
+    class 138626 "PlacesData"
+      visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 141314 // <generalisation>
+	relation 141314 ---|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 141314 // <generalisation>
+	  b parent class_ref 140162 // AbstractData
+      end
+
+      attribute 141826 "places"
+	public explicit_type "PlaceLikelihood"
+	stereotype "List"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${stereotype}<${type}> ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      operation 148098 "PlacesData"
+	public explicit_return_type ""
+	nparams 1
+	  param inout name "places" explicit_type "List<PlaceLikelihood>"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+    end
+
+    class 138882 "StepAndGoalData"
+      visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 141442 // <generalisation>
+	relation 141442 ---|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 141442 // <generalisation>
+	  b parent class_ref 140162 // AbstractData
+      end
+
+      classrelation 141570 // history (<unidirectional association>)
+	relation 141570 --->
+	  stereotype "HashMap"
+	  a role_name "history" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${stereotype}<LocalDate, ${type}> ${name}${value};
+"
+	    classrelation_ref 141570 // history (<unidirectional association>)
+	  b parent class_ref 140546 // DayData
+      end
+
+      operation 148226 "StepAndGoalData"
+	public explicit_return_type ""
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 148354 "getHistory"
+	public return_type class_ref 140546 // DayData
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}Map<LocalDate, ${type}> ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 148482 "updateDay"
+	public explicit_return_type "void"
+	nparams 1
+	  param inout name "day" type class_ref 140546 // DayData
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 148610 "getDay"
+	public return_type class_ref 140546 // DayData
+	nparams 1
+	  param inout name "day" explicit_type "LocalDate"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+    end
+
+    class 139394 "CalendarData"
+      visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 140418 // <generalisation>
+	relation 140418 ---|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 140418 // <generalisation>
+	  b parent class_ref 140162 // AbstractData
+      end
+
+      classrelation 140546 // cd (<unidirectional association>)
+	relation 140546 --->
+	  stereotype "List"
+	  a role_name "cd" init_value " new ArrayList<>()" public
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${stereotype}<${type}> ${name}${value};
+"
+	    classrelation_ref 140546 // cd (<unidirectional association>)
+	  b parent class_ref 140418 // EventData
+      end
+
+      operation 147330 "CalendarData"
+	public explicit_return_type ""
+	nparams 1
+	  param inout name "cd" explicit_type "List<EventData>"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 147458 "getEvents"
+	public return_type class_ref 140418 // EventData
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}List<${type}> ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Gets every event in the calendar.
+
+@return events
+"
+      end
+
+      operation 147586 "getEventsBetween"
+	public return_type class_ref 140418 // EventData
+	nparams 2
+	  param inout name "from" explicit_type "Date"
+	  param inout name "to" explicit_type "Date"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}List<${type}> ${name}${(}${t0} ${p0}, ${t1} ${p1}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Gets any event(s) in the calendar between two times.
+
+@param from lower bound
+@param to   upper bound
+@return events between lower and upper bounds
+"
+      end
+    end
+
+    class 140034 "StepData"
+      visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 141698 // <generalisation>
+	relation 141698 ---|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 141698 // <generalisation>
+	  b parent class_ref 140162 // AbstractData
+      end
+
+      attribute 141954 "steps"
+	public explicit_type "int"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+    end
+
+    class 140162 "AbstractData"
+      visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 139906 // <realization>
+	relation 139906 -_-|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 139906 // <realization>
+	  b parent class_ref 136962 // Data
+      end
+
+      attribute 140418 "timestamp"
+	private explicit_type "long"
+	init_value " System.currentTimeMillis()"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      operation 146946 "getTimestamp"
+	public explicit_return_type "long"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+    end
+
+    class 140290 "BatteryData"
+      visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 140290 // <generalisation>
+	relation 140290 ---|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 140290 // <generalisation>
+	  b parent class_ref 140162 // AbstractData
+      end
+
+      attribute 140802 "isLow"
+	public explicit_type "boolean"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+    end
+
+    class 140418 "EventData"
+      visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 140674 // <generalisation>
+	relation 140674 ---|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 140674 // <generalisation>
+	  b parent class_ref 140162 // AbstractData
+      end
+
+      attribute 141314 "name"
+	public explicit_type "String"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 141442 "time"
+	public explicit_type "Date"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      operation 147842 "EventData"
+	public explicit_return_type ""
+	nparams 2
+	  param in name "name" explicit_type "String"
+	  param inout name "time" explicit_type "Date"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${t0} ${p0}, ${t1} ${p1}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+    end
+
+    class 140546 "DayData"
+      visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      attribute 140930 "steps"
+	public explicit_type "int"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 141058 "goal"
+	public explicit_type "int"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 141186 "date"
+	public explicit_type "LocalDate"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      operation 147714 "DayData"
+	public explicit_return_type ""
+	nparams 3
+	  param in name "steps" explicit_type "int"
+	  param in name "goal" explicit_type "int"
+	  param inout name "date" explicit_type "LocalDate"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${t0} ${p0}, ${t1} ${p1}, ${t2} ${p2}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+    end
+
+    class 140674 "GoalData"
+      visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 140802 // <generalisation>
+	relation 140802 ---|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 140802 // <generalisation>
+	  b parent class_ref 140162 // AbstractData
+      end
+
+      attribute 141570 "steps"
+	public explicit_type "int"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+    end
+
+    class 140802 "ListCalendarData"
+      visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 140930 // <generalisation>
+	relation 140930 ---|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 140930 // <generalisation>
+	  b parent class_ref 140162 // AbstractData
+      end
+
+      classrelation 141058 // cd (<unidirectional association>)
+	relation 141058 --->
+	  stereotype "List"
+	  a role_name "cd" init_value " new ArrayList<>()" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${stereotype}<${type}> ${name}${value};
+"
+	    classrelation_ref 141058 // cd (<unidirectional association>)
+	  b parent class_ref 139394 // CalendarData
+      end
+
+      operation 147970 "ListCalendarData"
+	public explicit_return_type ""
+	nparams 1
+	  param inout name "cd" explicit_type "List<CalendarData>"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+    end
+
+    class 140930 "NotificationData"
+      visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 141186 // <generalisation>
+	relation 141186 ---|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 141186 // <generalisation>
+	  b parent class_ref 140162 // AbstractData
+      end
+
+      attribute 141698 "LastNotified"
+	public explicit_type "long"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+    end
+  end
+
+  deploymentview 134914 "data"
+    //deployment diagram settings
+    deploymentdiagramsettings
+     end
+    artifact 137858 "Data"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+${definition}"
+      associated_elems
+	class_ref 136962 // Data
+      end
+    end
+
+    artifact 137986 "AbstractData"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+${definition}"
+      associated_elems
+	class_ref 140162 // AbstractData
+      end
+    end
+
+    artifact 138114 "ActivityData"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import com.google.android.gms.location.DetectedActivity;
+${definition}"
+      associated_elems
+	class_ref 137346 // ActivityData
+      end
+    end
+
+    artifact 138242 "AltitudeData"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+${definition}"
+      associated_elems
+	class_ref 137602 // AltitudeData
+      end
+    end
+
+    artifact 138370 "BatteryData"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+${definition}"
+      associated_elems
+	class_ref 140290 // BatteryData
+      end
+    end
+
+    artifact 138498 "CalendarData"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.Date;
+import java.util.List;
+${definition}"
+      associated_elems
+	class_ref 139394 // CalendarData
+      end
+    end
+
+    artifact 138626 "DayData"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import java.time.LocalDate;
+${definition}"
+      associated_elems
+	class_ref 140546 // DayData
+      end
+    end
+
+    artifact 138754 "EventData"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import java.util.Date;
+${definition}"
+      associated_elems
+	class_ref 140418 // EventData
+      end
+    end
+
+    artifact 138882 "GoalData"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+${definition}"
+      associated_elems
+	class_ref 140674 // GoalData
+      end
+    end
+
+    artifact 139010 "ListCalendarData"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import java.util.ArrayList;
+import java.util.List;
+${definition}"
+      associated_elems
+	class_ref 140802 // ListCalendarData
+      end
+    end
+
+    artifact 139138 "NotificationData"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+${definition}"
+      associated_elems
+	class_ref 140930 // NotificationData
+      end
+    end
+
+    artifact 139266 "PlacesData"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import com.google.android.libraries.places.api.model.PlaceLikelihood;
+import java.util.List;
+${definition}"
+      associated_elems
+	class_ref 138626 // PlacesData
+      end
+    end
+
+    artifact 139394 "StepAndGoalData"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import java.time.LocalDate;
+import java.util.HashMap;
+import java.util.Map;
+${definition}"
+      associated_elems
+	class_ref 138882 // StepAndGoalData
+      end
+    end
+
+    artifact 139522 "StepData"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+${definition}"
+      associated_elems
+	class_ref 140034 // StepData
+      end
+    end
+
+    artifact 139650 "TimeOfDayData"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+${definition}"
+      associated_elems
+	class_ref 136706 // TimeOfDayData
+      end
+    end
+
+    artifact 139778 "VoidData"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+${definition}"
+      associated_elems
+	class_ref 138370 // VoidData
+      end
+    end
+
+    artifact 139906 "WeatherData"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+${definition}"
+      associated_elems
+	class_ref 138114 // WeatherData
+      end
+    end
+  end
+end

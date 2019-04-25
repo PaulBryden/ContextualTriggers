@@ -1,0 +1,2405 @@
+format 221
+"managers" // uk::ac::strath::contextualtriggers::managers
+  revision 1
+  modified_by 2 "paul"
+  // class settings
+  
+  classdiagramsettings member_max_width 0 end
+  
+  classcompositediagramsettings end
+  
+  usecasediagramsettings end
+  
+  sequencediagramsettings end
+  
+  collaborationdiagramsettings end
+  
+  objectdiagramsettings end
+  
+  objectcompositediagramsettings end
+  
+  componentdiagramsettings
+   end
+  
+  deploymentdiagramsettings
+   end
+  
+  statediagramsettings
+   end
+  
+  activitydiagramsettings
+   end
+  
+  java_dir "/home/paul/CS551/ContextualTriggers/contextualtriggers/src/main/java/uk/ac/strath/contextualtriggers/managers/"
+  java_package "uk.ac.strath.contextualtriggers.managers"
+  classview 135554 "managers"
+    
+    classdiagramsettings member_max_width 0 end
+    
+    classcompositediagramsettings end
+    
+    collaborationdiagramsettings end
+    
+    objectdiagramsettings end
+    
+    objectcompositediagramsettings end
+    
+    sequencediagramsettings end
+    
+    statediagramsettings
+     end
+    
+    
+    activitydiagramsettings
+     end
+    class 137090 "IDataManager"
+      visibility public stereotype "interface"
+      nformals 1
+      formal name "T" type "" explicit_default_value ""
+        extends class_ref 136962 // Data
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${static}interface ${name}${extends} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      operation 149890 "register"
+	cpp_inline public explicit_return_type "void"
+	nparams 1
+	  param inout name "dataCondition" type class_ref 136834 // DataCondition
+	
+	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0}<T> ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 150018 "setLowPowerMode"
+	cpp_inline public explicit_return_type "void"
+	nparams 1
+	  param inout name "lpm" explicit_type "boolean"
+	
+	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+    end
+
+    class 141826 "ActivityDataManager"
+      visibility public 
+      nactuals 1
+      actual class class_ref 141954 // AlarmDataManager
+        rank 0 explicit_value ""
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      comment "import static com.google.android.gms.internal.zzs.TAG;"
+      classrelation 143490 // <realization>
+	relation 143490 -_-|>
+	  stereotype "bind"
+	  a public
+	    java "${type}"
+	    classrelation_ref 143490 // <realization>
+	  b parent class_ref 141954 // AlarmDataManager
+      end
+
+      attribute 143234 "binder"
+	const_attribute private explicit_type "IBinder"
+	init_value " new ActivityDataManager.LocalBinder()"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      operation 151426 "onBind"
+	public explicit_return_type "IBinder"
+	nparams 1
+	  param inout name "intent" explicit_type "Intent"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Nullable
+@Override
+"
+	
+	
+	
+      end
+
+      class 142210 "LocalBinder"
+	visibility public 
+	cpp_decl ""
+	java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+	php_decl ""
+	python_2_2 python_decl ""
+	idl_decl ""
+	explicit_switch_type ""
+	mysql_decl ""
+	
+	classrelation 143618 // <generalisation>
+	  relation 143618 ---|>
+	    a public
+	      java "${type}"
+	      classrelation_ref 143618 // <generalisation>
+	    b parent class_ref 142338 // Binder
+	end
+
+	operation 151554 "getInstance"
+	  public return_type class_ref 137090 // IDataManager
+	  nparams 0
+	  
+	  preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type}<ActivityData> ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	  
+	  
+	  
+	end
+      end
+
+      operation 151682 "ActivityDataManager"
+	public explicit_return_type ""
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 151810 "setup"
+	private explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 151938 "onStartCommand"
+	public explicit_return_type "int"
+	nparams 3
+	  param inout name "intent" explicit_type "Intent"
+	  param in name "flags" explicit_type "int"
+	  param in name "startId" explicit_type "int"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}, ${t1} ${p1}, ${t2} ${p2}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+
+      operation 152066 "monitor"
+	private explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "This Could be setup to fire on a transition, instead of a poll"
+      end
+    end
+
+    class 141954 "AlarmDataManager"
+      abstract visibility public 
+      nformals 1
+      formal name "T" type "" explicit_default_value ""
+        extends class_ref 136962 // Data
+      nactuals 1
+      actual class class_ref 142082 // DataManager
+        rank 0 explicit_value ""
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 143362 // <realization>
+	relation 143362 -_-|>
+	  stereotype "bind"
+	  a public
+	    java "${type}"
+	    classrelation_ref 143362 // <realization>
+	  b parent class_ref 142082 // DataManager
+      end
+
+      attribute 142722 "pollingPeriod"
+	private explicit_type "int"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment " in seconds"
+      end
+
+      attribute 142850 "lpmPollingPeriod"
+	private explicit_type "int"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment " in seconds"
+      end
+
+      attribute 142978 "lpm"
+	private explicit_type "boolean"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 143106 "alarmMgr"
+	private explicit_type "AlarmManager"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      operation 150914 "AlarmDataManager"
+	cpp_inline public explicit_return_type ""
+	nparams 2
+	  param in name "pollingPeriod" explicit_type "int"
+	  param in name "lpmPollingPeriod" explicit_type "int"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${t0} ${p0}, ${t1} ${p1}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 151042 "alarm"
+	cpp_inline protected explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 151170 "onDestroy"
+	cpp_inline public explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+
+      operation 151298 "setLowPowerMode"
+	cpp_inline public explicit_return_type "void"
+	nparams 1
+	  param inout name "lpm" explicit_type "boolean"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+    end
+
+    class 142082 "DataManager"
+      abstract visibility public 
+      nformals 1
+      formal name "T" type "" explicit_default_value ""
+        extends class_ref 136962 // Data
+      nactuals 1
+      actual class class_ref 137090 // IDataManager
+        rank 0 explicit_value ""
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 142978 // <generalisation>
+	relation 142978 ---|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 142978 // <generalisation>
+	  b parent class_ref 134658 // Service
+      end
+
+      classrelation 143106 // <realization>
+	relation 143106 -_-|>
+	  stereotype "bind"
+	  a public
+	    java "${type}"
+	    classrelation_ref 143106 // <realization>
+	  b parent class_ref 137090 // IDataManager
+      end
+
+      classrelation 143234 // observers (<unidirectional association>)
+	relation 143234 --->
+	  stereotype "List"
+	  a role_name "observers" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${stereotype}<${type}<T>> ${name}${value};
+"
+	    classrelation_ref 143234 // observers (<unidirectional association>)
+	  b parent class_ref 136834 // DataCondition
+      end
+
+      attribute 142594 "cachedData"
+	private explicit_type "T"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      operation 150146 "DataManager"
+	cpp_inline public explicit_return_type ""
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 150274 "onStartCommand"
+	cpp_inline public explicit_return_type "int"
+	nparams 3
+	  param inout name "intent" explicit_type "Intent"
+	  param in name "flags" explicit_type "int"
+	  param in name "startId" explicit_type "int"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}, ${t1} ${p1}, ${t2} ${p2}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+
+      operation 150402 "register"
+	cpp_inline public explicit_return_type "void"
+	nparams 1
+	  param inout name "dataCondition" type class_ref 136834 // DataCondition
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0}<T> ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+
+      operation 150530 "sendUpdate"
+	cpp_inline protected explicit_return_type "void"
+	nparams 1
+	  param inout name "data" explicit_type "T"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 150658 "registerBatteryBroadcastReceiver"
+	cpp_inline private explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 150786 "setLowPowerMode"
+	cpp_inline public explicit_return_type "void"
+	nparams 1
+	  param inout name "lpm" explicit_type "boolean"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+    end
+
+    class 142466 "ActualStepAndGoalDataManager"
+      visibility public 
+      nactuals 1
+      actual class class_ref 142082 // DataManager
+        rank 0 explicit_value ""
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 143746 // <realization>
+	relation 143746 -_-|>
+	  stereotype "bind"
+	  a public
+	    java "${type}"
+	    classrelation_ref 143746 // <realization>
+	  b parent class_ref 142082 // DataManager
+      end
+
+      classrelation 143874 // stepGoalData (<unidirectional association>)
+	relation 143874 --->
+	  a role_name "stepGoalData" package
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 143874 // stepGoalData (<unidirectional association>)
+	  b parent class_ref 138882 // StepAndGoalData
+      end
+
+      classrelation 144002 // receiver (<unidirectional association>)
+	relation 144002 --->
+	  a role_name "receiver" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 144002 // receiver (<unidirectional association>)
+	  b parent class_ref 141698 // StepAndGoalIntentReceiver
+      end
+
+      attribute 143362 "binder"
+	const_attribute private explicit_type "IBinder"
+	init_value " new LocalBinder()"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      class 142594 "LocalBinder"
+	visibility public 
+	cpp_decl ""
+	java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+	php_decl ""
+	python_2_2 python_decl ""
+	idl_decl ""
+	explicit_switch_type ""
+	mysql_decl ""
+	
+	classrelation 144130 // <generalisation>
+	  relation 144130 ---|>
+	    a public
+	      java "${type}"
+	      classrelation_ref 144130 // <generalisation>
+	    b parent class_ref 142338 // Binder
+	end
+
+	operation 152194 "getInstance"
+	  public return_type class_ref 137090 // IDataManager
+	  nparams 0
+	  
+	  preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type}<StepAndGoalData> ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	  
+	  
+	  
+	end
+      end
+
+      operation 152322 "ActualStepAndGoalDataManager"
+	public explicit_return_type ""
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 152450 "configureReceiver"
+	private explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 152578 "onBind"
+	public explicit_return_type "IBinder"
+	nparams 1
+	  param inout name "intent" explicit_type "Intent"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Nullable
+@Override
+"
+	
+	
+	
+      end
+
+      operation 152706 "setup"
+	private explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 152834 "onStartCommand"
+	public explicit_return_type "int"
+	nparams 3
+	  param inout name "intent" explicit_type "Intent"
+	  param in name "flags" explicit_type "int"
+	  param in name "startId" explicit_type "int"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}, ${t1} ${p1}, ${t2} ${p2}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+
+      operation 152962 "monitor"
+	private explicit_return_type "void"
+	nparams 1
+	  param inout name "intent" explicit_type "Intent"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+    end
+
+    class 142722 "AltitudeDataManager"
+      visibility public 
+      nactuals 1
+      actual class class_ref 141954 // AlarmDataManager
+        rank 0 explicit_value ""
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 144258 // <realization>
+	relation 144258 -_-|>
+	  stereotype "bind"
+	  a public
+	    java "${type}"
+	    classrelation_ref 144258 // <realization>
+	  b parent class_ref 141954 // AlarmDataManager
+      end
+
+      classrelation 144386 // altData (<unidirectional association>)
+	relation 144386 --->
+	  a role_name "altData" package
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 144386 // altData (<unidirectional association>)
+	  b parent class_ref 137602 // AltitudeData
+      end
+
+      attribute 143490 "binder"
+	const_attribute private explicit_type "IBinder"
+	init_value " new AltitudeDataManager.LocalBinder()"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 143618 "MY_PERMISSIONS_REQUEST_READ_CONTACTS"
+	private explicit_type "int"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      operation 153090 "onBind"
+	public explicit_return_type "IBinder"
+	nparams 1
+	  param inout name "intent" explicit_type "Intent"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Nullable
+@Override
+"
+	
+	
+	
+      end
+
+      class 142850 "LocalBinder"
+	visibility public 
+	cpp_decl ""
+	java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+	php_decl ""
+	python_2_2 python_decl ""
+	idl_decl ""
+	explicit_switch_type ""
+	mysql_decl ""
+	
+	classrelation 144514 // <generalisation>
+	  relation 144514 ---|>
+	    a public
+	      java "${type}"
+	      classrelation_ref 144514 // <generalisation>
+	    b parent class_ref 142338 // Binder
+	end
+
+	operation 153218 "getInstance"
+	  public return_type class_ref 137090 // IDataManager
+	  nparams 0
+	  
+	  preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	  
+	  
+	  
+	end
+      end
+
+      operation 153346 "AltitudeDataManager"
+	public explicit_return_type ""
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 153474 "setup"
+	private explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 153602 "onStartCommand"
+	public explicit_return_type "int"
+	nparams 3
+	  param inout name "intent" explicit_type "Intent"
+	  param in name "flags" explicit_type "int"
+	  param in name "startId" explicit_type "int"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}, ${t1} ${p1}, ${t2} ${p2}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+
+      operation 153730 "monitor"
+	private explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "This Could be setup to fire on a transition, instead of a poll"
+      end
+
+      classrelation 148482 // <generalisation>
+	relation 148482 ---|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 148482 // <generalisation>
+	  b parent class_ref 145666 // RequestLocationPermission
+      end
+    end
+
+    class 142978 "BatteryDataManager"
+      visibility public 
+      nactuals 1
+      actual class class_ref 142082 // DataManager
+        rank 0 explicit_value ""
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 144642 // <realization>
+	relation 144642 -_-|>
+	  stereotype "bind"
+	  a public
+	    java "${type}"
+	    classrelation_ref 144642 // <realization>
+	  b parent class_ref 142082 // DataManager
+      end
+
+      attribute 143746 "LPM_BOOL_NAME"
+	class_attribute const_attribute public explicit_type "String"
+	init_value " \"LPM\""
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 143874 "LPM_ACTION_NAME"
+	class_attribute const_attribute public explicit_type "String"
+	init_value " \"MANAGERS/LPM\""
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      classrelation 144770 // batteryData (<unidirectional association>)
+	relation 144770 --->
+	  a role_name "batteryData" package
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 144770 // batteryData (<unidirectional association>)
+	  b parent class_ref 140290 // BatteryData
+      end
+
+      classrelation 144898 // receiver (<unidirectional association>)
+	relation 144898 --->
+	  a role_name "receiver" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 144898 // receiver (<unidirectional association>)
+	  b parent class_ref 141314 // BatteryLevelReceiver
+      end
+
+      attribute 144002 "binder"
+	const_attribute private explicit_type "IBinder"
+	init_value " new LocalBinder()"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      operation 153858 "setLowPowerMode"
+	public explicit_return_type "void"
+	nparams 1
+	  param inout name "lpm" explicit_type "boolean"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+
+      class 143106 "LocalBinder"
+	visibility public 
+	cpp_decl ""
+	java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+	php_decl ""
+	python_2_2 python_decl ""
+	idl_decl ""
+	explicit_switch_type ""
+	mysql_decl ""
+	
+	classrelation 145026 // <generalisation>
+	  relation 145026 ---|>
+	    a public
+	      java "${type}"
+	      classrelation_ref 145026 // <generalisation>
+	    b parent class_ref 142338 // Binder
+	end
+
+	operation 153986 "getInstance"
+	  public return_type class_ref 137090 // IDataManager
+	  nparams 0
+	  
+	  preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	  
+	  
+	  
+	end
+      end
+
+      operation 154114 "BatteryDataManager"
+	public explicit_return_type ""
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 154242 "configureReceiver"
+	private explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 154370 "onBind"
+	public explicit_return_type "IBinder"
+	nparams 1
+	  param inout name "intent" explicit_type "Intent"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Nullable
+@Override
+"
+	
+	
+	
+      end
+
+      operation 154498 "setup"
+	private explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 154626 "onStartCommand"
+	public explicit_return_type "int"
+	nparams 3
+	  param inout name "intent" explicit_type "Intent"
+	  param in name "flags" explicit_type "int"
+	  param in name "startId" explicit_type "int"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}, ${t1} ${p1}, ${t2} ${p2}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+
+      operation 154754 "monitor"
+	private explicit_return_type "void"
+	nparams 1
+	  param inout name "intent" explicit_type "Intent"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+    end
+
+    class 143234 "CalendarDataManager"
+      visibility public 
+      nactuals 1
+      actual class class_ref 141954 // AlarmDataManager
+        rank 0 explicit_value ""
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      comment "import static com.google.android.gms.internal.zzs.TAG;"
+      classrelation 145154 // <realization>
+	relation 145154 -_-|>
+	  stereotype "bind"
+	  a public
+	    java "${type}"
+	    classrelation_ref 145154 // <realization>
+	  b parent class_ref 141954 // AlarmDataManager
+      end
+
+      attribute 144130 "binder"
+	const_attribute private explicit_type "IBinder"
+	init_value " new CalendarDataManager.LocalBinder()"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 144258 "MY_PERMISSIONS_REQUEST_READ_CONTACTS"
+	package explicit_type "int"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 144386 "EVENT_PROJECTION"
+	class_attribute const_attribute public explicit_type "String"
+	multiplicity "[]"
+	init_value " new String[]{
+            CalendarContract.Calendars._ID,                           // 0
+            CalendarContract.Calendars.NAME,                          // 1
+            CalendarContract.Calendars.ACCOUNT_NAME,         // 2
+            CalendarContract.Calendars.ACCOUNT_TYPE                  // 3
+    }"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type}${multiplicity} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment " Projection array. Creating indices for this array instead of doing
+ dynamic lookups improves performance.
+"
+      end
+
+      attribute 144514 "PROJECTION_ID_INDEX"
+	class_attribute const_attribute private explicit_type "int"
+	init_value " 0"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment " The indices for the projection array above.
+"
+      end
+
+      attribute 144642 "PROJECTION_ACCOUNT_NAME_INDEX"
+	class_attribute const_attribute private explicit_type "int"
+	init_value " 1"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 144770 "PROJECTION_DISPLAY_NAME_INDEX"
+	class_attribute const_attribute private explicit_type "int"
+	init_value " 2"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 144898 "PROJECTION_OWNER_ACCOUNT_INDEX"
+	class_attribute const_attribute private explicit_type "int"
+	init_value " 3"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      operation 154882 "onBind"
+	public explicit_return_type "IBinder"
+	nparams 1
+	  param inout name "intent" explicit_type "Intent"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Nullable
+@Override
+"
+	
+	
+	
+      end
+
+      class 143362 "LocalBinder"
+	visibility public 
+	cpp_decl ""
+	java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+	php_decl ""
+	python_2_2 python_decl ""
+	idl_decl ""
+	explicit_switch_type ""
+	mysql_decl ""
+	
+	classrelation 145282 // <generalisation>
+	  relation 145282 ---|>
+	    a public
+	      java "${type}"
+	      classrelation_ref 145282 // <generalisation>
+	    b parent class_ref 142338 // Binder
+	end
+
+	operation 155010 "getInstance"
+	  public return_type class_ref 137090 // IDataManager
+	  nparams 0
+	  
+	  preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	  
+	  
+	  
+	end
+      end
+
+      operation 155138 "CalendarDataManager"
+	public explicit_return_type ""
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 155266 "setup"
+	private explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 155394 "onStartCommand"
+	public explicit_return_type "int"
+	nparams 3
+	  param inout name "intent" explicit_type "Intent"
+	  param in name "flags" explicit_type "int"
+	  param in name "startId" explicit_type "int"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}, ${t1} ${p1}, ${t2} ${p2}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+
+      operation 155522 "monitor"
+	private explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "This Could be setup to fire on a transition, instead of a poll"
+      end
+
+      operation 155650 "getDate"
+	class_operation public explicit_return_type "String"
+	nparams 1
+	  param in name "milliSeconds" explicit_type "long"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+    end
+
+    class 143490 "IntervalsDataManager"
+      visibility public 
+      nactuals 1
+      actual class class_ref 141954 // AlarmDataManager
+        rank 0 explicit_value ""
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 145410 // <realization>
+	relation 145410 -_-|>
+	  stereotype "bind"
+	  a public
+	    java "${type}"
+	    classrelation_ref 145410 // <realization>
+	  b parent class_ref 141954 // AlarmDataManager
+      end
+
+      attribute 145026 "binder"
+	const_attribute private explicit_type "IBinder"
+	init_value " new IntervalsDataManager.LocalBinder()"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 145154 "MY_PERMISSIONS_REQUEST_READ_CONTACTS"
+	private explicit_type "int"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      operation 155778 "onBind"
+	public explicit_return_type "IBinder"
+	nparams 1
+	  param inout name "intent" explicit_type "Intent"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Nullable
+@Override
+"
+	
+	
+	
+      end
+
+      class 143618 "LocalBinder"
+	visibility public 
+	cpp_decl ""
+	java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+	php_decl ""
+	python_2_2 python_decl ""
+	idl_decl ""
+	explicit_switch_type ""
+	mysql_decl ""
+	
+	classrelation 145538 // <generalisation>
+	  relation 145538 ---|>
+	    a public
+	      java "${type}"
+	      classrelation_ref 145538 // <generalisation>
+	    b parent class_ref 142338 // Binder
+	end
+
+	operation 155906 "getInstance"
+	  public return_type class_ref 137090 // IDataManager
+	  nparams 0
+	  
+	  preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type}<TimeOfDayData> ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	  
+	  
+	  
+	end
+      end
+
+      operation 156034 "IntervalsDataManager"
+	public explicit_return_type ""
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 156162 "setup"
+	private explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 156290 "onStartCommand"
+	public explicit_return_type "int"
+	nparams 3
+	  param inout name "intent" explicit_type "Intent"
+	  param in name "flags" explicit_type "int"
+	  param in name "startId" explicit_type "int"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}, ${t1} ${p1}, ${t2} ${p2}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+
+      operation 156418 "monitor"
+	private explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "This Could be setup to fire on a transition, instead of a poll"
+      end
+
+      classrelation 148226 // <generalisation>
+	relation 148226 ---|>
+	  a public
+	    java "observers;"
+	    classrelation_ref 148226 // <generalisation>
+	  b parent class_ref 145666 // RequestLocationPermission
+      end
+    end
+
+    class 143746 "NotificationDataManager"
+      visibility public 
+      nactuals 1
+      actual class class_ref 142082 // DataManager
+        rank 0 explicit_value ""
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 145666 // <realization>
+	relation 145666 -_-|>
+	  stereotype "bind"
+	  a public
+	    java "${type}"
+	    classrelation_ref 145666 // <realization>
+	  b parent class_ref 142082 // DataManager
+      end
+
+      attribute 145282 "goal"
+	package explicit_type "Integer"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 145410 "binder"
+	const_attribute private explicit_type "IBinder"
+	init_value " new LocalBinder()"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      class 143874 "LocalBinder"
+	visibility public 
+	cpp_decl ""
+	java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+	php_decl ""
+	python_2_2 python_decl ""
+	idl_decl ""
+	explicit_switch_type ""
+	mysql_decl ""
+	
+	classrelation 145794 // <generalisation>
+	  relation 145794 ---|>
+	    a public
+	      java "${type}"
+	      classrelation_ref 145794 // <generalisation>
+	    b parent class_ref 142338 // Binder
+	end
+
+	operation 156546 "getInstance"
+	  public return_type class_ref 137090 // IDataManager
+	  nparams 0
+	  
+	  preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type}<VoidData> ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	  
+	  
+	  
+	end
+      end
+
+      operation 156674 "NotificationDataManager"
+	public explicit_return_type ""
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 156802 "onBind"
+	public explicit_return_type "IBinder"
+	nparams 1
+	  param inout name "intent" explicit_type "Intent"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Nullable
+@Override
+"
+	
+	
+	
+      end
+
+      operation 156930 "setup"
+	private explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 157058 "onStartCommand"
+	public explicit_return_type "int"
+	nparams 3
+	  param inout name "intent" explicit_type "Intent"
+	  param in name "flags" explicit_type "int"
+	  param in name "startId" explicit_type "int"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}, ${t1} ${p1}, ${t2} ${p2}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+
+      operation 157186 "monitor"
+	private explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+    end
+
+    class 144258 "SimulatedStepDataManager"
+      visibility public 
+      nactuals 1
+      actual class class_ref 141954 // AlarmDataManager
+        rank 0 explicit_value ""
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 146178 // <realization>
+	relation 146178 -_-|>
+	  stereotype "bind"
+	  a public
+	    java "${type}"
+	    classrelation_ref 146178 // <realization>
+	  b parent class_ref 141954 // AlarmDataManager
+      end
+
+      classrelation 146306 // stepData (<unidirectional association>)
+	relation 146306 --->
+	  a role_name "stepData" package
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 146306 // stepData (<unidirectional association>)
+	  b parent class_ref 140034 // StepData
+      end
+
+      attribute 145794 "binder"
+	const_attribute private explicit_type "IBinder"
+	init_value " new LocalBinder()"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      class 144386 "LocalBinder"
+	visibility public 
+	cpp_decl ""
+	java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+	php_decl ""
+	python_2_2 python_decl ""
+	idl_decl ""
+	explicit_switch_type ""
+	mysql_decl ""
+	
+	classrelation 146434 // <generalisation>
+	  relation 146434 ---|>
+	    a public
+	      java "${type}"
+	      classrelation_ref 146434 // <generalisation>
+	    b parent class_ref 142338 // Binder
+	end
+
+	operation 158082 "getInstance"
+	  public return_type class_ref 137090 // IDataManager
+	  nparams 0
+	  
+	  preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type}<StepData> ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	  
+	  
+	  
+	end
+      end
+
+      operation 158210 "SimulatedStepDataManager"
+	public explicit_return_type ""
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 158338 "onBind"
+	public explicit_return_type "IBinder"
+	nparams 1
+	  param inout name "intent" explicit_type "Intent"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Nullable
+@Override
+"
+	
+	
+	
+      end
+
+      operation 158466 "setup"
+	private explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 158594 "onStartCommand"
+	public explicit_return_type "int"
+	nparams 3
+	  param inout name "intent" explicit_type "Intent"
+	  param in name "flags" explicit_type "int"
+	  param in name "startId" explicit_type "int"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}, ${t1} ${p1}, ${t2} ${p2}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+
+      operation 158722 "monitor"
+	private explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+    end
+
+    class 144514 "WeatherDataManager"
+      visibility public 
+      nactuals 1
+      actual class class_ref 141954 // AlarmDataManager
+        rank 0 explicit_value ""
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 146562 // <realization>
+	relation 146562 -_-|>
+	  stereotype "bind"
+	  a public
+	    java "${type}"
+	    classrelation_ref 146562 // <realization>
+	  b parent class_ref 141954 // AlarmDataManager
+      end
+
+      attribute 145922 "MY_PERMISSIONS_REQUEST_READ_CONTACTS"
+	package explicit_type "int"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 146050 "binder"
+	const_attribute private explicit_type "IBinder"
+	init_value " new WeatherDataManager.LocalBinder()"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      operation 158850 "onBind"
+	public explicit_return_type "IBinder"
+	nparams 1
+	  param inout name "intent" explicit_type "Intent"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Nullable
+@Override
+"
+	
+	
+	
+      end
+
+      class 144642 "LocalBinder"
+	visibility public 
+	cpp_decl ""
+	java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+	php_decl ""
+	python_2_2 python_decl ""
+	idl_decl ""
+	explicit_switch_type ""
+	mysql_decl ""
+	
+	classrelation 146690 // <generalisation>
+	  relation 146690 ---|>
+	    a public
+	      java "${type}"
+	      classrelation_ref 146690 // <generalisation>
+	    b parent class_ref 142338 // Binder
+	end
+
+	operation 158978 "getInstance"
+	  public return_type class_ref 137090 // IDataManager
+	  nparams 0
+	  
+	  preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type}<WeatherData> ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	  
+	  
+	  
+	end
+      end
+
+      operation 159106 "WeatherDataManager"
+	public explicit_return_type ""
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 159234 "setup"
+	private explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 159362 "onStartCommand"
+	public explicit_return_type "int"
+	nparams 3
+	  param inout name "intent" explicit_type "Intent"
+	  param in name "flags" explicit_type "int"
+	  param in name "startId" explicit_type "int"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}, ${t1} ${p1}, ${t2} ${p2}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+
+      operation 159490 "monitor"
+	private explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      classrelation 148354 // <generalisation>
+	relation 148354 ---|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 148354 // <generalisation>
+	  b parent class_ref 145666 // RequestLocationPermission
+      end
+    end
+
+    class 145410 "PlacesDataManager"
+      visibility public 
+      nactuals 1
+      actual class class_ref 141954 // AlarmDataManager
+        rank 0 explicit_value ""
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 147842 // <realization>
+	relation 147842 -_-|>
+	  stereotype "bind"
+	  a public
+	    java "${type}"
+	    classrelation_ref 147842 // <realization>
+	  b parent class_ref 141954 // AlarmDataManager
+      end
+
+      attribute 146434 "binder"
+	const_attribute private explicit_type "IBinder"
+	init_value " new PlacesDataManager.LocalBinder()"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 146562 "MY_PERMISSIONS_REQUEST_READ_CONTACTS"
+	private explicit_type "int"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      operation 162562 "onBind"
+	public explicit_return_type "IBinder"
+	nparams 1
+	  param inout name "intent" explicit_type "Intent"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Nullable
+@Override
+"
+	
+	
+	
+      end
+
+      class 145538 "LocalBinder"
+	visibility public 
+	cpp_decl ""
+	java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+	php_decl ""
+	python_2_2 python_decl ""
+	idl_decl ""
+	explicit_switch_type ""
+	mysql_decl ""
+	
+	classrelation 147970 // <generalisation>
+	  relation 147970 ---|>
+	    a public
+	      java "${type}"
+	      classrelation_ref 147970 // <generalisation>
+	    b parent class_ref 142338 // Binder
+	end
+
+	operation 162690 "getInstance"
+	  public return_type class_ref 137090 // IDataManager
+	  nparams 0
+	  
+	  preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	  
+	  
+	  
+	end
+      end
+
+      operation 162818 "PlacesDataManager"
+	public explicit_return_type ""
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 162946 "setup"
+	private explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 163074 "onStartCommand"
+	public explicit_return_type "int"
+	nparams 3
+	  param inout name "intent" explicit_type "Intent"
+	  param in name "flags" explicit_type "int"
+	  param in name "startId" explicit_type "int"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}, ${t1} ${p1}, ${t2} ${p2}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+
+      operation 163202 "monitor"
+	private explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "This Could be setup to fire on a transition, instead of a poll"
+      end
+
+      classrelation 148610 // <generalisation>
+	relation 148610 ---|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 148610 // <generalisation>
+	  b parent class_ref 145666 // RequestLocationPermission
+	ncouples 1
+	key "INTENT" value ""
+      end
+    end
+  end
+
+  deploymentview 135298 "managers"
+    //deployment diagram settings
+    deploymentdiagramsettings
+     end
+    artifact 140802 "IDataManager"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import uk.ac.strath.contextualtriggers.conditions.DataCondition;
+import uk.ac.strath.contextualtriggers.data.Data;
+${definition}"
+      associated_elems
+	class_ref 137090 // IDataManager
+      end
+    end
+
+    artifact 140930 "DataManager"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import android.app.Service;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
+import android.support.v4.content.LocalBroadcastManager;
+import android.util.Log;
+import java.util.ArrayList;
+import java.util.List;
+import uk.ac.strath.contextualtriggers.conditions.DataCondition;
+import uk.ac.strath.contextualtriggers.data.Data;
+${definition}"
+      associated_elems
+	class_ref 142082 // DataManager
+      end
+    end
+
+    artifact 141058 "AlarmDataManager"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.Context;
+import android.content.Intent;
+import android.os.SystemClock;
+import android.util.Log;
+import uk.ac.strath.contextualtriggers.data.Data;
+${definition}"
+      associated_elems
+	class_ref 141954 // AlarmDataManager
+      end
+    end
+
+    artifact 141186 "ActivityDataManager"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import android.content.Intent;
+import android.os.Binder;
+import android.os.IBinder;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.util.Log;
+import com.google.android.gms.awareness.Awareness;
+import com.google.android.gms.awareness.snapshot.DetectedActivityResponse;
+import com.google.android.gms.location.ActivityRecognitionResult;
+import com.google.android.gms.location.DetectedActivity;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import uk.ac.strath.contextualtriggers.data.ActivityData;
+${definition}"
+      associated_elems
+	class_ref 141826 // ActivityDataManager
+      end
+    end
+
+    artifact 141314 "ActualStepAndGoalDataManager"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import android.content.Intent;
+import android.content.IntentFilter;
+import android.os.Binder;
+import android.os.IBinder;
+import android.support.annotation.Nullable;
+import android.util.Log;
+import java.time.LocalDate;
+import uk.ac.strath.contextualtriggers.data.DayData;
+import uk.ac.strath.contextualtriggers.data.StepAndGoalData;
+import uk.ac.strath.contextualtriggers.intentReceivers.StepAndGoalIntentReceiver;
+${definition}"
+      associated_elems
+	class_ref 142466 // ActualStepAndGoalDataManager
+      end
+    end
+
+    artifact 141442 "AltitudeDataManager"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.location.Location;
+import android.os.Binder;
+import android.os.IBinder;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
+import android.util.Log;
+import com.google.android.gms.awareness.Awareness;
+import com.google.android.gms.awareness.snapshot.LocationResponse;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import uk.ac.strath.contextualtriggers.MainApplication;
+import uk.ac.strath.contextualtriggers.permissions.RequestLocationPermission;
+import uk.ac.strath.contextualtriggers.data.AltitudeData;
+import static android.Manifest.permission.ACCESS_FINE_LOCATION;
+${definition}"
+      associated_elems
+	class_ref 142722 // AltitudeDataManager
+      end
+    end
+
+    artifact 141570 "BatteryDataManager"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import android.content.Intent;
+import android.content.IntentFilter;
+import android.os.Binder;
+import android.os.IBinder;
+import android.support.annotation.Nullable;
+import android.support.v4.content.LocalBroadcastManager;
+import android.util.Log;
+import uk.ac.strath.contextualtriggers.data.BatteryData;
+import uk.ac.strath.contextualtriggers.intentReceivers.BatteryLevelReceiver;
+${definition}"
+      associated_elems
+	class_ref 142978 // BatteryDataManager
+      end
+    end
+
+    artifact 141698 "CalendarDataManager"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.database.Cursor;
+import android.icu.util.Calendar;
+import android.net.Uri;
+import android.os.Binder;
+import android.os.IBinder;
+import android.provider.CalendarContract;
+import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
+import android.util.Log;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
+import uk.ac.strath.contextualtriggers.MainApplication;
+import uk.ac.strath.contextualtriggers.permissions.RequestCalendarPermission;
+import uk.ac.strath.contextualtriggers.data.CalendarData;
+import uk.ac.strath.contextualtriggers.data.EventData;
+import static android.Manifest.permission.READ_CALENDAR;
+${definition}"
+      associated_elems
+	class_ref 143234 // CalendarDataManager
+      end
+    end
+
+    artifact 141826 "IntervalsDataManager"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.os.Binder;
+import android.os.IBinder;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
+import android.util.Log;
+import com.google.android.gms.awareness.Awareness;
+import com.google.android.gms.awareness.snapshot.TimeIntervalsResponse;
+import com.google.android.gms.awareness.state.TimeIntervals;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import uk.ac.strath.contextualtriggers.MainApplication;
+import uk.ac.strath.contextualtriggers.permissions.RequestLocationPermission;
+import uk.ac.strath.contextualtriggers.data.TimeOfDayData;
+import static android.Manifest.permission.ACCESS_FINE_LOCATION;
+${definition}"
+      associated_elems
+	class_ref 143490 // IntervalsDataManager
+      end
+    end
+
+    artifact 141954 "NotificationDataManager"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import android.content.Intent;
+import android.os.Binder;
+import android.os.IBinder;
+import android.support.annotation.Nullable;
+import android.util.Log;
+import uk.ac.strath.contextualtriggers.data.VoidData;
+${definition}"
+      associated_elems
+	class_ref 143746 // NotificationDataManager
+      end
+    end
+
+    artifact 142082 "PlacesDataManager"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.os.Binder;
+import android.os.IBinder;
+import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
+import android.util.Log;
+import com.google.android.gms.common.api.ApiException;
+import com.google.android.gms.tasks.Task;
+import com.google.android.libraries.places.api.Places;
+import com.google.android.libraries.places.api.model.Place;
+import com.google.android.libraries.places.api.model.PlaceLikelihood;
+import com.google.android.libraries.places.api.net.FindCurrentPlaceRequest;
+import com.google.android.libraries.places.api.net.FindCurrentPlaceResponse;
+import com.google.android.libraries.places.api.net.PlacesClient;
+import java.util.Arrays;
+import java.util.List;
+import uk.ac.strath.contextualtriggers.MainApplication;
+import uk.ac.strath.contextualtriggers.R;
+import uk.ac.strath.contextualtriggers.permissions.RequestLocationPermission;
+import uk.ac.strath.contextualtriggers.data.PlacesData;
+import static android.Manifest.permission.ACCESS_FINE_LOCATION;
+import static com.android.volley.VolleyLog.TAG;
+${definition}"
+      associated_elems
+      end
+    end
+
+    artifact 142210 "SimulatedStepDataManager"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import android.content.Intent;
+import android.os.Binder;
+import android.os.IBinder;
+import android.support.annotation.Nullable;
+import android.util.Log;
+import uk.ac.strath.contextualtriggers.data.StepData;
+${definition}"
+      associated_elems
+	class_ref 144258 // SimulatedStepDataManager
+      end
+    end
+
+    artifact 142338 "WeatherDataManager"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.os.Binder;
+import android.os.IBinder;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
+import android.util.Log;
+import com.google.android.gms.awareness.Awareness;
+import com.google.android.gms.awareness.snapshot.WeatherResponse;
+import com.google.android.gms.awareness.state.Weather;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import uk.ac.strath.contextualtriggers.MainApplication;
+import uk.ac.strath.contextualtriggers.permissions.RequestLocationPermission;
+import uk.ac.strath.contextualtriggers.data.WeatherData;
+import static android.Manifest.permission.ACCESS_FINE_LOCATION;
+${definition}"
+      associated_elems
+	class_ref 144514 // WeatherDataManager
+      end
+    end
+  end
+end

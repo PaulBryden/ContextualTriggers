@@ -1,0 +1,740 @@
+format 221
+"contextualtriggers" // uk::ac::strath::contextualtriggers
+  revision 1
+  modified_by 2 "paul"
+  // class settings
+  
+  classdiagramsettings member_max_width 0 end
+  
+  classcompositediagramsettings end
+  
+  usecasediagramsettings end
+  
+  sequencediagramsettings end
+  
+  collaborationdiagramsettings end
+  
+  objectdiagramsettings end
+  
+  objectcompositediagramsettings end
+  
+  componentdiagramsettings
+   end
+  
+  deploymentdiagramsettings
+   end
+  
+  statediagramsettings
+   end
+  
+  activitydiagramsettings
+   end
+  
+  java_dir "/home/paul/CS551/ContextualTriggers/contextualtriggers/src/main/java/uk/ac/strath/contextualtriggers/"
+  java_package "uk.ac.strath.contextualtriggers"
+  classview 134530 "contextualtriggers"
+    
+    classdiagramsettings member_max_width 0 end
+    
+    classcompositediagramsettings end
+    
+    collaborationdiagramsettings end
+    
+    objectdiagramsettings end
+    
+    objectcompositediagramsettings end
+    
+    sequencediagramsettings end
+    
+    statediagramsettings
+     end
+    
+    
+    activitydiagramsettings
+     end
+    class 134530 "ContextualTriggersService"
+      visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 134530 // <generalisation>
+	relation 134530 ---|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 134530 // <generalisation>
+	  b parent class_ref 134658 // Service
+      end
+
+      class 134786 "BaseServiceConnection"
+	visibility private 
+	cpp_decl ""
+	java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+	php_decl ""
+	python_2_2 python_decl ""
+	idl_decl ""
+	explicit_switch_type ""
+	mysql_decl ""
+	
+	classrelation 134658 // <realization>
+	  relation 134658 -_-|>
+	    a public
+	      java "${type}"
+	      classrelation_ref 134658 // <realization>
+	    b parent class_ref 134914 // ServiceConnection
+	end
+
+	classrelation 134786 // mainService (<unidirectional association>)
+	  relation 134786 --->
+	    a role_name "mainService" private
+	      java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	      classrelation_ref 134786 // mainService (<unidirectional association>)
+	    b parent class_ref 134530 // ContextualTriggersService
+	end
+
+	attribute 134530 "dataManager"
+	  private explicit_type "IBinder"
+	  cpp_decl ""
+	  java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	  php_decl ""
+	  python_decl ""
+	  idl_decl ""
+	  mysql_decl ""
+	  MysqlColumn
+	end
+
+	attribute 134658 "connected"
+	  private explicit_type "boolean"
+	  cpp_decl ""
+	  java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	  php_decl ""
+	  python_decl ""
+	  idl_decl ""
+	  mysql_decl ""
+	  MysqlColumn
+	end
+
+	operation 134530 "BaseServiceConnection"
+	  public explicit_return_type ""
+	  nparams 1
+	    param inout name "mainService" type class_ref 134530 // ContextualTriggersService
+	  
+	  preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	  
+	  
+	  
+	end
+
+	operation 134658 "onServiceConnected"
+	  public explicit_return_type "void"
+	  nparams 2
+	    param inout name "name" explicit_type "ComponentName"
+	    param inout name "service" explicit_type "IBinder"
+	  
+	  preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}, ${t1} ${p1}${)}${throws}${staticnl}{
+  ${body}}
+"
+	  java_annotation "@Override
+"
+	  
+	  
+	  
+	end
+
+	operation 134786 "onServiceDisconnected"
+	  public explicit_return_type "void"
+	  nparams 1
+	    param inout name "name" explicit_type "ComponentName"
+	  
+	  preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	  java_annotation "@Override
+"
+	  
+	  
+	  
+	end
+
+	operation 134914 "isConnected"
+	  public explicit_return_type "boolean"
+	  nparams 0
+	  
+	  preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	  
+	  
+	  
+	end
+
+	operation 135042 "getDataManager"
+	  public explicit_return_type "IBinder"
+	  nparams 0
+	  
+	  preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	  
+	  
+	  
+	end
+      end
+
+      attribute 134786 "mGoogleApiClient"
+	class_attribute private explicit_type "GoogleApiClient"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      classrelation 134914 // triggerList (<unidirectional association>)
+	relation 134914 --->
+	  stereotype "List"
+	  a role_name "triggerList" init_value " new ArrayList<>()" class_relation private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${stereotype}<${type}> ${name}${value};
+"
+	    classrelation_ref 134914 // triggerList (<unidirectional association>)
+	  b parent class_ref 135042 // ITrigger
+      end
+
+      attribute 134914 "serviceList"
+	class_attribute private explicit_type "IBinder"
+	init_value " new ArrayList<>()"
+	stereotype "List"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${stereotype}<${type}> ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      classrelation 135042 // stepServiceConnection (<unidirectional association>)
+	relation 135042 --->
+	  a role_name "stepServiceConnection" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 135042 // stepServiceConnection (<unidirectional association>)
+	  b parent class_ref 134786 // BaseServiceConnection
+      end
+
+      classrelation 135170 // weatherServiceConnection (<unidirectional association>)
+	relation 135170 --->
+	  a role_name "weatherServiceConnection" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 135170 // weatherServiceConnection (<unidirectional association>)
+	  b parent class_ref 134786 // BaseServiceConnection
+      end
+
+      classrelation 135298 // activityServiceConnection (<unidirectional association>)
+	relation 135298 --->
+	  a role_name "activityServiceConnection" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 135298 // activityServiceConnection (<unidirectional association>)
+	  b parent class_ref 134786 // BaseServiceConnection
+      end
+
+      classrelation 135426 // placesServiceConnection (<unidirectional association>)
+	relation 135426 --->
+	  a role_name "placesServiceConnection" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 135426 // placesServiceConnection (<unidirectional association>)
+	  b parent class_ref 134786 // BaseServiceConnection
+      end
+
+      classrelation 135554 // actualStepsServiceConnection (<unidirectional association>)
+	relation 135554 --->
+	  a role_name "actualStepsServiceConnection" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 135554 // actualStepsServiceConnection (<unidirectional association>)
+	  b parent class_ref 134786 // BaseServiceConnection
+      end
+
+      classrelation 135682 // calendarServiceConnection (<unidirectional association>)
+	relation 135682 --->
+	  a role_name "calendarServiceConnection" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 135682 // calendarServiceConnection (<unidirectional association>)
+	  b parent class_ref 134786 // BaseServiceConnection
+      end
+
+      classrelation 135810 // notifyServiceConnection (<unidirectional association>)
+	relation 135810 --->
+	  a role_name "notifyServiceConnection" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 135810 // notifyServiceConnection (<unidirectional association>)
+	  b parent class_ref 134786 // BaseServiceConnection
+      end
+
+      classrelation 135938 // batteryServiceConnection (<unidirectional association>)
+	relation 135938 --->
+	  a role_name "batteryServiceConnection" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 135938 // batteryServiceConnection (<unidirectional association>)
+	  b parent class_ref 134786 // BaseServiceConnection
+      end
+
+      classrelation 136066 // altitudeServiceConnection (<unidirectional association>)
+	relation 136066 --->
+	  a role_name "altitudeServiceConnection" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 136066 // altitudeServiceConnection (<unidirectional association>)
+	  b parent class_ref 134786 // BaseServiceConnection
+      end
+
+      classrelation 136194 // intervalServiceConnection (<unidirectional association>)
+	relation 136194 --->
+	  a role_name "intervalServiceConnection" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 136194 // intervalServiceConnection (<unidirectional association>)
+	  b parent class_ref 134786 // BaseServiceConnection
+      end
+
+      classrelation 136322 // receiverToast (<unidirectional association>)
+	relation 136322 --->
+	  a role_name "receiverToast" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 136322 // receiverToast (<unidirectional association>)
+	  b parent class_ref 135170 // ToastBroadcastReceiver
+      end
+
+      operation 135170 "getGoogleAPIClient"
+	class_operation public explicit_return_type "GoogleApiClient"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 135298 "onStartCommand"
+	public explicit_return_type "int"
+	nparams 3
+	  param inout name "intent" explicit_type "Intent"
+	  param in name "flags" explicit_type "int"
+	  param in name "startId" explicit_type "int"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}, ${t1} ${p1}, ${t2} ${p2}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 135426 "onDestroy"
+	public explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+
+      operation 135554 "addTrigger"
+	class_operation public explicit_return_type "void"
+	nparams 1
+	  param inout name "t" type class_ref 135042 // ITrigger
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment " These probably won't be needed"
+      end
+
+      operation 135682 "removeTrigger"
+	class_operation public explicit_return_type "void"
+	nparams 1
+	  param inout name "t" type class_ref 135042 // ITrigger
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 135810 "startDataManagers"
+	private explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 135938 "onBind"
+	public explicit_return_type "IBinder"
+	nparams 1
+	  param inout name "intent" explicit_type "Intent"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Nullable
+@Override
+"
+	
+	
+	
+      end
+
+      operation 136066 "notifyDataManagerOnline"
+	public explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 136194 "createTriggers"
+	private explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 136322 "getServiceNotification"
+	private explicit_return_type "Notification"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 136450 "createNotificationChannel"
+	private explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+    end
+
+    class 135298 "MainApplication"
+      visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 136450 // <generalisation>
+	relation 136450 ---|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 136450 // <generalisation>
+	  b parent class_ref 135426 // AppCompatActivity
+      end
+
+      attribute 135042 "serviceMode"
+	const_attribute private explicit_type "Boolean"
+	init_value " true"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 135170 "mAppActivity"
+	class_attribute private explicit_type "AppCompatActivity"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 135298 "context"
+	class_attribute private explicit_type "Context"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 135426 "i"
+	private explicit_type "Intent"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      operation 136578 "getAppContext"
+	class_operation public explicit_return_type "Context"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment " Trigger sunnyOotsideTrigger;"
+      end
+
+      operation 136706 "getAppActivity"
+	class_operation public explicit_return_type "AppCompatActivity"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 136834 "onPostCreate"
+	protected explicit_return_type "void"
+	nparams 1
+	  param inout name "savedInstanceState" explicit_type "Bundle"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}@Nullable ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+
+      operation 136962 "onCreate"
+	protected explicit_return_type "void"
+	nparams 1
+	  param inout name "savedInstanceState" explicit_type "Bundle"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+
+      operation 137090 "onResume"
+	protected explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+
+      operation 137218 "emptyActivity"
+	private explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@TargetApi(26)
+"
+	
+	
+	
+      end
+
+      operation 137346 "logActivity"
+	private explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+    end
+
+    classdiagram 134530 "Full_UML"
+      classdiagramsettings draw_all_relations yes member_max_width 0 end
+      size A3
+    end
+
+    classdiagram 134658 "RequestLocation"
+      classdiagramsettings draw_all_relations yes member_max_width 0 end
+      size B-Landscape
+    end
+  end
+
+  package_ref 135170 // triggers
+
+  package_ref 135298 // intentReceivers
+
+  deploymentview 134530 "contextualtriggers"
+    //deployment diagram settings
+    deploymentdiagramsettings
+     end
+    artifact 134530 "ContextualTriggersService"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.app.Service;
+import android.content.ComponentName;
+import android.content.Context;
+import android.content.Intent;
+import android.content.ServiceConnection;
+import android.content.BroadcastReceiver;
+import android.content.IntentFilter;
+import android.os.Build;
+import android.os.Bundle;
+import android.os.IBinder;
+import android.support.annotation.Nullable;
+import android.support.v4.app.NotificationCompat;
+import android.util.Log;
+import android.widget.Toast;
+import com.google.android.gms.awareness.Awareness;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.common.internal.safeparcel.SafeParcelable;
+import java.util.ArrayList;
+import java.util.List;
+import uk.ac.strath.contextualtriggers.intentReceivers.ToastBroadcastReceiver;
+import uk.ac.strath.contextualtriggers.managers.ActivityDataManager;
+import uk.ac.strath.contextualtriggers.managers.ActualStepAndGoalDataManager;
+import uk.ac.strath.contextualtriggers.managers.AltitudeDataManager;
+import uk.ac.strath.contextualtriggers.managers.BatteryDataManager;
+import uk.ac.strath.contextualtriggers.managers.CalendarDataManager;
+import uk.ac.strath.contextualtriggers.managers.IntervalsDataManager;
+import uk.ac.strath.contextualtriggers.managers.NotificationDataManager;
+import uk.ac.strath.contextualtriggers.managers.PlacesDataManager;
+import uk.ac.strath.contextualtriggers.managers.SimulatedStepDataManager;
+import uk.ac.strath.contextualtriggers.managers.WeatherDataManager;
+import uk.ac.strath.contextualtriggers.triggers.DefaultTriggers;
+import uk.ac.strath.contextualtriggers.triggers.ITrigger;
+${definition}"
+      associated_elems
+	class_ref 134530 // ContextualTriggersService
+      end
+    end
+
+    artifact 134658 "MainApplication"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import android.annotation.TargetApi;
+import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.support.v7.app.AppCompatActivity;
+import android.text.method.ScrollingMovementMethod;
+import android.util.Log;
+import android.widget.TextView;
+${definition}"
+      associated_elems
+	class_ref 135298 // MainApplication
+      end
+    end
+  end
+
+  package_ref 135426 // actions
+
+  package_ref 135554 // conditions
+
+  package_ref 135682 // exceptions
+
+  package_ref 135810 // data
+
+  package_ref 135938 // managers
+
+  package_ref 136066 // permissions
+end

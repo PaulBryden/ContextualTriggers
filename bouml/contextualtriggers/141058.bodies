@@ -1,0 +1,3 @@
+class LogSinkNotDefinedException
+!!!149122.java!!!	LogSinkNotDefinedException()
+        super("Error: No Log Sink Defined");

@@ -1,0 +1,10 @@
+class ClearWeatherCondition
+!!!142466.java!!!	ClearWeatherCondition(inout dataManager : IDataManager)
+        super(dataManager, 3 * 60);
+!!!142594.java!!!	isSatisfied() : boolean
+        for (Integer i : getData().Conditions) {
+            if (i.equals(Weather.CONDITION_CLEAR)) {
+                return true;
+            }
+        }
+        return false;

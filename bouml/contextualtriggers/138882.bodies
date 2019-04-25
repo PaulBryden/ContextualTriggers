@@ -1,0 +1,21 @@
+class StepAndGoalData
+!!!148226.java!!!	StepAndGoalData()
+        history = new HashMap<>();
+        /*
+        POPULATE STRUCT HERE FROM HISTORY
+         */
+
+        DayData tempDay1= new DayData(500,5000, LocalDate.now());
+        DayData tempDay2= new DayData(500,5000, LocalDate.now().minusDays(1));
+        DayData tempDay3= new DayData(500,5000, LocalDate.now().minusDays(2));
+        DayData tempDay4= new DayData(500,5000, LocalDate.now().minusDays(3));
+        updateDay(tempDay1);
+        updateDay(tempDay2);
+        updateDay(tempDay3);
+        updateDay(tempDay4);
+!!!148354.java!!!	getHistory() : DayData
+        return history;
+!!!148482.java!!!	updateDay(inout day : DayData) : void
+        history.put(day.date,day);
+!!!148610.java!!!	getDay(inout day : LocalDate) : DayData
+        return history.get(day);
