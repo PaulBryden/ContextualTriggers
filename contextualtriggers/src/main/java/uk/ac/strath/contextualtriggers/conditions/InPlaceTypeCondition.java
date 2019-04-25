@@ -39,6 +39,9 @@ public class InPlaceTypeCondition extends DataCondition<PlacesData> {
 
     @Override
     public boolean isSatisfied() {
+        if (getData() == null) {
+            return false;
+        }
         for(PlaceLikelihood p : getData().places)
         {
           if(p.getLikelihood() >= threshold)

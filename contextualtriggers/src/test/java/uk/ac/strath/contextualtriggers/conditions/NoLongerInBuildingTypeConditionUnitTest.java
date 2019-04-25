@@ -1,221 +1,84 @@
 package uk.ac.strath.contextualtriggers.conditions;
 
-import android.content.Intent;
-import android.net.Uri;
-import android.os.IBinder;
-import android.os.Parcel;
-import android.support.annotation.Nullable;
-
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.LatLngBounds;
-import com.google.android.libraries.places.api.model.AddressComponents;
-import com.google.android.libraries.places.api.model.OpeningHours;
-import com.google.android.libraries.places.api.model.PhotoMetadata;
-import com.google.android.libraries.places.api.model.Place;
 import com.google.android.libraries.places.api.model.PlaceLikelihood;
-import com.google.android.libraries.places.api.model.PlusCode;
 
+import org.junit.Before;
 import org.junit.Test;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Collections;
 
-import uk.ac.strath.contextualtriggers.actions.UnitTestAction;
 import uk.ac.strath.contextualtriggers.data.PlacesData;
-import uk.ac.strath.contextualtriggers.managers.DataManager;
-import uk.ac.strath.contextualtriggers.managers.IDataManager;
-import uk.ac.strath.contextualtriggers.triggers.Trigger;
 
+import static com.google.android.libraries.places.api.model.Place.Type.CHURCH;
+import static com.google.android.libraries.places.api.model.Place.Type.GYM;
+import static com.google.android.libraries.places.api.model.Place.Type.PARK;
+import static junit.framework.Assert.assertFalse;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class NoLongerInBuildingTypeConditionUnitTest {
 
+    private MockDataManager<PlacesData> manager;
+    private NoLongerInPlaceTypeCondition condition;
+
+    @Before
+    public void setup() {
+        manager = new MockDataManager<>();
+        condition = new NoLongerInPlaceTypeCondition(GYM, manager);
+    }
+
+    @Test
+    public void testNoDataReceived() {
+        assertFalse(condition.isSatisfied());
+    }
+
     /**
-     * Tests what happens when the user has left the building.
+     * Tests what happens when the user is in a gym.
      */
     @Test
-    public void NoLongerInBuildingTypeConditionUnitTest() {
-        class PlacesMockDataManager extends DataManager<PlacesData> implements IDataManager<PlacesData> {
-            boolean firstTime = true;
+    public void testConditionNotSatisfiedWhenInBuilding() {
+        PlaceLikelihood pl = new MockPlaceLikelihood(new MockPlace(GYM), 0.8);
+        manager.sendUpdate(new PlacesData(Collections.singletonList(pl)));
+        assertFalse(condition.isSatisfied());
+    }
 
-            @Nullable
-            @Override
-            public IBinder onBind(Intent intent) {
-                return null;
-            }
+    @Test
+    public void testConditionSatisfiedWhenLeftBuilding() {
+        PlaceLikelihood pl = new MockPlaceLikelihood(new MockPlace(GYM), 0.8);
+        manager.sendUpdate(new PlacesData(Collections.singletonList(pl)));
+        pl = new MockPlaceLikelihood(new MockPlace(GYM), 0.1);
+        manager.sendUpdate(new PlacesData(Collections.singletonList(pl)));
+        assertTrue(condition.isSatisfied());
+    }
 
-            public void mock() {
-                List<PlaceLikelihood> data = new ArrayList<PlaceLikelihood>();
-                Place gym = new Place() {
-                    @Override
-                    public int describeContents() {
-                        return 0;
-                    }
+    /**
+     * Tests what happens when the user is in a park.
+     */
+    @Test
+    public void testConditionNotSatisfiedWithWrongPlaceType() {
+        PlaceLikelihood pl = new MockPlaceLikelihood(new MockPlace(PARK), 0.8);
+        manager.sendUpdate(new PlacesData(Collections.singletonList(pl)));
+        pl = new MockPlaceLikelihood(new MockPlace(PARK), 0.1);
+        manager.sendUpdate(new PlacesData(Collections.singletonList(pl)));
+        assertFalse(condition.isSatisfied());
+    }
 
-                    @Override
-                    public void writeToParcel(Parcel parcel, int i) {
+    @Test
+    public void testConditionNotSatisfiedAfterTimeout() {
+        PlaceLikelihood pl = new MockPlaceLikelihood(new MockPlace(GYM), 0.8);
+        manager.sendUpdate(new PlacesData(Collections.singletonList(pl), System.currentTimeMillis() - 5*60*1000));
+        pl = new MockPlaceLikelihood(new MockPlace(GYM), 0.1);
+        manager.sendUpdate(new PlacesData(Collections.singletonList(pl), System.currentTimeMillis() - 4*60*1000));
+        assertFalse(condition.isSatisfied());
+    }
 
-                    }
-
-                    @Override
-                    public String getId() {
-                        return null;
-                    }
-
-
-                    @Nullable
-                    @Override
-                    public String getAddress() {
-                        return null;
-                    }
-
-                    @Nullable
-                    @Override
-                    public AddressComponents getAddressComponents() {
-                        return null;
-                    }
-
-                    @Nullable
-                    @Override
-                    public List<String> getAttributions() {
-                        return null;
-                    }
-
-                    @Nullable
-                    @Override
-                    public OpeningHours getOpeningHours() {
-                        return null;
-                    }
-
-                    @Nullable
-                    @Override
-                    public String getPhoneNumber() {
-                        return null;
-                    }
-
-                    @Override
-                    public LatLng getLatLng() {
-                        return null;
-                    }
-
-                    @Nullable
-                    @Override
-                    public String getName() {
-                        return null;
-                    }
-
-                    @Override
-                    public LatLngBounds getViewport() {
-                        return null;
-                    }
-
-                    @Override
-                    public Uri getWebsiteUri() {
-                        return null;
-                    }
-
-                    @Nullable
-                    @Override
-                    public List<PhotoMetadata> getPhotoMetadatas() {
-                        return null;
-                    }
-
-                    @Nullable
-                    @Override
-                    public PlusCode getPlusCode() {
-                        return null;
-                    }
-
-                    @Nullable
-                    @Override
-                    public Integer getPriceLevel() {
-                        return null;
-                    }
-
-                    @Nullable
-                    @Override
-                    public Double getRating() {
-                        return null;
-                    }
-
-                    @Nullable
-                    @Override
-                    public List<Type> getTypes() {
-                        ArrayList<Type> types = new ArrayList<Type>();
-                        types.add(Type.CAFE);
-                        return types;
-                    }
-
-                    @Nullable
-                    @Override
-                    public Integer getUserRatingsTotal() {
-                        return null;
-                    }
-                };
-                PlaceLikelihood likelihood = new PlaceLikelihood() {
-
-                    @Override
-                    public int describeContents() {
-                        return 0;
-                    }
-
-                    @Override
-                    public void writeToParcel(Parcel parcel, int i) {
-
-                    }
-
-                    @Override
-                    public Place getPlace() {
-                        return gym;
-                    }
-
-                    @Override
-                    public double getLikelihood() {
-                        return 0.76;
-                    }
-                };
-
-                PlaceLikelihood likelihood2 = new PlaceLikelihood() {
-
-                    @Override
-                    public int describeContents() {
-                        return 0;
-                    }
-
-                    @Override
-                    public void writeToParcel(Parcel parcel, int i) {
-
-                    }
-
-                    @Override
-                    public Place getPlace() {
-                        return gym;
-                    }
-
-                    @Override
-                    public double getLikelihood() {
-                        return 0.1;
-                    }
-                };
-                if (firstTime) {
-                    data.add(likelihood);
-                    firstTime = false;
-                } else {
-                    data.remove(likelihood);
-                    data.add(likelihood2);
-                }
-                sendUpdate(new PlacesData(data));
-            }
-        }
-        UnitTestAction action = new UnitTestAction();
-        PlacesMockDataManager manager = new PlacesMockDataManager();
-        NoLongerInBuildingTypeCondition condition = new NoLongerInBuildingTypeCondition(Place.Type.CAFE, manager);
-        new Trigger.Builder().setCondition(condition).setAction(action).build();
-        manager.mock();
-        assertEquals(false, condition.isSatisfied());
-        manager.mock();
-        assertEquals(true, condition.isSatisfied());
-        System.out.println("NoLongerInBuildingConditionUnitTest");
+    @Test
+    public void testConditionNotSatisfiedWithLowLikelihood() {
+        PlaceLikelihood pl = new MockPlaceLikelihood(new MockPlace(GYM), 0.5);
+        manager.sendUpdate(new PlacesData(Collections.singletonList(pl)));
+        pl = new MockPlaceLikelihood(new MockPlace(GYM), 0.1);
+        manager.sendUpdate(new PlacesData(Collections.singletonList(pl)));
+        assertFalse(condition.isSatisfied());
     }
 
 }

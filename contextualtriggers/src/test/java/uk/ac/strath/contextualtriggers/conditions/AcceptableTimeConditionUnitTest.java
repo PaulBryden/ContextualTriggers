@@ -1,5 +1,6 @@
 package uk.ac.strath.contextualtriggers.conditions;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import uk.ac.strath.contextualtriggers.data.TimeOfDayData;
@@ -14,12 +15,21 @@ import static org.junit.Assert.assertTrue;
 
 public class AcceptableTimeConditionUnitTest {
 
+    private MockDataManager<TimeOfDayData> manager;
+    private AcceptableTimeCondition afternoonCondition;
+    private AcceptableTimeCondition weekendCondition;
+
+    @Before
+    public void setup() {
+        manager = new MockDataManager<>();
+        afternoonCondition = new AcceptableTimeCondition(new TimeOfDayData(new int[]{TIME_INTERVAL_AFTERNOON}), manager);
+        weekendCondition = new AcceptableTimeCondition(new TimeOfDayData(new int[]{TIME_INTERVAL_EVENING, TIME_INTERVAL_WEEKEND}), manager);
+    }
+
     @Test
     public void testNoDataReceivedYet() {
-        MockDataManager<TimeOfDayData> manager = new MockDataManager<>();
-        TimeOfDayData data = new TimeOfDayData(new int[]{TIME_INTERVAL_AFTERNOON});
-        AcceptableTimeCondition condition = new AcceptableTimeCondition(data, manager);
-        assertFalse(condition.isSatisfied());
+        assertFalse(afternoonCondition.isSatisfied());
+        assertFalse(weekendCondition.isSatisfied());
     }
 
     /**
@@ -28,11 +38,8 @@ public class AcceptableTimeConditionUnitTest {
      */
     @Test
     public void testTargetInCurrentIntervals() {
-        MockDataManager<TimeOfDayData> manager = new MockDataManager<>();
-        TimeOfDayData data = new TimeOfDayData(new int[]{TIME_INTERVAL_AFTERNOON});
-        AcceptableTimeCondition condition = new AcceptableTimeCondition(data, manager);
         manager.sendUpdate(new TimeOfDayData(new int[]{TIME_INTERVAL_MORNING, TIME_INTERVAL_AFTERNOON}));
-        assertTrue(condition.isSatisfied());
+        assertTrue(afternoonCondition.isSatisfied());
     }
 
     /**
@@ -41,11 +48,8 @@ public class AcceptableTimeConditionUnitTest {
      */
     @Test
     public void testTargetNotInCurrentIntervals() {
-        MockDataManager<TimeOfDayData> manager = new MockDataManager<>();
-        TimeOfDayData data = new TimeOfDayData(new int[]{TIME_INTERVAL_EVENING, TIME_INTERVAL_WEEKEND});
-        AcceptableTimeCondition condition = new AcceptableTimeCondition(data, manager);
         manager.sendUpdate(new TimeOfDayData(new int[]{TIME_INTERVAL_WEEKDAY, TIME_INTERVAL_MORNING}));
-        assertFalse(condition.isSatisfied());
+        assertFalse(weekendCondition.isSatisfied());
     }
 
 }

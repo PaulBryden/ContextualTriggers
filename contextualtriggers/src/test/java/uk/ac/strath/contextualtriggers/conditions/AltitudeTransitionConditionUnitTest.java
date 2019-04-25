@@ -1,5 +1,6 @@
 package uk.ac.strath.contextualtriggers.conditions;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import uk.ac.strath.contextualtriggers.data.AltitudeData;
@@ -9,10 +10,18 @@ import static org.junit.Assert.assertTrue;
 
 public class AltitudeTransitionConditionUnitTest {
 
+    private MockDataManager<AltitudeData> manager;
+    private AltitudeTransitionCondition condition;
+
+    @Before
+    public void setup() {
+        manager = new MockDataManager<>();
+        condition = new AltitudeTransitionCondition(19, manager);
+    }
+
+
     @Test
     public void testNoDataReceivedYet() {
-        MockDataManager<AltitudeData> manager = new MockDataManager<>();
-        AltitudeTransitionCondition condition = new AltitudeTransitionCondition(19, manager);
         assertFalse(condition.isSatisfied());
         manager.sendUpdate(new AltitudeData(20.0));
         assertFalse(condition.isSatisfied());
@@ -23,8 +32,6 @@ public class AltitudeTransitionConditionUnitTest {
      */
     @Test
     public void testConditionSatisfied() {
-        MockDataManager<AltitudeData> manager = new MockDataManager<>();
-        AltitudeTransitionCondition condition = new AltitudeTransitionCondition(19, manager);
         manager.sendUpdate(new AltitudeData(0.0));
         assertFalse(condition.isSatisfied());
         manager.sendUpdate(new AltitudeData(20.0));
@@ -36,8 +43,6 @@ public class AltitudeTransitionConditionUnitTest {
      */
     @Test
     public void testConditionNotSatisfiedWithIncorrectSign() {
-        MockDataManager<AltitudeData> manager = new MockDataManager<>();
-        AltitudeTransitionCondition condition = new AltitudeTransitionCondition(19, manager);
         manager.sendUpdate(new AltitudeData(0.0));
         assertFalse(condition.isSatisfied());
         manager.sendUpdate(new AltitudeData(-20.0));
@@ -49,8 +54,6 @@ public class AltitudeTransitionConditionUnitTest {
      */
     @Test
     public void testConditionNotSatisfiedByInsuffcientIncrease() {
-        MockDataManager<AltitudeData> manager = new MockDataManager<>();
-        AltitudeTransitionCondition condition = new AltitudeTransitionCondition(19, manager);
         manager.sendUpdate(new AltitudeData(0.0));
         assertFalse(condition.isSatisfied());
         manager.sendUpdate(new AltitudeData(10.0));

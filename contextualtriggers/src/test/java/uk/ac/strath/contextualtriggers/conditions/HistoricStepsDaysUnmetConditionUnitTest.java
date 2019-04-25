@@ -1,52 +1,69 @@
 package uk.ac.strath.contextualtriggers.conditions;
 
-import android.content.Intent;
-import android.os.IBinder;
-import android.support.annotation.Nullable;
-
+import org.junit.Before;
 import org.junit.Test;
 
-import uk.ac.strath.contextualtriggers.actions.UnitTestAction;
-import uk.ac.strath.contextualtriggers.data.StepAndGoalData;
-import uk.ac.strath.contextualtriggers.managers.DataManager;
-import uk.ac.strath.contextualtriggers.managers.IDataManager;
-import uk.ac.strath.contextualtriggers.triggers.Trigger;
+import java.time.LocalDate;
 
-import static org.junit.Assert.assertEquals;
+import uk.ac.strath.contextualtriggers.data.DayData;
+import uk.ac.strath.contextualtriggers.data.StepAndGoalData;
+
+import static junit.framework.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 public class HistoricStepsDaysUnmetConditionUnitTest {
 
-    /**
-     * Tests what happens when the user has not met their goal.
-     */
+    private MockDataManager<StepAndGoalData> manager;
+    private HistoricStepsDaysUnmetCondition condition;
+
+    @Before
+    public void setup() {
+        manager = new MockDataManager<>();
+        condition = new HistoricStepsDaysUnmetCondition(3, manager);
+    }
+
     @Test
-    public void HistoricStepsDaysUnmetConditionUnitTest() {
-        class StepAndGoalMockDataManager extends DataManager<StepAndGoalData> implements IDataManager<StepAndGoalData> {
-            public StepAndGoalMockDataManager() {
-                data = new StepAndGoalData();
-            }
+    public void testNoDataReceivedYet() {
+        assertTrue(condition.isSatisfied());
+    }
 
-            boolean firstTime = true;
-            StepAndGoalData data;
+    @Test
+    public void testEmptyHistoryReceived() {
+        manager.sendUpdate(new StepAndGoalData());
+        assertTrue(condition.isSatisfied());
+    }
 
-            @Nullable
-            @Override
-            public IBinder onBind(Intent intent) {
-                return null;
-            }
+    @Test
+    public void testConditionNotSatisfiedAsGoalsMet() {
+        StepAndGoalData data = new StepAndGoalData();
+        data.updateDay(new DayData(600, 500, LocalDate.now()));
+        data.updateDay(new DayData(600, 500, LocalDate.now().minusDays(1)));
+        data.updateDay(new DayData(600, 500, LocalDate.now().minusDays(2)));
+        data.updateDay(new DayData(600, 500, LocalDate.now().minusDays(3)));
+        manager.sendUpdate(data);
+        assertFalse(condition.isSatisfied());
+    }
 
-            public void mock() {
-                sendUpdate(data);
-            }
-        }
+    @Test
+    public void testConditionNotSatisfiedAsGoalsMetExceptToday() {
+        StepAndGoalData data = new StepAndGoalData();
+        data.updateDay(new DayData(300, 500, LocalDate.now()));
+        data.updateDay(new DayData(600, 500, LocalDate.now().minusDays(1)));
+        data.updateDay(new DayData(600, 500, LocalDate.now().minusDays(2)));
+        data.updateDay(new DayData(600, 500, LocalDate.now().minusDays(3)));
+        manager.sendUpdate(data);
+        assertFalse(condition.isSatisfied());
+    }
 
-        UnitTestAction action = new UnitTestAction();
-        StepAndGoalMockDataManager manager = new StepAndGoalMockDataManager();
-        HistoricStepsDaysUnmetCondition condition = new HistoricStepsDaysUnmetCondition(3, manager);
-        new Trigger.Builder().setCondition(condition).setAction(action).build();
-        manager.mock();
-        assertEquals(true, condition.isSatisfied());
-        System.out.println("HistoricStepsDaysUnmetConditionUnitTest");
+    @Test
+    public void testConditionSatisfiedAsGoalNotMet() {
+        StepAndGoalData data = new StepAndGoalData();
+        data.updateDay(new DayData(600, 500, LocalDate.now()));
+        data.updateDay(new DayData(600, 500, LocalDate.now().minusDays(1)));
+        data.updateDay(new DayData(600, 500, LocalDate.now().minusDays(2)));
+        data.updateDay(new DayData(300, 500, LocalDate.now().minusDays(3)));
+        manager.sendUpdate(data);
+        assertTrue(condition.isSatisfied());
     }
 
 }

@@ -25,10 +25,13 @@ public class HistoricStepsDaysUnmetCondition extends DataCondition<StepAndGoalDa
 
     @Override
     public boolean isSatisfied() {
+        if (getData() == null) {
+            return true;
+        }
         DayData day;
         for (int i = 0; i < daysMet; i++) {
-            day = getData().getDay(LocalDate.now().minusDays(i));
-            if (day.steps < day.goal) {
+            day = getData().getDay(LocalDate.now().minusDays(i + 1));
+            if (day == null || day.steps < day.goal) {
                 return true;
             }
         }
