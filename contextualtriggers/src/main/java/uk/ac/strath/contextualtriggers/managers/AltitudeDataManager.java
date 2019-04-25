@@ -90,7 +90,7 @@ public class AltitudeDataManager extends AlarmDataManager<AltitudeData> {
             // try {
             // Permission has already been granted
             Log.d("ALT", "Accepted check perm");
-            Awareness.getSnapshotClient(getApplicationContext()).getLocation().addOnFailureListener(new OnFailureListener() {
+            Awareness.getSnapshotClient(this).getLocation().addOnFailureListener(new OnFailureListener() {
                 @Override
                 public void onFailure(@NonNull Exception e) {
                     Log.d("AltitudeDataManager", e.getMessage());

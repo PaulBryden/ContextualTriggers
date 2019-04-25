@@ -75,7 +75,7 @@ public class IntervalsDataManager extends AlarmDataManager<TimeOfDayData> {
 
                     }
                 } else {
-            Awareness.getSnapshotClient(getApplicationContext()).getTimeIntervals().addOnFailureListener(new OnFailureListener() {
+            Awareness.getSnapshotClient(this).getTimeIntervals().addOnFailureListener(new OnFailureListener() {
                 @Override
                 public void onFailure(@NonNull Exception e) {
                     Log.d("IntervalsDataManager", e.getMessage());
