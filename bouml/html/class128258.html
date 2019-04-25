@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Documentation produced by the Html generator of Bouml (http://www.bouml.fr) -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:svg="http://www.w3.org/2000/svg">
+
+<head>
+<title>Class BaseServiceConnection</title>
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body bgcolor="#ffffff">
+
+<div class = "title">Class BaseServiceConnection</div>
+<p></p>
+
+<!-- ============================================================= -->
+
+<a name="ref4_128258"></a>
+<p>Declaration :</p><ul>
+<li>Java : private class BaseServiceConnection extends <a href="class128386.html#ref4_128386"><b>ServiceConnection</b></a> </li></ul><p>nested in <a href="class128002.html#ref4_128002"><b>ContextualTriggersService</b></a></p>
+<div class="sub">
+<a name="ref0_128258"></a>
+<table><tr><td><div class="element">Relation <b>mainService (&lt;unidirectional association&gt;)</b></div></td></tr></table><p>Declaration :</p><ul><li>Uml : - mainService : <a href="class128002.html#ref4_128002"><b>ContextualTriggersService</b></a></li><li>Java : private <a href="class128002.html#ref4_128002"><b>ContextualTriggersService</b></a> mainService</li></ul><a name="ref1_128002"></a>
+<table><tr><td><div class="element">Attribute <b>dataManager</b></div></td></tr></table>
+<p>Declaration :</p><ul><li>Uml : - dataManager : IBinder</li><li>Java : private IBinder dataManager</li></ul><a name="ref1_128130"></a>
+<table><tr><td><div class="element">Attribute <b>connected</b></div></td></tr></table>
+<p>Declaration :</p><ul><li>Uml : - connected : boolean</li><li>Java : private boolean connected</li></ul><a name="ref2_128002"></a>
+<table><tr><td><div class="element">Operation <b>BaseServiceConnection</b></div></td></tr></table><p>Declaration :</p><ul><li>Uml : + BaseServiceConnection(inout mainService : <a href="class128002.html#ref4_128002"><b>ContextualTriggersService</b></a>) : </li><li>Java : public BaseServiceConnection(<a href="class128002.html#ref4_128002"><b>ContextualTriggersService</b></a> mainService)</li></ul><a name="ref2_128130"></a>
+<table><tr><td><div class="element">Operation <b>onServiceConnected</b></div></td></tr></table><p>Declaration :</p><ul><li>Uml : + onServiceConnected(inout name : ComponentName, inout service : IBinder) : void</li><li>Java : public void onServiceConnected(ComponentName name, IBinder service)</li></ul><p> Java annotation(s) :</p><div class="sub"><p>&#64;Override<br /></p></div><a name="ref2_128258"></a>
+<table><tr><td><div class="element">Operation <b>onServiceDisconnected</b></div></td></tr></table><p>Declaration :</p><ul><li>Uml : + onServiceDisconnected(inout name : ComponentName) : void</li><li>Java : public void onServiceDisconnected(ComponentName name)</li></ul><p> Java annotation(s) :</p><div class="sub"><p>&#64;Override<br /></p></div><a name="ref2_128386"></a>
+<table><tr><td><div class="element">Operation <b>isConnected</b></div></td></tr></table><p>Declaration :</p><ul><li>Uml : + isConnected() : boolean</li><li>Java : public boolean isConnected()</li></ul><a name="ref2_128514"></a>
+<table><tr><td><div class="element">Operation <b>getDataManager</b></div></td></tr></table><p>Declaration :</p><ul><li>Uml : + getDataManager() : IBinder</li><li>Java : public IBinder getDataManager()</li></ul></div>
+<p>All public operations : <a href="class128258.html#ref2_128514"><b>getDataManager</b></a> , <a href="class128258.html#ref2_128386"><b>isConnected</b></a> , <a href="class128258.html#ref2_128130"><b>onServiceConnected</b></a> , <a href="class128258.html#ref2_128258"><b>onServiceDisconnected</b></a> </p>
+</body>
+</html>

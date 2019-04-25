@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Documentation produced by the Html generator of Bouml (http://www.bouml.fr) -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:svg="http://www.w3.org/2000/svg">
+
+<head>
+<title>Class DataCondition</title>
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body bgcolor="#ffffff">
+
+<div class = "title">Class DataCondition</div>
+<p></p>
+
+<!-- ============================================================= -->
+
+<a name="ref4_130434"></a>
+<p>Declaration :</p><ul>
+<li>Java : public abstract class DataCondition&lt;T extends <a href="class130562.html#ref4_130562"><b>Data</b></a>&gt; extends <a href="class129794.html#ref4_129794"><b>AbstractCondition</b></a> </li></ul><p>Directly inherited by : <a href="class130178.html#ref4_130178"><b>AcceptableTimeCondition</b></a> <a href="class130818.html#ref4_130818"><b>ActivityPeriodCondition</b></a> <a href="class131074.html#ref4_131074"><b>AltitudeTransitionCondition</b></a> <a href="class131586.html#ref4_131586"><b>ClearWeatherCondition</b></a> <a href="class129282.html#ref4_129282"><b>FrequentNotificationPreventionCondition</b></a> <a href="class131970.html#ref4_131970"><b>GymNearbyCondition</b></a> <a href="class132226.html#ref4_132226"><b>HistoricStepsDaysUnmetCondition</b></a> <a href="class132610.html#ref4_132610"><b>InPlaceTypeCondition</b></a> <a href="class132738.html#ref4_132738"><b>MeetingCondition</b></a> <a href="class132994.html#ref4_132994"><b>NoLongerInBuildingTypeCondition</b></a> <a href="class133122.html#ref4_133122"><b>NotNotifiedTodayCondition</b></a> <a href="class133250.html#ref4_133250"><b>StepAndGoalRealCountCondition</b></a> <a href="class133378.html#ref4_133378"><b>StepCountCondition</b></a> </p>
+<p>Artifact : <a href="index.html#ref8_129154"><b>DataCondition</b></a></p>
+<div class="sub">
+<a name="ref1_130690"></a>
+<table><tr><td><div class="element">Attribute <b>data</b></div></td></tr></table>
+<p>Declaration :</p><ul><li>Uml : - data : T</li><li>Java : private T data</li></ul><p> Java annotation(s) :</p><div class="sub"><p>&#64;Nullable<br /></p></div><a name="ref1_130818"></a>
+<table><tr><td><div class="element">Attribute <b>dataTimeout</b></div></td></tr></table>
+<p>in minutes<br /></p><p>Declaration :</p><ul><li>Uml : - dataTimeout : int</li><li>Java : private int dataTimeout</li></ul><a name="ref2_133890"></a>
+<table><tr><td><div class="element">Operation <b>DataCondition</b></div></td></tr></table><p>Declaration :</p><ul><li>Uml : ~ DataCondition(inout dataManager : <a href="class130690.html#ref4_130690"><b>IDataManager</b></a>) : </li><li>Java : package DataCondition(<a href="class130690.html#ref4_130690"><b>IDataManager</b></a>&lt;T&gt; dataManager)</li></ul><a name="ref2_134018"></a>
+<table><tr><td><div class="element">Operation <b>DataCondition</b></div></td></tr></table><p>Declaration :</p><ul><li>Uml : ~ DataCondition(inout dataManager : <a href="class130690.html#ref4_130690"><b>IDataManager</b></a>, in dataTimeout : int) : </li><li>Java : package DataCondition(<a href="class130690.html#ref4_130690"><b>IDataManager</b></a>&lt;T&gt; dataManager, int dataTimeout)</li></ul><a name="ref2_134146"></a>
+<table><tr><td><div class="element">Operation <b>DataCondition</b></div></td></tr></table><p>Declaration :</p><ul><li>Uml : ~ DataCondition() : </li><li>Java : package DataCondition()</li></ul><p> Java annotation(s) :</p><div class="sub"><p>&#64;Deprecated<br /></p></div><a name="ref2_134274"></a>
+<table><tr><td><div class="element">Operation <b>DataCondition</b></div></td></tr></table><p>Declaration :</p><ul><li>Uml : ~ DataCondition(inout dataManager : <a href="class130690.html#ref4_130690"><b>IDataManager</b></a>, in dataTimeout : int, inout initialData : T) : </li><li>Java : package DataCondition(<a href="class130690.html#ref4_130690"><b>IDataManager</b></a>&lt;T&gt; dataManager, int dataTimeout, T initialData)</li></ul><a name="ref2_134402"></a>
+<table><tr><td><div class="element">Operation <b>getData</b></div></td></tr></table><p>Declaration :</p><ul><li>Uml : + getData() : T</li><li>Java : public T getData()</li></ul><a name="ref2_134530"></a>
+<table><tr><td><div class="element">Operation <b>hasStaleData</b></div></td></tr></table><p>Declaration :</p><ul><li>Uml : + hasStaleData() : boolean</li><li>Java : public boolean hasStaleData()</li></ul><a name="ref2_134658"></a>
+<table><tr><td><div class="element">Operation <b>notifyUpdate</b></div></td></tr></table><p>Declaration :</p><ul><li>Uml : + notifyUpdate(inout data : T) : void</li><li>Java : public void notifyUpdate(T data)</li></ul></div>
+<p>All public operations : <a href="class129794.html#ref2_133634"><b>attachTrigger</b></a> , <a href="class130434.html#ref2_134402"><b>getData</b></a> , <a href="class129922.html#ref2_133506"><b>hasStaleData</b></a> , <a href="class130434.html#ref2_134530"><b>hasStaleData</b></a> , <a href="class129922.html#ref2_133378"><b>isSatisfied</b></a> , <a href="class130434.html#ref2_134658"><b>notifyUpdate</b></a> </p>
+</body>
+</html>

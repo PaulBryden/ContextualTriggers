@@ -1,0 +1,25 @@
+class DataCondition
+!!!139906.java!!!	DataCondition(inout dataManager : IDataManager)
+        this(dataManager, 0, null);
+!!!140034.java!!!	DataCondition(inout dataManager : IDataManager, in dataTimeout : int)
+        this(dataManager, dataTimeout, null);
+!!!140162.java!!!	DataCondition()
+        // placeholder - change conditions to use data managers
+!!!140290.java!!!	DataCondition(inout dataManager : IDataManager, in dataTimeout : int, inout initialData : T)
+        data = initialData;
+        this.dataTimeout = dataTimeout;
+        dataManager.register(this);
+!!!140418.java!!!	getData() : T
+        return data;
+!!!140546.java!!!	hasStaleData() : boolean
+        if (data == null) {
+            return false;
+        }
+        return data.getTimestamp() < System.currentTimeMillis() - (dataTimeout * 60000);
+!!!140674.java!!!	notifyUpdate(inout data : T) : void
+        this.data = data;
+        try {
+            getTrigger().notifyChange();
+        } catch (TriggerNotConnectedException e) {
+            Log.d("DataCondition", e.getMessage());
+        }

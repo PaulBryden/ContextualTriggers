@@ -1,0 +1,23 @@
+class AlarmDataManager
+!!!150914.java!!!	AlarmDataManager(in pollingPeriod : int, in lpmPollingPeriod : int)
+        this.pollingPeriod = pollingPeriod;
+        this.lpmPollingPeriod = lpmPollingPeriod;
+        this.lpm = false;
+!!!151042.java!!!	alarm() : void
+        int period = lpm ? lpmPollingPeriod : pollingPeriod;
+        if (period > 0) {
+            alarmMgr = (AlarmManager) this.getSystemService(Context.ALARM_SERVICE);
+            Intent ip = new Intent(this, this.getClass());
+            PendingIntent alarmIntent = PendingIntent.getService(this, 0, ip, PendingIntent.FLAG_UPDATE_CURRENT);
+            alarmMgr.set(AlarmManager.ELAPSED_REALTIME_WAKEUP,
+                    SystemClock.elapsedRealtime() + period * 1000, alarmIntent);
+        }
+!!!151170.java!!!	onDestroy() : void
+        super.onDestroy();
+        alarmMgr = (AlarmManager)this.getSystemService(Context.ALARM_SERVICE);
+        Log.d(this.getClass().toString(), "HAS BEEN OBLITERATED");
+        Intent iw = new Intent(this, this.getClass());
+        PendingIntent alarmIntent = PendingIntent.getService(this, 0, iw, PendingIntent.FLAG_UPDATE_CURRENT);
+        alarmMgr.cancel(alarmIntent);
+!!!151298.java!!!	setLowPowerMode(inout lpm : boolean) : void
+        this.lpm = lpm;

@@ -1,0 +1,3 @@
+class LocalBinder
+!!!155010.java!!!	getInstance() : IDataManager
+            return CalendarDataManager.this;

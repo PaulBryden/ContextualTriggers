@@ -1,0 +1,4 @@
+class EventData
+!!!147842.java!!!	EventData(in name : String, inout time : Date)
+        this.name = name;
+        this.time = time;

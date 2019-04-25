@@ -1,0 +1,18 @@
+class StepAndGoalRealCountCondition
+!!!146178.java!!!	StepAndGoalRealCountCondition(in mode : int, inout dataManager : IDataManager)
+        super(dataManager);
+        this.mode = mode;
+!!!146306.java!!!	hasStaleData() : boolean
+        return false;
+!!!146434.java!!!	isSatisfied() : boolean
+        LocalDate today = LocalDate.now();
+        if (getData().getDay(today).steps < 0) { // no step count updates received yet
+            return false;
+        }
+        if (this.mode == LESS_THAN) {
+            return (getData().getDay(today).steps < getData().getDay(today).goal);
+        }
+        if (this.mode == GREATER_THAN_OR_EQUAL_TO) {
+            return (getData().getDay(today).steps >= getData().getDay(today).goal);
+        }
+        return false;

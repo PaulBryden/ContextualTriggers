@@ -1,0 +1,8 @@
+class CompositeCondition
+!!!141826.java!!!	attachTrigger(inout trigger : ITrigger) : void
+        super.attachTrigger(trigger);
+        for (Condition condition : components) {
+            ((AbstractCondition) condition).attachTrigger(trigger);
+        }
+!!!141954.java!!!	CompositeCondition(inout components : List<Condition>)
+        this.components = components;

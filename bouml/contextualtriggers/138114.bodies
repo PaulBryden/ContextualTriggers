@@ -1,0 +1,13 @@
+class WeatherData
+!!!148866.java!!!	printData() : void
+        System.out.println(toString());
+
+!!!148994.java!!!	toString() : String
+        String loggingInfo="WeatherData:\n"+"Time: "+System.currentTimeMillis()+"\n";
+        loggingInfo+="Temperature (Celsius):"+TemperatureCelsius+"\n"+"Humidity (%):"+Humidity+"\n";
+        for(int i=0;i<Conditions.length;i++)
+        {
+            loggingInfo+="Condition "+i+": "+Conditions[i]+"\n";
+        }
+        return loggingInfo;
+

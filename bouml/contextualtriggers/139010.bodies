@@ -1,0 +1,5 @@
+class InBuildingCondition
+!!!144514.java!!!	InBuildingCondition(inout dataManager : IDataManager)
+        this(DEFAULT_THRESHOLD, dataManager);
+!!!144642.java!!!	InBuildingCondition(in threshold : double, inout dataManager : IDataManager)
+        super(BUILDING_PLACE_TYPES, threshold, dataManager);

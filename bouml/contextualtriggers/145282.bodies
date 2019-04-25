@@ -1,0 +1,9 @@
+class Builder
+!!!162178.java!!!	setCondition(inout condition : Condition) : Trigger::Builder
+            this.condition = condition;
+            return this;
+!!!162306.java!!!	setAction(inout action : Action) : Trigger::Builder
+            this.action = action;
+            return this;
+!!!162434.java!!!	build() : Trigger
+            return new Trigger(condition, action);

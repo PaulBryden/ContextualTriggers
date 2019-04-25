@@ -1,0 +1,3 @@
+class PlacesData
+!!!148098.java!!!	PlacesData(inout places : List<PlaceLikelihood>)
+        this.places = places;

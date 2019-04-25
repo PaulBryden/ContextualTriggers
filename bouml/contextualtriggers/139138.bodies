@@ -1,0 +1,26 @@
+class InPlaceTypeCondition
+!!!143874.java!!!	InPlaceTypeCondition(inout buildingType : Place.Type, inout dataManager : IDataManager)
+        this(Collections.singletonList(buildingType), DEFAULT_THRESHOLD, dataManager);
+!!!144002.java!!!	InPlaceTypeCondition(inout buildingType : Place.Type, in threshold : double, inout dataManager : IDataManager)
+        this(Collections.singletonList(buildingType), threshold, dataManager);
+!!!144130.java!!!	InPlaceTypeCondition(inout buildingTypes : List<Place.Type>, inout dataManager : IDataManager)
+        this(buildingTypes, DEFAULT_THRESHOLD, dataManager);
+!!!144258.java!!!	InPlaceTypeCondition(inout buildingTypes : List<Place.Type>, in threshold : double, inout dataManager : IDataManager)
+        super(dataManager, 30);
+        this.targetTypes = buildingTypes;
+        this.threshold = threshold;
+!!!144386.java!!!	isSatisfied() : boolean
+        for(PlaceLikelihood p : getData().places)
+        {
+          if(p.getLikelihood() >= threshold)
+          {
+              for(Place.Type type : p.getPlace().getTypes())
+              {
+                  if(targetTypes.contains(type))
+                  {
+                      return true;
+                  }
+              }
+          }
+        }
+        return false;

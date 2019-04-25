@@ -1,0 +1,3 @@
+class ToastBroadcastReceiver
+!!!149762.java!!!	onReceive(inout context : Context, inout intent : Intent) : void
+        Toast.makeText(context.getApplicationContext(), "The Contextual Triggers Framework is a foreground service.", Toast.LENGTH_SHORT).show();

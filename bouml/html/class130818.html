@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Documentation produced by the Html generator of Bouml (http://www.bouml.fr) -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:svg="http://www.w3.org/2000/svg">
+
+<head>
+<title>Class ActivityPeriodCondition</title>
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body bgcolor="#ffffff">
+
+<div class = "title">Class ActivityPeriodCondition</div>
+<p></p>
+
+<!-- ============================================================= -->
+
+<a name="ref4_130818"></a>
+<p>A condition that checks whether the user has been doing the target activity for longer than the<br />target time.<br /><br /></p>
+<p>Declaration :</p><ul>
+<li>Java : public class ActivityPeriodCondition extends <a href="class130434.html#ref4_130434"><b>DataCondition</b></a>&lt;&gt; </li></ul><p>Artifact : <a href="index.html#ref8_129410"><b>ActivityPeriodCondition</b></a></p>
+<div class="sub">
+<a name="ref1_130946"></a>
+<table><tr><td><div class="element">Attribute <b>activityStarted</b></div></td></tr></table>
+<p>Declaration :</p><ul><li>Uml : - activityStarted : long</li><li>Java : private long activityStarted</li></ul><a name="ref1_131074"></a>
+<table><tr><td><div class="element">Attribute <b>activityTypeUnderExamination</b></div></td></tr></table>
+<p>Declaration :</p><ul><li>Uml : - activityTypeUnderExamination : int</li><li>Java : private int activityTypeUnderExamination</li></ul><a name="ref1_131202"></a>
+<table><tr><td><div class="element">Attribute <b>minimumTimeElapsed</b></div></td></tr></table>
+<p>in seconds<br /></p><p>Declaration :</p><ul><li>Uml : - minimumTimeElapsed : int</li><li>Java : private int minimumTimeElapsed</li></ul><a name="ref2_135042"></a>
+<table><tr><td><div class="element">Operation <b>ActivityPeriodCondition</b></div></td></tr></table><p>Declaration :</p><ul><li>Uml : + ActivityPeriodCondition(in minimumTimeElapsed : int, in activityType : int, inout dataManager : <a href="class130690.html#ref4_130690"><b>IDataManager</b></a>) : </li><li>Java : public ActivityPeriodCondition(int minimumTimeElapsed, int activityType, <a href="class130690.html#ref4_130690"><b>IDataManager</b></a>&lt;ActivityData&gt; dataManager)</li></ul><a name="ref2_135170"></a>
+<table><tr><td><div class="element">Operation <b>notifyUpdate</b></div></td></tr></table><p>Declaration :</p><ul><li>Uml : + notifyUpdate(inout data : <a href="class130946.html#ref4_130946"><b>ActivityData</b></a>) : void</li><li>Java : public void notifyUpdate(<a href="class130946.html#ref4_130946"><b>ActivityData</b></a> data)</li></ul><p> Java annotation(s) :</p><div class="sub"><p>&#64;Override<br /></p></div><a name="ref2_135298"></a>
+<table><tr><td><div class="element">Operation <b>isSatisfied</b></div></td></tr></table><p>Declaration :</p><ul><li>Uml : + isSatisfied() : boolean</li><li>Java : public boolean isSatisfied()</li></ul><p> Java annotation(s) :</p><div class="sub"><p>&#64;Override<br /></p></div></div>
+<p>All public operations : <a href="class129794.html#ref2_133634"><b>attachTrigger</b></a> , <a href="class130434.html#ref2_134402"><b>getData</b></a> , <a href="class129922.html#ref2_133506"><b>hasStaleData</b></a> , <a href="class130434.html#ref2_134530"><b>hasStaleData</b></a> , <a href="class130818.html#ref2_135298"><b>isSatisfied</b></a> , <a href="class129922.html#ref2_133378"><b>isSatisfied</b></a> , <a href="class130818.html#ref2_135170"><b>notifyUpdate</b></a> , <a href="class130434.html#ref2_134658"><b>notifyUpdate</b></a> </p>
+</body>
+</html>

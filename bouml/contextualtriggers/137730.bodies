@@ -1,0 +1,17 @@
+class AndCondition
+!!!142082.java!!!	AndCondition(inout components : List<Condition>)
+        super(components);
+!!!142210.java!!!	isSatisfied() : boolean
+        for (Condition c : components) {
+            if (!c.isSatisfied()) {
+                return false;
+            }
+        }
+        return true;
+!!!142338.java!!!	hasStaleData() : boolean
+        for (Condition c : components) {
+            if (c.hasStaleData()) {
+                return true;
+            }
+        }
+        return false;

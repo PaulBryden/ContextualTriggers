@@ -1,0 +1,5 @@
+class DayData
+!!!147714.java!!!	DayData(in steps : int, in goal : int, inout date : LocalDate)
+        this.steps = steps;
+        this.goal = goal;
+        this.date = date;

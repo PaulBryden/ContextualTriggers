@@ -1,0 +1,3 @@
+class LocalBinder
+!!!158978.java!!!	getInstance() : IDataManager
+            return WeatherDataManager.this;

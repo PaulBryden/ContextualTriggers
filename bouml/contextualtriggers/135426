@@ -1,0 +1,599 @@
+format 221
+"actions" // uk::ac::strath::contextualtriggers::actions
+  revision 1
+  modified_by 2 "paul"
+  // class settings
+  
+  classdiagramsettings member_max_width 0 end
+  
+  classcompositediagramsettings end
+  
+  usecasediagramsettings end
+  
+  sequencediagramsettings end
+  
+  collaborationdiagramsettings end
+  
+  objectdiagramsettings end
+  
+  objectcompositediagramsettings end
+  
+  componentdiagramsettings
+   end
+  
+  deploymentdiagramsettings
+   end
+  
+  statediagramsettings
+   end
+  
+  activitydiagramsettings
+   end
+  
+  java_dir "/home/paul/CS551/ContextualTriggers/contextualtriggers/src/main/java/uk/ac/strath/contextualtriggers/actions/"
+  java_package "uk.ac.strath.contextualtriggers.actions"
+  classview 135042 "actions"
+    
+    classdiagramsettings member_max_width 0 end
+    
+    classcompositediagramsettings end
+    
+    collaborationdiagramsettings end
+    
+    objectdiagramsettings end
+    
+    objectcompositediagramsettings end
+    
+    sequencediagramsettings end
+    
+    statediagramsettings
+     end
+    
+    
+    activitydiagramsettings
+     end
+    class 135554 "Action"
+      visibility public stereotype "interface"
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${static}interface ${name}${extends} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      operation 137474 "execute"
+	public explicit_return_type "void"
+	nparams 0
+	
+	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Method called by Trigger whenever the Trigger's Condition is satisfied.
+"
+      end
+    end
+
+    class 135682 "CustomMapNotificationAction"
+      visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 136578 // <realization>
+	relation 136578 -_-|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 136578 // <realization>
+	  b parent class_ref 135554 // Action
+      end
+
+      attribute 135554 "CHANNEL_ID"
+	class_attribute const_attribute private explicit_type "String"
+	init_value " \"contextualtriggers\""
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 135682 "message"
+	private explicit_type "String"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 135810 "queryLocation"
+	private explicit_type "String"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 135938 "LOCATION_PERMISSIONS"
+	private explicit_type "int"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      operation 137602 "CustomMapNotificationAction"
+	public explicit_return_type ""
+	nparams 2
+	  param in name "message" explicit_type "String"
+	  param in name "queryLocation" explicit_type "String"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${t0} ${p0}, ${t1} ${p1}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 137730 "executeMapsNotification"
+	private explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 137858 "execute"
+	public explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+
+      operation 137986 "createNotificationChannel"
+	private explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+    end
+
+    class 135810 "SimpleMapNotificationAction"
+      visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 136706 // <realization>
+	relation 136706 -_-|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 136706 // <realization>
+	  b parent class_ref 135554 // Action
+      end
+
+      attribute 136066 "CHANNEL_ID"
+	class_attribute const_attribute private explicit_type "String"
+	init_value " \"contextualtriggers\""
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 136194 "message"
+	private explicit_type "String"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 136322 "LOCATION_PERMISSIONS"
+	private explicit_type "int"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      operation 138114 "SimpleMapNotificationAction"
+	public explicit_return_type ""
+	nparams 1
+	  param in name "message" explicit_type "String"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 138242 "executeMapsNotification"
+	private explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 138370 "execute"
+	public explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+
+      operation 138498 "createNotificationChannel"
+	private explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+    end
+
+    class 135938 "SimpleNotificationAction"
+      visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 136834 // <realization>
+	relation 136834 -_-|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 136834 // <realization>
+	  b parent class_ref 135554 // Action
+      end
+
+      attribute 136450 "CHANNEL_ID"
+	class_attribute const_attribute private explicit_type "String"
+	init_value " \"contextualtriggers\""
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 136578 "message"
+	private explicit_type "String"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      operation 138626 "SimpleNotificationAction"
+	public explicit_return_type ""
+	nparams 1
+	  param in name "message" explicit_type "String"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 138754 "execute"
+	public explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+
+      operation 138882 "createNotificationChannel"
+	private explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+    end
+
+    class 136066 "UnitTestAction"
+      visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      comment "import static android.support.v4.content.ContextCompat.getSystemService;"
+      classrelation 136962 // <realization>
+	relation 136962 -_-|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 136962 // <realization>
+	  b parent class_ref 135554 // Action
+      end
+
+      attribute 136706 "CHANNEL_ID"
+	class_attribute const_attribute private explicit_type "String"
+	init_value " \"contextualtriggers\""
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 136834 "message"
+	private explicit_type "String"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      operation 139010 "UnitTestAction"
+	public explicit_return_type ""
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 139138 "execute"
+	public explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+
+      operation 139266 "createNotificationChannel"
+	private explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+    end
+  end
+
+  deploymentview 134658 "actions"
+    //deployment diagram settings
+    deploymentdiagramsettings
+     end
+    artifact 134786 "Action"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import android.app.Service;
+${definition}"
+      associated_elems
+	class_ref 135554 // Action
+      end
+    end
+
+    artifact 134914 "CustomMapNotificationAction"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.location.Location;
+import android.net.Uri;
+import android.os.Build;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.NotificationCompat;
+import android.support.v4.app.NotificationManagerCompat;
+import android.support.v4.content.ContextCompat;
+import com.google.android.gms.awareness.Awareness;
+import com.google.android.gms.awareness.snapshot.LocationResponse;
+import com.google.android.gms.tasks.OnSuccessListener;
+import uk.ac.strath.contextualtriggers.ContextualTriggersService;
+import uk.ac.strath.contextualtriggers.MainApplication;
+import uk.ac.strath.contextualtriggers.R;
+import uk.ac.strath.contextualtriggers.managers.NotificationDataManager;
+import static android.Manifest.permission.ACCESS_FINE_LOCATION;
+${definition}"
+      associated_elems
+	class_ref 135682 // CustomMapNotificationAction
+      end
+    end
+
+    artifact 135042 "SimpleMapNotificationAction"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.location.Location;
+import android.net.Uri;
+import android.os.Build;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.NotificationCompat;
+import android.support.v4.app.NotificationManagerCompat;
+import android.support.v4.content.ContextCompat;
+import com.google.android.gms.awareness.Awareness;
+import com.google.android.gms.awareness.snapshot.LocationResponse;
+import com.google.android.gms.tasks.OnSuccessListener;
+import uk.ac.strath.contextualtriggers.MainApplication;
+import uk.ac.strath.contextualtriggers.R;
+import uk.ac.strath.contextualtriggers.managers.NotificationDataManager;
+import static android.Manifest.permission.ACCESS_FINE_LOCATION;
+${definition}"
+      associated_elems
+	class_ref 135810 // SimpleMapNotificationAction
+      end
+    end
+
+    artifact 135170 "SimpleNotificationAction"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
+import android.content.Intent;
+import android.os.Build;
+import android.support.v4.app.NotificationCompat;
+import android.support.v4.app.NotificationManagerCompat;
+import uk.ac.strath.contextualtriggers.MainApplication;
+import uk.ac.strath.contextualtriggers.R;
+import uk.ac.strath.contextualtriggers.conditions.FrequentNotificationPreventionCondition;
+import uk.ac.strath.contextualtriggers.managers.NotificationDataManager;
+${definition}"
+      associated_elems
+	class_ref 135938 // SimpleNotificationAction
+      end
+    end
+
+    artifact 135298 "UnitTestAction"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import android.content.Context;
+import uk.ac.strath.contextualtriggers.conditions.FrequentNotificationPreventionCondition;
+${definition}"
+      associated_elems
+	class_ref 136066 // UnitTestAction
+      end
+    end
+  end
+end

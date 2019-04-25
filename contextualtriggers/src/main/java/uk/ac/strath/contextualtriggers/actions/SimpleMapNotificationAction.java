@@ -20,7 +20,6 @@ import com.google.android.gms.tasks.OnSuccessListener;
 
 import uk.ac.strath.contextualtriggers.MainApplication;
 import uk.ac.strath.contextualtriggers.R;
-import uk.ac.strath.contextualtriggers.conditions.FrequentNotificationPreventionCondition;
 import uk.ac.strath.contextualtriggers.managers.NotificationDataManager;
 
 import static android.Manifest.permission.ACCESS_FINE_LOCATION;
@@ -29,8 +28,7 @@ public class SimpleMapNotificationAction implements Action {
 
     private static final String CHANNEL_ID = "contextualtriggers";
     private String message;
-    private FrequentNotificationPreventionCondition notifyCondition;
-    private int MY_PERMISSIONS_REQUEST_READ_CONTACTS;
+    private int LOCATION_PERMISSIONS;
 
     public SimpleMapNotificationAction(String message) {
         this.message = message;
@@ -53,7 +51,7 @@ public class SimpleMapNotificationAction implements Action {
                     // No explanation needed; request the permission
                     ActivityCompat.requestPermissions(MainApplication.getAppActivity(),
                             new String[]{ACCESS_FINE_LOCATION},
-                            MY_PERMISSIONS_REQUEST_READ_CONTACTS);
+                            LOCATION_PERMISSIONS);
                 }
             } else {
                 // Permission has already been granted
@@ -63,9 +61,6 @@ public class SimpleMapNotificationAction implements Action {
                         Location localLocation = locationResponse.getLocation();
                         Intent cs = new Intent(MainApplication.getAppContext(), NotificationDataManager.class);
                         MainApplication.getAppContext().startService(cs);
-                        if (notifyCondition != null) {
-                            notifyCondition.notifyUpdate(null);
-                        }
                         Uri gmmIntentUri = Uri.parse("google.navigation:q=" + Double.toString(localLocation.getLatitude() + 0.01) + "," + Double.toString(localLocation.getLongitude() + 0.01) + "&mode=w");
                         Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
                         mapIntent.setPackage("com.google.android.apps.maps");
@@ -89,6 +84,8 @@ public class SimpleMapNotificationAction implements Action {
     @Override
     public void execute() {
         executeMapsNotification();
+        Intent cns = new Intent(MainApplication.getAppContext(), NotificationDataManager.class);
+        MainApplication.getAppContext().startService(cns);
     }
 
     private void createNotificationChannel() {
@@ -107,8 +104,5 @@ public class SimpleMapNotificationAction implements Action {
         }
     }
 
-    public void attachCondition(FrequentNotificationPreventionCondition notifyCondition) {
-        this.notifyCondition = notifyCondition;
-    }
 
 }

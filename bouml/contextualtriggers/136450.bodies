@@ -1,0 +1,3 @@
+class TriggerNotConnectedException
+!!!149250.java!!!	TriggerNotConnectedException()
+        super("Error: Trigger Not Connected");

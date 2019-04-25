@@ -1,0 +1,5 @@
+class ActivityData
+!!!147074.java!!!	ActivityData(inout activity : DetectedActivity)
+        this.activity = activity;
+!!!147202.java!!!	getActivityType() : int
+        return activity.getType();

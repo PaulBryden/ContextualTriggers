@@ -1,0 +1,36 @@
+format 221
+"strath" // uk::ac::strath
+  revision 1
+  modified_by 2 "paul"
+  // class settings
+  
+  classdiagramsettings member_max_width 0 end
+  
+  classcompositediagramsettings end
+  
+  usecasediagramsettings end
+  
+  sequencediagramsettings end
+  
+  collaborationdiagramsettings end
+  
+  objectdiagramsettings end
+  
+  objectcompositediagramsettings end
+  
+  componentdiagramsettings
+   end
+  
+  deploymentdiagramsettings
+   end
+  
+  statediagramsettings
+   end
+  
+  activitydiagramsettings
+   end
+  
+  java_dir "/home/paul/CS551/ContextualTriggers/contextualtriggers/src/main/java/uk/ac/strath/"
+  java_package "uk.ac.strath"
+  package_ref 134914 // contextualtriggers
+end

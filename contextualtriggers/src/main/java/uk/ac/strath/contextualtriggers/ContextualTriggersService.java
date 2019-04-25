@@ -229,11 +229,8 @@ public class ContextualTriggersService extends Service
     private void createTriggers()
     {
         Log.d("Creating Triggers", "created");
-        // triggerList.add(DefaultTriggers.createWeatherTrigger(stepServiceConnection.getDataManager(), weatherServiceConnection.getDataManager()));
-        // triggerList.add(DefaultTriggers.createWalkIdleTrigger(stepServiceConnection.getDataManager(), this));
-       // triggerList.add(DefaultTriggers.createWeatherWithNotifyLimitTrigger(stepServiceConnection.getDataManager(), weatherServiceConnection.getDataManager(), notifyServiceConnection.getDataManager(), this));
-     //   triggerList.add(DefaultTriggers.createWeatherWithNotifyLimitTriggerReal(actualStepsServiceConnection.getDataManager(), weatherServiceConnection.getDataManager(), notifyServiceConnection.getDataManager(), this));
-       // triggerList.add(DefaultTriggers.TimeToWalk(activityServiceConnection.getDataManager(),intervalServiceConnection.getDataManager(),notifyServiceConnection.getDataManager()));
+        //   triggerList.add(DefaultTriggers.createWeatherWithNotifyLimitTriggerReal(actualStepsServiceConnection.getDataManager(), weatherServiceConnection.getDataManager(), notifyServiceConnection.getDataManager(), this));
+        triggerList.add(DefaultTriggers.TimeToWalk(activityServiceConnection.getDataManager(),intervalServiceConnection.getDataManager(),notifyServiceConnection.getDataManager()));
        // triggerList.add(DefaultTriggers.HalfAndHalf(actualStepsServiceConnection.getDataManager(),intervalServiceConnection.getDataManager(),notifyServiceConnection.getDataManager()));
         //triggerList.add(DefaultTriggers.GyminyCricket(placesServiceConnection.getDataManager(),notifyServiceConnection.getDataManager()));
         //triggerList.add(DefaultTriggers.ButItsSunnyOutside(actualStepsServiceConnection.getDataManager(),weatherServiceConnection.getDataManager(),activityServiceConnection.getDataManager(),notifyServiceConnection.getDataManager()));
@@ -242,7 +239,7 @@ public class ContextualTriggersService extends Service
         //triggerList.add(DefaultTriggers.WalkToWorkOnWeekdays(actualStepsServiceConnection.getDataManager(),intervalServiceConnection.getDataManager(),notifyServiceConnection.getDataManager()));
         //triggerList.add(DefaultTriggers.Congratulations(placesServiceConnection.getDataManager(),notifyServiceConnection.getDataManager()));
 
-        triggerList.add(DefaultTriggers.WalkAndTalk(actualStepsServiceConnection.getDataManager(),calendarServiceConnection.getDataManager(),notifyServiceConnection.getDataManager()));
+      //  triggerList.add(DefaultTriggers.WalkAndTalk(actualStepsServiceConnection.getDataManager(),calendarServiceConnection.getDataManager(),notifyServiceConnection.getDataManager()));
         unbindService(weatherServiceConnection);
         unbindService(stepServiceConnection);
         unbindService(notifyServiceConnection);

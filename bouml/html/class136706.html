@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Documentation produced by the Html generator of Bouml (http://www.bouml.fr) -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:svg="http://www.w3.org/2000/svg">
+
+<head>
+<title>Class CalendarDataManager</title>
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body bgcolor="#ffffff">
+
+<div class = "title">Class CalendarDataManager</div>
+<p></p>
+
+<!-- ============================================================= -->
+
+<a name="ref4_136706"></a>
+<p>import static com.google.android.gms.internal.zzs.TAG;<br /></p>
+<p>Declaration :</p><ul>
+<li>Java : public class CalendarDataManager extends <a href="class135426.html#ref4_135426"><b>AlarmDataManager</b></a>&lt;&gt; </li></ul><p>Artifact : <a href="index.html#ref8_135170"><b>CalendarDataManager</b></a></p>
+<div class="sub">
+<a name="ref1_137858"></a>
+<table><tr><td><div class="element">Attribute <b>binder</b></div></td></tr></table>
+<p>Declaration :</p><ul><li>Uml : - binder : IBinder =  new CalendarDataManager.LocalBinder(), read only</li><li>Java : private final IBinder binder</li></ul><a name="ref1_137986"></a>
+<table><tr><td><div class="element">Attribute <b>MY_PERMISSIONS_REQUEST_READ_CONTACTS</b></div></td></tr></table>
+<p>Declaration :</p><ul><li>Uml : ~ MY_PERMISSIONS_REQUEST_READ_CONTACTS : int</li><li>Java : package int MY_PERMISSIONS_REQUEST_READ_CONTACTS</li></ul><a name="ref1_138114"></a>
+<table><tr><td><div class="element">Attribute <b>EVENT_PROJECTION</b></div></td></tr></table>
+<p>Projection array. Creating indices for this array instead of doing<br /> dynamic lookups improves performance.<br /><br /></p><p>Declaration :</p><ul><li>Uml : static, + EVENT_PROJECTION : String =  new String[]{<br />            CalendarContract.Calendars._ID,                           // 0<br />            CalendarContract.Calendars.NAME,                          // 1<br />            CalendarContract.Calendars.ACCOUNT_NAME,         // 2<br />            CalendarContract.Calendars.ACCOUNT_TYPE                  // 3<br />    }, multiplicity : [], read only</li><li>Java : public static final String[] EVENT_PROJECTION</li></ul><a name="ref1_138242"></a>
+<table><tr><td><div class="element">Attribute <b>PROJECTION_ID_INDEX</b></div></td></tr></table>
+<p>The indices for the projection array above.<br /><br /></p><p>Declaration :</p><ul><li>Uml : static, - PROJECTION_ID_INDEX : int =  0, read only</li><li>Java : private static final int PROJECTION_ID_INDEX</li></ul><a name="ref1_138370"></a>
+<table><tr><td><div class="element">Attribute <b>PROJECTION_ACCOUNT_NAME_INDEX</b></div></td></tr></table>
+<p>Declaration :</p><ul><li>Uml : static, - PROJECTION_ACCOUNT_NAME_INDEX : int =  1, read only</li><li>Java : private static final int PROJECTION_ACCOUNT_NAME_INDEX</li></ul><a name="ref1_138498"></a>
+<table><tr><td><div class="element">Attribute <b>PROJECTION_DISPLAY_NAME_INDEX</b></div></td></tr></table>
+<p>Declaration :</p><ul><li>Uml : static, - PROJECTION_DISPLAY_NAME_INDEX : int =  2, read only</li><li>Java : private static final int PROJECTION_DISPLAY_NAME_INDEX</li></ul><a name="ref1_138626"></a>
+<table><tr><td><div class="element">Attribute <b>PROJECTION_OWNER_ACCOUNT_INDEX</b></div></td></tr></table>
+<p>Declaration :</p><ul><li>Uml : static, - PROJECTION_OWNER_ACCOUNT_INDEX : int =  3, read only</li><li>Java : private static final int PROJECTION_OWNER_ACCOUNT_INDEX</li></ul><a name="ref2_148866"></a>
+<table><tr><td><div class="element">Operation <b>onBind</b></div></td></tr></table><p>Declaration :</p><ul><li>Uml : + onBind(inout intent : Intent) : IBinder</li><li>Java : public IBinder onBind(Intent intent)</li></ul><p> Java annotation(s) :</p><div class="sub"><p>&#64;Nullable<br />&#64;Override<br /></p></div><table><tr><td><div class="element">Class <b><a href="class136834.html#ref4_136834"><b>LocalBinder</b></a></b></div></td></tr></table>
+<a name="ref2_149122"></a>
+<table><tr><td><div class="element">Operation <b>CalendarDataManager</b></div></td></tr></table><p>Declaration :</p><ul><li>Uml : + CalendarDataManager() : </li><li>Java : public CalendarDataManager()</li></ul><a name="ref2_149250"></a>
+<table><tr><td><div class="element">Operation <b>setup</b></div></td></tr></table><p>Declaration :</p><ul><li>Uml : - setup() : void</li><li>Java : private void setup()</li></ul><a name="ref2_149378"></a>
+<table><tr><td><div class="element">Operation <b>onStartCommand</b></div></td></tr></table><p>Declaration :</p><ul><li>Uml : + onStartCommand(inout intent : Intent, in flags : int, in startId : int) : int</li><li>Java : public int onStartCommand(Intent intent, int flags, int startId)</li></ul><p> Java annotation(s) :</p><div class="sub"><p>&#64;Override<br /></p></div><a name="ref2_149506"></a>
+<table><tr><td><div class="element">Operation <b>monitor</b></div></td></tr></table><p>This Could be setup to fire on a transition, instead of a poll<br /></p><p>Declaration :</p><ul><li>Uml : - monitor() : void</li><li>Java : private void monitor()</li></ul><a name="ref2_149634"></a>
+<table><tr><td><div class="element">Operation <b>getDate</b></div></td></tr></table><p>Declaration :</p><ul><li>Uml : static, + getDate(in milliSeconds : long) : String</li><li>Java : public static String getDate(long milliSeconds)</li></ul></div>
+<p>All public operations : <a href="class136706.html#ref2_149634"><b>getDate</b></a> , <a href="class136706.html#ref2_148866"><b>onBind</b></a> , <a href="class135426.html#ref2_145154"><b>onDestroy</b></a> , <a href="class136706.html#ref2_149378"><b>onStartCommand</b></a> , <a href="class135554.html#ref2_144258"><b>onStartCommand</b></a> , <a href="class135554.html#ref2_144386"><b>register</b></a> , <a href="class130690.html#ref2_143874"><b>register</b></a> , <a href="class135426.html#ref2_145282"><b>setLowPowerMode</b></a> , <a href="class135554.html#ref2_144770"><b>setLowPowerMode</b></a> , <a href="class130690.html#ref2_144002"><b>setLowPowerMode</b></a> </p>
+</body>
+</html>
