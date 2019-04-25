@@ -15,7 +15,7 @@ import uk.ac.strath.contextualtriggers.managers.IDataManager;
  */
 public class InPlaceTypeCondition extends DataCondition<PlacesData> {
 
-    protected static final double DEFAULT_THRESHOLD = 0.5;
+    protected static final double DEFAULT_THRESHOLD = 0.1;
     private List<Place.Type> targetTypes;
     private double threshold;
 

@@ -35,7 +35,7 @@ public class ActivityPeriodCondition extends DataCondition<ActivityData> {
     @Override
     public boolean isSatisfied() {
         return getData().getActivityType() == activityTypeUnderExamination &&
-                (System.currentTimeMillis() - activityStarted) > minimumTimeElapsed;
+                (System.currentTimeMillis() - activityStarted) > minimumTimeElapsed*1000;
     }
 
 }

@@ -65,8 +65,8 @@ public class DefaultTriggers {
         intervalDataManager = ((IntervalsDataManager.LocalBinder) intervalBinder).getInstance();
         notificationDataManager = ((NotificationDataManager.LocalBinder) notifyBinder).getInstance();
         Trigger.Builder builder = new Trigger.Builder();
-        Condition c = new ActivityPeriodCondition(60000, STILL,activityDataManager);
-        Condition c1 = new FrequentNotificationPreventionCondition(60000,notificationDataManager);
+        Condition c = new ActivityPeriodCondition(60, STILL,activityDataManager);
+        Condition c1 = new FrequentNotificationPreventionCondition(60,notificationDataManager);
         Condition c2 = new AcceptableTimeCondition(new TimeOfDayData(new int[]{TIME_INTERVAL_MORNING,TIME_INTERVAL_AFTERNOON,TIME_INTERVAL_EVENING}), intervalDataManager);
         Action a = new SimpleNotificationAction("You have been inactive for some time. Go for a walk.");
         List<Condition> conditionList = new ArrayList<>();
@@ -108,7 +108,7 @@ public class DefaultTriggers {
         notificationDataManager = ((NotificationDataManager.LocalBinder) notifyBinder).getInstance();
         Trigger.Builder builder = new Trigger.Builder();
         Condition c = new HistoricStepsDaysUnmetCondition(3,stepDataManager);
-        Condition c1 = new FrequentNotificationPreventionCondition(60000,notificationDataManager);
+        Condition c1 = new FrequentNotificationPreventionCondition(60,notificationDataManager);
         Condition c2 = new AcceptableTimeCondition(new TimeOfDayData(new int[]{TIME_INTERVAL_MORNING,TIME_INTERVAL_AFTERNOON}), intervalDataManager);
         Condition c3 = new StepAndGoalRealCountCondition(LESS_THAN,stepDataManager);
 
@@ -137,8 +137,8 @@ public class DefaultTriggers {
         Trigger.Builder builder = new Trigger.Builder();
         Condition c = new StepAndGoalRealCountCondition(StepCountCondition.LESS_THAN, stepDataManager);
         Condition c1 = new ClearWeatherCondition(weatherDataManager);
-        Condition c2 = new FrequentNotificationPreventionCondition(60000, notificationDataManager);
-        Condition c3 = new ActivityPeriodCondition(60000, STILL,activityDataManager);
+        Condition c2 = new FrequentNotificationPreventionCondition(60, notificationDataManager);
+        Condition c3 = new ActivityPeriodCondition(60, STILL,activityDataManager);
         Action a = new SimpleMapNotificationAction("The weather is clear. Would you like to go for a walk?");
         List<Condition> conditionList = new ArrayList<>();
         conditionList.add(c);
@@ -166,7 +166,7 @@ public class DefaultTriggers {
         Condition c = new HistoricStepsDaysUnmetCondition(3, stepDataManager);
         Condition c1 = new InBuildingCondition(placesDataManager);
         Condition c2 = new StepAndGoalRealCountCondition(LESS_THAN, stepDataManager);
-        Condition c3 = new FrequentNotificationPreventionCondition(60000, notificationDataManager);
+        Condition c3 = new FrequentNotificationPreventionCondition(60, notificationDataManager);
         Condition c4 = new AltitudeTransitionCondition(20,altitudeDataManager);
         Action a = new SimpleNotificationAction("You haven't met your step goal. Would you like to walk down?");
         List<Condition> conditionList = new ArrayList<>();
@@ -191,7 +191,7 @@ public class DefaultTriggers {
         Trigger.Builder builder = new Trigger.Builder();
         Condition c = new StepAndGoalRealCountCondition(StepCountCondition.LESS_THAN, stepDataManager);
         Condition c1 = new MeetingCondition(calendarDataManager);
-        Condition c2 = new FrequentNotificationPreventionCondition(10000, notificationDataManager);
+        Condition c2 = new FrequentNotificationPreventionCondition(30, notificationDataManager);
         Action a = new SimpleMapNotificationAction("Would you like to have a walking meeting?");
         List<Condition> conditionList = new ArrayList<>();
         conditionList.add(c);
@@ -213,7 +213,7 @@ public class DefaultTriggers {
         Trigger.Builder builder = new Trigger.Builder();
         Condition c = new StepAndGoalRealCountCondition(StepCountCondition.LESS_THAN, stepDataManager);
         Condition c1 = new InPlaceTypeCondition(Place.Type.FOOD, placesDataManager);
-        Condition c2 = new FrequentNotificationPreventionCondition(10000, notificationDataManager);
+        Condition c2 = new FrequentNotificationPreventionCondition(30, notificationDataManager);
         Action a = new SimpleMapNotificationAction("We hope you enjoyed your lunch. Let's walk it off.");
         List<Condition> conditionList = new ArrayList<>();
         conditionList.add(c);
@@ -237,7 +237,7 @@ public class DefaultTriggers {
         Trigger.Builder builder = new Trigger.Builder();
         Condition c = new StepAndGoalRealCountCondition(StepCountCondition.LESS_THAN, stepDataManager);
         Condition c1 = new AcceptableTimeCondition(new TimeOfDayData(new int[]{TIME_INTERVAL_WEEKDAY,TIME_INTERVAL_MORNING}),timeOfDayDataManager);
-        Condition c2 = new FrequentNotificationPreventionCondition(10000, notificationDataManager);
+        Condition c2 = new FrequentNotificationPreventionCondition(60, notificationDataManager);
         Condition c3 = new HistoricStepsDaysUnmetCondition(3,stepDataManager);
         Action a = new CustomMapNotificationAction("Lets walk to work today!","work");
         List<Condition> conditionList = new ArrayList<>();
@@ -258,7 +258,7 @@ public class DefaultTriggers {
         notificationDataManager = ((NotificationDataManager.LocalBinder) notifyBinder).getInstance();
         Trigger.Builder builder = new Trigger.Builder();
         Condition c = new NoLongerInPlaceTypeCondition(Place.Type.GYM, placesDataManager);
-        Condition c1 = new FrequentNotificationPreventionCondition(10000, notificationDataManager);
+        Condition c1 = new FrequentNotificationPreventionCondition(60, notificationDataManager);
         Action a = new SimpleNotificationAction("You went to the gym! Congratulations.");
         List<Condition> conditionList = new ArrayList<>();
         conditionList.add(c);
