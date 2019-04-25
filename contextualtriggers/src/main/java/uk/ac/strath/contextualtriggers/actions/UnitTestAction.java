@@ -10,8 +10,6 @@ public class UnitTestAction implements Action {
 
     private static final String CHANNEL_ID = "contextualtriggers";
     private String message;
-    private FrequentNotificationPreventionCondition notifyCondition;
-    private Context ct;
 
     public UnitTestAction() {
         this.message = message;
@@ -28,9 +26,4 @@ public class UnitTestAction implements Action {
     private void createNotificationChannel() {
 
     }
-
-    public void attachCondition(FrequentNotificationPreventionCondition notifyCondition) {
-        this.notifyCondition = notifyCondition;
-    }
-
 }
