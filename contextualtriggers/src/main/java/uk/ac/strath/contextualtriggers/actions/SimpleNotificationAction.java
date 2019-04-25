@@ -18,8 +18,6 @@ public class SimpleNotificationAction implements Action {
 
     private static final String CHANNEL_ID = "contextualtriggers";
     private String message;
-    private FrequentNotificationPreventionCondition notifyCondition;
-    private Context ct;
 
     public SimpleNotificationAction(String message) {
         this.message = message;
@@ -30,9 +28,6 @@ public class SimpleNotificationAction implements Action {
     public void execute() {
         Intent cs = new Intent(MainApplication.getAppContext(), NotificationDataManager.class);
         MainApplication.getAppContext().startService(cs);
-        if (notifyCondition != null) {
-            notifyCondition.notifyUpdate(null);
-        }
         NotificationCompat.Builder builder = new NotificationCompat.Builder(MainApplication.getAppContext(), CHANNEL_ID)
                 .setSmallIcon(R.drawable.round_directions_walk_24)
                 .setContentTitle("Notification")
@@ -47,6 +42,8 @@ public class SimpleNotificationAction implements Action {
 // notificationId is a unique int for each notification that you must define
 
         notificationManager.notify(0, builder.build());
+        Intent cns = new Intent(MainApplication.getAppContext(), NotificationDataManager.class);
+        MainApplication.getAppContext().startService(cns);
     }
 
     private void createNotificationChannel() {
@@ -63,10 +60,6 @@ public class SimpleNotificationAction implements Action {
             NotificationManager notificationManager = (NotificationManager) MainApplication.getAppContext().getSystemService(Context.NOTIFICATION_SERVICE);
             notificationManager.createNotificationChannel(channel);
         }
-    }
-
-    public void attachCondition(FrequentNotificationPreventionCondition notifyCondition) {
-        this.notifyCondition = notifyCondition;
     }
 
 }

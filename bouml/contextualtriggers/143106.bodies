@@ -1,0 +1,3 @@
+class LocalBinder
+!!!153986.java!!!	getInstance() : IDataManager
+            return BatteryDataManager.this;

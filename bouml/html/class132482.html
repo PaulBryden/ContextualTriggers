@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Documentation produced by the Html generator of Bouml (http://www.bouml.fr) -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:svg="http://www.w3.org/2000/svg">
+
+<head>
+<title>Class InBuildingCondition</title>
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body bgcolor="#ffffff">
+
+<div class = "title">Class InBuildingCondition</div>
+<p></p>
+
+<!-- ============================================================= -->
+
+<a name="ref4_132482"></a>
+<p>A condition satisfied if any place with a likelihood greater than a threshold value matches<br />a place type considered a building.<br /><br /></p>
+<p>Declaration :</p><ul>
+<li>Java : public class InBuildingCondition extends <a href="class132610.html#ref4_132610"><b>InPlaceTypeCondition</b></a> </li></ul><p>Artifact : <a href="index.html#ref8_130562"><b>InBuildingCondition</b></a></p>
+<div class="sub">
+<a name="ref1_132354"></a>
+<table><tr><td><div class="element">Attribute <b>BUILDING_PLACE_TYPES</b></div></td></tr></table>
+<p>Declaration :</p><ul><li>Uml : static, - BUILDING_PLACE_TYPES : Place.Type =  Arrays.asList(Place.Type.ACCOUNTING,<br />            Place.Type.AQUARIUM, Place.Type.ART_GALLERY, Place.Type.BAKERY, Place.Type.BANK,<br />            Place.Type.BAR, Place.Type.BEAUTY_SALON, Place.Type.BICYCLE_STORE, Place.Type.BOOK_STORE,<br />            Place.Type.BOWLING_ALLEY, Place.Type.CAFE, Place.Type.CAR_DEALER, Place.Type.CAR_RENTAL,<br />            Place.Type.CAR_REPAIR, Place.Type.CASINO, Place.Type.CHURCH, Place.Type.CITY_HALL,<br />            Place.Type.CLOTHING_STORE, Place.Type.CONVENIENCE_STORE, Place.Type.COURTHOUSE,<br />            Place.Type.DENTIST, Place.Type.DEPARTMENT_STORE, Place.Type.DOCTOR, Place.Type.ELECTRICIAN,<br />            Place.Type.ELECTRONICS_STORE, Place.Type.EMBASSY, Place.Type.FIRE_STATION,<br />            Place.Type.FLORIST, Place.Type.FUNERAL_HOME, Place.Type.FURNITURE_STORE, Place.Type.GYM,<br />            Place.Type.HAIR_CARE, Place.Type.HARDWARE_STORE, Place.Type.HINDU_TEMPLE,<br />            Place.Type.HOME_GOODS_STORE, Place.Type.HOSPITAL, Place.Type.INSURANCE_AGENCY,<br />            Place.Type.JEWELRY_STORE, Place.Type.LAUNDRY, Place.Type.LAWYER, Place.Type.LIBRARY,<br />            Place.Type.LIQUOR_STORE, Place.Type.LOCAL_GOVERNMENT_OFFICE, Place.Type.LOCKSMITH,<br />            Place.Type.LODGING, Place.Type.MEAL_DELIVERY, Place.Type.MEAL_TAKEAWAY, Place.Type.MOSQUE,<br />            Place.Type.MOVIE_RENTAL, Place.Type.MOVIE_THEATER, Place.Type.MOVING_COMPANY,<br />            Place.Type.MUSEUM, Place.Type.NIGHT_CLUB, Place.Type.PAINTER, Place.Type.PET_STORE,<br />            Place.Type.PHARMACY, Place.Type.PHYSIOTHERAPIST, Place.Type.PLUMBER, Place.Type.POLICE,<br />            Place.Type.POST_OFFICE, Place.Type.REAL_ESTATE_AGENCY, Place.Type.RESTAURANT,<br />            Place.Type.ROOFING_CONTRACTOR, Place.Type.SCHOOL, Place.Type.SHOE_STORE,<br />            Place.Type.SHOPPING_MALL, Place.Type.SPA, Place.Type.STADIUM, Place.Type.STORAGE,<br />            Place.Type.STORE, Place.Type.SUPERMARKET, Place.Type.SYNAGOGUE, Place.Type.TRAVEL_AGENCY,<br />            Place.Type.VETERINARY_CARE), read only</li><li>Java : private static final List&lt;Place.Type&gt; BUILDING_PLACE_TYPES</li></ul><p>Stereotype: List</p>
+<a name="ref2_138498"></a>
+<table><tr><td><div class="element">Operation <b>InBuildingCondition</b></div></td></tr></table><p>Declaration :</p><ul><li>Uml : + InBuildingCondition(inout dataManager : <a href="class130690.html#ref4_130690"><b>IDataManager</b></a>) : </li><li>Java : public InBuildingCondition(<a href="class130690.html#ref4_130690"><b>IDataManager</b></a>&lt;PlacesData&gt; dataManager)</li></ul><a name="ref2_138626"></a>
+<table><tr><td><div class="element">Operation <b>InBuildingCondition</b></div></td></tr></table><p>Declaration :</p><ul><li>Uml : + InBuildingCondition(in threshold : double, inout dataManager : <a href="class130690.html#ref4_130690"><b>IDataManager</b></a>) : </li><li>Java : public InBuildingCondition(double threshold, <a href="class130690.html#ref4_130690"><b>IDataManager</b></a>&lt;PlacesData&gt; dataManager)</li></ul></div>
+<p>All public operations : <a href="class129794.html#ref2_133634"><b>attachTrigger</b></a> , <a href="class130434.html#ref2_134402"><b>getData</b></a> , <a href="class129922.html#ref2_133506"><b>hasStaleData</b></a> , <a href="class130434.html#ref2_134530"><b>hasStaleData</b></a> , <a href="class129922.html#ref2_133378"><b>isSatisfied</b></a> , <a href="class132610.html#ref2_138370"><b>isSatisfied</b></a> , <a href="class130434.html#ref2_134658"><b>notifyUpdate</b></a> </p>
+</body>
+</html>

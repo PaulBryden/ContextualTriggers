@@ -1,0 +1,12 @@
+class AltitudeTransitionCondition
+!!!141442.java!!!	AltitudeTransitionCondition(in transition : int, inout dataManager : IDataManager)
+        super(dataManager, 30);
+        oldAltitude = new AltitudeData();
+        this.targetTransition = transition;
+!!!141570.java!!!	notifyUpdate(inout data : AltitudeData) : void
+        // Override since an update always means condition isn't satisfied,
+        AltitudeTransition = data.altitude - oldAltitude.altitude;
+        oldAltitude = data;
+        super.notifyUpdate(data);
+!!!141698.java!!!	isSatisfied() : boolean
+        return AltitudeTransition > targetTransition;

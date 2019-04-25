@@ -1,0 +1,171 @@
+format 221
+
+classcanvas 128002 class_ref 142082 // DataManager
+  classdiagramsettings member_max_width 0 end
+  xyz 404 283 2005
+end
+classcanvas 128130 class_ref 144514 // WeatherDataManager
+  classdiagramsettings member_max_width 0 end
+  xyz 343 723 2000
+end
+classcanvas 128258 class_ref 137090 // IDataManager
+  classdiagramsettings member_max_width 0 end
+  xyz 459 129 3005
+end
+classcanvas 128514 class_ref 141954 // AlarmDataManager
+  classdiagramsettings member_max_width 0 end
+  xyz 445 494 3005
+end
+classcanvas 128898 class_ref 135042 // ITrigger
+  classdiagramsettings member_max_width 0 end
+  xyz 684 333 2000
+end
+classcanvas 129026 class_ref 136194 // AbstractCondition
+  classdiagramsettings member_max_width 0 end
+  xyz 840 331 2006
+end
+classcanvas 129282 class_ref 136322 // Condition
+  classdiagramsettings member_max_width 0 end
+  xyz 861 198 2012
+end
+classcanvas 129538 class_ref 145154 // Trigger
+  classdiagramsettings member_max_width 0 end
+  xyz 682 202 2018
+end
+classcanvas 129922 class_ref 135554 // Action
+  classdiagramsettings member_max_width 0 end
+  xyz 703 35 3005
+end
+classcanvas 130178 class_ref 135938 // SimpleNotificationAction
+  classdiagramsettings member_max_width 0 end
+  xyz 246 5 3011
+end
+classcanvas 130434 class_ref 137858 // CompositeCondition
+  classdiagramsettings member_max_width 0 end
+  xyz 1016 328 2018
+end
+classcanvas 130818 class_ref 137730 // AndCondition
+  classdiagramsettings member_max_width 0 end
+  xyz 1036 431 2024
+end
+classcanvas 131074 class_ref 136834 // DataCondition
+  classdiagramsettings member_max_width 0 end
+  xyz 852 448 2012
+end
+classcanvas 131458 class_ref 137986 // ClearWeatherCondition
+  classdiagramsettings member_max_width 0 end
+  xyz 856 807 2018
+end
+classcanvas 131714 class_ref 138242 // FrequentNotificationPreventionCondition
+  classdiagramsettings member_max_width 0 end
+  xyz 1048 714 2018
+end
+classcanvas 131970 class_ref 143746 // NotificationDataManager
+  classdiagramsettings member_max_width 0 end
+  xyz 144 286 2011
+end
+classcanvas 132226 class_ref 137090 // IDataManager
+  classdiagramsettings member_max_width 0 end
+  xyz 404 944 2005
+end
+classcanvas 132354 class_ref 142082 // DataManager
+  classdiagramsettings member_max_width 0 end
+  xyz 660 919 2018
+end
+relationcanvas 128386 relation_ref 143106 // <realization>
+  from ref 128002 z 3006 stereotype "<<bind>>" xyz 574.5 329 3006 to ref 128258
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 128642 relation_ref 143362 // <realization>
+  decenter_begin 496
+  from ref 128514 z 3006 stereotype "<<bind>>" xyz 453 477.5 3006 to ref 128002
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 128770 relation_ref 146562 // <realization>
+  from ref 128130 z 3006 stereotype "<<bind>>" xyz 454.5 706 3006 to ref 128514
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 129154 relation_ref 137218 // <unidirectional association>
+  from ref 129026 z 2007 to ref 128898
+  role_a_pos 798 345 3000 no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 129410 relation_ref 137090 // <realization>
+  from ref 129026 z 2013 to ref 129282
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 129666 relation_ref 147074 // <realization>
+  from ref 129538 z 2019 to ref 128898
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 129794 relation_ref 147202 // <unidirectional association>
+  from ref 129538 z 2019 to ref 129282
+  role_a_pos 791 218 3000 no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 130050 relation_ref 147330 // <unidirectional association>
+  from ref 129538 z 3006 to ref 129922
+  role_a_pos 746 116 3000 no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 130306 relation_ref 136834 // <realization>
+  from ref 130178 z 3012 to ref 129922
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 130562 relation_ref 138114 // <generalisation>
+  from ref 130434 z 2019 to ref 129026
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 130690 relation_ref 138242 // <unidirectional association>
+  from ref 130434 z 2019 stereotype "<<List>>" xyz 1007.5 293 2019 to ref 129282
+  role_a_pos 977 261 3000 no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 130946 relation_ref 138370 // <generalisation>
+  from ref 130818 z 2025 to ref 130434
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 131202 relation_ref 137346 // <generalisation>
+  from ref 131074 z 2013 to ref 129026
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 131330 relation_ref 143234 // <unidirectional association>
+  from ref 128002 z 2013 stereotype "<<List>>" xyz 719 483.5 2013 to ref 131074
+  role_a_pos 777 514 3000 no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 131586 relation_ref 138498 // <realization>
+  from ref 131458 z 2019 stereotype "<<bind>>" xyz 898.5 740.5 2019 to ref 131074
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 131842 relation_ref 138626 // <realization>
+  from ref 131714 z 2019 stereotype "<<bind>>" xyz 1002.5 659 2019 to ref 131074
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 132098 relation_ref 145666 // <realization>
+  from ref 131970 z 2012 stereotype "<<bind>>" xyz 334 372.5 2012 to ref 128002
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 132482 relation_ref 143106 // <realization>
+  from ref 132354 z 2019 stereotype "<<bind>>" xyz 571 1003 2019 to ref 132226
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 132610 relation_ref 143234 // <unidirectional association>
+  from ref 132354 z 2019 stereotype "<<List>>" xyz 812 796.5 2019 to ref 131074
+  role_a_pos 882 685 3000 no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+end

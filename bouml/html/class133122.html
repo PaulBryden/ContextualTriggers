@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Documentation produced by the Html generator of Bouml (http://www.bouml.fr) -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:svg="http://www.w3.org/2000/svg">
+
+<head>
+<title>Class NotNotifiedTodayCondition</title>
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body bgcolor="#ffffff">
+
+<div class = "title">Class NotNotifiedTodayCondition</div>
+<p></p>
+
+<!-- ============================================================= -->
+
+<a name="ref4_133122"></a>
+<p>Basic condition that checks if a notification has been sent recently.<br />Condition is satisfied if time elapsed since last condition is more than<br />specified amount.<br /><br /></p>
+<p>Declaration :</p><ul>
+<li>Java : public class NotNotifiedTodayCondition extends <a href="class130434.html#ref4_130434"><b>DataCondition</b></a>&lt;&gt; </li></ul><p>Artifact : <a href="index.html#ref8_130946"><b>NotNotifiedTodayCondition</b></a></p>
+<div class="sub">
+<a name="ref1_133122"></a>
+<table><tr><td><div class="element">Attribute <b>date</b></div></td></tr></table>
+<p>Declaration :</p><ul><li>Uml : ~ date : LocalDate</li><li>Java : package LocalDate date</li></ul><a name="ref2_139650"></a>
+<table><tr><td><div class="element">Operation <b>NotNotifiedTodayCondition</b></div></td></tr></table><p>Declaration :</p><ul><li>Uml : + NotNotifiedTodayCondition(inout dataManager : <a href="class130690.html#ref4_130690"><b>IDataManager</b></a>) : </li><li>Java : public NotNotifiedTodayCondition(<a href="class130690.html#ref4_130690"><b>IDataManager</b></a>&lt;VoidData&gt; dataManager)</li></ul><a name="ref2_139778"></a>
+<table><tr><td><div class="element">Operation <b>hasStaleData</b></div></td></tr></table><p>Declaration :</p><ul><li>Uml : + hasStaleData() : boolean</li><li>Java : public boolean hasStaleData()</li></ul><p> Java annotation(s) :</p><div class="sub"><p>&#64;Override<br /></p></div><a name="ref2_139906"></a>
+<table><tr><td><div class="element">Operation <b>notifyUpdate</b></div></td></tr></table><p>Declaration :</p><ul><li>Uml : + notifyUpdate(inout data : <a href="class131842.html#ref4_131842"><b>VoidData</b></a>) : void</li><li>Java : public void notifyUpdate(<a href="class131842.html#ref4_131842"><b>VoidData</b></a> data)</li></ul><p> Java annotation(s) :</p><div class="sub"><p>&#64;Override<br /></p></div><a name="ref2_140034"></a>
+<table><tr><td><div class="element">Operation <b>isSatisfied</b></div></td></tr></table><p>Declaration :</p><ul><li>Uml : + isSatisfied() : boolean</li><li>Java : public boolean isSatisfied()</li></ul><p> Java annotation(s) :</p><div class="sub"><p>&#64;Override<br /></p></div></div>
+<p>All public operations : <a href="class129794.html#ref2_133634"><b>attachTrigger</b></a> , <a href="class130434.html#ref2_134402"><b>getData</b></a> , <a href="class129922.html#ref2_133506"><b>hasStaleData</b></a> , <a href="class130434.html#ref2_134530"><b>hasStaleData</b></a> , <a href="class133122.html#ref2_139778"><b>hasStaleData</b></a> , <a href="class129922.html#ref2_133378"><b>isSatisfied</b></a> , <a href="class133122.html#ref2_140034"><b>isSatisfied</b></a> , <a href="class130434.html#ref2_134658"><b>notifyUpdate</b></a> , <a href="class133122.html#ref2_139906"><b>notifyUpdate</b></a> </p>
+</body>
+</html>

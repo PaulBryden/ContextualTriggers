@@ -1,0 +1,20 @@
+class SimulatedStepDataManager
+!!!158210.java!!!	SimulatedStepDataManager()
+        super(5, 60);
+        setup();
+!!!158338.java!!!	onBind(inout intent : Intent) : IBinder
+        //Not sure if this is required
+        //Needed if onStartCommand not called automatically
+        Log.d("SimulatedStepDataManage", "Binding");
+        return binder;
+!!!158466.java!!!	setup() : void
+        stepData = new StepData();
+!!!158594.java!!!	onStartCommand(inout intent : Intent, in flags : int, in startId : int) : int
+        super.onStartCommand(intent, flags, startId);
+        monitor();
+        alarm();
+        return START_STICKY;
+!!!158722.java!!!	monitor() : void
+        stepData.steps += 100;
+        Log.d("SimulatedStepDataManage", "Starting");
+        sendUpdate(stepData);

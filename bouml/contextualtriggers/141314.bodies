@@ -1,0 +1,14 @@
+class BatteryLevelReceiver
+!!!149378.java!!!	onReceive(inout context : Context, inout intent : Intent) : void
+        Log.d("BatteryLevelReceiver","Received Battery Event");
+        Intent pushIntent = new Intent(context, BatteryDataManager.class);
+        if (intent.getAction() == "android.intent.action.BATTERY_LOW")
+        {
+            pushIntent.putExtra("level", true);
+        }
+        else if(intent.getAction() == "android.intent.action.BATTERY_OKAY")
+        {
+            pushIntent.putExtra("level", false);
+
+        }
+        context.startService(pushIntent);

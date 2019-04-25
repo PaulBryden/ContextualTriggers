@@ -1,0 +1,15 @@
+class CalendarData
+!!!147330.java!!!	CalendarData(inout cd : List<EventData>)
+        // Sort events in ascending time order.
+        cd.sort(Comparator.comparing(o -> o.time));
+        this.cd = cd;
+!!!147458.java!!!	getEvents() : EventData
+        return cd;
+!!!147586.java!!!	getEventsBetween(inout from : Date, inout to : Date) : EventData
+        List<EventData> events = new ArrayList<>();
+        for (EventData event : cd) {
+            if (event.time.after(from) && event.time.before(to)) {
+                events.add(event);
+            }
+        }
+        return events;

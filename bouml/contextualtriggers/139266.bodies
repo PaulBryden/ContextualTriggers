@@ -1,0 +1,19 @@
+class MeetingCondition
+!!!144770.java!!!	MeetingCondition(inout dataManager : IDataManager)
+        super(dataManager);
+!!!144898.java!!!	isSatisfied() : boolean
+        Calendar c = Calendar.getInstance();
+        Date t = c.getTime();
+        c.add(Calendar.HOUR, 2);
+        Date t2 = c.getTime();
+        for (EventData event : getData().getEventsBetween(t, t2)) {
+            if (StringUtils.containsIgnoreCase(event.name, "meet")) {
+                name = event.name;
+                return true;
+            }
+        }
+        return false;
+!!!145026.java!!!	getName() : String
+        return name;
+!!!145154.java!!!	hasStaleData() : boolean
+        return false;

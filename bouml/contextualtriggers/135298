@@ -1,0 +1,270 @@
+format 221
+"intentReceivers" // uk::ac::strath::contextualtriggers::intentReceivers
+  revision 1
+  modified_by 2 "paul"
+  // class settings
+  
+  classdiagramsettings member_max_width 0 end
+  
+  classcompositediagramsettings end
+  
+  usecasediagramsettings end
+  
+  sequencediagramsettings end
+  
+  collaborationdiagramsettings end
+  
+  objectdiagramsettings end
+  
+  objectcompositediagramsettings end
+  
+  componentdiagramsettings
+   end
+  
+  deploymentdiagramsettings
+   end
+  
+  statediagramsettings
+   end
+  
+  activitydiagramsettings
+   end
+  
+  java_dir "/home/paul/CS551/ContextualTriggers/contextualtriggers/src/main/java/uk/ac/strath/contextualtriggers/intentReceivers/"
+  java_package "uk.ac.strath.contextualtriggers.intentReceivers"
+  classview 134914 "intentReceivers"
+    
+    classdiagramsettings member_max_width 0 end
+    
+    classcompositediagramsettings end
+    
+    collaborationdiagramsettings end
+    
+    objectdiagramsettings end
+    
+    objectcompositediagramsettings end
+    
+    sequencediagramsettings end
+    
+    statediagramsettings
+     end
+    
+    
+    activitydiagramsettings
+     end
+    class 135170 "ToastBroadcastReceiver"
+      visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 142850 // <generalisation>
+	relation 142850 ---|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 142850 // <generalisation>
+	  b parent class_ref 141442 // BroadcastReceiver
+      end
+
+      operation 149762 "onReceive"
+	public explicit_return_type "void"
+	nparams 2
+	  param inout name "context" explicit_type "Context"
+	  param inout name "intent" explicit_type "Intent"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}, ${t1} ${p1}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+    end
+
+    class 141314 "BatteryLevelReceiver"
+      visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 142466 // <generalisation>
+	relation 142466 ---|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 142466 // <generalisation>
+	  b parent class_ref 141442 // BroadcastReceiver
+      end
+
+      operation 149378 "onReceive"
+	public explicit_return_type "void"
+	nparams 2
+	  param inout name "context" explicit_type "Context"
+	  param inout name "intent" explicit_type "Intent"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}, ${t1} ${p1}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+    end
+
+    class 141570 "BootCompletedIntentReceiver"
+      visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 142594 // <generalisation>
+	relation 142594 ---|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 142594 // <generalisation>
+	  b parent class_ref 141442 // BroadcastReceiver
+      end
+
+      operation 149506 "onReceive"
+	public explicit_return_type "void"
+	nparams 2
+	  param inout name "context" explicit_type "Context"
+	  param inout name "intent" explicit_type "Intent"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}, ${t1} ${p1}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+    end
+
+    class 141698 "StepAndGoalIntentReceiver"
+      visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 142722 // <generalisation>
+	relation 142722 ---|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 142722 // <generalisation>
+	  b parent class_ref 141442 // BroadcastReceiver
+      end
+
+      operation 149634 "onReceive"
+	public explicit_return_type "void"
+	nparams 2
+	  param inout name "context" explicit_type "Context"
+	  param inout name "intent" explicit_type "Intent"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}, ${t1} ${p1}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+    end
+  end
+
+  deploymentview 135170 "intentReceivers"
+    //deployment diagram settings
+    deploymentdiagramsettings
+     end
+    artifact 140290 "BatteryLevelReceiver"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.util.Log;
+import uk.ac.strath.contextualtriggers.managers.BatteryDataManager;
+${definition}"
+      associated_elems
+	class_ref 141314 // BatteryLevelReceiver
+      end
+    end
+
+    artifact 140418 "BootCompletedIntentReceiver"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import uk.ac.strath.contextualtriggers.MainApplication;
+${definition}"
+      associated_elems
+	class_ref 141570 // BootCompletedIntentReceiver
+      end
+    end
+
+    artifact 140546 "StepAndGoalIntentReceiver"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.util.Log;
+import uk.ac.strath.contextualtriggers.managers.ActualStepAndGoalDataManager;
+${definition}"
+      associated_elems
+	class_ref 141698 // StepAndGoalIntentReceiver
+      end
+    end
+
+    artifact 140674 "ToastBroadcastReceiver"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.widget.Toast;
+${definition}"
+      associated_elems
+	class_ref 135170 // ToastBroadcastReceiver
+      end
+    end
+  end
+end

@@ -1,0 +1,32 @@
+class NoLongerInBuildingTypeCondition
+!!!145282.java!!!	NoLongerInBuildingTypeCondition(inout targetType : Place.Type, inout dataManager : IDataManager)
+        super(dataManager, 30);
+        this.targetType = targetType;
+!!!145410.java!!!	notifyUpdate(inout data : PlacesData) : void
+        // Override since an update always means condition isn't satisfied,
+        // so no need to notify the Trigger of the change.
+        for (PlaceLikelihood p : data.places) {
+            for (Place.Type type : p.getPlace().getTypes()) {
+                if (type == targetType && p.getLikelihood() > 0.75) {
+                    isInPlace = true;
+                }
+            }
+        }
+        super.notifyUpdate(data);
+!!!145538.java!!!	isSatisfied() : boolean
+        for (PlaceLikelihood p : getData().places) {
+            for (Place.Type type : p.getPlace().getTypes()) {
+                if (type == targetType && p.getLikelihood() < 0.35) {
+                    if (isInPlace) {
+                        isInPlace = false;
+                        justLeftPlace = true;
+                        lastInPlace = System.currentTimeMillis();
+                    }
+                }
+            }
+        }
+        if (System.currentTimeMillis() - lastInPlace < 600000) {
+            return justLeftPlace;
+        } else {
+            return false;
+        }

@@ -1,0 +1,16 @@
+class ActivityPeriodCondition
+!!!141058.java!!!	ActivityPeriodCondition(in minimumTimeElapsed : int, in activityType : int, inout dataManager : IDataManager)
+        super(dataManager, 30, new ActivityData(new DetectedActivity(0, 0)));
+        this.minimumTimeElapsed = minimumTimeElapsed; /*seconds*/
+        activityStarted = System.currentTimeMillis();
+        activityTypeUnderExamination = activityType;
+!!!141186.java!!!	notifyUpdate(inout data : ActivityData) : void
+        // Override since an update always means condition isn't satisfied,
+        // so no need to notify the Trigger of the change.
+        if (data.getActivityType() != getData().getActivityType()) {
+            activityStarted = data.getTimestamp();
+        }
+        super.notifyUpdate(data);
+!!!141314.java!!!	isSatisfied() : boolean
+        return getData().getActivityType() == activityTypeUnderExamination &&
+                (System.currentTimeMillis() - activityStarted) > minimumTimeElapsed;

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Documentation produced by the Html generator of Bouml (http://www.bouml.fr) -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:svg="http://www.w3.org/2000/svg">
+
+<head>
+<title>Class AltitudeTransitionCondition</title>
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body bgcolor="#ffffff">
+
+<div class = "title">Class AltitudeTransitionCondition</div>
+<p></p>
+
+<!-- ============================================================= -->
+
+<a name="ref4_131074"></a>
+<p>A condition that checks whether the user's altitude is increasing.<br /><br /></p>
+<p>Declaration :</p><ul>
+<li>Java : public class AltitudeTransitionCondition extends <a href="class130434.html#ref4_130434"><b>DataCondition</b></a>&lt;&gt; </li></ul><p>Artifact : <a href="index.html#ref8_129538"><b>AltitudeTransitionCondition</b></a></p>
+<div class="sub">
+<a name="ref1_131330"></a>
+<table><tr><td><div class="element">Attribute <b>AltitudeTransition</b></div></td></tr></table>
+<p>Declaration :</p><ul><li>Uml : - AltitudeTransition : double =  0</li><li>Java : private double AltitudeTransition</li></ul><a name="ref0_131970"></a>
+<table><tr><td><div class="element">Relation <b>oldAltitude (&lt;unidirectional association&gt;)</b></div></td></tr></table><p>Declaration :</p><ul><li>Uml : - oldAltitude : <a href="class131202.html#ref4_131202"><b>AltitudeData</b></a></li><li>Java : private <a href="class131202.html#ref4_131202"><b>AltitudeData</b></a> oldAltitude</li></ul><a name="ref1_131458"></a>
+<table><tr><td><div class="element">Attribute <b>targetTransition</b></div></td></tr></table>
+<p>Declaration :</p><ul><li>Uml : - targetTransition : int</li><li>Java : private int targetTransition</li></ul><a name="ref2_135426"></a>
+<table><tr><td><div class="element">Operation <b>AltitudeTransitionCondition</b></div></td></tr></table><p>Declaration :</p><ul><li>Uml : + AltitudeTransitionCondition(in transition : int, inout dataManager : <a href="class130690.html#ref4_130690"><b>IDataManager</b></a>) : </li><li>Java : public AltitudeTransitionCondition(int transition, <a href="class130690.html#ref4_130690"><b>IDataManager</b></a>&lt;AltitudeData&gt; dataManager)</li></ul><a name="ref2_135554"></a>
+<table><tr><td><div class="element">Operation <b>notifyUpdate</b></div></td></tr></table><p>Declaration :</p><ul><li>Uml : + notifyUpdate(inout data : <a href="class131202.html#ref4_131202"><b>AltitudeData</b></a>) : void</li><li>Java : public void notifyUpdate(<a href="class131202.html#ref4_131202"><b>AltitudeData</b></a> data)</li></ul><p> Java annotation(s) :</p><div class="sub"><p>&#64;Override<br /></p></div><a name="ref2_135682"></a>
+<table><tr><td><div class="element">Operation <b>isSatisfied</b></div></td></tr></table><p>Declaration :</p><ul><li>Uml : + isSatisfied() : boolean</li><li>Java : public boolean isSatisfied()</li></ul><p> Java annotation(s) :</p><div class="sub"><p>&#64;Override<br /></p></div></div>
+<p>All public operations : <a href="class129794.html#ref2_133634"><b>attachTrigger</b></a> , <a href="class130434.html#ref2_134402"><b>getData</b></a> , <a href="class129922.html#ref2_133506"><b>hasStaleData</b></a> , <a href="class130434.html#ref2_134530"><b>hasStaleData</b></a> , <a href="class131074.html#ref2_135682"><b>isSatisfied</b></a> , <a href="class129922.html#ref2_133378"><b>isSatisfied</b></a> , <a href="class131074.html#ref2_135554"><b>notifyUpdate</b></a> , <a href="class130434.html#ref2_134658"><b>notifyUpdate</b></a> </p>
+</body>
+</html>

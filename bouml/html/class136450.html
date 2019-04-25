@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Documentation produced by the Html generator of Bouml (http://www.bouml.fr) -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:svg="http://www.w3.org/2000/svg">
+
+<head>
+<title>Class BatteryDataManager</title>
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body bgcolor="#ffffff">
+
+<div class = "title">Class BatteryDataManager</div>
+<p></p>
+
+<!-- ============================================================= -->
+
+<a name="ref4_136450"></a>
+<p>Declaration :</p><ul>
+<li>Java : public class BatteryDataManager extends <a href="class135554.html#ref4_135554"><b>DataManager</b></a>&lt;&gt; </li></ul><p>Artifact : <a href="index.html#ref8_135042"><b>BatteryDataManager</b></a></p>
+<div class="sub">
+<a name="ref1_137474"></a>
+<table><tr><td><div class="element">Attribute <b>LPM_BOOL_NAME</b></div></td></tr></table>
+<p>Declaration :</p><ul><li>Uml : static, + LPM_BOOL_NAME : String =  "LPM", read only</li><li>Java : public static final String LPM_BOOL_NAME</li></ul><a name="ref1_137602"></a>
+<table><tr><td><div class="element">Attribute <b>LPM_ACTION_NAME</b></div></td></tr></table>
+<p>Declaration :</p><ul><li>Uml : static, + LPM_ACTION_NAME : String =  "MANAGERS/LPM", read only</li><li>Java : public static final String LPM_ACTION_NAME</li></ul><a name="ref0_138754"></a>
+<table><tr><td><div class="element">Relation <b>batteryData (&lt;unidirectional association&gt;)</b></div></td></tr></table><p>Declaration :</p><ul><li>Uml : ~ batteryData : <a href="class133762.html#ref4_133762"><b>BatteryData</b></a></li><li>Java : package <a href="class133762.html#ref4_133762"><b>BatteryData</b></a> batteryData</li></ul><a name="ref0_138882"></a>
+<table><tr><td><div class="element">Relation <b>receiver (&lt;unidirectional association&gt;)</b></div></td></tr></table><p>Declaration :</p><ul><li>Uml : - receiver : <a href="class134786.html#ref4_134786"><b>BatteryLevelReceiver</b></a></li><li>Java : private <a href="class134786.html#ref4_134786"><b>BatteryLevelReceiver</b></a> receiver</li></ul><a name="ref1_137730"></a>
+<table><tr><td><div class="element">Attribute <b>binder</b></div></td></tr></table>
+<p>Declaration :</p><ul><li>Uml : - binder : IBinder =  new LocalBinder(), read only</li><li>Java : private final IBinder binder</li></ul><a name="ref2_147842"></a>
+<table><tr><td><div class="element">Operation <b>setLowPowerMode</b></div></td></tr></table><p>Declaration :</p><ul><li>Uml : + setLowPowerMode(inout lpm : boolean) : void</li><li>Java : public void setLowPowerMode(boolean lpm)</li></ul><p> Java annotation(s) :</p><div class="sub"><p>&#64;Override<br /></p></div><table><tr><td><div class="element">Class <b><a href="class136578.html#ref4_136578"><b>LocalBinder</b></a></b></div></td></tr></table>
+<a name="ref2_148098"></a>
+<table><tr><td><div class="element">Operation <b>BatteryDataManager</b></div></td></tr></table><p>Declaration :</p><ul><li>Uml : + BatteryDataManager() : </li><li>Java : public BatteryDataManager()</li></ul><a name="ref2_148226"></a>
+<table><tr><td><div class="element">Operation <b>configureReceiver</b></div></td></tr></table><p>Declaration :</p><ul><li>Uml : - configureReceiver() : void</li><li>Java : private void configureReceiver()</li></ul><a name="ref2_148354"></a>
+<table><tr><td><div class="element">Operation <b>onBind</b></div></td></tr></table><p>Declaration :</p><ul><li>Uml : + onBind(inout intent : Intent) : IBinder</li><li>Java : public IBinder onBind(Intent intent)</li></ul><p> Java annotation(s) :</p><div class="sub"><p>&#64;Nullable<br />&#64;Override<br /></p></div><a name="ref2_148482"></a>
+<table><tr><td><div class="element">Operation <b>setup</b></div></td></tr></table><p>Declaration :</p><ul><li>Uml : - setup() : void</li><li>Java : private void setup()</li></ul><a name="ref2_148610"></a>
+<table><tr><td><div class="element">Operation <b>onStartCommand</b></div></td></tr></table><p>Declaration :</p><ul><li>Uml : + onStartCommand(inout intent : Intent, in flags : int, in startId : int) : int</li><li>Java : public int onStartCommand(Intent intent, int flags, int startId)</li></ul><p> Java annotation(s) :</p><div class="sub"><p>&#64;Override<br /></p></div><a name="ref2_148738"></a>
+<table><tr><td><div class="element">Operation <b>monitor</b></div></td></tr></table><p>Declaration :</p><ul><li>Uml : - monitor(inout intent : Intent) : void</li><li>Java : private void monitor(Intent intent)</li></ul></div>
+<p>All public operations : <a href="class136450.html#ref2_148354"><b>onBind</b></a> , <a href="class136450.html#ref2_148610"><b>onStartCommand</b></a> , <a href="class135554.html#ref2_144258"><b>onStartCommand</b></a> , <a href="class135554.html#ref2_144386"><b>register</b></a> , <a href="class130690.html#ref2_143874"><b>register</b></a> , <a href="class136450.html#ref2_147842"><b>setLowPowerMode</b></a> , <a href="class135554.html#ref2_144770"><b>setLowPowerMode</b></a> , <a href="class130690.html#ref2_144002"><b>setLowPowerMode</b></a> </p>
+</body>
+</html>

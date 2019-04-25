@@ -1,0 +1,43 @@
+class RequestCalendarPermission
+!!!159618.java!!!	onCreate(inout savedInstanceState : Bundle) : void
+        super.onCreate(savedInstanceState);
+        final Activity activity = this;
+        Log.d("REQUEST", "HERE");
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Need Calendar Permissions");
+        builder.setMessage("This app needs to read calendar data only for contextual services.");
+        builder.setPositiveButton("Grant", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+                ActivityCompat.requestPermissions(activity,new String[]{READ_CALENDAR},MY_PERMISSIONS_REQUEST_READ_CONTACTS);
+            }
+        });
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                turnOffCalendarManager();
+                dialog.cancel();
+                activity.finish();
+            }
+        });
+        builder.show();
+!!!159746.java!!!	onRequestPermissionsResult(in requestCode : int, inout permissions : String [[]], inout grantResults : int [[]]) : void
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+        if (requestCode == MY_PERMISSIONS_REQUEST_READ_CONTACTS) {
+            for (int i = 0; i < permissions.length; i++) {
+                if (grantResults[i] == PackageManager.PERMISSION_GRANTED) {
+                    onPermissionGranted(permissions[i]);
+                } else {
+                    turnOffCalendarManager();
+                }
+            }
+        }
+!!!159874.java!!!	onPermissionGranted(in permission : String) : void
+        this.finish();
+!!!160002.java!!!	turnOffCalendarManager() : void
+        Log.d("PERMISSION DENIED", "TURN OFF ALL CALENDAR BASED DATA MANAGERS");
+        Intent i = new Intent(this, CalendarDataManager.class);
+        stopService(i);
+        this.finish();

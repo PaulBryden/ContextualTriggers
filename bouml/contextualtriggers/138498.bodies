@@ -1,0 +1,12 @@
+class GymNearbyCondition
+!!!143234.java!!!	GymNearbyCondition(inout dataManager : IDataManager)
+        super(dataManager,20);
+!!!143362.java!!!	isSatisfied() : boolean
+        for (PlaceLikelihood p : getData().places) {
+            for (Place.Type type : p.getPlace().getTypes()) {
+                if (type == Place.Type.GYM && p.getLikelihood() < 0.5) {
+                    return true;
+                }
+            }
+        }
+        return false;

@@ -1,0 +1,3 @@
+class LocalBinder
+!!!152194.java!!!	getInstance() : IDataManager
+            return ActualStepAndGoalDataManager.this;

@@ -1,0 +1,27 @@
+class ActualStepAndGoalDataManager
+!!!152322.java!!!	ActualStepAndGoalDataManager()
+        Log.d("StepAndGoalIntentReceiver","Starting");
+        setup();
+!!!152450.java!!!	configureReceiver() : void
+        IntentFilter filter = new IntentFilter();
+        filter.addAction("uk.ac.strath.contextualtriggers.step");
+        receiver = new StepAndGoalIntentReceiver();
+        registerReceiver(receiver, filter);
+!!!152578.java!!!	onBind(inout intent : Intent) : IBinder
+        //Not sure if this is required
+        //Needed if onStartCommand not called automatically
+        Log.d("SimulatedStepDataManage", "Binding");
+        configureReceiver();
+        return binder;
+!!!152706.java!!!	setup() : void
+        stepGoalData = new StepAndGoalData();
+!!!152834.java!!!	onStartCommand(inout intent : Intent, in flags : int, in startId : int) : int
+        super.onStartCommand(intent, flags, startId);
+        monitor(intent);
+        return START_STICKY;
+!!!152962.java!!!	monitor(inout intent : Intent) : void
+        LocalDate today = LocalDate.now();
+        DayData day = new DayData(intent.getIntExtra("steps", 0),intent.getIntExtra("goal", 0),today);
+        stepGoalData.updateDay(day);
+        Log.d("ActualStepAndGoalDataManager", "Starting");
+        sendUpdate(stepGoalData);

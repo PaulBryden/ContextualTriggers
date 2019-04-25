@@ -1,0 +1,28 @@
+class ActivityDataManager
+!!!151426.java!!!	onBind(inout intent : Intent) : IBinder
+        setup();
+        return binder;
+!!!151682.java!!!	ActivityDataManager()
+        super(5, 60);
+        setup();
+!!!151938.java!!!	onStartCommand(inout intent : Intent, in flags : int, in startId : int) : int
+        super.onStartCommand(intent, flags, startId);
+        monitor();
+        alarm();
+        return START_STICKY;
+!!!152066.java!!!	monitor() : void
+        // Permission has already been granted
+        Awareness.getSnapshotClient(getApplicationContext()).getDetectedActivity().addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Log.d("ActivityDataManager", e.getMessage());
+            }
+        }).addOnSuccessListener(new OnSuccessListener<DetectedActivityResponse>() {
+            @Override
+            public void onSuccess(DetectedActivityResponse detectedActivityResponse) {
+                ActivityRecognitionResult ar = detectedActivityResponse.getActivityRecognitionResult();
+                DetectedActivity probableActivity = ar.getMostProbableActivity();
+                Log.d("ActivityDataManager", probableActivity.toString());
+                sendUpdate(new ActivityData(probableActivity));
+            }
+        });

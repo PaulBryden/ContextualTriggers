@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Documentation produced by the Html generator of Bouml (http://www.bouml.fr) -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:svg="http://www.w3.org/2000/svg">
+
+<head>
+<title>Class CompositeCondition</title>
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body bgcolor="#ffffff">
+
+<div class = "title">Class CompositeCondition</div>
+<p></p>
+
+<!-- ============================================================= -->
+
+<a name="ref4_131458"></a>
+<p>Base class for composite conditions (conditions that depend on multiple other conditions,<br />such as AndCondition).<br /><br /></p>
+<p>Declaration :</p><ul>
+<li>Java : public abstract class CompositeCondition extends <a href="class129794.html#ref4_129794"><b>AbstractCondition</b></a> </li></ul><p>Directly inherited by : <a href="class131330.html#ref4_131330"><b>AndCondition</b></a> </p>
+<p>Artifact : <a href="index.html#ref8_129666"><b>CompositeCondition</b></a></p>
+<div class="sub">
+<a name="ref0_132226"></a>
+<table><tr><td><div class="element">Relation <b>components (&lt;unidirectional association&gt;)</b></div></td></tr></table><p>Declaration :</p><ul><li>Uml : ~ components : <a href="class129922.html#ref4_129922"><b>Condition</b></a></li><li>Java : package List&lt;<a href="class129922.html#ref4_129922"><b>Condition</b></a>&gt; components</li></ul><p>Stereotype: List</p>
+<a name="ref2_135810"></a>
+<table><tr><td><div class="element">Operation <b>attachTrigger</b></div></td></tr></table><p>Declaration :</p><ul><li>Uml : + attachTrigger(inout trigger : <a href="class128514.html#ref4_128514"><b>ITrigger</b></a>) : void</li><li>Java : public void attachTrigger(<a href="class128514.html#ref4_128514"><b>ITrigger</b></a> trigger)</li></ul><p> Java annotation(s) :</p><div class="sub"><p>&#64;Override<br /></p></div><a name="ref2_135938"></a>
+<table><tr><td><div class="element">Operation <b>CompositeCondition</b></div></td></tr></table><p>Declaration :</p><ul><li>Uml : ~ CompositeCondition(inout components : List&lt;Condition&gt;) : </li><li>Java : package CompositeCondition(List&lt;Condition&gt; components)</li></ul></div>
+<p>All public operations : <a href="class129794.html#ref2_133634"><b>attachTrigger</b></a> , <a href="class131458.html#ref2_135810"><b>attachTrigger</b></a> , <a href="class129922.html#ref2_133506"><b>hasStaleData</b></a> , <a href="class129922.html#ref2_133378"><b>isSatisfied</b></a> </p>
+</body>
+</html>

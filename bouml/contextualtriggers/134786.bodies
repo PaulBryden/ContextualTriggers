@@ -1,0 +1,15 @@
+class BaseServiceConnection
+!!!134530.java!!!	BaseServiceConnection(inout mainService : ContextualTriggersService)
+            this.mainService = mainService;
+            connected = false;
+!!!134658.java!!!	onServiceConnected(inout name : ComponentName, inout service : IBinder) : void
+            Log.d("AbstractService", "Are we here?");
+            dataManager = service;
+            connected = true;
+            mainService.notifyDataManagerOnline();
+!!!134786.java!!!	onServiceDisconnected(inout name : ComponentName) : void
+            connected = false;
+!!!134914.java!!!	isConnected() : boolean
+            return connected;
+!!!135042.java!!!	getDataManager() : IBinder
+            return dataManager;

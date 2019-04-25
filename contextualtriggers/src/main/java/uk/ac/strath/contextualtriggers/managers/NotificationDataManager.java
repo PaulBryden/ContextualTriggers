@@ -45,7 +45,7 @@ public class NotificationDataManager extends DataManager<VoidData> {
     }
 
     private void monitor(){
-        sendUpdate(null);
+        sendUpdate(new VoidData());
     }
 
 

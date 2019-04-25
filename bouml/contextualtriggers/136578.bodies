@@ -1,0 +1,13 @@
+class AcceptableTimeCondition
+!!!140802.java!!!	AcceptableTimeCondition(inout targetIntervals : TimeOfDayData, inout dataManager : IDataManager)
+        super(dataManager, 60);
+        this.targetIntervals = targetIntervals;
+!!!140930.java!!!	isSatisfied() : boolean
+        for (int i : getData().intervals) {
+            for (int x : targetIntervals.intervals) {
+                if (x == i) {
+                    return true;
+                }
+            }
+        }
+        return false;

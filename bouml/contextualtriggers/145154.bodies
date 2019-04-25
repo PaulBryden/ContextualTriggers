@@ -1,0 +1,10 @@
+class Trigger
+!!!161922.java!!!	Trigger(inout condition : Condition, inout action : Action)
+        this.condition = condition;
+        this.action = action;
+        ((AbstractCondition) this.condition).attachTrigger(this);
+!!!162050.java!!!	notifyChange() : void
+        //Log.d("Trigger", String.format("Condition satisfied: %b", condition.isSatisfied()));
+        if (condition.isSatisfied() && !condition.hasStaleData()) {
+            action.execute();
+        }

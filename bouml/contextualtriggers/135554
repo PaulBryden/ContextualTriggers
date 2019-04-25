@@ -1,0 +1,2035 @@
+format 221
+"conditions" // uk::ac::strath::contextualtriggers::conditions
+  revision 1
+  modified_by 2 "paul"
+  // class settings
+  
+  classdiagramsettings member_max_width 0 end
+  
+  classcompositediagramsettings end
+  
+  usecasediagramsettings end
+  
+  sequencediagramsettings end
+  
+  collaborationdiagramsettings end
+  
+  objectdiagramsettings end
+  
+  objectcompositediagramsettings end
+  
+  componentdiagramsettings
+   end
+  
+  deploymentdiagramsettings
+   end
+  
+  statediagramsettings
+   end
+  
+  activitydiagramsettings
+   end
+  
+  java_dir "/home/paul/CS551/ContextualTriggers/contextualtriggers/src/main/java/uk/ac/strath/contextualtriggers/conditions/"
+  java_package "uk.ac.strath.contextualtriggers.conditions"
+  classview 135170 "conditions"
+    
+    classdiagramsettings member_max_width 0 end
+    
+    classcompositediagramsettings end
+    
+    collaborationdiagramsettings end
+    
+    objectdiagramsettings end
+    
+    objectcompositediagramsettings end
+    
+    sequencediagramsettings end
+    
+    statediagramsettings
+     end
+    
+    
+    activitydiagramsettings
+     end
+    class 136194 "AbstractCondition"
+      abstract visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      comment "Base class for Condition implementations.
+"
+      classrelation 137090 // <realization>
+	relation 137090 -_-|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 137090 // <realization>
+	  b parent class_ref 136322 // Condition
+      end
+
+      classrelation 137218 // trigger (<unidirectional association>)
+	relation 137218 --->
+	  a role_name "trigger" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 137218 // trigger (<unidirectional association>)
+	  b parent class_ref 135042 // ITrigger
+      end
+
+      operation 139650 "attachTrigger"
+	public explicit_return_type "void"
+	nparams 1
+	  param inout name "trigger" type class_ref 135042 // ITrigger
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 139778 "getTrigger"
+	package return_type class_ref 135042 // ITrigger
+	nparams 0
+	nexceptions 1
+	  exception class_ref 136450 // TriggerNotConnectedException
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+    end
+
+    class 136322 "Condition"
+      visibility public stereotype "interface"
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${static}interface ${name}${extends} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      operation 139394 "isSatisfied"
+	public explicit_return_type "boolean"
+	nparams 0
+	
+	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "@return true iff the condition is satisfied.
+"
+      end
+
+      operation 139522 "hasStaleData"
+	public explicit_return_type "boolean"
+	nparams 0
+	
+	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "@return true iff condition should not be considered satisfied because data is too old.
+"
+      end
+    end
+
+    class 136578 "AcceptableTimeCondition"
+      visibility public 
+      nactuals 1
+      actual class class_ref 136834 // DataCondition
+        rank 0 explicit_value ""
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      comment "A condition that is satisfied if any of the current time intervals (like morning or afternoon)
+match any of the target time intervals.
+"
+      classrelation 137474 // <realization>
+	relation 137474 -_-|>
+	  stereotype "bind"
+	  a public
+	    java "${type}"
+	    classrelation_ref 137474 // <realization>
+	  b parent class_ref 136834 // DataCondition
+      end
+
+      classrelation 137602 // targetIntervals (<unidirectional association>)
+	relation 137602 --->
+	  a role_name "targetIntervals" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 137602 // targetIntervals (<unidirectional association>)
+	  b parent class_ref 136706 // TimeOfDayData
+      end
+
+      operation 140802 "AcceptableTimeCondition"
+	public explicit_return_type ""
+	nparams 2
+	  param inout name "targetIntervals" type class_ref 136706 // TimeOfDayData
+	  param inout name "dataManager" type class_ref 137090 // IDataManager
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${t0} ${p0}, ${t1}<TimeOfDayData> ${p1}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 140930 "isSatisfied"
+	public explicit_return_type "boolean"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+    end
+
+    class 136834 "DataCondition"
+      abstract visibility public 
+      nformals 1
+      formal name "T" type "" explicit_default_value ""
+        extends class_ref 136962 // Data
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 137346 // <generalisation>
+	relation 137346 ---|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 137346 // <generalisation>
+	  b parent class_ref 136194 // AbstractCondition
+      end
+
+      attribute 136962 "data"
+	private explicit_type "T"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	java_annotation "@Nullable
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 137090 "dataTimeout"
+	private explicit_type "int"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment " in minutes"
+      end
+
+      operation 139906 "DataCondition"
+	cpp_inline package explicit_return_type ""
+	nparams 1
+	  param inout name "dataManager" type class_ref 137090 // IDataManager
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${t0}<T> ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 140034 "DataCondition"
+	cpp_inline package explicit_return_type ""
+	nparams 2
+	  param inout name "dataManager" type class_ref 137090 // IDataManager
+	  param in name "dataTimeout" explicit_type "int"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${t0}<T> ${p0}, ${t1} ${p1}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 140162 "DataCondition"
+	cpp_inline package explicit_return_type ""
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Deprecated
+"
+	
+	
+	
+      end
+
+      operation 140290 "DataCondition"
+	cpp_inline package explicit_return_type ""
+	nparams 3
+	  param inout name "dataManager" type class_ref 137090 // IDataManager
+	  param in name "dataTimeout" explicit_type "int"
+	  param inout name "initialData" explicit_type "T"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${t0}<T> ${p0}, ${t1} ${p1}, ${t2} ${p2}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 140418 "getData"
+	cpp_inline public explicit_return_type "T"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 140546 "hasStaleData"
+	cpp_inline public explicit_return_type "boolean"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 140674 "notifyUpdate"
+	cpp_inline public explicit_return_type "void"
+	nparams 1
+	  param inout name "data" explicit_type "T"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+    end
+
+    class 137218 "ActivityPeriodCondition"
+      visibility public 
+      nactuals 1
+      actual class class_ref 136834 // DataCondition
+        rank 0 explicit_value ""
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      comment "A condition that checks whether the user has been doing the target activity for longer than the
+target time.
+"
+      classrelation 137730 // <realization>
+	relation 137730 -_-|>
+	  stereotype "bind"
+	  a public
+	    java "${type}"
+	    classrelation_ref 137730 // <realization>
+	  b parent class_ref 136834 // DataCondition
+      end
+
+      attribute 137218 "activityStarted"
+	private explicit_type "long"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 137346 "activityTypeUnderExamination"
+	private explicit_type "int"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 137474 "minimumTimeElapsed"
+	private explicit_type "int"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment " in seconds"
+      end
+
+      operation 141058 "ActivityPeriodCondition"
+	public explicit_return_type ""
+	nparams 3
+	  param in name "minimumTimeElapsed" explicit_type "int"
+	  param in name "activityType" explicit_type "int"
+	  param inout name "dataManager" type class_ref 137090 // IDataManager
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${t0} ${p0}, ${t1} ${p1}, ${t2}<ActivityData> ${p2}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 141186 "notifyUpdate"
+	public explicit_return_type "void"
+	nparams 1
+	  param inout name "data" type class_ref 137346 // ActivityData
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+
+      operation 141314 "isSatisfied"
+	public explicit_return_type "boolean"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+    end
+
+    class 137474 "AltitudeTransitionCondition"
+      visibility public 
+      nactuals 1
+      actual class class_ref 136834 // DataCondition
+        rank 0 explicit_value ""
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      comment "A condition that checks whether the user's altitude is increasing.
+"
+      classrelation 137858 // <realization>
+	relation 137858 -_-|>
+	  stereotype "bind"
+	  a public
+	    java "${type}"
+	    classrelation_ref 137858 // <realization>
+	  b parent class_ref 136834 // DataCondition
+      end
+
+      attribute 137602 "AltitudeTransition"
+	private explicit_type "double"
+	init_value " 0"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      classrelation 137986 // oldAltitude (<unidirectional association>)
+	relation 137986 --->
+	  a role_name "oldAltitude" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 137986 // oldAltitude (<unidirectional association>)
+	  b parent class_ref 137602 // AltitudeData
+      end
+
+      attribute 137730 "targetTransition"
+	private explicit_type "int"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      operation 141442 "AltitudeTransitionCondition"
+	public explicit_return_type ""
+	nparams 2
+	  param in name "transition" explicit_type "int"
+	  param inout name "dataManager" type class_ref 137090 // IDataManager
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${t0} ${p0}, ${t1}<AltitudeData> ${p1}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 141570 "notifyUpdate"
+	public explicit_return_type "void"
+	nparams 1
+	  param inout name "data" type class_ref 137602 // AltitudeData
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+
+      operation 141698 "isSatisfied"
+	public explicit_return_type "boolean"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+    end
+
+    class 137730 "AndCondition"
+      visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 138370 // <generalisation>
+	relation 138370 ---|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 138370 // <generalisation>
+	  b parent class_ref 137858 // CompositeCondition
+      end
+
+      operation 142082 "AndCondition"
+	public explicit_return_type ""
+	nparams 1
+	  param inout name "components" explicit_type "List<Condition>"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 142210 "isSatisfied"
+	public explicit_return_type "boolean"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+
+      operation 142338 "hasStaleData"
+	public explicit_return_type "boolean"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+    end
+
+    class 137858 "CompositeCondition"
+      abstract visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      comment "Base class for composite conditions (conditions that depend on multiple other conditions,
+such as AndCondition).
+"
+      classrelation 138114 // <generalisation>
+	relation 138114 ---|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 138114 // <generalisation>
+	  b parent class_ref 136194 // AbstractCondition
+      end
+
+      classrelation 138242 // components (<unidirectional association>)
+	relation 138242 --->
+	  stereotype "List"
+	  a role_name "components" package
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${stereotype}<${type}> ${name}${value};
+"
+	    classrelation_ref 138242 // components (<unidirectional association>)
+	  b parent class_ref 136322 // Condition
+      end
+
+      operation 141826 "attachTrigger"
+	public explicit_return_type "void"
+	nparams 1
+	  param inout name "trigger" type class_ref 135042 // ITrigger
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+
+      operation 141954 "CompositeCondition"
+	package explicit_return_type ""
+	nparams 1
+	  param inout name "components" explicit_type "List<Condition>"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+    end
+
+    class 137986 "ClearWeatherCondition"
+      visibility public 
+      nactuals 1
+      actual class class_ref 136834 // DataCondition
+        rank 0 explicit_value ""
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      comment "Condition satisfied if current weather matches a target value. Use constants defined in
+WeatherService to represent weather states.
+"
+      classrelation 138498 // <realization>
+	relation 138498 -_-|>
+	  stereotype "bind"
+	  a public
+	    java "${type}"
+	    classrelation_ref 138498 // <realization>
+	  b parent class_ref 136834 // DataCondition
+      end
+
+      operation 142466 "ClearWeatherCondition"
+	public explicit_return_type ""
+	nparams 1
+	  param inout name "dataManager" type class_ref 137090 // IDataManager
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${t0}<WeatherData> ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 142594 "isSatisfied"
+	public explicit_return_type "boolean"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+    end
+
+    class 138242 "FrequentNotificationPreventionCondition"
+      visibility public 
+      nactuals 1
+      actual class class_ref 136834 // DataCondition
+        rank 0 explicit_value ""
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      comment "Basic condition that checks if a notification has been sent recently.
+Condition is satisfied if time elapsed since last condition is more than
+specified amount.
+"
+      classrelation 138626 // <realization>
+	relation 138626 -_-|>
+	  stereotype "bind"
+	  a public
+	    java "${type}"
+	    classrelation_ref 138626 // <realization>
+	  b parent class_ref 136834 // DataCondition
+      end
+
+      attribute 137858 "lastNotificationSent"
+	private explicit_type "long"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 137986 "minimumTimeElapsed"
+	private explicit_type "int"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment " in seconds"
+      end
+
+      operation 142722 "FrequentNotificationPreventionCondition"
+	public explicit_return_type ""
+	nparams 2
+	  param in name "minimumTimeElapsed" explicit_type "int"
+	  param inout name "dataManager" type class_ref 137090 // IDataManager
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${t0} ${p0}, ${t1}<VoidData> ${p1}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 142850 "notifyUpdate"
+	public explicit_return_type "void"
+	nparams 1
+	  param inout name "data" type class_ref 138370 // VoidData
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+
+      operation 142978 "hasStaleData"
+	public explicit_return_type "boolean"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+
+      operation 143106 "isSatisfied"
+	public explicit_return_type "boolean"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+    end
+
+    class 138498 "GymNearbyCondition"
+      visibility public 
+      nactuals 1
+      actual class class_ref 136834 // DataCondition
+        rank 0 explicit_value ""
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      comment "A condition that checks for nearby gyms.
+"
+      classrelation 138754 // <realization>
+	relation 138754 -_-|>
+	  stereotype "bind"
+	  a public
+	    java "${type}"
+	    classrelation_ref 138754 // <realization>
+	  b parent class_ref 136834 // DataCondition
+      end
+
+      operation 143234 "GymNearbyCondition"
+	public explicit_return_type ""
+	nparams 1
+	  param inout name "dataManager" type class_ref 137090 // IDataManager
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${t0}<PlacesData> ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 143362 "isSatisfied"
+	public explicit_return_type "boolean"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+    end
+
+    class 138754 "HistoricStepsDaysUnmetCondition"
+      visibility public 
+      nactuals 1
+      actual class class_ref 136834 // DataCondition
+        rank 0 explicit_value ""
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      comment "A condition that is satisfied if the user failed to meet any of their recent goals.
+"
+      classrelation 138882 // <realization>
+	relation 138882 -_-|>
+	  stereotype "bind"
+	  a public
+	    java "${type}"
+	    classrelation_ref 138882 // <realization>
+	  b parent class_ref 136834 // DataCondition
+      end
+
+      attribute 138114 "daysMet"
+	private explicit_type "int"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      operation 143490 "HistoricStepsDaysUnmetCondition"
+	public explicit_return_type ""
+	nparams 2
+	  param in name "days" explicit_type "int"
+	  param inout name "dataManager" type class_ref 137090 // IDataManager
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${t0} ${p0}, ${t1}<StepAndGoalData> ${p1}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 143618 "hasStaleData"
+	public explicit_return_type "boolean"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+
+      operation 143746 "isSatisfied"
+	public explicit_return_type "boolean"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+    end
+
+    class 139010 "InBuildingCondition"
+      visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      comment "A condition satisfied if any place with a likelihood greater than a threshold value matches
+a place type considered a building.
+"
+      classrelation 139138 // <generalisation>
+	relation 139138 ---|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 139138 // <generalisation>
+	  b parent class_ref 139138 // InPlaceTypeCondition
+      end
+
+      attribute 138626 "BUILDING_PLACE_TYPES"
+	class_attribute const_attribute private explicit_type "Place.Type"
+	init_value " Arrays.asList(Place.Type.ACCOUNTING,
+            Place.Type.AQUARIUM, Place.Type.ART_GALLERY, Place.Type.BAKERY, Place.Type.BANK,
+            Place.Type.BAR, Place.Type.BEAUTY_SALON, Place.Type.BICYCLE_STORE, Place.Type.BOOK_STORE,
+            Place.Type.BOWLING_ALLEY, Place.Type.CAFE, Place.Type.CAR_DEALER, Place.Type.CAR_RENTAL,
+            Place.Type.CAR_REPAIR, Place.Type.CASINO, Place.Type.CHURCH, Place.Type.CITY_HALL,
+            Place.Type.CLOTHING_STORE, Place.Type.CONVENIENCE_STORE, Place.Type.COURTHOUSE,
+            Place.Type.DENTIST, Place.Type.DEPARTMENT_STORE, Place.Type.DOCTOR, Place.Type.ELECTRICIAN,
+            Place.Type.ELECTRONICS_STORE, Place.Type.EMBASSY, Place.Type.FIRE_STATION,
+            Place.Type.FLORIST, Place.Type.FUNERAL_HOME, Place.Type.FURNITURE_STORE, Place.Type.GYM,
+            Place.Type.HAIR_CARE, Place.Type.HARDWARE_STORE, Place.Type.HINDU_TEMPLE,
+            Place.Type.HOME_GOODS_STORE, Place.Type.HOSPITAL, Place.Type.INSURANCE_AGENCY,
+            Place.Type.JEWELRY_STORE, Place.Type.LAUNDRY, Place.Type.LAWYER, Place.Type.LIBRARY,
+            Place.Type.LIQUOR_STORE, Place.Type.LOCAL_GOVERNMENT_OFFICE, Place.Type.LOCKSMITH,
+            Place.Type.LODGING, Place.Type.MEAL_DELIVERY, Place.Type.MEAL_TAKEAWAY, Place.Type.MOSQUE,
+            Place.Type.MOVIE_RENTAL, Place.Type.MOVIE_THEATER, Place.Type.MOVING_COMPANY,
+            Place.Type.MUSEUM, Place.Type.NIGHT_CLUB, Place.Type.PAINTER, Place.Type.PET_STORE,
+            Place.Type.PHARMACY, Place.Type.PHYSIOTHERAPIST, Place.Type.PLUMBER, Place.Type.POLICE,
+            Place.Type.POST_OFFICE, Place.Type.REAL_ESTATE_AGENCY, Place.Type.RESTAURANT,
+            Place.Type.ROOFING_CONTRACTOR, Place.Type.SCHOOL, Place.Type.SHOE_STORE,
+            Place.Type.SHOPPING_MALL, Place.Type.SPA, Place.Type.STADIUM, Place.Type.STORAGE,
+            Place.Type.STORE, Place.Type.SUPERMARKET, Place.Type.SYNAGOGUE, Place.Type.TRAVEL_AGENCY,
+            Place.Type.VETERINARY_CARE)"
+	stereotype "List"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${stereotype}<${type}> ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      operation 144514 "InBuildingCondition"
+	public explicit_return_type ""
+	nparams 1
+	  param inout name "dataManager" type class_ref 137090 // IDataManager
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${t0}<PlacesData> ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 144642 "InBuildingCondition"
+	public explicit_return_type ""
+	nparams 2
+	  param in name "threshold" explicit_type "double"
+	  param inout name "dataManager" type class_ref 137090 // IDataManager
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${t0} ${p0}, ${t1}<PlacesData> ${p1}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+    end
+
+    class 139138 "InPlaceTypeCondition"
+      visibility public 
+      nactuals 1
+      actual class class_ref 136834 // DataCondition
+        rank 0 explicit_value ""
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      comment "Condition satisfied if any place with a likelihood greater than a threshold value matches
+any target place type.
+"
+      classrelation 139010 // <realization>
+	relation 139010 -_-|>
+	  stereotype "bind"
+	  a public
+	    java "${type}"
+	    classrelation_ref 139010 // <realization>
+	  b parent class_ref 136834 // DataCondition
+      end
+
+      attribute 138242 "DEFAULT_THRESHOLD"
+	class_attribute const_attribute protected explicit_type "double"
+	init_value " 0.5"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 138370 "targetTypes"
+	private explicit_type "Place.Type"
+	stereotype "List"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${stereotype}<${type}> ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 138498 "threshold"
+	private explicit_type "double"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      operation 143874 "InPlaceTypeCondition"
+	public explicit_return_type ""
+	nparams 2
+	  param inout name "buildingType" explicit_type "Place.Type"
+	  param inout name "dataManager" type class_ref 137090 // IDataManager
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${t0} ${p0}, ${t1}<PlacesData> ${p1}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 144002 "InPlaceTypeCondition"
+	public explicit_return_type ""
+	nparams 3
+	  param inout name "buildingType" explicit_type "Place.Type"
+	  param in name "threshold" explicit_type "double"
+	  param inout name "dataManager" type class_ref 137090 // IDataManager
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${t0} ${p0}, ${t1} ${p1}, ${t2}<PlacesData> ${p2}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 144130 "InPlaceTypeCondition"
+	public explicit_return_type ""
+	nparams 2
+	  param inout name "buildingTypes" explicit_type "List<Place.Type>"
+	  param inout name "dataManager" type class_ref 137090 // IDataManager
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${t0} ${p0}, ${t1}<PlacesData> ${p1}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 144258 "InPlaceTypeCondition"
+	public explicit_return_type ""
+	nparams 3
+	  param inout name "buildingTypes" explicit_type "List<Place.Type>"
+	  param in name "threshold" explicit_type "double"
+	  param inout name "dataManager" type class_ref 137090 // IDataManager
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${t0} ${p0}, ${t1} ${p1}, ${t2}<PlacesData> ${p2}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 144386 "isSatisfied"
+	public explicit_return_type "boolean"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+    end
+
+    class 139266 "MeetingCondition"
+      visibility public 
+      nactuals 1
+      actual class class_ref 136834 // DataCondition
+        rank 0 explicit_value ""
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      comment "A condition that checks the user's calendar for meetings in the next couple of hours.
+"
+      classrelation 139266 // <realization>
+	relation 139266 -_-|>
+	  stereotype "bind"
+	  a public
+	    java "${type}"
+	    classrelation_ref 139266 // <realization>
+	  b parent class_ref 136834 // DataCondition
+      end
+
+      attribute 138754 "name"
+	private explicit_type "String"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      operation 144770 "MeetingCondition"
+	public explicit_return_type ""
+	nparams 1
+	  param inout name "dataManager" type class_ref 137090 // IDataManager
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${t0}<CalendarData> ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 144898 "isSatisfied"
+	public explicit_return_type "boolean"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+
+      operation 145026 "getName"
+	public explicit_return_type "String"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 145154 "hasStaleData"
+	public explicit_return_type "boolean"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+    end
+
+    class 139522 "NoLongerInBuildingTypeCondition"
+      visibility public 
+      nactuals 1
+      actual class class_ref 136834 // DataCondition
+        rank 0 explicit_value ""
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      comment "A condition that is satisfied if the user leaves a building of the target type.
+"
+      classrelation 139394 // <realization>
+	relation 139394 -_-|>
+	  stereotype "bind"
+	  a public
+	    java "${type}"
+	    classrelation_ref 139394 // <realization>
+	  b parent class_ref 136834 // DataCondition
+      end
+
+      attribute 138882 "targetType"
+	package explicit_type "Place.Type"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 139010 "isInPlace"
+	package explicit_type "boolean"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 139138 "justLeftPlace"
+	package explicit_type "boolean"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 139266 "lastInPlace"
+	package explicit_type "long"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      operation 145282 "NoLongerInBuildingTypeCondition"
+	public explicit_return_type ""
+	nparams 2
+	  param inout name "targetType" explicit_type "Place.Type"
+	  param inout name "dataManager" type class_ref 137090 // IDataManager
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${t0} ${p0}, ${t1}<PlacesData> ${p1}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 145410 "notifyUpdate"
+	public explicit_return_type "void"
+	nparams 1
+	  param inout name "data" type class_ref 138626 // PlacesData
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+
+      operation 145538 "isSatisfied"
+	public explicit_return_type "boolean"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+    end
+
+    class 139650 "NotNotifiedTodayCondition"
+      visibility public 
+      nactuals 1
+      actual class class_ref 136834 // DataCondition
+        rank 0 explicit_value ""
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      comment "Basic condition that checks if a notification has been sent recently.
+Condition is satisfied if time elapsed since last condition is more than
+specified amount.
+"
+      classrelation 139522 // <realization>
+	relation 139522 -_-|>
+	  stereotype "bind"
+	  a public
+	    java "${type}"
+	    classrelation_ref 139522 // <realization>
+	  b parent class_ref 136834 // DataCondition
+      end
+
+      attribute 139394 "date"
+	package explicit_type "LocalDate"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      operation 145666 "NotNotifiedTodayCondition"
+	public explicit_return_type ""
+	nparams 1
+	  param inout name "dataManager" type class_ref 137090 // IDataManager
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${t0}<VoidData> ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 145794 "hasStaleData"
+	public explicit_return_type "boolean"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+
+      operation 145922 "notifyUpdate"
+	public explicit_return_type "void"
+	nparams 1
+	  param inout name "data" type class_ref 138370 // VoidData
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+
+      operation 146050 "isSatisfied"
+	public explicit_return_type "boolean"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+    end
+
+    class 139778 "StepAndGoalRealCountCondition"
+      visibility public 
+      nactuals 1
+      actual class class_ref 136834 // DataCondition
+        rank 0 explicit_value ""
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      comment "A condition that compares the number of steps the user has taken today and their goal. It has two
+modes, LESS_THAN and GREATER_THAN_OR_EQUAL_TO. In LESS_THAN mode, it is satisfied if the number
+of steps the user has taken today is less than their goal. In GREATER_THAN_OR_EQUAL_TO mode, the
+opposite is true.
+"
+      classrelation 139650 // <realization>
+	relation 139650 -_-|>
+	  stereotype "bind"
+	  a public
+	    java "${type}"
+	    classrelation_ref 139650 // <realization>
+	  b parent class_ref 136834 // DataCondition
+      end
+
+      attribute 139522 "mode"
+	private explicit_type "int"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 139650 "LESS_THAN"
+	class_attribute const_attribute public explicit_type "int"
+	init_value " 0"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 139778 "GREATER_THAN_OR_EQUAL_TO"
+	class_attribute const_attribute public explicit_type "int"
+	init_value " 1"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      operation 146178 "StepAndGoalRealCountCondition"
+	public explicit_return_type ""
+	nparams 2
+	  param in name "mode" explicit_type "int"
+	  param inout name "dataManager" type class_ref 137090 // IDataManager
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${t0} ${p0}, ${t1}<StepAndGoalData> ${p1}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 146306 "hasStaleData"
+	public explicit_return_type "boolean"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+
+      operation 146434 "isSatisfied"
+	public explicit_return_type "boolean"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+    end
+
+    class 139906 "StepCountCondition"
+      visibility public 
+      nactuals 1
+      actual class class_ref 136834 // DataCondition
+        rank 0 explicit_value ""
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      comment "A condition that compares the number of steps the user has taken today and the target. It has two
+modes, LESS_THAN and GREATER_THAN_OR_EQUAL_TO. In LESS_THAN mode, it is satisfied if the number
+of steps the user has taken today is less than their goal. In GREATER_THAN_OR_EQUAL_TO mode, the
+opposite is true.
+"
+      classrelation 139778 // <realization>
+	relation 139778 -_-|>
+	  stereotype "bind"
+	  a public
+	    java "${type}"
+	    classrelation_ref 139778 // <realization>
+	  b parent class_ref 136834 // DataCondition
+      end
+
+      attribute 139906 "matchCount"
+	private explicit_type "int"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 140034 "mode"
+	private explicit_type "int"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 140162 "LESS_THAN"
+	class_attribute const_attribute public explicit_type "int"
+	init_value " 0"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 140290 "GREATER_THAN_OR_EQUAL_TO"
+	class_attribute const_attribute public explicit_type "int"
+	init_value " 1"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      operation 146562 "StepCountCondition"
+	public explicit_return_type ""
+	nparams 3
+	  param in name "mode" explicit_type "int"
+	  param in name "count" explicit_type "int"
+	  param inout name "dataManager" type class_ref 137090 // IDataManager
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${t0} ${p0}, ${t1} ${p1}, ${t2}<StepData> ${p2}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 146690 "isSatisfied"
+	public explicit_return_type "boolean"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+    end
+  end
+
+  deploymentview 134786 "conditions"
+    //deployment diagram settings
+    deploymentdiagramsettings
+     end
+    artifact 135426 "Condition"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+${definition}"
+      associated_elems
+	class_ref 136322 // Condition
+      end
+    end
+
+    artifact 135554 "AbstractCondition"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import uk.ac.strath.contextualtriggers.exceptions.TriggerNotConnectedException;
+import uk.ac.strath.contextualtriggers.triggers.ITrigger;
+${definition}"
+      associated_elems
+	class_ref 136194 // AbstractCondition
+      end
+    end
+
+    artifact 135682 "DataCondition"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import android.support.annotation.Nullable;
+import android.util.Log;
+import uk.ac.strath.contextualtriggers.data.Data;
+import uk.ac.strath.contextualtriggers.exceptions.TriggerNotConnectedException;
+import uk.ac.strath.contextualtriggers.managers.IDataManager;
+${definition}"
+      associated_elems
+	class_ref 136834 // DataCondition
+      end
+    end
+
+    artifact 135810 "AcceptableTimeCondition"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import uk.ac.strath.contextualtriggers.data.TimeOfDayData;
+import uk.ac.strath.contextualtriggers.managers.IDataManager;
+${definition}"
+      associated_elems
+	class_ref 136578 // AcceptableTimeCondition
+      end
+    end
+
+    artifact 135938 "ActivityPeriodCondition"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import com.google.android.gms.location.DetectedActivity;
+import uk.ac.strath.contextualtriggers.data.ActivityData;
+import uk.ac.strath.contextualtriggers.managers.IDataManager;
+${definition}"
+      associated_elems
+	class_ref 137218 // ActivityPeriodCondition
+      end
+    end
+
+    artifact 136066 "AltitudeTransitionCondition"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import uk.ac.strath.contextualtriggers.data.AltitudeData;
+import uk.ac.strath.contextualtriggers.managers.IDataManager;
+${definition}"
+      associated_elems
+	class_ref 137474 // AltitudeTransitionCondition
+      end
+    end
+
+    artifact 136194 "CompositeCondition"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import java.util.List;
+import uk.ac.strath.contextualtriggers.triggers.ITrigger;
+${definition}"
+      associated_elems
+	class_ref 137858 // CompositeCondition
+      end
+    end
+
+    artifact 136322 "AndCondition"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import java.util.List;
+${definition}"
+      associated_elems
+	class_ref 137730 // AndCondition
+      end
+    end
+
+    artifact 136450 "ClearWeatherCondition"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import com.google.android.gms.awareness.state.Weather;
+import uk.ac.strath.contextualtriggers.data.WeatherData;
+import uk.ac.strath.contextualtriggers.managers.IDataManager;
+${definition}"
+      associated_elems
+	class_ref 137986 // ClearWeatherCondition
+      end
+    end
+
+    artifact 136578 "FrequentNotificationPreventionCondition"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import uk.ac.strath.contextualtriggers.data.VoidData;
+import uk.ac.strath.contextualtriggers.managers.IDataManager;
+${definition}"
+      associated_elems
+	class_ref 138242 // FrequentNotificationPreventionCondition
+      end
+    end
+
+    artifact 136706 "GymNearbyCondition"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import com.google.android.libraries.places.api.model.Place;
+import com.google.android.libraries.places.api.model.PlaceLikelihood;
+import uk.ac.strath.contextualtriggers.data.PlacesData;
+import uk.ac.strath.contextualtriggers.managers.IDataManager;
+${definition}"
+      associated_elems
+	class_ref 138498 // GymNearbyCondition
+      end
+    end
+
+    artifact 136834 "HistoricStepsDaysUnmetCondition"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import java.time.LocalDate;
+import uk.ac.strath.contextualtriggers.data.DayData;
+import uk.ac.strath.contextualtriggers.data.StepAndGoalData;
+import uk.ac.strath.contextualtriggers.managers.IDataManager;
+${definition}"
+      associated_elems
+	class_ref 138754 // HistoricStepsDaysUnmetCondition
+      end
+    end
+
+    artifact 136962 "InPlaceTypeCondition"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import com.google.android.libraries.places.api.model.Place;
+import com.google.android.libraries.places.api.model.PlaceLikelihood;
+import java.util.Collections;
+import java.util.List;
+import uk.ac.strath.contextualtriggers.data.PlacesData;
+import uk.ac.strath.contextualtriggers.managers.IDataManager;
+${definition}"
+      associated_elems
+	class_ref 139138 // InPlaceTypeCondition
+      end
+    end
+
+    artifact 137090 "InBuildingCondition"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import com.google.android.libraries.places.api.model.Place;
+import java.util.Arrays;
+import java.util.List;
+import uk.ac.strath.contextualtriggers.data.PlacesData;
+import uk.ac.strath.contextualtriggers.managers.IDataManager;
+${definition}"
+      associated_elems
+	class_ref 139010 // InBuildingCondition
+      end
+    end
+
+    artifact 137218 "MeetingCondition"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import org.apache.commons.lang3.StringUtils;
+import java.util.Calendar;
+import java.util.Date;
+import uk.ac.strath.contextualtriggers.data.CalendarData;
+import uk.ac.strath.contextualtriggers.data.EventData;
+import uk.ac.strath.contextualtriggers.managers.IDataManager;
+${definition}"
+      associated_elems
+	class_ref 139266 // MeetingCondition
+      end
+    end
+
+    artifact 137346 "NoLongerInBuildingTypeCondition"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import com.google.android.libraries.places.api.model.Place;
+import com.google.android.libraries.places.api.model.PlaceLikelihood;
+import uk.ac.strath.contextualtriggers.data.PlacesData;
+import uk.ac.strath.contextualtriggers.managers.IDataManager;
+${definition}"
+      associated_elems
+	class_ref 139522 // NoLongerInBuildingTypeCondition
+      end
+    end
+
+    artifact 137474 "NotNotifiedTodayCondition"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import com.google.android.libraries.places.api.model.Place;
+import com.google.android.libraries.places.api.model.PlaceLikelihood;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.Calendar;
+import java.util.Date;
+import uk.ac.strath.contextualtriggers.data.PlacesData;
+import uk.ac.strath.contextualtriggers.data.VoidData;
+import uk.ac.strath.contextualtriggers.managers.IDataManager;
+${definition}"
+      associated_elems
+	class_ref 139650 // NotNotifiedTodayCondition
+      end
+    end
+
+    artifact 137602 "StepAndGoalRealCountCondition"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import java.time.LocalDate;
+import uk.ac.strath.contextualtriggers.data.StepAndGoalData;
+import uk.ac.strath.contextualtriggers.managers.IDataManager;
+${definition}"
+      associated_elems
+	class_ref 139778 // StepAndGoalRealCountCondition
+      end
+    end
+
+    artifact 137730 "StepCountCondition"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import uk.ac.strath.contextualtriggers.data.StepData;
+import uk.ac.strath.contextualtriggers.managers.IDataManager;
+${definition}"
+      associated_elems
+	class_ref 139906 // StepCountCondition
+      end
+    end
+  end
+end

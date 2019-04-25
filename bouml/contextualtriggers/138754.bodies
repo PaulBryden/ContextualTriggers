@@ -1,0 +1,15 @@
+class HistoricStepsDaysUnmetCondition
+!!!143490.java!!!	HistoricStepsDaysUnmetCondition(in days : int, inout dataManager : IDataManager)
+        super(dataManager);
+        daysMet = days;
+!!!143618.java!!!	hasStaleData() : boolean
+        return false;
+!!!143746.java!!!	isSatisfied() : boolean
+        DayData day;
+        for (int i = 0; i < daysMet; i++) {
+            day = getData().getDay(LocalDate.now().minusDays(i));
+            if (day.steps < day.goal) {
+                return true;
+            }
+        }
+        return false;

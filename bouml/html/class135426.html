@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Documentation produced by the Html generator of Bouml (http://www.bouml.fr) -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:svg="http://www.w3.org/2000/svg">
+
+<head>
+<title>Class AlarmDataManager</title>
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body bgcolor="#ffffff">
+
+<div class = "title">Class AlarmDataManager</div>
+<p></p>
+
+<!-- ============================================================= -->
+
+<a name="ref4_135426"></a>
+<p>Declaration :</p><ul>
+<li>Java : public abstract class AlarmDataManager&lt;T extends <a href="class130562.html#ref4_130562"><b>Data</b></a>&gt; extends <a href="class135554.html#ref4_135554"><b>DataManager</b></a>&lt;&gt; </li></ul><p>Directly inherited by : <a href="class135298.html#ref4_135298"><b>ActivityDataManager</b></a> <a href="class136194.html#ref4_136194"><b>AltitudeDataManager</b></a> <a href="class136706.html#ref4_136706"><b>CalendarDataManager</b></a> <a href="class136962.html#ref4_136962"><b>IntervalsDataManager</b></a> <a href="class137474.html#ref4_137474"><b>PlacesDataManager</b></a> <a href="class137730.html#ref4_137730"><b>SimulatedStepDataManager</b></a> <a href="class137986.html#ref4_137986"><b>WeatherDataManager</b></a> </p>
+<p>Artifact : <a href="index.html#ref8_134530"><b>AlarmDataManager</b></a></p>
+<div class="sub">
+<a name="ref1_136450"></a>
+<table><tr><td><div class="element">Attribute <b>pollingPeriod</b></div></td></tr></table>
+<p>in seconds<br /></p><p>Declaration :</p><ul><li>Uml : - pollingPeriod : int</li><li>Java : private int pollingPeriod</li></ul><a name="ref1_136578"></a>
+<table><tr><td><div class="element">Attribute <b>lpmPollingPeriod</b></div></td></tr></table>
+<p>in seconds<br /></p><p>Declaration :</p><ul><li>Uml : - lpmPollingPeriod : int</li><li>Java : private int lpmPollingPeriod</li></ul><a name="ref1_136706"></a>
+<table><tr><td><div class="element">Attribute <b>lpm</b></div></td></tr></table>
+<p>Declaration :</p><ul><li>Uml : - lpm : boolean</li><li>Java : private boolean lpm</li></ul><a name="ref1_136834"></a>
+<table><tr><td><div class="element">Attribute <b>alarmMgr</b></div></td></tr></table>
+<p>Declaration :</p><ul><li>Uml : - alarmMgr : AlarmManager</li><li>Java : private AlarmManager alarmMgr</li></ul><a name="ref2_144898"></a>
+<table><tr><td><div class="element">Operation <b>AlarmDataManager</b></div></td></tr></table><p>Declaration :</p><ul><li>Uml : + AlarmDataManager(in pollingPeriod : int, in lpmPollingPeriod : int) : </li><li>Java : public AlarmDataManager(int pollingPeriod, int lpmPollingPeriod)</li></ul><a name="ref2_145026"></a>
+<table><tr><td><div class="element">Operation <b>alarm</b></div></td></tr></table><p>Declaration :</p><ul><li>Uml : # alarm() : void</li><li>Java : protected void alarm()</li></ul><a name="ref2_145154"></a>
+<table><tr><td><div class="element">Operation <b>onDestroy</b></div></td></tr></table><p>Declaration :</p><ul><li>Uml : + onDestroy() : void</li><li>Java : public void onDestroy()</li></ul><p> Java annotation(s) :</p><div class="sub"><p>&#64;Override<br /></p></div><a name="ref2_145282"></a>
+<table><tr><td><div class="element">Operation <b>setLowPowerMode</b></div></td></tr></table><p>Declaration :</p><ul><li>Uml : + setLowPowerMode(inout lpm : boolean) : void</li><li>Java : public void setLowPowerMode(boolean lpm)</li></ul><p> Java annotation(s) :</p><div class="sub"><p>&#64;Override<br /></p></div></div>
+<p>All public operations : <a href="class135426.html#ref2_145154"><b>onDestroy</b></a> , <a href="class135554.html#ref2_144258"><b>onStartCommand</b></a> , <a href="class135554.html#ref2_144386"><b>register</b></a> , <a href="class130690.html#ref2_143874"><b>register</b></a> , <a href="class135426.html#ref2_145282"><b>setLowPowerMode</b></a> , <a href="class135554.html#ref2_144770"><b>setLowPowerMode</b></a> , <a href="class130690.html#ref2_144002"><b>setLowPowerMode</b></a> </p>
+</body>
+</html>

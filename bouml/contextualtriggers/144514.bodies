@@ -1,0 +1,47 @@
+class WeatherDataManager
+!!!158850.java!!!	onBind(inout intent : Intent) : IBinder
+        setup();
+        return binder;
+!!!159106.java!!!	WeatherDataManager()
+        super(300, 3600);
+        setup();
+!!!159362.java!!!	onStartCommand(inout intent : Intent, in flags : int, in startId : int) : int
+        super.onStartCommand(intent, flags, startId);
+        monitor();
+        alarm();
+        return START_STICKY;
+!!!159490.java!!!	monitor() : void
+        if (ContextCompat.checkSelfPermission(this, ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED)
+        {
+            if (ActivityCompat.shouldShowRequestPermissionRationale(MainApplication.getAppActivity(),
+                    ACCESS_FINE_LOCATION)) {
+                Intent i = new Intent(this, RequestLocationPermission.class);
+                startActivity(i);
+
+            } else {
+                ActivityCompat.requestPermissions(MainApplication.getAppActivity(),
+                        new String[]{ACCESS_FINE_LOCATION},
+                        MY_PERMISSIONS_REQUEST_READ_CONTACTS);
+
+            }
+        } else {
+            Awareness.getSnapshotClient(getApplicationContext()).getWeather().addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Log.d("WeatherDataManager", e.getMessage());
+                }
+            }).addOnSuccessListener(new OnSuccessListener<WeatherResponse>() {
+                @Override
+                public void onSuccess(WeatherResponse weatherResponse) {
+                    // parse and display current weather status
+                    Weather weather = weatherResponse.getWeather();
+                    WeatherData data = new WeatherData();
+                    data.TemperatureCelsius = weather.getTemperature(Weather.CELSIUS);
+                    data.Humidity = weather.getHumidity();
+                    data.Conditions = weather.getConditions();
+                    Log.d("WeatherDM", data.toString());
+                    data.printData();
+                    sendUpdate(data);
+                }
+            });
+        }

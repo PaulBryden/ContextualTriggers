@@ -18,9 +18,9 @@ import com.google.android.gms.awareness.Awareness;
 import com.google.android.gms.awareness.snapshot.LocationResponse;
 import com.google.android.gms.tasks.OnSuccessListener;
 
+import uk.ac.strath.contextualtriggers.ContextualTriggersService;
 import uk.ac.strath.contextualtriggers.MainApplication;
 import uk.ac.strath.contextualtriggers.R;
-import uk.ac.strath.contextualtriggers.conditions.FrequentNotificationPreventionCondition;
 import uk.ac.strath.contextualtriggers.managers.NotificationDataManager;
 
 import static android.Manifest.permission.ACCESS_FINE_LOCATION;
@@ -30,8 +30,7 @@ public class CustomMapNotificationAction implements Action {
     private static final String CHANNEL_ID = "contextualtriggers";
     private String message;
     private String queryLocation;
-    private FrequentNotificationPreventionCondition notifyCondition;
-    private int MY_PERMISSIONS_REQUEST_READ_CONTACTS;
+    private int LOCATION_PERMISSIONS;
 
     public CustomMapNotificationAction(String message, String queryLocation) {
         this.message = message;
@@ -55,7 +54,7 @@ public class CustomMapNotificationAction implements Action {
                     // No explanation needed; request the permission
                     ActivityCompat.requestPermissions(MainApplication.getAppActivity(),
                             new String[]{ACCESS_FINE_LOCATION},
-                            MY_PERMISSIONS_REQUEST_READ_CONTACTS);
+                            LOCATION_PERMISSIONS);
                 }
             } else {
                 // Permission has already been granted
@@ -65,9 +64,6 @@ public class CustomMapNotificationAction implements Action {
                         Location localLocation = locationResponse.getLocation();
                         Intent cs = new Intent(MainApplication.getAppContext(), NotificationDataManager.class);
                         MainApplication.getAppContext().startService(cs);
-                        if (notifyCondition != null) {
-                            notifyCondition.notifyUpdate(null);
-                        }
                         Uri gmmIntentUri = Uri.parse("google.navigation:q=" + queryLocation + "&mode=w");
                         Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
                         mapIntent.setPackage("com.google.android.apps.maps");
@@ -91,6 +87,8 @@ public class CustomMapNotificationAction implements Action {
     @Override
     public void execute() {
         executeMapsNotification();
+        Intent cns = new Intent(MainApplication.getAppContext(), NotificationDataManager.class);
+        MainApplication.getAppContext().startService(cns);
     }
 
     private void createNotificationChannel() {
@@ -107,10 +105,6 @@ public class CustomMapNotificationAction implements Action {
             NotificationManager notificationManager = (NotificationManager) MainApplication.getAppContext().getSystemService(Context.NOTIFICATION_SERVICE);
             notificationManager.createNotificationChannel(channel);
         }
-    }
-
-    public void attachCondition(FrequentNotificationPreventionCondition notifyCondition) {
-        this.notifyCondition = notifyCondition;
     }
 
 }

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Documentation produced by the Html generator of Bouml (http://www.bouml.fr) -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:svg="http://www.w3.org/2000/svg">
+
+<head>
+<title>Class StepAndGoalRealCountCondition</title>
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body bgcolor="#ffffff">
+
+<div class = "title">Class StepAndGoalRealCountCondition</div>
+<p></p>
+
+<!-- ============================================================= -->
+
+<a name="ref4_133250"></a>
+<p>A condition that compares the number of steps the user has taken today and their goal. It has two<br />modes, LESS_THAN and GREATER_THAN_OR_EQUAL_TO. In LESS_THAN mode, it is satisfied if the number<br />of steps the user has taken today is less than their goal. In GREATER_THAN_OR_EQUAL_TO mode, the<br />opposite is true.<br /><br /></p>
+<p>Declaration :</p><ul>
+<li>Java : public class StepAndGoalRealCountCondition extends <a href="class130434.html#ref4_130434"><b>DataCondition</b></a>&lt;&gt; </li></ul><p>Artifact : <a href="index.html#ref8_131074"><b>StepAndGoalRealCountCondition</b></a></p>
+<div class="sub">
+<a name="ref1_133250"></a>
+<table><tr><td><div class="element">Attribute <b>mode</b></div></td></tr></table>
+<p>Declaration :</p><ul><li>Uml : - mode : int</li><li>Java : private int mode</li></ul><a name="ref1_133378"></a>
+<table><tr><td><div class="element">Attribute <b>LESS_THAN</b></div></td></tr></table>
+<p>Declaration :</p><ul><li>Uml : static, + LESS_THAN : int =  0, read only</li><li>Java : public static final int LESS_THAN</li></ul><a name="ref1_133506"></a>
+<table><tr><td><div class="element">Attribute <b>GREATER_THAN_OR_EQUAL_TO</b></div></td></tr></table>
+<p>Declaration :</p><ul><li>Uml : static, + GREATER_THAN_OR_EQUAL_TO : int =  1, read only</li><li>Java : public static final int GREATER_THAN_OR_EQUAL_TO</li></ul><a name="ref2_140162"></a>
+<table><tr><td><div class="element">Operation <b>StepAndGoalRealCountCondition</b></div></td></tr></table><p>Declaration :</p><ul><li>Uml : + StepAndGoalRealCountCondition(in mode : int, inout dataManager : <a href="class130690.html#ref4_130690"><b>IDataManager</b></a>) : </li><li>Java : public StepAndGoalRealCountCondition(int mode, <a href="class130690.html#ref4_130690"><b>IDataManager</b></a>&lt;StepAndGoalData&gt; dataManager)</li></ul><a name="ref2_140290"></a>
+<table><tr><td><div class="element">Operation <b>hasStaleData</b></div></td></tr></table><p>Declaration :</p><ul><li>Uml : + hasStaleData() : boolean</li><li>Java : public boolean hasStaleData()</li></ul><p> Java annotation(s) :</p><div class="sub"><p>&#64;Override<br /></p></div><a name="ref2_140418"></a>
+<table><tr><td><div class="element">Operation <b>isSatisfied</b></div></td></tr></table><p>Declaration :</p><ul><li>Uml : + isSatisfied() : boolean</li><li>Java : public boolean isSatisfied()</li></ul><p> Java annotation(s) :</p><div class="sub"><p>&#64;Override<br /></p></div></div>
+<p>All public operations : <a href="class129794.html#ref2_133634"><b>attachTrigger</b></a> , <a href="class130434.html#ref2_134402"><b>getData</b></a> , <a href="class129922.html#ref2_133506"><b>hasStaleData</b></a> , <a href="class130434.html#ref2_134530"><b>hasStaleData</b></a> , <a href="class133250.html#ref2_140290"><b>hasStaleData</b></a> , <a href="class129922.html#ref2_133378"><b>isSatisfied</b></a> , <a href="class133250.html#ref2_140418"><b>isSatisfied</b></a> , <a href="class130434.html#ref2_134658"><b>notifyUpdate</b></a> </p>
+</body>
+</html>

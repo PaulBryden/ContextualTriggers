@@ -49,6 +49,7 @@ import uk.ac.strath.contextualtriggers.managers.PlacesDataManager;
 import uk.ac.strath.contextualtriggers.managers.WeatherDataManager;
 
 import static com.google.android.gms.awareness.fence.TimeFence.TIME_INTERVAL_AFTERNOON;
+import static com.google.android.gms.awareness.fence.TimeFence.TIME_INTERVAL_EVENING;
 import static com.google.android.gms.awareness.fence.TimeFence.TIME_INTERVAL_MORNING;
 import static com.google.android.gms.awareness.fence.TimeFence.TIME_INTERVAL_WEEKDAY;
 import static com.google.android.gms.location.DetectedActivity.STILL;
@@ -66,7 +67,7 @@ public class DefaultTriggers {
         Trigger.Builder builder = new Trigger.Builder();
         Condition c = new ActivityPeriodCondition(60000, STILL,activityDataManager);
         Condition c1 = new FrequentNotificationPreventionCondition(60000,notificationDataManager);
-        Condition c2 = new AcceptableTimeCondition(new TimeOfDayData(new int[]{TIME_INTERVAL_MORNING,TIME_INTERVAL_AFTERNOON}), intervalDataManager);
+        Condition c2 = new AcceptableTimeCondition(new TimeOfDayData(new int[]{TIME_INTERVAL_MORNING,TIME_INTERVAL_AFTERNOON,TIME_INTERVAL_EVENING}), intervalDataManager);
         Action a = new SimpleNotificationAction("You have been inactive for some time. Go for a walk.");
         List<Condition> conditionList = new ArrayList<>();
         conditionList.add(c);

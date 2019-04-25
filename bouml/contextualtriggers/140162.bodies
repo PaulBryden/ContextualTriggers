@@ -1,0 +1,3 @@
+class AbstractData
+!!!146946.java!!!	getTimestamp() : long
+        return timestamp;
