@@ -112,14 +112,10 @@ public class CalendarDataManager extends AlarmDataManager<CalendarData> {
             // fetching calendars id
             nameOfEvent.clear();
             startDates.clear();
-            endDates.clear();
-            descriptions.clear();
             for (int i = 0; i < CNames.length; i++) {
 
                 nameOfEvent.add(cursor.getString(1));
                 startDates.add(getDate(Long.parseLong(cursor.getString(3))));
-                endDates.add(getDate(Long.parseLong(cursor.getString(4))));
-                descriptions.add(cursor.getString(2));
                 CNames[i] = cursor.getString(1);
                 cursor.moveToNext();
 

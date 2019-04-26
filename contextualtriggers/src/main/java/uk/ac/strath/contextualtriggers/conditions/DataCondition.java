@@ -46,6 +46,8 @@ public abstract class DataCondition<T extends Data> extends AbstractCondition {
 
     public void notifyUpdate(T data) {
         this.data = data;
+        Log.d("Condition", this.getClass().getSimpleName() + " received update (" + data.toString() + ")");
+        Log.d("Condition", this.getClass().getSimpleName() + " satisfied: " + this.isSatisfied());
         try {
             getTrigger().notifyChange();
         } catch (TriggerNotConnectedException e) {
