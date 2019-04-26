@@ -11,7 +11,7 @@ import static junit.framework.Assert.assertEquals;
 
 public class TypeConverterTest {
     @Test
-    public void ActivityTest() {
+    public void testActivityData() {
         Data d = new ActivityData(new DetectedActivity(1, 1));
         String s = DataConverter.DataToString(d);
         Data d2 = DataConverter.StringToData(s);
@@ -20,7 +20,7 @@ public class TypeConverterTest {
     }
 
     @Test
-    public void AltitudeTest() {
+    public void testAltitudeData() {
         AltitudeData d = new AltitudeData(12345);
         String s = DataConverter.DataToString(d);
         Data d2 = DataConverter.StringToData(s);
@@ -29,7 +29,7 @@ public class TypeConverterTest {
     }
 
     @Test
-    public void BatteryTest() {
+    public void testBatteryData() {
         Data d = new BatteryData();
         String s = DataConverter.DataToString(d);
         Data d2 = DataConverter.StringToData(s);
@@ -38,7 +38,7 @@ public class TypeConverterTest {
     }
 
     @Test
-    public void CalendarTest() {
+    public void testCalendarData() {
         CalendarData d = new CalendarData(new ArrayList<>());
         d.cd.add(new EventData("event1", new Date(1970, 1, 1)));
         d.cd.add(new EventData("event2", new Date(2001, 1, 1)));
@@ -50,7 +50,7 @@ public class TypeConverterTest {
     }
 
     @Test
-    public void ListCalendarTest() {
+    public void testListCalendarData() {
         Data d = new ListCalendarData(new ArrayList<>());
         String s = DataConverter.DataToString(d);
         Data d2 = DataConverter.StringToData(s);
@@ -59,7 +59,7 @@ public class TypeConverterTest {
     }
 
     @Test
-    public void NotificationTest() {
+    public void testNotificationData() {
         Data d = new NotificationData();
         String s = DataConverter.DataToString(d);
         Data d2 = DataConverter.StringToData(s);
@@ -68,7 +68,7 @@ public class TypeConverterTest {
     }
 
     @Test
-    public void PlacesTest() {
+    public void testPlacesData() {
         Data d = new PlacesData(new ArrayList<>());
         String s = DataConverter.DataToString(d);
         Data d2 = DataConverter.StringToData(s);
@@ -77,30 +77,18 @@ public class TypeConverterTest {
     }
 
     @Test
-    public void StepAndGoalTest() {
-        // TODO: Insert dummy data
+    public void testStepAndGoalData() {
         StepAndGoalData d = new StepAndGoalData();
 
         String s = DataConverter.DataToString(d);
         Data d2 = DataConverter.StringToData(s);
-
-        for (String k : d.getHistory().keySet()) {
-            System.out.println(k);
-            System.out.println(d.getHistory().get(k));
-
-            System.out.println(((StepAndGoalData) d2).getHistory().get(k));
-
-        }
-        System.out.println(d.getHistory());
-
-        System.out.println(((StepAndGoalData) d2).getHistory());
 
         assertEquals(StepAndGoalData.class, d2.getClass());
         assertEquals(d, d2);
     }
 
     @Test
-    public void TimeOfDayTest() {
+    public void testTimeOfDayData() {
         Data d = new TimeOfDayData(new int[10]);
         String s = DataConverter.DataToString(d);
         Data d2 = DataConverter.StringToData(s);
@@ -109,7 +97,7 @@ public class TypeConverterTest {
     }
 
     @Test
-    public void VoidTest() {
+    public void testVoidData() {
         Data d = new VoidData();
         String s = DataConverter.DataToString(d);
         Data d2 = DataConverter.StringToData(s);
@@ -118,7 +106,7 @@ public class TypeConverterTest {
     }
 
     @Test
-    public void WeatherTest() {
+    public void testWeatherData() {
         Data d = new WeatherData(0.0f, 0, new int[0]);
         String s = DataConverter.DataToString(d);
         Data d2 = DataConverter.StringToData(s);

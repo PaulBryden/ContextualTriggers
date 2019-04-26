@@ -205,15 +205,15 @@ public class ContextualTriggersService extends Service {
 
     private void createTriggers() {
         Log.d("ContextualTriggersService", "Creating triggers");
-        triggerList.add(DefaultTriggers.TimeToWalk(activityServiceConnection.getDataManager(), intervalServiceConnection.getDataManager(), notifyServiceConnection.getDataManager()));
-        triggerList.add(DefaultTriggers.GyminyCricket(placesServiceConnection.getDataManager(), notifyServiceConnection.getDataManager()));
-        triggerList.add(DefaultTriggers.HalfAndHalf(actualStepsServiceConnection.getDataManager(), intervalServiceConnection.getDataManager(), notifyServiceConnection.getDataManager()));
-        triggerList.add(DefaultTriggers.ButItsSunnyOutside(actualStepsServiceConnection.getDataManager(), weatherServiceConnection.getDataManager(), activityServiceConnection.getDataManager(), notifyServiceConnection.getDataManager()));
-        triggerList.add(DefaultTriggers.GoingDown(actualStepsServiceConnection.getDataManager(), placesServiceConnection.getDataManager(), altitudeServiceConnection.getDataManager(), notifyServiceConnection.getDataManager()));
-        triggerList.add(DefaultTriggers.WalkAndTalk(actualStepsServiceConnection.getDataManager(), calendarServiceConnection.getDataManager(), notifyServiceConnection.getDataManager()));
-        triggerList.add(DefaultTriggers.DanceForYourDinner(actualStepsServiceConnection.getDataManager(), placesServiceConnection.getDataManager(), notifyServiceConnection.getDataManager()));
-        triggerList.add(DefaultTriggers.WalkToWorkOnWeekdays(actualStepsServiceConnection.getDataManager(), intervalServiceConnection.getDataManager(), notifyServiceConnection.getDataManager()));
-        triggerList.add(DefaultTriggers.Congratulations(placesServiceConnection.getDataManager(), notifyServiceConnection.getDataManager()));
+        triggerList.add(DefaultTriggers.timeToWalk(activityServiceConnection.getDataManager(), intervalServiceConnection.getDataManager(), notifyServiceConnection.getDataManager()));
+        triggerList.add(DefaultTriggers.gyminyCricket(placesServiceConnection.getDataManager(), notifyServiceConnection.getDataManager()));
+        triggerList.add(DefaultTriggers.halfAndHalf(actualStepsServiceConnection.getDataManager(), intervalServiceConnection.getDataManager(), notifyServiceConnection.getDataManager()));
+        triggerList.add(DefaultTriggers.butItsSunnyOutside(actualStepsServiceConnection.getDataManager(), weatherServiceConnection.getDataManager(), activityServiceConnection.getDataManager(), notifyServiceConnection.getDataManager()));
+        triggerList.add(DefaultTriggers.goingDown(actualStepsServiceConnection.getDataManager(), placesServiceConnection.getDataManager(), altitudeServiceConnection.getDataManager(), notifyServiceConnection.getDataManager()));
+        triggerList.add(DefaultTriggers.walkAndTalk(actualStepsServiceConnection.getDataManager(), calendarServiceConnection.getDataManager(), notifyServiceConnection.getDataManager()));
+        triggerList.add(DefaultTriggers.danceForYourDinner(actualStepsServiceConnection.getDataManager(), placesServiceConnection.getDataManager(), notifyServiceConnection.getDataManager()));
+        triggerList.add(DefaultTriggers.walkToWorkOnWeekdays(actualStepsServiceConnection.getDataManager(), intervalServiceConnection.getDataManager(), notifyServiceConnection.getDataManager()));
+        triggerList.add(DefaultTriggers.congratulations(placesServiceConnection.getDataManager(), notifyServiceConnection.getDataManager()));
         Log.i("ContextualTriggersService", "Created " + triggerList.size() + " triggers");
 
         unbindService(weatherServiceConnection);
