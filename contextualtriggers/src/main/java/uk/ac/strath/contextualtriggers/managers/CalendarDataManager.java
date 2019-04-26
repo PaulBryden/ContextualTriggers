@@ -79,20 +79,8 @@ public class CalendarDataManager extends AlarmDataManager<CalendarData> {
         if (ContextCompat.checkSelfPermission(this,
                 READ_CALENDAR)
                 != PackageManager.PERMISSION_GRANTED) {
-
-            // Permission is not granted
-            // Should we show an explanation?
-            if (ActivityCompat.shouldShowRequestPermissionRationale(MainApplication.getAppActivity(),
-                    READ_CALENDAR)) {
                 Intent i = new Intent(this, RequestCalendarPermission.class);
                 startActivity(i);
-            } else {
-                // No explanation needed; request the permission
-                ActivityCompat.requestPermissions(MainApplication.getAppActivity(),
-                        new String[]{READ_CALENDAR},
-                        MY_PERMISSIONS_REQUEST_READ_CONTACTS);
-
-            }
         } else {
 
             ArrayList<String> nameOfEvent = new ArrayList<String>();

@@ -60,17 +60,9 @@ public class WeatherDataManager extends AlarmDataManager<WeatherData> {
     private void monitor() {
         if (ContextCompat.checkSelfPermission(this, ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED)
         {
-            if (ActivityCompat.shouldShowRequestPermissionRationale(MainApplication.getAppActivity(),
-                    ACCESS_FINE_LOCATION)) {
-                Intent i = new Intent(this, RequestLocationPermission.class);
-                startActivity(i);
+            Intent i = new Intent(this, RequestLocationPermission.class);
+            startActivity(i);
 
-            } else {
-                ActivityCompat.requestPermissions(MainApplication.getAppActivity(),
-                        new String[]{ACCESS_FINE_LOCATION},
-                        MY_PERMISSIONS_REQUEST_READ_CONTACTS);
-
-            }
         } else {
             Awareness.getSnapshotClient(this).getWeather().addOnFailureListener(new OnFailureListener() {
                 @Override

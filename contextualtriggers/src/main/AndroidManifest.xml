@@ -70,9 +70,6 @@
             android:name=".managers.ActualStepAndGoalDataManager">
         </service>
         <service android:enabled="true"
-            android:name=".managers.SimulatedStepDataManager">
-        </service>
-        <service android:enabled="true"
             android:name=".managers.ActivityDataManager">
         </service>
         <service android:enabled="true"

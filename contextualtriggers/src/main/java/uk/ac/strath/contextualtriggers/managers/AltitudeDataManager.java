@@ -70,22 +70,8 @@ public class AltitudeDataManager extends AlarmDataManager<AltitudeData> {
 // Call findCurrentPlace and handle the response (first check that the user has granted permission).
         if (ContextCompat.checkSelfPermission(this, ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED)
         {   // Permission is not granted
-            Log.d("ALT", "After check perm");
-            // Should we show an explanation?
-            if (ActivityCompat.shouldShowRequestPermissionRationale(MainApplication.getAppActivity(),
-                    ACCESS_FINE_LOCATION)) {
-                Log.d("ALT", "Show rationale check perm");
                 Intent i = new Intent(this, RequestLocationPermission.class);
                 startActivity(i);
-
-            } else {
-                // No explanation needed; request the permission
-                ActivityCompat.requestPermissions(MainApplication.getAppActivity(),
-                        new String[]{ACCESS_FINE_LOCATION},
-                        MY_PERMISSIONS_REQUEST_READ_CONTACTS);
-                Log.d("ALT", "Request check perm");
-
-            }
         } else {
             // try {
             // Permission has already been granted
