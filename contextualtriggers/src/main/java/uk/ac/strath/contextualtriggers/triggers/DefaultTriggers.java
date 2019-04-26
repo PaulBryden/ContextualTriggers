@@ -63,7 +63,7 @@ public class DefaultTriggers {
         notificationDataManager = ((NotificationDataManager.LocalBinder) notifyBinder).getInstance();
         Trigger.Builder builder = new Trigger.Builder();
         Condition c = new ActivityPeriodCondition(60, STILL, activityDataManager);
-        Condition c1 = new FrequentNotificationPreventionCondition(60, notificationDataManager);
+        Condition c1 = new FrequentNotificationPreventionCondition(120, notificationDataManager);
         Condition c2 = new AcceptableTimeCondition(new TimeOfDayData(new int[]{TIME_INTERVAL_MORNING, TIME_INTERVAL_AFTERNOON, TIME_INTERVAL_EVENING}), intervalDataManager);
         Action a = new SimpleNotificationAction("You have been inactive for some time. Go for a walk.");
         List<Condition> conditionList = new ArrayList<>();
@@ -204,7 +204,7 @@ public class DefaultTriggers {
         Trigger.Builder builder = new Trigger.Builder();
         Condition c = new StepAndGoalRealCountCondition(StepAndGoalRealCountCondition.LESS_THAN, stepDataManager);
         Condition c1 = new InPlaceTypeCondition(Place.Type.FOOD, placesDataManager);
-        Condition c2 = new FrequentNotificationPreventionCondition(30, notificationDataManager);
+        Condition c2 = new FrequentNotificationPreventionCondition(120, notificationDataManager);
         Action a = new SimpleMapNotificationAction("We hope you enjoyed your lunch. Let's walk it off.");
         List<Condition> conditionList = new ArrayList<>();
         conditionList.add(c);
@@ -247,7 +247,7 @@ public class DefaultTriggers {
         notificationDataManager = ((NotificationDataManager.LocalBinder) notifyBinder).getInstance();
         Trigger.Builder builder = new Trigger.Builder();
         Condition c = new NoLongerInPlaceTypeCondition(Place.Type.GYM, placesDataManager);
-        Condition c1 = new FrequentNotificationPreventionCondition(60, notificationDataManager);
+        Condition c1 = new FrequentNotificationPreventionCondition(30, notificationDataManager);
         Action a = new SimpleNotificationAction("You went to the gym! congratulations.");
         List<Condition> conditionList = new ArrayList<>();
         conditionList.add(c);

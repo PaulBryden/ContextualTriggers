@@ -22,9 +22,14 @@ public class AcceptableTimeCondition extends DataCondition<TimeOfDayData> {
             return false;
         }
         for (int i : getData().intervals) {
-            for (int x : targetIntervals.intervals) {
-                if (x == i) {
-                    return true;
+            if(targetIntervals!=null)
+            {
+                for (int x : targetIntervals.intervals)
+                {
+                    if (x == i)
+                    {
+                        return true;
+                    }
                 }
             }
         }
