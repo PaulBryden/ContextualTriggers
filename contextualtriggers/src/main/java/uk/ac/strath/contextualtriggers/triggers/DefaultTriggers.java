@@ -2,9 +2,7 @@ package uk.ac.strath.contextualtriggers.triggers;
 
 
 import android.os.IBinder;
-import android.util.Log;
 
-import com.google.android.gms.awareness.state.Weather;
 import com.google.android.libraries.places.api.model.Place;
 
 import java.util.ArrayList;
@@ -17,9 +15,9 @@ import uk.ac.strath.contextualtriggers.actions.SimpleNotificationAction;
 import uk.ac.strath.contextualtriggers.conditions.AcceptableTimeCondition;
 import uk.ac.strath.contextualtriggers.conditions.ActivityPeriodCondition;
 import uk.ac.strath.contextualtriggers.conditions.AltitudeTransitionCondition;
+import uk.ac.strath.contextualtriggers.conditions.AndCondition;
 import uk.ac.strath.contextualtriggers.conditions.ClearWeatherCondition;
 import uk.ac.strath.contextualtriggers.conditions.Condition;
-import uk.ac.strath.contextualtriggers.conditions.AndCondition;
 import uk.ac.strath.contextualtriggers.conditions.FrequentNotificationPreventionCondition;
 import uk.ac.strath.contextualtriggers.conditions.GymNearbyCondition;
 import uk.ac.strath.contextualtriggers.conditions.HistoricStepsDaysUnmetCondition;
@@ -61,7 +59,6 @@ public class DefaultTriggers {
         IDataManager<ActivityData> activityDataManager;
         IDataManager<VoidData> notificationDataManager;
         IDataManager<TimeOfDayData> intervalDataManager;
-        Log.d("Time To Walk Trigger", activityBinder.toString());
         activityDataManager = ((ActivityDataManager.LocalBinder) activityBinder).getInstance();
         intervalDataManager = ((IntervalsDataManager.LocalBinder) intervalBinder).getInstance();
         notificationDataManager = ((NotificationDataManager.LocalBinder) notifyBinder).getInstance();
@@ -84,7 +81,6 @@ public class DefaultTriggers {
     {
         IDataManager<PlacesData> placeDataManager;
         IDataManager<VoidData> notificationDataManager;
-        Log.d("HalfAndHalf Trigger","");
         placeDataManager = ((PlacesDataManager.LocalBinder) placesBinder).getInstance();
         notificationDataManager = ((NotificationDataManager.LocalBinder) notifyBinder).getInstance();
         Trigger.Builder builder = new Trigger.Builder();
@@ -105,7 +101,6 @@ public class DefaultTriggers {
         IDataManager<StepAndGoalData> stepDataManager;
         IDataManager<VoidData> notificationDataManager;
         IDataManager<TimeOfDayData> intervalDataManager;
-        Log.d("HalfAndHalf Trigger","");
         stepDataManager = ((ActualStepAndGoalDataManager.LocalBinder) stepBinder).getInstance();
         intervalDataManager = ((IntervalsDataManager.LocalBinder) intervalBinder).getInstance();
         notificationDataManager = ((NotificationDataManager.LocalBinder) notifyBinder).getInstance();
@@ -114,7 +109,6 @@ public class DefaultTriggers {
         Condition c1 = new FrequentNotificationPreventionCondition(60,notificationDataManager);
         Condition c2 = new AcceptableTimeCondition(new TimeOfDayData(new int[]{TIME_INTERVAL_MORNING,TIME_INTERVAL_AFTERNOON}), intervalDataManager);
         Condition c3 = new StepAndGoalRealCountCondition(LESS_THAN,stepDataManager);
-
         Action a = new SimpleNotificationAction("Lets meet today's goal! Let's go for a walk.");
         List<Condition> conditionList = new ArrayList<>();
         conditionList.add(c);
@@ -130,10 +124,8 @@ public class DefaultTriggers {
     public static ITrigger ButItsSunnyOutside(IBinder stepBinder, IBinder weatherBinder, IBinder activityBinder, IBinder notifyBinder) {
         IDataManager<StepAndGoalData> stepDataManager;
         IDataManager<VoidData> notificationDataManager;
-        Log.d("Create Weather Trigger", stepBinder.toString());
         IDataManager<WeatherData> weatherDataManager;
         IDataManager<ActivityData> activityDataManager;
-        WeatherData targetWeather = new WeatherData(1, 0, new int[]{Weather.CONDITION_CLEAR});
         stepDataManager = ((ActualStepAndGoalDataManager.LocalBinder) stepBinder).getInstance();
         weatherDataManager = ((WeatherDataManager.LocalBinder) weatherBinder).getInstance();
         notificationDataManager = ((NotificationDataManager.LocalBinder) notifyBinder).getInstance();
@@ -158,10 +150,8 @@ public class DefaultTriggers {
     public static ITrigger GoingDown(IBinder stepBinder, IBinder placesBinder, IBinder altitudeBinder,  IBinder notifyBinder) {
         IDataManager<StepAndGoalData> stepDataManager;
         IDataManager<VoidData> notificationDataManager;
-        Log.d("Create Weather Trigger", stepBinder.toString());
         IDataManager<AltitudeData> altitudeDataManager;
         IDataManager<PlacesData> placesDataManager;
-        WeatherData targetWeather = new WeatherData(1, 0, new int[]{Weather.CONDITION_CLEAR});
         stepDataManager = ((ActualStepAndGoalDataManager.LocalBinder) stepBinder).getInstance();
         placesDataManager = ((PlacesDataManager.LocalBinder) placesBinder).getInstance();
         notificationDataManager = ((NotificationDataManager.LocalBinder) notifyBinder).getInstance();
@@ -188,7 +178,6 @@ public class DefaultTriggers {
     public static ITrigger WalkAndTalk(IBinder stepBinder, IBinder calendarBinder, IBinder notifyBinder) {
         IDataManager<StepAndGoalData> stepDataManager;
         IDataManager<CalendarData> calendarDataManager;
-        Log.d("Create Weather Trigger", stepBinder.toString());
         IDataManager<VoidData> notificationDataManager;
         stepDataManager = ((ActualStepAndGoalDataManager.LocalBinder) stepBinder).getInstance();
         calendarDataManager = ((CalendarDataManager.LocalBinder) calendarBinder).getInstance();
@@ -212,7 +201,6 @@ public class DefaultTriggers {
         IDataManager<StepAndGoalData> stepDataManager;
         IDataManager<VoidData> notificationDataManager;
         IDataManager<PlacesData> placesDataManager;
-        Log.d("DanceForYourDinner Trigger", stepBinder.toString());
         stepDataManager = ((ActualStepAndGoalDataManager.LocalBinder) stepBinder).getInstance();
         placesDataManager = ((PlacesDataManager.LocalBinder) placesBinder).getInstance();
         notificationDataManager = ((NotificationDataManager.LocalBinder) notifyBinder).getInstance();
@@ -234,10 +222,7 @@ public class DefaultTriggers {
     public static ITrigger WalkToWorkOnWeekdays(IBinder stepBinder, IBinder intervalBinder, IBinder notifyBinder) {
         IDataManager<StepAndGoalData> stepDataManager;
         IDataManager<VoidData> notificationDataManager;
-        Log.d("Create Weather Trigger", stepBinder.toString());
         IDataManager<TimeOfDayData> timeOfDayDataManager;
-        IDataManager<WeatherData> weatherDataManager;
-        WeatherData targetWeather = new WeatherData(1, 0, new int[0]);
         stepDataManager = ((ActualStepAndGoalDataManager.LocalBinder) stepBinder).getInstance();
         timeOfDayDataManager = ((IntervalsDataManager.LocalBinder) intervalBinder).getInstance();
         notificationDataManager = ((NotificationDataManager.LocalBinder) notifyBinder).getInstance();
@@ -260,7 +245,6 @@ public class DefaultTriggers {
 
     public static ITrigger Congratulations(IBinder placesBinder, IBinder notifyBinder) {
         IDataManager<VoidData> notificationDataManager;
-        Log.d("Create Weather Trigger", "Congratulations");
         IDataManager<PlacesData> placesDataManager;
         placesDataManager = ((PlacesDataManager.LocalBinder) placesBinder).getInstance();
         notificationDataManager = ((NotificationDataManager.LocalBinder) notifyBinder).getInstance();

@@ -41,7 +41,7 @@ public class PlacesDataManager extends AlarmDataManager<PlacesData> {
     }
 
     public class LocalBinder extends Binder {
-        public IDataManager getInstance() {
+        public IDataManager<PlacesData> getInstance() {
             return PlacesDataManager.this;
         }
     }

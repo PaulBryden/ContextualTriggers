@@ -17,6 +17,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import uk.ac.strath.contextualtriggers.MainApplication;
 import uk.ac.strath.contextualtriggers.permissions.RequestCalendarPermission;
@@ -24,26 +25,17 @@ import uk.ac.strath.contextualtriggers.data.CalendarData;
 import uk.ac.strath.contextualtriggers.data.EventData;
 
 import static android.Manifest.permission.READ_CALENDAR;
-//import static com.google.android.gms.internal.zzs.TAG;
 
 public class CalendarDataManager extends AlarmDataManager<CalendarData> {
     private final IBinder binder = new CalendarDataManager.LocalBinder();
-    int MY_PERMISSIONS_REQUEST_READ_CONTACTS;
     // Projection array. Creating indices for this array instead of doing
-// dynamic lookups improves performance.
+    // dynamic lookups improves performance.
     public static final String[] EVENT_PROJECTION = new String[]{
             CalendarContract.Calendars._ID,                           // 0
             CalendarContract.Calendars.NAME,                          // 1
             CalendarContract.Calendars.ACCOUNT_NAME,         // 2
             CalendarContract.Calendars.ACCOUNT_TYPE                  // 3
     };
-
-    // The indices for the projection array above.
-    private static final int PROJECTION_ID_INDEX = 0;
-    private static final int PROJECTION_ACCOUNT_NAME_INDEX = 1;
-    private static final int PROJECTION_DISPLAY_NAME_INDEX = 2;
-    private static final int PROJECTION_OWNER_ACCOUNT_INDEX = 3;
-
 
     @Nullable
     @Override
@@ -53,7 +45,7 @@ public class CalendarDataManager extends AlarmDataManager<CalendarData> {
     }
 
     public class LocalBinder extends Binder {
-        public IDataManager getInstance() {
+        public IDataManager<CalendarData> getInstance() {
             return CalendarDataManager.this;
         }
     }
@@ -74,7 +66,6 @@ public class CalendarDataManager extends AlarmDataManager<CalendarData> {
         return START_STICKY;
     }
 
-    /*This Could be setup to fire on a transition, instead of a poll*/
     private void monitor() {
         if (ContextCompat.checkSelfPermission(this,
                 READ_CALENDAR)
@@ -110,8 +101,6 @@ public class CalendarDataManager extends AlarmDataManager<CalendarData> {
             }
             List<EventData> cd = new ArrayList<>();
             for(int i = 0; i < nameOfEvent.size();i++){
-               // Log.d("CALENDAREVENT", nameOfEvent.get(i));
-              //  Log.d("CALENDARTIME", startDates.get(i));
                 SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss a");
                 try {
                     EventData c = new EventData(nameOfEvent.get(i), dateFormat.parse(startDates.get(i)));
@@ -128,8 +117,7 @@ public class CalendarDataManager extends AlarmDataManager<CalendarData> {
 
 
     public static String getDate(long milliSeconds) {
-        SimpleDateFormat formatter = new SimpleDateFormat(
-                "dd/MM/yyyy hh:mm:ss a");
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss a", Locale.getDefault());
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(milliSeconds);
         return formatter.format(calendar.getTime());
