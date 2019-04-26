@@ -53,7 +53,7 @@ public class InBuildingConditionUnitTest {
 
     @Test
     public void testConditionNotSatisfiedWithLowLikelihood() {
-        PlaceLikelihood pl = new MockPlaceLikelihood(new MockPlace(GYM), 0.25);
+        PlaceLikelihood pl = new MockPlaceLikelihood(new MockPlace(GYM), 0.01);
         manager.sendUpdate(new PlacesData(Collections.singletonList(pl)));
         assertFalse(condition.isSatisfied());
     }

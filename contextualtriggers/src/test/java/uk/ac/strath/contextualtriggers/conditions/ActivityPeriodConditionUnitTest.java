@@ -20,7 +20,7 @@ public class ActivityPeriodConditionUnitTest {
     @Before
     public void setup() {
         manager = new MockDataManager<>();
-        condition = new ActivityPeriodCondition(10000, STILL, manager);
+        condition = new ActivityPeriodCondition(10, STILL, manager);
     }
 
     /**
