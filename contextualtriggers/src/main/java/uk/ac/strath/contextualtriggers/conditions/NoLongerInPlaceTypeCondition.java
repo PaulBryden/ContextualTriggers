@@ -14,8 +14,8 @@ import uk.ac.strath.contextualtriggers.managers.IDataManager;
  */
 public class NoLongerInPlaceTypeCondition extends DataCondition<PlacesData> {
 
-    protected static final double DEFAULT_UPPER_THRESHOLD = 0.75;
-    protected static final double DEFAULT_LOWER_THRESHOLD = 0.35;
+    protected static final double DEFAULT_UPPER_THRESHOLD = 0.2;
+    protected static final double DEFAULT_LOWER_THRESHOLD = 0.2;
     private static final int TIMEOUT = 180; // in seconds
     private List<Place.Type> targetTypes;
     private double upperThreshold;

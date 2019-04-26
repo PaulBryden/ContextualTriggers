@@ -77,18 +77,8 @@ public class PlacesDataManager extends AlarmDataManager<PlacesData> {
         if (ContextCompat.checkSelfPermission(this, ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED)
         {   // Permission is not granted
             // Should we show an explanation?
-            if (ActivityCompat.shouldShowRequestPermissionRationale(MainApplication.getAppActivity(),
-                    ACCESS_FINE_LOCATION)) {
                 Intent i = new Intent(this, RequestLocationPermission.class);
                 startActivity(i);
-
-            } else {
-                // No explanation needed; request the permission
-                ActivityCompat.requestPermissions(MainApplication.getAppActivity(),
-                        new String[]{ACCESS_FINE_LOCATION},
-                        MY_PERMISSIONS_REQUEST_READ_CONTACTS);
-
-            }
         } else {
             Task<FindCurrentPlaceResponse> placeResponse = placesClient.findCurrentPlace(request);
             placeResponse.addOnCompleteListener(task ->
