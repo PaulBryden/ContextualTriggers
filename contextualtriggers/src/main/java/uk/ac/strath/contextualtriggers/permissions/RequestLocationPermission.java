@@ -12,7 +12,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
 import uk.ac.strath.contextualtriggers.managers.AltitudeDataManager;
-import uk.ac.strath.contextualtriggers.managers.CalendarDataManager;
 import uk.ac.strath.contextualtriggers.managers.IntervalsDataManager;
 import uk.ac.strath.contextualtriggers.managers.PlacesDataManager;
 import uk.ac.strath.contextualtriggers.managers.WeatherDataManager;
@@ -20,11 +19,11 @@ import uk.ac.strath.contextualtriggers.managers.WeatherDataManager;
 import static android.Manifest.permission.ACCESS_FINE_LOCATION;
 
 
-public class RequestLocationPermission extends AppCompatActivity{
+public class RequestLocationPermission extends AppCompatActivity {
 
-    private int MY_PERMISSIONS_REQUEST_READ_CONTACTS;
+    private final static int MY_PERMISSIONS_REQUEST = 42;
+
     /**
-     *
      * @param savedInstanceState contains information pertaining to previous states of the activity
      *                           if it has been used before
      * @see android.support.v7.app.AppCompatActivity
@@ -41,7 +40,7 @@ public class RequestLocationPermission extends AppCompatActivity{
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.cancel();
-                ActivityCompat.requestPermissions(activity,new String[]{ACCESS_FINE_LOCATION},MY_PERMISSIONS_REQUEST_READ_CONTACTS);
+                ActivityCompat.requestPermissions(activity, new String[]{ACCESS_FINE_LOCATION}, MY_PERMISSIONS_REQUEST);
             }
         });
         builder.show();
@@ -52,7 +51,7 @@ public class RequestLocationPermission extends AppCompatActivity{
                                            @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
 
-        if (requestCode == MY_PERMISSIONS_REQUEST_READ_CONTACTS) {
+        if (requestCode == MY_PERMISSIONS_REQUEST) {
             for (int i = 0; i < permissions.length; i++) {
                 if (grantResults[i] == PackageManager.PERMISSION_GRANTED) {
                     onPermissionGranted(permissions[i]);
@@ -62,11 +61,12 @@ public class RequestLocationPermission extends AppCompatActivity{
             }
         }
     }
+
     protected void onPermissionGranted(String permission) {
-            this.finish();
+        this.finish();
     }
 
-    private void turnOffLocationManagers(){
+    private void turnOffLocationManagers() {
         Log.d("PERMISSION DENIED", "TURN OFF ALL LOCATION BASED DATA MANAGERS");
         Intent i = new Intent(this, AltitudeDataManager.class);
         stopService(i);

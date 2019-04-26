@@ -31,8 +31,8 @@ public class BatteryDataManager extends DataManager<BatteryData> {
         }
     }
 
-    public BatteryDataManager(){
-        Log.d("StepAndGoalIntentReceiver","Starting");
+    public BatteryDataManager() {
+        Log.d("StepAndGoalIntentReceiver", "Starting");
         setup();
     }
 
@@ -65,7 +65,7 @@ public class BatteryDataManager extends DataManager<BatteryData> {
         return START_STICKY;
     }
 
-    private void monitor(Intent intent){
+    private void monitor(Intent intent) {
         batteryData.isLow = intent.getBooleanExtra("level", false);
         Log.d("BatteryDataManager", "Battery low: " + batteryData.isLow);
         sendUpdate(batteryData);

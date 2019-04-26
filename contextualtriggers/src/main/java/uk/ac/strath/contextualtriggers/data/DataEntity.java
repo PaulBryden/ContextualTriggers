@@ -4,19 +4,18 @@ package uk.ac.strath.contextualtriggers.data;
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
-import android.arch.persistence.room.TypeConverter;
 
 @Entity(tableName = "data_cache")
 public class DataEntity {
 
-    public DataEntity(){
+    public DataEntity() {
 
     }
-    public DataEntity(Data d){
+
+    public DataEntity(Data d) {
         type = d.getClass().toString();
         data = d;
     }
-
 
     @PrimaryKey(autoGenerate = true)
     public int id;
@@ -24,8 +23,5 @@ public class DataEntity {
     @ColumnInfo
     public String type;
     public Data data;
-
-
-
 
 }

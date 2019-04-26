@@ -19,8 +19,7 @@ public class NotificationDataManager extends DataManager<VoidData> {
         }
     }
 
-    public NotificationDataManager()
-    {
+    public NotificationDataManager() {
         setup();
     }
 
@@ -44,7 +43,7 @@ public class NotificationDataManager extends DataManager<VoidData> {
         return START_STICKY;
     }
 
-    private void monitor(){
+    private void monitor() {
         sendUpdate(new VoidData());
     }
 

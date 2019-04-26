@@ -31,8 +31,8 @@ public class ActualStepAndGoalDataManager extends DataManager<StepAndGoalData> {
         }
     }
 
-    public ActualStepAndGoalDataManager(){
-        Log.d("StepAndGoalIntentReceiver","Starting");
+    public ActualStepAndGoalDataManager() {
+        Log.d("StepAndGoalIntentReceiver", "Starting");
         try {
             setup();
         } catch (ExecutionException e) {
@@ -67,10 +67,9 @@ public class ActualStepAndGoalDataManager extends DataManager<StepAndGoalData> {
 
         List<DataEntity> l = db.getAllOfType(StepAndGoalData.class.toString()).get();
 
-        if(l.size() == 0){
+        if (l.size() == 0) {
             stepGoalData = new StepAndGoalData();
-        }
-        else{
+        } else {
             stepGoalData = (StepAndGoalData) l.get(0).data;
         }
     }
@@ -82,9 +81,9 @@ public class ActualStepAndGoalDataManager extends DataManager<StepAndGoalData> {
         return START_STICKY;
     }
 
-    private void monitor(Intent intent){
+    private void monitor(Intent intent) {
         LocalDate today = LocalDate.now();
-        DayData day = new DayData(intent.getIntExtra("steps", 0),intent.getIntExtra("goal", 0),today);
+        DayData day = new DayData(intent.getIntExtra("steps", 0), intent.getIntExtra("goal", 0), today);
         stepGoalData.updateDay(day);
         Log.d("ActualStepAndGoalDataManager", "Starting");
         sendUpdate(stepGoalData);

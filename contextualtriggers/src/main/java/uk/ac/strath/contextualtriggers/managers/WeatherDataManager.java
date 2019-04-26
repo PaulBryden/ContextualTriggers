@@ -6,7 +6,6 @@ import android.os.Binder;
 import android.os.IBinder;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
 
@@ -16,15 +15,12 @@ import com.google.android.gms.awareness.state.Weather;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 
-import uk.ac.strath.contextualtriggers.MainApplication;
-import uk.ac.strath.contextualtriggers.permissions.RequestLocationPermission;
 import uk.ac.strath.contextualtriggers.data.WeatherData;
+import uk.ac.strath.contextualtriggers.permissions.RequestLocationPermission;
 
 import static android.Manifest.permission.ACCESS_FINE_LOCATION;
 
 public class WeatherDataManager extends AlarmDataManager<WeatherData> {
-    int MY_PERMISSIONS_REQUEST_READ_CONTACTS;
-
     private final IBinder binder = new WeatherDataManager.LocalBinder();
 
     @Nullable
@@ -58,8 +54,7 @@ public class WeatherDataManager extends AlarmDataManager<WeatherData> {
     }
 
     private void monitor() {
-        if (ContextCompat.checkSelfPermission(this, ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED)
-        {
+        if (ContextCompat.checkSelfPermission(this, ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             Intent i = new Intent(this, RequestLocationPermission.class);
             startActivity(i);
 

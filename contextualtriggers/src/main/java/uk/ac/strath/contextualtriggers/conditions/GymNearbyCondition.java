@@ -12,7 +12,7 @@ import uk.ac.strath.contextualtriggers.managers.IDataManager;
 public class GymNearbyCondition extends DataCondition<PlacesData> {
 
     public GymNearbyCondition(IDataManager<PlacesData> dataManager) {
-        super(dataManager,20);
+        super(dataManager, 20);
     }
 
     @Override

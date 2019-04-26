@@ -22,8 +22,8 @@ public class ActivityData extends AbstractData {
     }
 
     @Override
-    public boolean equals(Object o){
-        if(o instanceof ActivityData){
+    public boolean equals(Object o) {
+        if (o instanceof ActivityData) {
             return ((ActivityData) o).activity.equals(this.activity) && super.equals(o);
         }
         return false;

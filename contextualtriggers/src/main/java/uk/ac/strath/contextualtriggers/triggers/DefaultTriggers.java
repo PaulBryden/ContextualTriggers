@@ -27,7 +27,6 @@ import uk.ac.strath.contextualtriggers.conditions.MeetingCondition;
 import uk.ac.strath.contextualtriggers.conditions.NoLongerInPlaceTypeCondition;
 import uk.ac.strath.contextualtriggers.conditions.NotNotifiedTodayCondition;
 import uk.ac.strath.contextualtriggers.conditions.StepAndGoalRealCountCondition;
-import uk.ac.strath.contextualtriggers.conditions.StepCountCondition;
 import uk.ac.strath.contextualtriggers.data.ActivityData;
 import uk.ac.strath.contextualtriggers.data.AltitudeData;
 import uk.ac.strath.contextualtriggers.data.CalendarData;
@@ -131,7 +130,7 @@ public class DefaultTriggers {
         notificationDataManager = ((NotificationDataManager.LocalBinder) notifyBinder).getInstance();
         activityDataManager = ((ActivityDataManager.LocalBinder) activityBinder).getInstance();
         Trigger.Builder builder = new Trigger.Builder();
-        Condition c = new StepAndGoalRealCountCondition(StepCountCondition.LESS_THAN, stepDataManager);
+        Condition c = new StepAndGoalRealCountCondition(StepAndGoalRealCountCondition.LESS_THAN, stepDataManager);
         Condition c1 = new ClearWeatherCondition(weatherDataManager);
         Condition c2 = new FrequentNotificationPreventionCondition(60, notificationDataManager);
         Condition c3 = new ActivityPeriodCondition(60, STILL,activityDataManager);
@@ -183,7 +182,7 @@ public class DefaultTriggers {
         calendarDataManager = ((CalendarDataManager.LocalBinder) calendarBinder).getInstance();
         notificationDataManager = ((NotificationDataManager.LocalBinder) notifyBinder).getInstance();
         Trigger.Builder builder = new Trigger.Builder();
-        Condition c = new StepAndGoalRealCountCondition(StepCountCondition.LESS_THAN, stepDataManager);
+        Condition c = new StepAndGoalRealCountCondition(StepAndGoalRealCountCondition.LESS_THAN, stepDataManager);
         Condition c1 = new MeetingCondition(calendarDataManager);
         Condition c2 = new FrequentNotificationPreventionCondition(30, notificationDataManager);
         Action a = new SimpleMapNotificationAction("Would you like to have a walking meeting?");
@@ -205,7 +204,7 @@ public class DefaultTriggers {
         placesDataManager = ((PlacesDataManager.LocalBinder) placesBinder).getInstance();
         notificationDataManager = ((NotificationDataManager.LocalBinder) notifyBinder).getInstance();
         Trigger.Builder builder = new Trigger.Builder();
-        Condition c = new StepAndGoalRealCountCondition(StepCountCondition.LESS_THAN, stepDataManager);
+        Condition c = new StepAndGoalRealCountCondition(StepAndGoalRealCountCondition.LESS_THAN, stepDataManager);
         Condition c1 = new InPlaceTypeCondition(Place.Type.FOOD, placesDataManager);
         Condition c2 = new FrequentNotificationPreventionCondition(30, notificationDataManager);
         Action a = new SimpleMapNotificationAction("We hope you enjoyed your lunch. Let's walk it off.");
@@ -227,7 +226,7 @@ public class DefaultTriggers {
         timeOfDayDataManager = ((IntervalsDataManager.LocalBinder) intervalBinder).getInstance();
         notificationDataManager = ((NotificationDataManager.LocalBinder) notifyBinder).getInstance();
         Trigger.Builder builder = new Trigger.Builder();
-        Condition c = new StepAndGoalRealCountCondition(StepCountCondition.LESS_THAN, stepDataManager);
+        Condition c = new StepAndGoalRealCountCondition(StepAndGoalRealCountCondition.LESS_THAN, stepDataManager);
         Condition c1 = new AcceptableTimeCondition(new TimeOfDayData(new int[]{TIME_INTERVAL_WEEKDAY,TIME_INTERVAL_MORNING}),timeOfDayDataManager);
         Condition c2 = new FrequentNotificationPreventionCondition(60, notificationDataManager);
         Condition c3 = new HistoricStepsDaysUnmetCondition(3,stepDataManager);

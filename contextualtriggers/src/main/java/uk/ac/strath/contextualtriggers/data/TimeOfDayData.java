@@ -1,6 +1,5 @@
 package uk.ac.strath.contextualtriggers.data;
 
-import java.lang.reflect.Array;
 import java.lang.reflect.Type;
 import java.util.Arrays;
 
@@ -12,8 +11,8 @@ public class TimeOfDayData extends AbstractData {
     }
 
     @Override
-    public boolean equals(Object o){
-        if(o instanceof TimeOfDayData){
+    public boolean equals(Object o) {
+        if (o instanceof TimeOfDayData) {
             return Arrays.equals(((TimeOfDayData) o).intervals, this.intervals) && super.equals(o);
         }
         return false;

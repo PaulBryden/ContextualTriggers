@@ -8,7 +8,6 @@ import android.content.IntentFilter;
 import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 
-import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
@@ -43,7 +42,7 @@ public abstract class DataManager<T extends Data> extends Service implements IDa
 
             System.out.println(e.getMessage());
             e.printStackTrace();
-        } catch (NullPointerException e){
+        } catch (NullPointerException e) {
             ; //This is fine, simply means no cached data exists
         }
 

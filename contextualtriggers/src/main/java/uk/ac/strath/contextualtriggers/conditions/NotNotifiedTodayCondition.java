@@ -12,10 +12,8 @@ import uk.ac.strath.contextualtriggers.managers.IDataManager;
  * Condition is satisfied if time elapsed since last condition is more than
  * specified amount.
  */
-public class NotNotifiedTodayCondition extends DataCondition<VoidData>
-{
-    public NotNotifiedTodayCondition(IDataManager<VoidData> dataManager)
-    {
+public class NotNotifiedTodayCondition extends DataCondition<VoidData> {
+    public NotNotifiedTodayCondition(IDataManager<VoidData> dataManager) {
         super(dataManager);
     }
 
@@ -25,14 +23,12 @@ public class NotNotifiedTodayCondition extends DataCondition<VoidData>
     }
 
     @Override
-    public void notifyUpdate(VoidData data)
-    {
+    public void notifyUpdate(VoidData data) {
         super.notifyUpdate(data);
     }
 
     @Override
-    public boolean isSatisfied()
-    {
+    public boolean isSatisfied() {
         if (getData() == null) {
             return true;
         }

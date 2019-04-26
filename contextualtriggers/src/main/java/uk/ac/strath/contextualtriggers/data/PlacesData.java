@@ -18,8 +18,8 @@ public class PlacesData extends AbstractData {
     }
 
     @Override
-    public boolean equals(Object o){
-        if(o instanceof PlacesData){
+    public boolean equals(Object o) {
+        if (o instanceof PlacesData) {
             return ((PlacesData) o).places.equals(this.places) && super.equals(o);
         }
         return false;

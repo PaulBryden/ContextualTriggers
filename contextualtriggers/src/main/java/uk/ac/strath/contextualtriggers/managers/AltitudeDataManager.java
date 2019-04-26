@@ -7,7 +7,6 @@ import android.os.Binder;
 import android.os.IBinder;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
 
@@ -16,9 +15,8 @@ import com.google.android.gms.awareness.snapshot.LocationResponse;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 
-import uk.ac.strath.contextualtriggers.MainApplication;
-import uk.ac.strath.contextualtriggers.permissions.RequestLocationPermission;
 import uk.ac.strath.contextualtriggers.data.AltitudeData;
+import uk.ac.strath.contextualtriggers.permissions.RequestLocationPermission;
 
 import static android.Manifest.permission.ACCESS_FINE_LOCATION;
 
@@ -33,23 +31,22 @@ public class AltitudeDataManager extends AlarmDataManager<AltitudeData> {
         return binder;
     }
 
-    public class LocalBinder extends Binder
-    {
+    public class LocalBinder extends Binder {
         public IDataManager<AltitudeData> getInstance() {
             return AltitudeDataManager.this;
         }
     }
 
-    public AltitudeDataManager()
-    {
+    public AltitudeDataManager() {
         super(60, 240);
         setup();
     }
 
     private void setup() {
-        Log.d("AltitudeDataManager","Setting Up Altitude Data Manager");
+        Log.d("AltitudeDataManager", "Setting Up Altitude Data Manager");
         altData = null;
     }
+
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         super.onStartCommand(intent, flags, startId);
@@ -59,15 +56,13 @@ public class AltitudeDataManager extends AlarmDataManager<AltitudeData> {
     }
 
     /*This Could be setup to fire on a transition, instead of a poll*/
-    private void monitor()
-    {
+    private void monitor() {
         Log.d("AltitudeDataManager", "Checking permsissions");
 
         // Call findCurrentPlace and handle the response (first check that the user has granted permission).
-        if (ContextCompat.checkSelfPermission(this, ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED)
-        {   // Permission is not granted
-                Intent i = new Intent(this, RequestLocationPermission.class);
-                startActivity(i);
+        if (ContextCompat.checkSelfPermission(this, ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {   // Permission is not granted
+            Intent i = new Intent(this, RequestLocationPermission.class);
+            startActivity(i);
         } else {
             // try {
             // Permission has already been granted

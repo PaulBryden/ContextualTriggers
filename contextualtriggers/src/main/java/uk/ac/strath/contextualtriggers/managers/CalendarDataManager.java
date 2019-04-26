@@ -9,7 +9,6 @@ import android.os.Binder;
 import android.os.IBinder;
 import android.provider.CalendarContract;
 import android.support.annotation.Nullable;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
 
@@ -19,10 +18,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-import uk.ac.strath.contextualtriggers.MainApplication;
-import uk.ac.strath.contextualtriggers.permissions.RequestCalendarPermission;
 import uk.ac.strath.contextualtriggers.data.CalendarData;
 import uk.ac.strath.contextualtriggers.data.EventData;
+import uk.ac.strath.contextualtriggers.permissions.RequestCalendarPermission;
 
 import static android.Manifest.permission.READ_CALENDAR;
 
@@ -70,8 +68,8 @@ public class CalendarDataManager extends AlarmDataManager<CalendarData> {
         if (ContextCompat.checkSelfPermission(this,
                 READ_CALENDAR)
                 != PackageManager.PERMISSION_GRANTED) {
-                Intent i = new Intent(this, RequestCalendarPermission.class);
-                startActivity(i);
+            Intent i = new Intent(this, RequestCalendarPermission.class);
+            startActivity(i);
         } else {
 
             ArrayList<String> nameOfEvent = new ArrayList<String>();
@@ -100,14 +98,14 @@ public class CalendarDataManager extends AlarmDataManager<CalendarData> {
 
             }
             List<EventData> cd = new ArrayList<>();
-            for(int i = 0; i < nameOfEvent.size();i++){
+            for (int i = 0; i < nameOfEvent.size(); i++) {
                 SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss a");
                 try {
                     EventData c = new EventData(nameOfEvent.get(i), dateFormat.parse(startDates.get(i)));
                     cd.add(c);
-                    Log.d("Calendar Event",c.name+c.time);
-                } catch (ParseException e ){
-                    Log.e("Calendar","Error parsing date in Calendar");
+                    Log.d("Calendar Event", c.name + c.time);
+                } catch (ParseException e) {
+                    Log.e("Calendar", "Error parsing date in Calendar");
                 }
 
             }

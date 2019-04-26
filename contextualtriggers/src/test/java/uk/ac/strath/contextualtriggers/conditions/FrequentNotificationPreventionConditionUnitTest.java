@@ -19,7 +19,6 @@ public class FrequentNotificationPreventionConditionUnitTest {
         condition = new FrequentNotificationPreventionCondition(10, manager);
     }
 
-
     @Test
     public void testConditionSatisfiedWhenNoNotificationSent() {
         assertTrue(condition.isSatisfied());

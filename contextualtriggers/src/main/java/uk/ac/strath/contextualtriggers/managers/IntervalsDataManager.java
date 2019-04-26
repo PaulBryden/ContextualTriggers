@@ -6,7 +6,6 @@ import android.os.Binder;
 import android.os.IBinder;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
 
@@ -16,16 +15,13 @@ import com.google.android.gms.awareness.state.TimeIntervals;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 
-import uk.ac.strath.contextualtriggers.MainApplication;
-import uk.ac.strath.contextualtriggers.permissions.RequestLocationPermission;
 import uk.ac.strath.contextualtriggers.data.TimeOfDayData;
+import uk.ac.strath.contextualtriggers.permissions.RequestLocationPermission;
 
 import static android.Manifest.permission.ACCESS_FINE_LOCATION;
 
 public class IntervalsDataManager extends AlarmDataManager<TimeOfDayData> {
     private final IBinder binder = new IntervalsDataManager.LocalBinder();
-
-    private int MY_PERMISSIONS_REQUEST_READ_CONTACTS;
 
     @Nullable
     @Override
@@ -59,12 +55,11 @@ public class IntervalsDataManager extends AlarmDataManager<TimeOfDayData> {
     /*This Could be setup to fire on a transition, instead of a poll*/
     private void monitor() {
 
-        if (ContextCompat.checkSelfPermission(this, ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED)
-               {   // Permission is not granted
-                   // Should we show an explanation?
-                        Intent i = new Intent(this, RequestLocationPermission.class);
-                        startActivity(i);
-                } else {
+        if (ContextCompat.checkSelfPermission(this, ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {   // Permission is not granted
+            // Should we show an explanation?
+            Intent i = new Intent(this, RequestLocationPermission.class);
+            startActivity(i);
+        } else {
             Awareness.getSnapshotClient(this).getTimeIntervals().addOnFailureListener(new OnFailureListener() {
                 @Override
                 public void onFailure(@NonNull Exception e) {

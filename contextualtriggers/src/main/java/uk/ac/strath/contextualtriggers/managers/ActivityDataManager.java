@@ -15,7 +15,6 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 
 import uk.ac.strath.contextualtriggers.data.ActivityData;
-//import static com.google.android.gms.internal.zzs.TAG;
 
 public class ActivityDataManager extends AlarmDataManager<ActivityData> {
     private final IBinder binder = new ActivityDataManager.LocalBinder();

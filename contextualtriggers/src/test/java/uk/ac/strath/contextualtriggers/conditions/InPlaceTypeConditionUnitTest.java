@@ -31,9 +31,6 @@ public class InPlaceTypeConditionUnitTest {
         assertFalse(gymCondition.isSatisfied());
     }
 
-    /**
-     * Tests what happens when the user is in a gym.
-     */
     @Test
     public void testConditionSatisfied() {
         PlaceLikelihood pl = new MockPlaceLikelihood(new MockPlace(GYM), 0.75);
@@ -41,9 +38,6 @@ public class InPlaceTypeConditionUnitTest {
         assertTrue(gymCondition.isSatisfied());
     }
 
-    /**
-     * Tests what happens when the user is in a park.
-     */
     @Test
     public void testConditionNotSatisfiedWithWrongPlaceType() {
         PlaceLikelihood pl = new MockPlaceLikelihood(new MockPlace(PARK), 0.75);
