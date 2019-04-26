@@ -56,6 +56,7 @@ import static com.google.android.gms.location.DetectedActivity.STILL;
 import static uk.ac.strath.contextualtriggers.conditions.StepAndGoalRealCountCondition.LESS_THAN;
 
 public class DefaultTriggers {
+
     public static ITrigger TimeToWalk(IBinder activityBinder, IBinder intervalBinder, IBinder notifyBinder) {
         IDataManager<ActivityData> activityDataManager;
         IDataManager<VoidData> notificationDataManager;
@@ -78,6 +79,7 @@ public class DefaultTriggers {
         builder.setAction(a);
         return builder.build();
     }
+
     public static ITrigger GyminyCricket(IBinder placesBinder, IBinder notifyBinder)
     {
         IDataManager<PlacesData> placeDataManager;
@@ -97,6 +99,7 @@ public class DefaultTriggers {
         builder.setAction(a);
         return builder.build();
     }
+
     public static ITrigger HalfAndHalf(IBinder stepBinder, IBinder intervalBinder, IBinder notifyBinder)
     {
         IDataManager<StepAndGoalData> stepDataManager;
@@ -123,6 +126,7 @@ public class DefaultTriggers {
         builder.setAction(a);
         return builder.build();
     }
+
     public static ITrigger ButItsSunnyOutside(IBinder stepBinder, IBinder weatherBinder, IBinder activityBinder, IBinder notifyBinder) {
         IDataManager<StepAndGoalData> stepDataManager;
         IDataManager<VoidData> notificationDataManager;
@@ -180,6 +184,7 @@ public class DefaultTriggers {
         builder.setAction(a);
         return builder.build();
     }
+
     public static ITrigger WalkAndTalk(IBinder stepBinder, IBinder calendarBinder, IBinder notifyBinder) {
         IDataManager<StepAndGoalData> stepDataManager;
         IDataManager<CalendarData> calendarDataManager;
@@ -202,6 +207,7 @@ public class DefaultTriggers {
         builder.setAction(a);
         return builder.build();
     }
+
     public static ITrigger DanceForYourDinner(IBinder stepBinder, IBinder placesBinder, IBinder notifyBinder) {
         IDataManager<StepAndGoalData> stepDataManager;
         IDataManager<VoidData> notificationDataManager;
@@ -224,6 +230,7 @@ public class DefaultTriggers {
         builder.setAction(a);
         return builder.build();
     }
+
     public static ITrigger WalkToWorkOnWeekdays(IBinder stepBinder, IBinder intervalBinder, IBinder notifyBinder) {
         IDataManager<StepAndGoalData> stepDataManager;
         IDataManager<VoidData> notificationDataManager;
@@ -250,6 +257,7 @@ public class DefaultTriggers {
         builder.setAction(a);
         return builder.build();
     }
+
     public static ITrigger Congratulations(IBinder placesBinder, IBinder notifyBinder) {
         IDataManager<VoidData> notificationDataManager;
         Log.d("Create Weather Trigger", "Congratulations");
