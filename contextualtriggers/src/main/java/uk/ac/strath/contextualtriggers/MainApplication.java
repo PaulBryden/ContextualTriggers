@@ -16,7 +16,6 @@ public class MainApplication extends AppCompatActivity {
     private static Context context;
     private Intent i;
 
-    // Trigger sunnyOotsideTrigger;
     public static Context getAppContext() {
         return MainApplication.context;
     }
@@ -26,16 +25,16 @@ public class MainApplication extends AppCompatActivity {
     }
 
     @Override
-    protected void onPostCreate(@Nullable Bundle savedInstanceState)
-    {
+    protected void onPostCreate(@Nullable Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
-        mAppActivity=this;
-        if(serviceMode){
+        mAppActivity = this;
+        if (serviceMode) {
             emptyActivity();
         } else {
             logActivity();
         }
     }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,7 +49,7 @@ public class MainApplication extends AppCompatActivity {
     }
 
     @TargetApi(26)
-    private void emptyActivity(){
+    private void emptyActivity() {
         Log.d("MainApplication", "Starting empty activity");
         this.setTheme(R.style.Theme_Transparent);
         i = new Intent(this, ContextualTriggersService.class);
@@ -59,7 +58,7 @@ public class MainApplication extends AppCompatActivity {
 
     }
 
-    private void logActivity(){
+    private void logActivity() {
         setContentView(R.layout.scrollable_textview);
         TextView textView = findViewById(R.id.text_view);
         textView.setMovementMethod(new ScrollingMovementMethod());

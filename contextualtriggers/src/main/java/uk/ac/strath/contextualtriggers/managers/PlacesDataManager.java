@@ -5,7 +5,6 @@ import android.content.pm.PackageManager;
 import android.os.Binder;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
 
@@ -21,10 +20,9 @@ import com.google.android.libraries.places.api.net.PlacesClient;
 import java.util.Arrays;
 import java.util.List;
 
-import uk.ac.strath.contextualtriggers.MainApplication;
 import uk.ac.strath.contextualtriggers.R;
-import uk.ac.strath.contextualtriggers.permissions.RequestLocationPermission;
 import uk.ac.strath.contextualtriggers.data.PlacesData;
+import uk.ac.strath.contextualtriggers.permissions.RequestLocationPermission;
 
 import static android.Manifest.permission.ACCESS_FINE_LOCATION;
 import static com.android.volley.VolleyLog.TAG;
@@ -41,7 +39,7 @@ public class PlacesDataManager extends AlarmDataManager<PlacesData> {
     }
 
     public class LocalBinder extends Binder {
-        public IDataManager getInstance() {
+        public IDataManager<PlacesData> getInstance() {
             return PlacesDataManager.this;
         }
     }
@@ -74,11 +72,10 @@ public class PlacesDataManager extends AlarmDataManager<PlacesData> {
         FindCurrentPlaceRequest request =
                 FindCurrentPlaceRequest.builder(placeFields).build();
 
-        if (ContextCompat.checkSelfPermission(this, ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED)
-        {   // Permission is not granted
+        if (ContextCompat.checkSelfPermission(this, ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {   // Permission is not granted
             // Should we show an explanation?
-                Intent i = new Intent(this, RequestLocationPermission.class);
-                startActivity(i);
+            Intent i = new Intent(this, RequestLocationPermission.class);
+            startActivity(i);
         } else {
             Task<FindCurrentPlaceResponse> placeResponse = placesClient.findCurrentPlace(request);
             placeResponse.addOnCompleteListener(task ->

@@ -8,7 +8,6 @@ import org.junit.Test;
 import java.util.Collections;
 
 import uk.ac.strath.contextualtriggers.data.PlacesData;
-import uk.ac.strath.contextualtriggers.managers.DataManager;
 
 import static com.google.android.libraries.places.api.model.Place.Type.GYM;
 import static com.google.android.libraries.places.api.model.Place.Type.PARK;
@@ -31,9 +30,6 @@ public class InBuildingConditionUnitTest {
         assertFalse(condition.isSatisfied());
     }
 
-    /**
-     * Tests what happens when the user is in a gym.
-     */
     @Test
     public void testConditionSatisfied() {
         PlaceLikelihood pl = new MockPlaceLikelihood(new MockPlace(GYM), 0.75);
@@ -41,9 +37,6 @@ public class InBuildingConditionUnitTest {
         assertTrue(condition.isSatisfied());
     }
 
-    /**
-     * Tests what happens when the user is in a park.
-     */
     @Test
     public void testConditionNotSatisfiedWithWrongPlaceType() {
         PlaceLikelihood pl = new MockPlaceLikelihood(new MockPlace(PARK), 0.75);
@@ -53,7 +46,7 @@ public class InBuildingConditionUnitTest {
 
     @Test
     public void testConditionNotSatisfiedWithLowLikelihood() {
-        PlaceLikelihood pl = new MockPlaceLikelihood(new MockPlace(GYM), 0.25);
+        PlaceLikelihood pl = new MockPlaceLikelihood(new MockPlace(GYM), 0.01);
         manager.sendUpdate(new PlacesData(Collections.singletonList(pl)));
         assertFalse(condition.isSatisfied());
     }

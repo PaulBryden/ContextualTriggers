@@ -21,7 +21,6 @@ public class ClearWeatherConditionUnitTest {
         condition = new ClearWeatherCondition(manager);
     }
 
-
     @Test
     public void testNoWeatherDataReceivedYet() {
         assertFalse(condition.isSatisfied());

@@ -1,5 +1,7 @@
 package uk.ac.strath.contextualtriggers.conditions;
 
+import android.util.Log;
+
 import java.util.List;
 
 public class AndCondition extends CompositeCondition {
@@ -10,12 +12,15 @@ public class AndCondition extends CompositeCondition {
 
     @Override
     public boolean isSatisfied() {
+        boolean satisfied = true;
         for (Condition c : components) {
+            Log.d("Condition", c.getClass().getSimpleName() + " satisfied: " + c.isSatisfied());
             if (!c.isSatisfied()) {
-                return false;
+                satisfied = false;
             }
         }
-        return true;
+        Log.d("Condition", "AndCondition with " + components.size() + " components satisfied: " + satisfied);
+        return satisfied;
     }
 
     @Override

@@ -20,39 +20,26 @@ public class ActivityPeriodConditionUnitTest {
     @Before
     public void setup() {
         manager = new MockDataManager<>();
-        condition = new ActivityPeriodCondition(10000, STILL, manager);
+        condition = new ActivityPeriodCondition(10, STILL, manager);
     }
 
-    /**
-     * Tests what happens when no activity has been sent to the condition yet.
-     */
     @Test
     public void testNoActivityDataReceivedYet() {
         assertFalse(condition.isSatisfied());
     }
 
-    /**
-     * Tests what happens when the user has been still for 10 seconds.
-     */
     @Test
     public void testStillActivitySatisfied() {
         manager.sendUpdate(new ActivityData(new DetectedActivity(STILL, 100), System.currentTimeMillis() - 20000));
         assertTrue(condition.isSatisfied());
     }
 
-    /**
-     * Checks what happens when the user has not been still for 10 seconds because they have only
-     * been still for 5 seconds.
-     */
     @Test
     public void testStillConditionNotSatisfiedForMinimumTime() {
         manager.sendUpdate(new ActivityData(new DetectedActivity(STILL, 100), System.currentTimeMillis() - 5000));
         assertFalse(condition.isSatisfied());
     }
 
-    /**
-     * Tests what happens when the user is not still.
-     */
     @Test
     public void testStillConditionNotSatisfiedAsIncorrectActivity() {
         manager.sendUpdate(new ActivityData(new DetectedActivity(STILL, 100), System.currentTimeMillis() - 30000));

@@ -32,20 +32,12 @@ public class AcceptableTimeConditionUnitTest {
         assertFalse(weekendCondition.isSatisfied());
     }
 
-    /**
-     * Tests what happens when the current time intervals are MORNING and AFTERNOON and the target
-     * time interval is MORNING.
-     */
     @Test
     public void testTargetInCurrentIntervals() {
         manager.sendUpdate(new TimeOfDayData(new int[]{TIME_INTERVAL_MORNING, TIME_INTERVAL_AFTERNOON}));
         assertTrue(afternoonCondition.isSatisfied());
     }
 
-    /**
-     * Tests what happens when the current time intervals are WEEKDAY and MORNING and the target
-     * time intervals are EVENING and WEEKEND.
-     */
     @Test
     public void testTargetNotInCurrentIntervals() {
         manager.sendUpdate(new TimeOfDayData(new int[]{TIME_INTERVAL_WEEKDAY, TIME_INTERVAL_MORNING}));

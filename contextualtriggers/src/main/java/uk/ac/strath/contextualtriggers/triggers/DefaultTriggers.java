@@ -2,9 +2,7 @@ package uk.ac.strath.contextualtriggers.triggers;
 
 
 import android.os.IBinder;
-import android.util.Log;
 
-import com.google.android.gms.awareness.state.Weather;
 import com.google.android.libraries.places.api.model.Place;
 
 import java.util.ArrayList;
@@ -17,9 +15,9 @@ import uk.ac.strath.contextualtriggers.actions.SimpleNotificationAction;
 import uk.ac.strath.contextualtriggers.conditions.AcceptableTimeCondition;
 import uk.ac.strath.contextualtriggers.conditions.ActivityPeriodCondition;
 import uk.ac.strath.contextualtriggers.conditions.AltitudeTransitionCondition;
+import uk.ac.strath.contextualtriggers.conditions.AndCondition;
 import uk.ac.strath.contextualtriggers.conditions.ClearWeatherCondition;
 import uk.ac.strath.contextualtriggers.conditions.Condition;
-import uk.ac.strath.contextualtriggers.conditions.AndCondition;
 import uk.ac.strath.contextualtriggers.conditions.FrequentNotificationPreventionCondition;
 import uk.ac.strath.contextualtriggers.conditions.GymNearbyCondition;
 import uk.ac.strath.contextualtriggers.conditions.HistoricStepsDaysUnmetCondition;
@@ -29,7 +27,6 @@ import uk.ac.strath.contextualtriggers.conditions.MeetingCondition;
 import uk.ac.strath.contextualtriggers.conditions.NoLongerInPlaceTypeCondition;
 import uk.ac.strath.contextualtriggers.conditions.NotNotifiedTodayCondition;
 import uk.ac.strath.contextualtriggers.conditions.StepAndGoalRealCountCondition;
-import uk.ac.strath.contextualtriggers.conditions.StepCountCondition;
 import uk.ac.strath.contextualtriggers.data.ActivityData;
 import uk.ac.strath.contextualtriggers.data.AltitudeData;
 import uk.ac.strath.contextualtriggers.data.CalendarData;
@@ -56,18 +53,18 @@ import static com.google.android.gms.location.DetectedActivity.STILL;
 import static uk.ac.strath.contextualtriggers.conditions.StepAndGoalRealCountCondition.LESS_THAN;
 
 public class DefaultTriggers {
-    public static ITrigger TimeToWalk(IBinder activityBinder, IBinder intervalBinder, IBinder notifyBinder) {
+
+    public static ITrigger timeToWalk(IBinder activityBinder, IBinder intervalBinder, IBinder notifyBinder) {
         IDataManager<ActivityData> activityDataManager;
         IDataManager<VoidData> notificationDataManager;
         IDataManager<TimeOfDayData> intervalDataManager;
-        Log.d("Time To Walk Trigger", activityBinder.toString());
         activityDataManager = ((ActivityDataManager.LocalBinder) activityBinder).getInstance();
         intervalDataManager = ((IntervalsDataManager.LocalBinder) intervalBinder).getInstance();
         notificationDataManager = ((NotificationDataManager.LocalBinder) notifyBinder).getInstance();
         Trigger.Builder builder = new Trigger.Builder();
-        Condition c = new ActivityPeriodCondition(60, STILL,activityDataManager);
-        Condition c1 = new FrequentNotificationPreventionCondition(60,notificationDataManager);
-        Condition c2 = new AcceptableTimeCondition(new TimeOfDayData(new int[]{TIME_INTERVAL_MORNING,TIME_INTERVAL_AFTERNOON,TIME_INTERVAL_EVENING}), intervalDataManager);
+        Condition c = new ActivityPeriodCondition(60, STILL, activityDataManager);
+        Condition c1 = new FrequentNotificationPreventionCondition(120, notificationDataManager);
+        Condition c2 = new AcceptableTimeCondition(new TimeOfDayData(new int[]{TIME_INTERVAL_MORNING, TIME_INTERVAL_AFTERNOON, TIME_INTERVAL_EVENING}), intervalDataManager);
         Action a = new SimpleNotificationAction("You have been inactive for some time. Go for a walk.");
         List<Condition> conditionList = new ArrayList<>();
         conditionList.add(c);
@@ -78,17 +75,16 @@ public class DefaultTriggers {
         builder.setAction(a);
         return builder.build();
     }
-    public static ITrigger GyminyCricket(IBinder placesBinder, IBinder notifyBinder)
-    {
+
+    public static ITrigger gyminyCricket(IBinder placesBinder, IBinder notifyBinder) {
         IDataManager<PlacesData> placeDataManager;
         IDataManager<VoidData> notificationDataManager;
-        Log.d("HalfAndHalf Trigger","");
         placeDataManager = ((PlacesDataManager.LocalBinder) placesBinder).getInstance();
         notificationDataManager = ((NotificationDataManager.LocalBinder) notifyBinder).getInstance();
         Trigger.Builder builder = new Trigger.Builder();
         Condition c = new GymNearbyCondition(placeDataManager);
         Condition c1 = new NotNotifiedTodayCondition(notificationDataManager);
-        Action a = new CustomMapNotificationAction("There is a gym nearby. Let's go on the treadmill.","gym");
+        Action a = new CustomMapNotificationAction("There is a gym nearby. Let's go on the treadmill.", "gym");
         List<Condition> conditionList = new ArrayList<>();
         conditionList.add(c);
         conditionList.add(c1);
@@ -97,21 +93,19 @@ public class DefaultTriggers {
         builder.setAction(a);
         return builder.build();
     }
-    public static ITrigger HalfAndHalf(IBinder stepBinder, IBinder intervalBinder, IBinder notifyBinder)
-    {
+
+    public static ITrigger halfAndHalf(IBinder stepBinder, IBinder intervalBinder, IBinder notifyBinder) {
         IDataManager<StepAndGoalData> stepDataManager;
         IDataManager<VoidData> notificationDataManager;
         IDataManager<TimeOfDayData> intervalDataManager;
-        Log.d("HalfAndHalf Trigger","");
         stepDataManager = ((ActualStepAndGoalDataManager.LocalBinder) stepBinder).getInstance();
         intervalDataManager = ((IntervalsDataManager.LocalBinder) intervalBinder).getInstance();
         notificationDataManager = ((NotificationDataManager.LocalBinder) notifyBinder).getInstance();
         Trigger.Builder builder = new Trigger.Builder();
-        Condition c = new HistoricStepsDaysUnmetCondition(3,stepDataManager);
-        Condition c1 = new FrequentNotificationPreventionCondition(60,notificationDataManager);
-        Condition c2 = new AcceptableTimeCondition(new TimeOfDayData(new int[]{TIME_INTERVAL_MORNING,TIME_INTERVAL_AFTERNOON}), intervalDataManager);
-        Condition c3 = new StepAndGoalRealCountCondition(LESS_THAN,stepDataManager);
-
+        Condition c = new HistoricStepsDaysUnmetCondition(3, stepDataManager);
+        Condition c1 = new FrequentNotificationPreventionCondition(60, notificationDataManager);
+        Condition c2 = new AcceptableTimeCondition(new TimeOfDayData(new int[]{TIME_INTERVAL_MORNING, TIME_INTERVAL_AFTERNOON}), intervalDataManager);
+        Condition c3 = new StepAndGoalRealCountCondition(LESS_THAN, stepDataManager);
         Action a = new SimpleNotificationAction("Lets meet today's goal! Let's go for a walk.");
         List<Condition> conditionList = new ArrayList<>();
         conditionList.add(c);
@@ -123,22 +117,21 @@ public class DefaultTriggers {
         builder.setAction(a);
         return builder.build();
     }
-    public static ITrigger ButItsSunnyOutside(IBinder stepBinder, IBinder weatherBinder, IBinder activityBinder, IBinder notifyBinder) {
+
+    public static ITrigger butItsSunnyOutside(IBinder stepBinder, IBinder weatherBinder, IBinder activityBinder, IBinder notifyBinder) {
         IDataManager<StepAndGoalData> stepDataManager;
         IDataManager<VoidData> notificationDataManager;
-        Log.d("Create Weather Trigger", stepBinder.toString());
         IDataManager<WeatherData> weatherDataManager;
         IDataManager<ActivityData> activityDataManager;
-        WeatherData targetWeather = new WeatherData(1, 0, new int[]{Weather.CONDITION_CLEAR});
         stepDataManager = ((ActualStepAndGoalDataManager.LocalBinder) stepBinder).getInstance();
         weatherDataManager = ((WeatherDataManager.LocalBinder) weatherBinder).getInstance();
         notificationDataManager = ((NotificationDataManager.LocalBinder) notifyBinder).getInstance();
         activityDataManager = ((ActivityDataManager.LocalBinder) activityBinder).getInstance();
         Trigger.Builder builder = new Trigger.Builder();
-        Condition c = new StepAndGoalRealCountCondition(StepCountCondition.LESS_THAN, stepDataManager);
+        Condition c = new StepAndGoalRealCountCondition(StepAndGoalRealCountCondition.LESS_THAN, stepDataManager);
         Condition c1 = new ClearWeatherCondition(weatherDataManager);
         Condition c2 = new FrequentNotificationPreventionCondition(60, notificationDataManager);
-        Condition c3 = new ActivityPeriodCondition(60, STILL,activityDataManager);
+        Condition c3 = new ActivityPeriodCondition(60, STILL, activityDataManager);
         Action a = new SimpleMapNotificationAction("The weather is clear. Would you like to go for a walk?");
         List<Condition> conditionList = new ArrayList<>();
         conditionList.add(c);
@@ -151,13 +144,11 @@ public class DefaultTriggers {
         return builder.build();
     }
 
-    public static ITrigger GoingDown(IBinder stepBinder, IBinder placesBinder, IBinder altitudeBinder,  IBinder notifyBinder) {
+    public static ITrigger goingDown(IBinder stepBinder, IBinder placesBinder, IBinder altitudeBinder, IBinder notifyBinder) {
         IDataManager<StepAndGoalData> stepDataManager;
         IDataManager<VoidData> notificationDataManager;
-        Log.d("Create Weather Trigger", stepBinder.toString());
         IDataManager<AltitudeData> altitudeDataManager;
         IDataManager<PlacesData> placesDataManager;
-        WeatherData targetWeather = new WeatherData(1, 0, new int[]{Weather.CONDITION_CLEAR});
         stepDataManager = ((ActualStepAndGoalDataManager.LocalBinder) stepBinder).getInstance();
         placesDataManager = ((PlacesDataManager.LocalBinder) placesBinder).getInstance();
         notificationDataManager = ((NotificationDataManager.LocalBinder) notifyBinder).getInstance();
@@ -167,7 +158,7 @@ public class DefaultTriggers {
         Condition c1 = new InBuildingCondition(placesDataManager);
         Condition c2 = new StepAndGoalRealCountCondition(LESS_THAN, stepDataManager);
         Condition c3 = new FrequentNotificationPreventionCondition(60, notificationDataManager);
-        Condition c4 = new AltitudeTransitionCondition(20,altitudeDataManager);
+        Condition c4 = new AltitudeTransitionCondition(20, altitudeDataManager);
         Action a = new SimpleNotificationAction("You haven't met your step goal. Would you like to walk down?");
         List<Condition> conditionList = new ArrayList<>();
         conditionList.add(c);
@@ -180,16 +171,16 @@ public class DefaultTriggers {
         builder.setAction(a);
         return builder.build();
     }
-    public static ITrigger WalkAndTalk(IBinder stepBinder, IBinder calendarBinder, IBinder notifyBinder) {
+
+    public static ITrigger walkAndTalk(IBinder stepBinder, IBinder calendarBinder, IBinder notifyBinder) {
         IDataManager<StepAndGoalData> stepDataManager;
         IDataManager<CalendarData> calendarDataManager;
-        Log.d("Create Weather Trigger", stepBinder.toString());
         IDataManager<VoidData> notificationDataManager;
         stepDataManager = ((ActualStepAndGoalDataManager.LocalBinder) stepBinder).getInstance();
         calendarDataManager = ((CalendarDataManager.LocalBinder) calendarBinder).getInstance();
         notificationDataManager = ((NotificationDataManager.LocalBinder) notifyBinder).getInstance();
         Trigger.Builder builder = new Trigger.Builder();
-        Condition c = new StepAndGoalRealCountCondition(StepCountCondition.LESS_THAN, stepDataManager);
+        Condition c = new StepAndGoalRealCountCondition(StepAndGoalRealCountCondition.LESS_THAN, stepDataManager);
         Condition c1 = new MeetingCondition(calendarDataManager);
         Condition c2 = new FrequentNotificationPreventionCondition(30, notificationDataManager);
         Action a = new SimpleMapNotificationAction("Would you like to have a walking meeting?");
@@ -202,18 +193,18 @@ public class DefaultTriggers {
         builder.setAction(a);
         return builder.build();
     }
-    public static ITrigger DanceForYourDinner(IBinder stepBinder, IBinder placesBinder, IBinder notifyBinder) {
+
+    public static ITrigger danceForYourDinner(IBinder stepBinder, IBinder placesBinder, IBinder notifyBinder) {
         IDataManager<StepAndGoalData> stepDataManager;
         IDataManager<VoidData> notificationDataManager;
         IDataManager<PlacesData> placesDataManager;
-        Log.d("DanceForYourDinner Trigger", stepBinder.toString());
         stepDataManager = ((ActualStepAndGoalDataManager.LocalBinder) stepBinder).getInstance();
         placesDataManager = ((PlacesDataManager.LocalBinder) placesBinder).getInstance();
         notificationDataManager = ((NotificationDataManager.LocalBinder) notifyBinder).getInstance();
         Trigger.Builder builder = new Trigger.Builder();
-        Condition c = new StepAndGoalRealCountCondition(StepCountCondition.LESS_THAN, stepDataManager);
+        Condition c = new StepAndGoalRealCountCondition(StepAndGoalRealCountCondition.LESS_THAN, stepDataManager);
         Condition c1 = new InPlaceTypeCondition(Place.Type.FOOD, placesDataManager);
-        Condition c2 = new FrequentNotificationPreventionCondition(30, notificationDataManager);
+        Condition c2 = new FrequentNotificationPreventionCondition(120, notificationDataManager);
         Action a = new SimpleMapNotificationAction("We hope you enjoyed your lunch. Let's walk it off.");
         List<Condition> conditionList = new ArrayList<>();
         conditionList.add(c);
@@ -224,22 +215,20 @@ public class DefaultTriggers {
         builder.setAction(a);
         return builder.build();
     }
-    public static ITrigger WalkToWorkOnWeekdays(IBinder stepBinder, IBinder intervalBinder, IBinder notifyBinder) {
+
+    public static ITrigger walkToWorkOnWeekdays(IBinder stepBinder, IBinder intervalBinder, IBinder notifyBinder) {
         IDataManager<StepAndGoalData> stepDataManager;
         IDataManager<VoidData> notificationDataManager;
-        Log.d("Create Weather Trigger", stepBinder.toString());
         IDataManager<TimeOfDayData> timeOfDayDataManager;
-        IDataManager<WeatherData> weatherDataManager;
-        WeatherData targetWeather = new WeatherData(1, 0, new int[0]);
         stepDataManager = ((ActualStepAndGoalDataManager.LocalBinder) stepBinder).getInstance();
         timeOfDayDataManager = ((IntervalsDataManager.LocalBinder) intervalBinder).getInstance();
         notificationDataManager = ((NotificationDataManager.LocalBinder) notifyBinder).getInstance();
         Trigger.Builder builder = new Trigger.Builder();
-        Condition c = new StepAndGoalRealCountCondition(StepCountCondition.LESS_THAN, stepDataManager);
-        Condition c1 = new AcceptableTimeCondition(new TimeOfDayData(new int[]{TIME_INTERVAL_WEEKDAY,TIME_INTERVAL_MORNING}),timeOfDayDataManager);
+        Condition c = new StepAndGoalRealCountCondition(StepAndGoalRealCountCondition.LESS_THAN, stepDataManager);
+        Condition c1 = new AcceptableTimeCondition(new TimeOfDayData(new int[]{TIME_INTERVAL_WEEKDAY, TIME_INTERVAL_MORNING}), timeOfDayDataManager);
         Condition c2 = new FrequentNotificationPreventionCondition(60, notificationDataManager);
-        Condition c3 = new HistoricStepsDaysUnmetCondition(3,stepDataManager);
-        Action a = new CustomMapNotificationAction("Lets walk to work today!","work");
+        Condition c3 = new HistoricStepsDaysUnmetCondition(3, stepDataManager);
+        Action a = new CustomMapNotificationAction("Lets walk to work today!", "work");
         List<Condition> conditionList = new ArrayList<>();
         conditionList.add(c);
         conditionList.add(c1);
@@ -250,16 +239,16 @@ public class DefaultTriggers {
         builder.setAction(a);
         return builder.build();
     }
-    public static ITrigger Congratulations(IBinder placesBinder, IBinder notifyBinder) {
+
+    public static ITrigger congratulations(IBinder placesBinder, IBinder notifyBinder) {
         IDataManager<VoidData> notificationDataManager;
-        Log.d("Create Weather Trigger", "Congratulations");
         IDataManager<PlacesData> placesDataManager;
         placesDataManager = ((PlacesDataManager.LocalBinder) placesBinder).getInstance();
         notificationDataManager = ((NotificationDataManager.LocalBinder) notifyBinder).getInstance();
         Trigger.Builder builder = new Trigger.Builder();
         Condition c = new NoLongerInPlaceTypeCondition(Place.Type.GYM, placesDataManager);
-        Condition c1 = new FrequentNotificationPreventionCondition(60, notificationDataManager);
-        Action a = new SimpleNotificationAction("You went to the gym! Congratulations.");
+        Condition c1 = new FrequentNotificationPreventionCondition(30, notificationDataManager);
+        Action a = new SimpleNotificationAction("You went to the gym! congratulations.");
         List<Condition> conditionList = new ArrayList<>();
         conditionList.add(c);
         conditionList.add(c1);

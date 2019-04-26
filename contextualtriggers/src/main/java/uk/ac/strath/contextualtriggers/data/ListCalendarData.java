@@ -4,22 +4,21 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ListCalendarData extends  AbstractData {
+public class ListCalendarData extends AbstractData {
 
     private List<CalendarData> cd = new ArrayList<>();
 
-    public ListCalendarData(List<CalendarData> cd){
+    public ListCalendarData(List<CalendarData> cd) {
         this.cd = cd;
     }
 
     @Override
-    public boolean equals(Object o){
-        if(o instanceof ListCalendarData){
+    public boolean equals(Object o) {
+        if (o instanceof ListCalendarData) {
             return ((ListCalendarData) o).cd.equals(this.cd) && super.equals(o);
         }
         return false;
     }
-
 
     public static Type getType() {
         return ListCalendarData.class;

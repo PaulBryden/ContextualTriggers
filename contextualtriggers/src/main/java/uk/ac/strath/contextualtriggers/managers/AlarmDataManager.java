@@ -36,7 +36,7 @@ public abstract class AlarmDataManager<T extends Data> extends DataManager<T> {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        alarmMgr = (AlarmManager)this.getSystemService(Context.ALARM_SERVICE);
+        alarmMgr = (AlarmManager) this.getSystemService(Context.ALARM_SERVICE);
         Log.d(this.getClass().toString(), "HAS BEEN OBLITERATED");
         Intent iw = new Intent(this, this.getClass());
         PendingIntent alarmIntent = PendingIntent.getService(this, 0, iw, PendingIntent.FLAG_UPDATE_CURRENT);

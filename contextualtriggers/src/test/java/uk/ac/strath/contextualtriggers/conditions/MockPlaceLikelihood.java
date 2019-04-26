@@ -22,7 +22,8 @@ public class MockPlaceLikelihood extends PlaceLikelihood {
     }
 
     @Override
-    public void writeToParcel(Parcel parcel, int i) {}
+    public void writeToParcel(Parcel parcel, int i) {
+    }
 
     @NonNull
     @Override

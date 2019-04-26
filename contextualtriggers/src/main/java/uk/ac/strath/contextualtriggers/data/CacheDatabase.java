@@ -14,11 +14,9 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
-import uk.ac.strath.contextualtriggers.managers.DataManager;
-
 @Database(entities = {DataEntity.class}, version = 1, exportSchema = false)
 @TypeConverters({DataConverter.class})
-public abstract class CacheDatabase extends RoomDatabase{
+public abstract class CacheDatabase extends RoomDatabase {
 
     public abstract DataDAO DataDao();
 
@@ -54,8 +52,8 @@ public abstract class CacheDatabase extends RoomDatabase{
                 long oldestTimestamp = System.currentTimeMillis() - (cache_keeptime * 1000 * 60 * 60 * 24);
                 try {
                     List<DataEntity> l = INSTANCE.getAll().get();
-                    for(DataEntity d : l){
-                        if(d.data.getTimestamp() < oldestTimestamp){
+                    for (DataEntity d : l) {
+                        if (d.data.getTimestamp() < oldestTimestamp) {
                             INSTANCE.delete(d);
                         }
                     }
@@ -73,76 +71,77 @@ public abstract class CacheDatabase extends RoomDatabase{
 
     /* Generic Queries */
 
-    public void insert(DataEntity e){
+    public void insert(DataEntity e) {
         executor.submit(() -> {
             DataDao().insert(e);
         });
     }
 
-    public void insert(Data d){
+    public void insert(Data d) {
         executor.submit(() -> {
             DataEntity e = new DataEntity(d);
             DataDao().insert(e);
         });
     }
 
-    public void delete(DataEntity e){
+    public void delete(DataEntity e) {
         executor.submit(() -> {
             DataDao().delete(e);
         });
     }
 
-    public void update(DataEntity e){
+    public void update(DataEntity e) {
         executor.submit(() -> {
-           DataDao().update(e);
+            DataDao().update(e);
         });
     }
 
-    public Future<List<DataEntity>> getAll(){
+    public Future<List<DataEntity>> getAll() {
         return executor.submit(() -> {
             return DataDao().getAll();
         });
 
     }
 
-    public void deleteAll(){
+    public void deleteAll() {
         executor.submit(() -> {
             DataDao().deleteAll();
         });
     }
+
     /*******************/
 
     /* Queries for interacting with all data of a given type */
-    public Future<List<DataEntity>> getAllOfType(String type){
+    public Future<List<DataEntity>> getAllOfType(String type) {
         return executor.submit(() -> {
-           return DataDao().getAllOfType(type);
+            return DataDao().getAllOfType(type);
         });
 
     }
 
-    public void deleteAllOfType(String type){
+    public void deleteAllOfType(String type) {
         executor.submit(() -> {
             DataDao().deleteAllOfType(type);
         });
     }
+
     /*********************************************************/
 
-    public Future<DataEntity> getLatestOfType(String type){
+    public Future<DataEntity> getLatestOfType(String type) {
         return executor.submit(() -> {
-           List<DataEntity> l = DataDao().getAllOfType(type);
-           if(l.size() == 0){
-               return null;
-           }
-           DataEntity max = l.get(0);
-           for(int i = 1; i < l.size(); i++){
-               if(l.get(i).data.getTimestamp() > max.data.getTimestamp()){
-                   max = l.get(i);
-               }
-           }
-           return max;
+            List<DataEntity> l = DataDao().getAllOfType(type);
+            if (l.size() == 0) {
+                return null;
+            }
+            DataEntity max = l.get(0);
+            for (int i = 1; i < l.size(); i++) {
+                if (l.get(i).data.getTimestamp() > max.data.getTimestamp()) {
+                    max = l.get(i);
+                }
+            }
+            return max;
         });
     }
-
 
 
 }

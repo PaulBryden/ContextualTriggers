@@ -7,8 +7,8 @@ import java.lang.reflect.Type;
  */
 public class VoidData extends AbstractData {
     @Override
-    public boolean equals(Object o){
-        if(o instanceof VoidData){
+    public boolean equals(Object o) {
+        if (o instanceof VoidData) {
             return super.equals(o);
         }
         return false;

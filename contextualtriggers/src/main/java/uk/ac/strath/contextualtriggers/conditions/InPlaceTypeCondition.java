@@ -42,18 +42,14 @@ public class InPlaceTypeCondition extends DataCondition<PlacesData> {
         if (getData() == null) {
             return false;
         }
-        for(PlaceLikelihood p : getData().places)
-        {
-          if(p.getLikelihood() >= threshold)
-          {
-              for(Place.Type type : p.getPlace().getTypes())
-              {
-                  if(targetTypes.contains(type))
-                  {
-                      return true;
-                  }
-              }
-          }
+        for (PlaceLikelihood p : getData().places) {
+            if (p.getLikelihood() >= threshold) {
+                for (Place.Type type : p.getPlace().getTypes()) {
+                    if (targetTypes.contains(type)) {
+                        return true;
+                    }
+                }
+            }
         }
         return false;
     }

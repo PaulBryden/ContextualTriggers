@@ -9,11 +9,9 @@ import java.util.Collections;
 
 import uk.ac.strath.contextualtriggers.data.PlacesData;
 
-import static com.google.android.libraries.places.api.model.Place.Type.CHURCH;
 import static com.google.android.libraries.places.api.model.Place.Type.GYM;
 import static com.google.android.libraries.places.api.model.Place.Type.PARK;
 import static junit.framework.Assert.assertFalse;
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 public class NoLongerInBuildingTypeConditionUnitTest {
@@ -32,9 +30,6 @@ public class NoLongerInBuildingTypeConditionUnitTest {
         assertFalse(condition.isSatisfied());
     }
 
-    /**
-     * Tests what happens when the user is in a gym.
-     */
     @Test
     public void testConditionNotSatisfiedWhenInBuilding() {
         PlaceLikelihood pl = new MockPlaceLikelihood(new MockPlace(GYM), 0.8);
@@ -46,19 +41,16 @@ public class NoLongerInBuildingTypeConditionUnitTest {
     public void testConditionSatisfiedWhenLeftBuilding() {
         PlaceLikelihood pl = new MockPlaceLikelihood(new MockPlace(GYM), 0.8);
         manager.sendUpdate(new PlacesData(Collections.singletonList(pl)));
-        pl = new MockPlaceLikelihood(new MockPlace(GYM), 0.1);
+        pl = new MockPlaceLikelihood(new MockPlace(GYM), 0.01);
         manager.sendUpdate(new PlacesData(Collections.singletonList(pl)));
         assertTrue(condition.isSatisfied());
     }
 
-    /**
-     * Tests what happens when the user is in a park.
-     */
     @Test
     public void testConditionNotSatisfiedWithWrongPlaceType() {
         PlaceLikelihood pl = new MockPlaceLikelihood(new MockPlace(PARK), 0.8);
         manager.sendUpdate(new PlacesData(Collections.singletonList(pl)));
-        pl = new MockPlaceLikelihood(new MockPlace(PARK), 0.1);
+        pl = new MockPlaceLikelihood(new MockPlace(PARK), 0.01);
         manager.sendUpdate(new PlacesData(Collections.singletonList(pl)));
         assertFalse(condition.isSatisfied());
     }
@@ -66,17 +58,17 @@ public class NoLongerInBuildingTypeConditionUnitTest {
     @Test
     public void testConditionNotSatisfiedAfterTimeout() {
         PlaceLikelihood pl = new MockPlaceLikelihood(new MockPlace(GYM), 0.8);
-        manager.sendUpdate(new PlacesData(Collections.singletonList(pl), System.currentTimeMillis() - 5*60*1000));
-        pl = new MockPlaceLikelihood(new MockPlace(GYM), 0.1);
-        manager.sendUpdate(new PlacesData(Collections.singletonList(pl), System.currentTimeMillis() - 4*60*1000));
+        manager.sendUpdate(new PlacesData(Collections.singletonList(pl), System.currentTimeMillis() - 5 * 60 * 1000));
+        pl = new MockPlaceLikelihood(new MockPlace(GYM), 0.01);
+        manager.sendUpdate(new PlacesData(Collections.singletonList(pl), System.currentTimeMillis() - 4 * 60 * 1000));
         assertFalse(condition.isSatisfied());
     }
 
     @Test
     public void testConditionNotSatisfiedWithLowLikelihood() {
-        PlaceLikelihood pl = new MockPlaceLikelihood(new MockPlace(GYM), 0.5);
+        PlaceLikelihood pl = new MockPlaceLikelihood(new MockPlace(GYM), 0.15);
         manager.sendUpdate(new PlacesData(Collections.singletonList(pl)));
-        pl = new MockPlaceLikelihood(new MockPlace(GYM), 0.1);
+        pl = new MockPlaceLikelihood(new MockPlace(GYM), 0.01);
         manager.sendUpdate(new PlacesData(Collections.singletonList(pl)));
         assertFalse(condition.isSatisfied());
     }

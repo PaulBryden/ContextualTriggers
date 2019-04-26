@@ -6,8 +6,8 @@ public interface Data {
 
     long getTimestamp();
 
-    static Type getType(){
+    static Type getType() {
         return Data.class;
-    };
+    }
 
 }

@@ -2,6 +2,7 @@ package uk.ac.strath.contextualtriggers.conditions;
 
 import java.time.LocalDate;
 
+import uk.ac.strath.contextualtriggers.data.DayData;
 import uk.ac.strath.contextualtriggers.data.StepAndGoalData;
 import uk.ac.strath.contextualtriggers.managers.IDataManager;
 
@@ -33,15 +34,18 @@ public class StepAndGoalRealCountCondition extends DataCondition<StepAndGoalData
         if (getData() == null) {
             return mode == LESS_THAN;
         }
-        LocalDate today = LocalDate.now();
-        if (getData().getDay(today).steps < 0) { // no step count updates received yet
+        DayData today = getData().getDay(LocalDate.now());
+        if (today == null) {
+            return mode == LESS_THAN;
+        }
+        if (today.steps < 0) { // no step count updates received yet
             return false;
         }
         if (this.mode == LESS_THAN) {
-            return (getData().getDay(today).steps < getData().getDay(today).goal);
+            return (today.steps < today.goal);
         }
         if (this.mode == GREATER_THAN_OR_EQUAL_TO) {
-            return (getData().getDay(today).steps >= getData().getDay(today).goal);
+            return (today.steps >= today.goal);
         }
         return false;
     }

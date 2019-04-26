@@ -13,15 +13,14 @@ import android.util.Log;
 
 import uk.ac.strath.contextualtriggers.managers.CalendarDataManager;
 
-import static android.Manifest.permission.ACCESS_FINE_LOCATION;
 import static android.Manifest.permission.READ_CALENDAR;
 
 
-public class RequestCalendarPermission extends AppCompatActivity{
+public class RequestCalendarPermission extends AppCompatActivity {
 
-    private int MY_PERMISSIONS_REQUEST_READ_CONTACTS;
+    private static final int MY_PERMISSIONS_REQUEST = 83;
+
     /**
-     *
      * @param savedInstanceState contains information pertaining to previous states of the activity
      *                           if it has been used before
      * @see android.support.v7.app.AppCompatActivity
@@ -38,7 +37,7 @@ public class RequestCalendarPermission extends AppCompatActivity{
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.cancel();
-                ActivityCompat.requestPermissions(activity,new String[]{READ_CALENDAR},MY_PERMISSIONS_REQUEST_READ_CONTACTS);
+                ActivityCompat.requestPermissions(activity, new String[]{READ_CALENDAR}, MY_PERMISSIONS_REQUEST);
             }
         });
         builder.show();
@@ -49,7 +48,7 @@ public class RequestCalendarPermission extends AppCompatActivity{
                                            @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
 
-        if (requestCode == MY_PERMISSIONS_REQUEST_READ_CONTACTS) {
+        if (requestCode == MY_PERMISSIONS_REQUEST) {
             for (int i = 0; i < permissions.length; i++) {
                 if (grantResults[i] == PackageManager.PERMISSION_GRANTED) {
                     onPermissionGranted(permissions[i]);
@@ -59,11 +58,12 @@ public class RequestCalendarPermission extends AppCompatActivity{
             }
         }
     }
+
     protected void onPermissionGranted(String permission) {
         this.finish();
     }
 
-    private void turnOffCalendarManager(){
+    private void turnOffCalendarManager() {
         Log.d("PERMISSION DENIED", "TURN OFF ALL CALENDAR BASED DATA MANAGERS");
         Intent i = new Intent(this, CalendarDataManager.class);
         stopService(i);

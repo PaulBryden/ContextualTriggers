@@ -8,8 +8,8 @@ import java.lang.reflect.Type;
 
 public class DataConverter {
     @TypeConverter
-    public static Data StringToData(String s){
-        String[] split = s.split(":",2);
+    public static Data StringToData(String s) {
+        String[] split = s.split(":", 2);
 
         split[0] = split[0].split(" ", 2)[1];
 
@@ -28,7 +28,7 @@ public class DataConverter {
     }
 
     @TypeConverter
-    public static String DataToString(Data d){
+    public static String DataToString(Data d) {
         Type t = d.getClass();
         Gson g = new Gson();
         String s = g.toJson(d, t);

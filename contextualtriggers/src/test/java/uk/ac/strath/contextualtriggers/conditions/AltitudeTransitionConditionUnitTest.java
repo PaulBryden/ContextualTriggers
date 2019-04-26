@@ -27,9 +27,6 @@ public class AltitudeTransitionConditionUnitTest {
         assertFalse(condition.isSatisfied());
     }
 
-    /**
-     * Tests what happens when the user's altitude increases.
-     */
     @Test
     public void testConditionSatisfied() {
         manager.sendUpdate(new AltitudeData(0.0));
@@ -38,9 +35,6 @@ public class AltitudeTransitionConditionUnitTest {
         assertTrue(condition.isSatisfied());
     }
 
-    /**
-     * Tests what happens when the user's altitude decreases.
-     */
     @Test
     public void testConditionNotSatisfiedWithIncorrectSign() {
         manager.sendUpdate(new AltitudeData(0.0));
@@ -49,9 +43,6 @@ public class AltitudeTransitionConditionUnitTest {
         assertFalse(condition.isSatisfied());
     }
 
-    /**
-     * Tests what happens when the user's altitude increases too slowly.
-     */
     @Test
     public void testConditionNotSatisfiedByInsuffcientIncrease() {
         manager.sendUpdate(new AltitudeData(0.0));

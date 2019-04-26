@@ -3,8 +3,7 @@ package uk.ac.strath.contextualtriggers.data;
 import java.lang.reflect.Type;
 import java.util.Arrays;
 
-public class WeatherData extends  AbstractData
-{
+public class WeatherData extends AbstractData {
     private final double temperatureCelsius;
     private final double humidity;
     private final int[] conditions;
@@ -27,12 +26,10 @@ public class WeatherData extends  AbstractData
         return conditions;
     }
 
-    public String toString()
-    {
+    public String toString() {
         String loggingInfo = "WeatherData:\n" + "Time: " + System.currentTimeMillis() + "\n";
-        loggingInfo += "Temperature (Celsius):" + temperatureCelsius + "\n"+"Humidity (%):" + humidity + "\n";
-        for(int i = 0; i < conditions.length; i++)
-        {
+        loggingInfo += "Temperature (Celsius):" + temperatureCelsius + "\n" + "Humidity (%):" + humidity + "\n";
+        for (int i = 0; i < conditions.length; i++) {
             loggingInfo += "Condition " + i + ": " + conditions[i] + "\n";
         }
         return loggingInfo;
@@ -40,8 +37,8 @@ public class WeatherData extends  AbstractData
     }
 
     @Override
-    public boolean equals(Object o){
-        if(o instanceof WeatherData){
+    public boolean equals(Object o) {
+        if (o instanceof WeatherData) {
             return super.equals(o) &&
                     ((WeatherData) o).temperatureCelsius == (this.temperatureCelsius) &&
                     ((WeatherData) o).humidity == (this.humidity) &&

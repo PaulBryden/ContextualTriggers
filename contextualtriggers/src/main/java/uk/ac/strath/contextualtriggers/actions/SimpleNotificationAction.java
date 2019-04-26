@@ -11,7 +11,6 @@ import android.support.v4.app.NotificationManagerCompat;
 
 import uk.ac.strath.contextualtriggers.MainApplication;
 import uk.ac.strath.contextualtriggers.R;
-import uk.ac.strath.contextualtriggers.conditions.FrequentNotificationPreventionCondition;
 import uk.ac.strath.contextualtriggers.managers.NotificationDataManager;
 
 public class SimpleNotificationAction implements Action {

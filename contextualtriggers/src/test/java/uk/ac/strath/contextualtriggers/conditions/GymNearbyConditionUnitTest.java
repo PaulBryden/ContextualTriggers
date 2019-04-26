@@ -28,15 +28,11 @@ public class GymNearbyConditionUnitTest {
         condition = new GymNearbyCondition(manager);
     }
 
-
     @Test
     public void testConditionNotSatisfiedWhenNoDataReceived() {
         assertFalse(condition.isSatisfied());
     }
 
-    /**
-     * Tests what happens when there is a gym nearby.
-     */
     @Test
     public void testConditionSatisfiedByLikelyGymProximity() {
         PlaceLikelihood likelihood = new MockPlaceLikelihood(new MockPlace(GYM), 0.25);
@@ -44,9 +40,6 @@ public class GymNearbyConditionUnitTest {
         assertTrue(condition.isSatisfied());
     }
 
-    /**
-     * Tests what happens when there is not a gym nearby, just a cafe.
-     */
     @Test
     public void testConditionNotSatisfiedWithoutGymProximity() {
         PlaceLikelihood likelihood = new MockPlaceLikelihood(new MockPlace(CAFE), 0.25);
@@ -54,9 +47,6 @@ public class GymNearbyConditionUnitTest {
         assertFalse(condition.isSatisfied());
     }
 
-    /**
-     * Tests what happens when there is a gym nearby, amongst multiple other locations.
-     */
     @Test
     public void testConditionSatisfiedWithGymProximityMultiple() {
         PlaceLikelihood likelihood_cafe = new MockPlaceLikelihood(new MockPlace(CAFE), 0.25);
@@ -67,9 +57,6 @@ public class GymNearbyConditionUnitTest {
         assertTrue(condition.isSatisfied());
     }
 
-    /**
-     * Tests what happens when there is not a gym nearby, just multiple other locations.
-     */
     @Test
     public void testConditionNotSatisfiedWithoutGymProximityMultiple() {
         PlaceLikelihood likelihood_cafe = new MockPlaceLikelihood(new MockPlace(CAFE), 0.25);
@@ -79,9 +66,6 @@ public class GymNearbyConditionUnitTest {
         assertFalse(condition.isSatisfied());
     }
 
-    /**
-     * Tests what happens when the user is already in a gym.
-     */
     @Test
     public void testConditionNotSatisfiedByTooHighLikelihood() {
         PlaceLikelihood likelihood = new MockPlaceLikelihood(new MockPlace(GYM), 0.75);
@@ -89,9 +73,6 @@ public class GymNearbyConditionUnitTest {
         assertFalse(condition.isSatisfied());
     }
 
-    /**
-     * Tests what happens when the user is already in a gym, and there is a gym nearby.
-     */
     @Test
     public void testConditionNotSatisfiedByTooHighLikelihoodWhenAlsoNearGym() {
         PlaceLikelihood likelihood_gym = new MockPlaceLikelihood(new MockPlace(GYM), 0.1);
