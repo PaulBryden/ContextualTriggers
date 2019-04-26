@@ -35,21 +35,13 @@ public class RequestLocationPermission extends AppCompatActivity{
         final Activity activity = this;
         Log.d("REQUEST", "HERE");
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Need Location Permissions");
-        builder.setMessage("This app needs location permission for contextual services.");
-        builder.setPositiveButton("Grant", new DialogInterface.OnClickListener() {
+        builder.setTitle("Location Permissions");
+        builder.setMessage("To enable personalised location-based triggers, please grant location access permissions.");
+        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.cancel();
                 ActivityCompat.requestPermissions(activity,new String[]{ACCESS_FINE_LOCATION},MY_PERMISSIONS_REQUEST_READ_CONTACTS);
-            }
-        });
-        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                turnOffLocationManagers();
-                dialog.cancel();
-                activity.finish();
             }
         });
         builder.show();

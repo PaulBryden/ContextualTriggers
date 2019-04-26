@@ -32,21 +32,13 @@ public class RequestCalendarPermission extends AppCompatActivity{
         final Activity activity = this;
         Log.d("REQUEST", "HERE");
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Need Calendar Permissions");
-        builder.setMessage("This app needs to read calendar data only for contextual services.");
-        builder.setPositiveButton("Grant", new DialogInterface.OnClickListener() {
+        builder.setTitle("Calendar Permissions");
+        builder.setMessage("To enable personalised calendar triggers, please grant calendar access permissions.");
+        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.cancel();
                 ActivityCompat.requestPermissions(activity,new String[]{READ_CALENDAR},MY_PERMISSIONS_REQUEST_READ_CONTACTS);
-            }
-        });
-        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                turnOffCalendarManager();
-                dialog.cancel();
-                activity.finish();
             }
         });
         builder.show();

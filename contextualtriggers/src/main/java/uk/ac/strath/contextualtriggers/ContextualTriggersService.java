@@ -8,20 +8,17 @@ import android.app.Service;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import android.content.ServiceConnection;
-import android.content.BroadcastReceiver;
 import android.content.IntentFilter;
+import android.content.ServiceConnection;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.google.android.gms.awareness.Awareness;
 import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.common.internal.safeparcel.SafeParcelable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,7 +32,6 @@ import uk.ac.strath.contextualtriggers.managers.CalendarDataManager;
 import uk.ac.strath.contextualtriggers.managers.IntervalsDataManager;
 import uk.ac.strath.contextualtriggers.managers.NotificationDataManager;
 import uk.ac.strath.contextualtriggers.managers.PlacesDataManager;
-import uk.ac.strath.contextualtriggers.managers.SimulatedStepDataManager;
 import uk.ac.strath.contextualtriggers.managers.WeatherDataManager;
 import uk.ac.strath.contextualtriggers.triggers.DefaultTriggers;
 import uk.ac.strath.contextualtriggers.triggers.ITrigger;
@@ -81,7 +77,6 @@ public class ContextualTriggersService extends Service
     private static List<ITrigger> triggerList = new ArrayList<>();
     private static List<IBinder> serviceList = new ArrayList<>();
 
-    private BaseServiceConnection stepServiceConnection;
     private BaseServiceConnection weatherServiceConnection;
     private BaseServiceConnection activityServiceConnection;
     private BaseServiceConnection placesServiceConnection;
@@ -134,7 +129,6 @@ public class ContextualTriggersService extends Service
         super.onDestroy();
         Log.i("ContextualTriggersService", "Destroying service");
         unbindService(weatherServiceConnection);
-        unbindService(stepServiceConnection);
         unbindService(notifyServiceConnection);
         unbindService(placesServiceConnection);
         unbindService(activityServiceConnection);
@@ -199,11 +193,6 @@ public class ContextualTriggersService extends Service
         b = bindService(iw, weatherServiceConnection, 0);
         startService(iw);
         Log.d("ContextualTriggersService", "Weather connection bound: " + b);
-        stepServiceConnection = new BaseServiceConnection(this);
-        Intent is = new Intent(this, SimulatedStepDataManager.class);
-        b = bindService(is, stepServiceConnection, 0);
-        startService(is);
-        Log.d("ContextualTriggersService", "Step count connection bound: " + b);
     }
 
     @Nullable
@@ -215,13 +204,17 @@ public class ContextualTriggersService extends Service
 
     public void notifyDataManagerOnline()
     {
-        if (stepServiceConnection.isConnected() && weatherServiceConnection.isConnected() && notifyServiceConnection.isConnected())
+        if (weatherServiceConnection.isConnected() && notifyServiceConnection.isConnected() &&
+                placesServiceConnection.isConnected() && activityServiceConnection.isConnected() &&
+                actualStepsServiceConnection.isConnected() && calendarServiceConnection.isConnected() &&
+                batteryServiceConnection.isConnected() && altitudeServiceConnection.isConnected() &&
+                intervalServiceConnection.isConnected())
         {
             Log.d("ContextualTriggersService", "Data manager online");
             createTriggers();
         } else
         {
-            Log.d("ContextualTriggersService", "DataManagerOnline: " + stepServiceConnection.isConnected());
+            Log.d("ContextualTriggersService", "Data manager not online");
         }
     }
 
@@ -233,14 +226,13 @@ public class ContextualTriggersService extends Service
         triggerList.add(DefaultTriggers.HalfAndHalf(actualStepsServiceConnection.getDataManager(),intervalServiceConnection.getDataManager(),notifyServiceConnection.getDataManager()));
         triggerList.add(DefaultTriggers.ButItsSunnyOutside(actualStepsServiceConnection.getDataManager(),weatherServiceConnection.getDataManager(),activityServiceConnection.getDataManager(),notifyServiceConnection.getDataManager()));
         triggerList.add(DefaultTriggers.GoingDown(actualStepsServiceConnection.getDataManager(),placesServiceConnection.getDataManager(),altitudeServiceConnection.getDataManager(),notifyServiceConnection.getDataManager()));
-        triggerList.add(DefaultTriggers.WalkAndTalk(stepServiceConnection.getDataManager(), calendarServiceConnection.getDataManager(), notifyServiceConnection.getDataManager()));
+        triggerList.add(DefaultTriggers.WalkAndTalk(actualStepsServiceConnection.getDataManager(), calendarServiceConnection.getDataManager(), notifyServiceConnection.getDataManager()));
         triggerList.add(DefaultTriggers.DanceForYourDinner(actualStepsServiceConnection.getDataManager(),placesServiceConnection.getDataManager(),notifyServiceConnection.getDataManager()));
         triggerList.add(DefaultTriggers.WalkToWorkOnWeekdays(actualStepsServiceConnection.getDataManager(),intervalServiceConnection.getDataManager(),notifyServiceConnection.getDataManager()));
         triggerList.add(DefaultTriggers.Congratulations(placesServiceConnection.getDataManager(),notifyServiceConnection.getDataManager()));
         Log.i("ContextualTriggersService", "Created " + triggerList.size() + " triggers");
 
         unbindService(weatherServiceConnection);
-        unbindService(stepServiceConnection);
         unbindService(notifyServiceConnection);
         unbindService(placesServiceConnection);
         unbindService(activityServiceConnection);
